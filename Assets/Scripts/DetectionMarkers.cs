@@ -21,7 +21,15 @@ public class DetectionMarkers : MonoBehaviour
 	Texture2D left;
 	Texture2D leftCPU;
 	Texture2D gray;
-	public Matrix4x4 leftPose;
+
+	Point3f[] markerPoints;
+	private float markerLength=0.06f;
+	private double[,] cameraMatrix;
+	double[] distCoeffs = new double[4] { 0d, 0d, 0d, 0d };
+	double[,] rotMat = new double[3, 3] { { 0d, 0d, 0d }, { 0d, 0d, 0d }, { 0d, 0d, 0d } };
+	private bool isCameraInitialized;
+	private Matrix4x4 leftPose;
+
 
 	public GameObject cubeToMove;
 
@@ -32,6 +40,13 @@ public class DetectionMarkers : MonoBehaviour
 
 	void Start()
 	{
+		 markerPoints= new Point3f[] {
+				new Point3f(-markerLength / 2f,  markerLength / 2f, 0f),
+				new Point3f( markerLength / 2f,  markerLength / 2f, 0f),
+				new Point3f( markerLength / 2f, -markerLength / 2f, 0f),
+				new Point3f(-markerLength / 2f, -markerLength / 2f, 0f)
+			};
+
 
 		// Create default parameres for detection
 		detectorParameters = DetectorParameters.Create();
@@ -59,17 +74,25 @@ public class DetectionMarkers : MonoBehaviour
 
     private void Update()
 	{
-		Debug.Log("Left focal is " + ViveSR_DualCameraImageCapture.FocalLengthLeft.ToString());
-		Debug.Log("Cx is " + ViveSR_DualCameraImageCapture.UndistortedCx_L.ToString());
-		Debug.Log("Cy is " + ViveSR_DualCameraImageCapture.UndistortedCy_L.ToString());
 
 		if (!initialized)
 		{
 			InitTextures();
 			initialized = true;
 		}
+		if (!isCameraInitialized  && ViveSR_DualCameraImageCapture.FocalLengthLeft > 0)
+        {
+			cameraMatrix = new double[3, 3] {
+				{ViveSR_DualCameraImageCapture.FocalLengthLeft, 0d, ViveSR_DualCameraImageCapture.UndistortedCxLeft},
+				{0d, ViveSR_DualCameraImageCapture.FocalLengthLeft, ViveSR_DualCameraImageCapture.UndistortedCyLeft},
+				{0d, 0d, 1d}
+			};
 
-		if (initialized && request.done)
+			isCameraInitialized = true;
+		}
+		
+
+		if (initialized&& isCameraInitialized && request.done)
 		{
 			initialImage.material.mainTexture = leftCPU;
 			Mat mat = OpenCvSharp.Unity.TextureToMat(leftCPU);
@@ -85,6 +108,28 @@ public class DetectionMarkers : MonoBehaviour
 			CvAruco.DetectMarkers(grayMat, dictionary, out corners, out ids, detectorParameters, out rejectedImgPoints);
 			CvAruco.DrawDetectedMarkers(flippedMat, corners, ids);
 
+			if (ids.Length > 0)
+            {
+				for (int i = 0; i < ids.Length; i++)
+				{
+					if (ids[i] == 0)
+					{
+						Cv2.SolvePnP(markerPoints, corners[i], cameraMatrix, distCoeffs, out double[] rvec, out double[] tvec, false, SolvePnPFlags.Iterative);
+						Cv2.Rodrigues(rvec, out rotMat);
+
+						Vector3 cameraSpacePos = new Vector3(-(float)tvec[0], (float)tvec[1], (float)tvec[2]); //x is negative due to flipping of camera
+						Quaternion cameraSpaceRot = Quaternion.Euler((float) rvec[0], (float) rvec[1], (float) rvec[2]);
+
+						Vector3 worldPos = leftPose.MultiplyPoint(cameraSpacePos);
+
+						cubeToMove.transform.position = worldPos;
+						cubeToMove.transform.rotation = cameraSpaceRot;
+					}
+				}
+
+
+
+			}
 
 			Texture2D outputTexture = OpenCvSharp.Unity.MatToTexture(flippedMat);
 			finalImage.material.mainTexture = outputTexture;
