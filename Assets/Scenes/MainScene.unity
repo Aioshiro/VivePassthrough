@@ -331,7 +331,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935432318}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.06975156, y: -0.07573398, z: 0.5514995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -339,7 +339,7 @@ Transform:
   - {fileID: 1374991080}
   - {fileID: 246096709}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &935432320
 MonoBehaviour:
@@ -754,8 +754,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 268cc8583cec2214da5fcbe6475fc02b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  markerLength: 0.06
   rvec: []
   tvec: []
+  leftPose:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
   cubeToMove: {fileID: 935432320}
 --- !u!4 &1856049634
 Transform:
@@ -769,7 +787,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4279948242889058625
 PrefabInstance:
@@ -786,7 +804,7 @@ PrefabInstance:
     - target: {fileID: 4284269869958333137, guid: 87e5c171db4b11b48bd3d4b6a643019d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4284269869958333137, guid: 87e5c171db4b11b48bd3d4b6a643019d,
         type: 3}
