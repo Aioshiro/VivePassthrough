@@ -195,6 +195,7 @@ public class DetectionMarkers : MonoBehaviour
 
 		if(updatedLeftPose && updatedRightPose)
         {
+			Debug.Log("do both");
 			GetObjectNewTransform(tvecRight, rotMatRight, rightPose, out Vector3 worldPosRight, out Quaternion worldRotRight);
 			GetObjectNewTransform(tvecLeft, rotMatLeft, leftPose, out Vector3 worldPosLeft, out Quaternion worldRotLeft);
 			cubeToMove.SetNewTransform(Vector3.Lerp(worldPosLeft, worldPosRight, 0.5f), Quaternion.Slerp(worldRotLeft,worldRotRight,0.5f));
@@ -203,12 +204,14 @@ public class DetectionMarkers : MonoBehaviour
 		}
 		else if (updatedRightPose)
         {
+			Debug.Log("did right");
 			GetObjectNewTransform(tvecRight, rotMatRight, rightPose,out Vector3 worldPos, out Quaternion worldRot);
 			cubeToMove.SetNewTransform(worldPos, worldRot);
 			updatedRightPose = false;
 		}
 		else if (updatedLeftPose)
         {
+			Debug.Log("did left");
 			GetObjectNewTransform(tvecLeft, rotMatLeft,leftPose,out Vector3 worldPos, out Quaternion worldRot);
 			cubeToMove.SetNewTransform(worldPos, worldRot);
 			updatedLeftPose = false;

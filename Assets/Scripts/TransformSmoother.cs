@@ -15,7 +15,6 @@ public class TransformSmoother : MonoBehaviour
     public void SetNewTransform(Vector3 pos, Quaternion rot)
     {
         count++;
-        //transform.rotation = Quaternion.Slerp(transform.rotation, rot, smootherCoefRot);
         if (count> movingAverageLengthPos)
         {
             movingAveragePos += (pos - movingAveragePos) / (movingAverageLengthPos + 1);
