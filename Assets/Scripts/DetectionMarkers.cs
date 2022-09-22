@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
 using OpenCvSharp;
 using OpenCvSharp.Aruco;
 using UnityEngine.Rendering;
@@ -50,8 +48,6 @@ public class DetectionMarkers : MonoBehaviour
 	bool updatedLeftPose = false;
 	bool updatedRightPose = false;
 
-
-
 	//Object to make appear on tracker
 	public TransformSmoother cubeToMove;
 
@@ -65,9 +61,11 @@ public class DetectionMarkers : MonoBehaviour
 				new Point3f(-markerLength / 2f, -markerLength / 2f, 0f)
 			};
 
-
 		// Create default parameres for detection
 		detectorParameters = DetectorParameters.Create();
+		detectorParameters.DoCornerRefinement = true;
+		detectorParameters.CornerRefinementMinAccuracy = 0.0001;
+		detectorParameters.CornerRefinementMaxIterations = 100;
 
 		// Dictionary holds set of all available markers
 		dictionary = CvAruco.GetPredefinedDictionary(dictionaryName);
@@ -156,7 +154,7 @@ public class DetectionMarkers : MonoBehaviour
 			{
 				for (int i = 0; i < ids.Length; i++)
 				{
-					if (ids[i] == 0)
+					if (ids[i] == 3)
 					{
 						Cv2.SolvePnP(markerPoints, corners[i], cameraLeftMatrix, distCoeffs, out rvecLeft, out tvecLeft, false, SolvePnPFlags.Iterative);
 						Cv2.Rodrigues(rvecLeft, out rotMatLeft);
@@ -178,7 +176,7 @@ public class DetectionMarkers : MonoBehaviour
 			{
 				for (int i = 0; i < ids.Length; i++)
 				{
-					if (ids[i] == 0)
+					if (ids[i] == 3)
 					{
 						Cv2.SolvePnP(markerPoints, corners[i], cameraRightMatrix, distCoeffs, out rvecRight, out tvecRight, false, SolvePnPFlags.Iterative);
 						Cv2.Rodrigues(rvecRight, out rotMatRight);
@@ -193,30 +191,28 @@ public class DetectionMarkers : MonoBehaviour
 		}
 
 
-		if(updatedLeftPose && updatedRightPose)
+		if(updatedLeftPose && updatedRightPose) //taking the average of the two values
         {
-			Debug.Log("do both");
 			GetObjectNewTransform(tvecRight, rotMatRight, rightPose, out Vector3 worldPosRight, out Quaternion worldRotRight);
 			GetObjectNewTransform(tvecLeft, rotMatLeft, leftPose, out Vector3 worldPosLeft, out Quaternion worldRotLeft);
 			cubeToMove.SetNewTransform(Vector3.Lerp(worldPosLeft, worldPosRight, 0.5f), Quaternion.Slerp(worldRotLeft,worldRotRight,0.5f));
 			updatedLeftPose = false;
 			updatedRightPose = false;
 		}
-		else if (updatedRightPose)
+		else if (updatedRightPose) //taking the right result
         {
-			Debug.Log("did right");
 			GetObjectNewTransform(tvecRight, rotMatRight, rightPose,out Vector3 worldPos, out Quaternion worldRot);
 			cubeToMove.SetNewTransform(worldPos, worldRot);
 			updatedRightPose = false;
+
 		}
-		else if (updatedLeftPose)
+		else if (updatedLeftPose) //taking the left result
         {
-			Debug.Log("did left");
 			GetObjectNewTransform(tvecLeft, rotMatLeft,leftPose,out Vector3 worldPos, out Quaternion worldRot);
 			cubeToMove.SetNewTransform(worldPos, worldRot);
 			updatedLeftPose = false;
-
 		}
+		//else : no updates on both cameras, do nothing
 	}
 
 
@@ -255,19 +251,11 @@ public class DetectionMarkers : MonoBehaviour
 
 	private void DetectMarkers(Texture2D image, out Point2f[][] corners,out int[] ids, out Point2f[][] rejectedImgPoints)
     {
-		Mat mat = OpenCvSharp.Unity.TextureToMat(image);
-
 		Mat flippedMat = new Mat();
-		Cv2.Flip(mat, flippedMat, FlipMode.Y);
-		Mat grayMat = new Mat();
-		Cv2.CvtColor(flippedMat, grayMat, ColorConversionCodes.BGRA2GRAY);
-
-		// Detect and draw markers
-		CvAruco.DetectMarkers(grayMat, dictionary, out corners, out ids, detectorParameters, out rejectedImgPoints);
-
-		grayMat.Dispose();
-		mat.Dispose();
+		Cv2.Flip(OpenCvSharp.Unity.TextureToMat(image), flippedMat, FlipMode.Y); //flipping input cameras, as vive feed is reversed
+		CvAruco.DetectMarkers(flippedMat, dictionary, out corners, out ids, detectorParameters, out rejectedImgPoints);
 		flippedMat.Dispose();
 	}
+
 
 }

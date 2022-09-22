@@ -8,8 +8,8 @@ public class TransformSmoother : MonoBehaviour
     private Vector3 movingAverageUp;
     private Vector3 movingAverageForward;
     private int count=0;
-    [SerializeField] private int movingAverageLengthPos = 10;
-    [SerializeField] private int movingAverageLengthRot = 10;
+    [SerializeField] private int movingAverageLengthPos = 6;
+    [SerializeField] private int movingAverageLengthRot = 3;
 
 
     public void SetNewTransform(Vector3 pos, Quaternion rot)
