@@ -83,12 +83,18 @@ namespace Vive.Plugin.SR
             set { EditorPrefs.SetBool("ViveSR_AutoEnableVR", value); }
         }
 
+        [System.Obsolete]
+#pragma warning disable CS0809 // Un membre obsolète se substitue à un membre non obsolète
         public override bool IsNeedShow()
+#pragma warning restore CS0809 // Un membre obsolète se substitue à un membre non obsolète
         {
             return IsNeedOpenVRSupport();
         }
 
+        [System.Obsolete]
+#pragma warning disable CS0809 // Un membre obsolète se substitue à un membre non obsolète
         public override void RenderGUI()
+#pragma warning restore CS0809 // Un membre obsolète se substitue à un membre non obsolète
         {
             EditorGUILayout.HelpBox(HelpboxText_RemindEnableOpenVRSupport, MessageType.Warning);
             GUILayout.FlexibleSpace();
@@ -102,6 +108,7 @@ namespace Vive.Plugin.SR
             GUILayout.EndHorizontal();
         }
 
+        [System.Obsolete]
         private bool IsNeedOpenVRSupport()
         {
             //if (!AutoEnableVR) return false;
@@ -122,6 +129,7 @@ namespace Vive.Plugin.SR
             return true;
         }
 
+        [System.Obsolete]
         private void EnableOpenVRSupport()
         {
             PlayerSettings.virtualRealitySupported = true;
@@ -398,8 +406,8 @@ namespace Vive.Plugin.SR
             int mask = LayerMask.GetMask(ViveSR_Layers.DefaultLayerName, ViveSR_Layers.TransparentFXLayerName,
                 ViveSR_Layers.IgnoreRaycastLayerName, ViveSR_Layers.WaterLayerName, ViveSR_Layers.UILayerName, layer_name);
             int layer = LayerMask.NameToLayer(layer_name);
-            ViveSR_DualCameraRig prefabRig = PrefabUtility.GetPrefabParent(ViveSR_DualCameraRig.Instance) as ViveSR_DualCameraRig;
-
+            //ViveSR_DualCameraRig prefabRig = PrefabUtility.GetPrefabParent(ViveSR_DualCameraRig.Instance) as ViveSR_DualCameraRig;
+            ViveSR_DualCameraRig prefabRig = PrefabUtility.GetCorrespondingObjectFromSource(ViveSR_DualCameraRig.Instance);
             Camera cam = camera_index == DualCameraIndex.LEFT ?
                 prefabRig.DualCameraLeft :
                 prefabRig.DualCameraRight;
@@ -422,8 +430,8 @@ namespace Vive.Plugin.SR
 
         private void UpdateRenderCameraLayers()
         {
-            ViveSR_DualCameraRig prefabRig = PrefabUtility.GetPrefabParent(ViveSR_DualCameraRig.Instance) as ViveSR_DualCameraRig;
-
+            //ViveSR_DualCameraRig prefabRig = PrefabUtility.GetPrefabParent(ViveSR_DualCameraRig.Instance) as ViveSR_DualCameraRig;
+            ViveSR_DualCameraRig prefabRig = PrefabUtility.GetCorrespondingObjectFromSource(ViveSR_DualCameraRig.Instance);
             prefabRig.RenderCameraLeft.cullingMask = LayerMask.GetMask(ViveSR_Layers.RenderPlaneLeftLayerName);
             prefabRig.RenderCameraRight.cullingMask = LayerMask.GetMask(ViveSR_Layers.RenderPlaneRightLayerName);
             prefabRig.TrackedCameraLeft.RenderPlane.gameObject.layer = LayerMask.NameToLayer(ViveSR_Layers.RenderPlaneLeftLayerName);

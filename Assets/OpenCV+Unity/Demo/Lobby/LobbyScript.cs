@@ -65,7 +65,8 @@ public class LobbyScript: MonoBehaviour {
 
 	private void UnloadScene() {
 		if (currentScene != null) {
-			SceneManager.UnloadScene (currentScene);
+			//SceneManager.UnloadScene (currentScene);
+			SceneManager.UnloadSceneAsync(currentScene);
 			currentScene = null;
 		}
 	}
