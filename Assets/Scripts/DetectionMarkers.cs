@@ -54,6 +54,11 @@ public class DetectionMarkers : MonoBehaviour
 
 	void Start()
 	{
+		InitArucoParameters();
+	}
+
+	void InitArucoParameters()
+    {
 		markerPoints = new Point3f[] {
 				new Point3f(-markerLength / 2f,  markerLength / 2f, 0f),
 				new Point3f( markerLength / 2f,  markerLength / 2f, 0f),
@@ -104,7 +109,12 @@ public class DetectionMarkers : MonoBehaviour
 				{0d, ViveSR_DualCameraImageCapture.FocalLengthLeft, ViveSR_DualCameraImageCapture.UndistortedCyLeft},
 				{0d, 0d, 1d}
 			};
-
+		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out leftPose, out _);
+		if (left != null)
+		{
+			requestLeft = AsyncGPUReadback.Request(left, 0, TextureFormat.RGBA32, OnCompleteReadbackLeft);
+			isCameraLeftInitialized = true;
+		}
 	}
 	void InitRightCamera()
 	{
@@ -113,6 +123,13 @@ public class DetectionMarkers : MonoBehaviour
 				{0d, ViveSR_DualCameraImageCapture.FocalLengthRight, ViveSR_DualCameraImageCapture.UndistortedCyRight},
 				{0d, 0d, 1d}
 			};
+
+		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out rightPose);
+		if (right != null)
+		{
+			requestRight = AsyncGPUReadback.Request(right, 0, TextureFormat.RGBA32, OnCompleteReadbackRight);
+			isCameraRightInitialized = true;
+		}
 	}
 
 	private void Update()
@@ -127,23 +144,10 @@ public class DetectionMarkers : MonoBehaviour
 		if (!isCameraLeftInitialized && ViveSR_DualCameraImageCapture.FocalLengthLeft > 0)
 		{
 			InitLeftCamera();
-			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out leftPose, out _);
-			if (left != null)
-            {
-				requestLeft = AsyncGPUReadback.Request(left, 0, TextureFormat.RGBA32, OnCompleteReadbackLeft);
-				isCameraLeftInitialized = true;
-			}
 		}
 		if (!isCameraRightInitialized && ViveSR_DualCameraImageCapture.FocalLengthRight > 0)
 		{
 			InitRightCamera();
-			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _ , out right, out _, out _, out _, out rightPose);
-			if (right != null)
-			{
-				requestRight = AsyncGPUReadback.Request(right, 0, TextureFormat.RGBA32, OnCompleteReadbackRight);
-				isCameraRightInitialized = true;
-			}
-
 		}
 
 		if (isCameraLeftInitialized && requestLeft.done)
