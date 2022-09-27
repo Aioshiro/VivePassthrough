@@ -1,22 +1,12 @@
 fileFormatVersion: 2
-guid: dda7e312b9d61a94ab06c9aadbebfd82
+guid: 1c064a4b8de8cfb47996282d78ae823c
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
-      74: 1827226128182048838
-    second: Take 001
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: m007_body
-    second: {fileID: 2100000, guid: b44fb930e20e1ba4288853d56a8f0372, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: m007_head
-    second: {fileID: 2100000, guid: 1662e97a5c0fa4b498d965923119f240, type: 2}
+      74: 8996876661282030961
+    second: Bip01|Bip01|Take 001|BaseLayer
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
