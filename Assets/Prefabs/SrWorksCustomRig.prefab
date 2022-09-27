@@ -521,8 +521,6 @@ MonoBehaviour:
   InitializeNon4KDistortedPassThroughData: 0
   Modules:
   - {fileID: 4246907754626583593}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &4247718123380267021
 MonoBehaviour:
   m_ObjectHideFlags: 0
