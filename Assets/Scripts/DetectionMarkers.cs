@@ -10,12 +10,14 @@ public class DetectionMarkers : MonoBehaviour
 	//Aruco variables
 	private DetectorParameters detectorParameters;
 	private Dictionary dictionary;
-	//Texture2D left;
+	Texture2D left;
 	Texture2D right;
-	//Texture2D leftCPU;
+	Texture2D leftCPU;
 	Texture2D rightCPU;
+
 	Point3f[] markerPoints;
-	[Tooltip("Marker length in meters")] [SerializeField] private float markerLength = 0.06f;
+	[Tooltip("Marker length in meters")]
+	[SerializeField] private float markerLength = 0.06f;
 	[SerializeField] private PredefinedDictionaryName dictionaryName = PredefinedDictionaryName.Dict4X4_50;
 	const int numberOfMarkers = 4;
 
@@ -24,34 +26,38 @@ public class DetectionMarkers : MonoBehaviour
 	private Point2f[][] corners;
 	private int[] ids;
 	//private Point2f[][] rejectedImgPoints;
-	//double[][,] rotMatLeft;
+	double[][,] rotMatLeft;
 	double[][,] rotMatRight;
-	//private double[][] rvecLeft;
-	//private double[][] tvecLeft;
+	private double[][] rvecLeft;
+	private double[][] tvecLeft;
 	private double[][] rvecRight;
 	private double[][] tvecRight;
 
 	//To extract the HMD video frame from GPU to CPU
-	//AsyncGPUReadbackRequest requestLeft;
+	AsyncGPUReadbackRequest requestLeft;
 	private bool initialized=false;
 	AsyncGPUReadbackRequest requestRight;
 
 	//Camera parameters
-	//private double[,] cameraLeftMatrix;
+	private double[,] cameraLeftMatrix;
 	private double[,] cameraRightMatrix;
-	readonly double[] distCoeffs = new double[4] { 0d, 0d, 0d, 0d }; //no distortion with the Vive Pro 2
- 	//private bool isCameraLeftInitialized = false;
+	double[] distCoeffs = new double[4] { 0d, 0d, 0d, 0d }; //no distortion with the Vive Pro 2
+ 	private bool isCameraLeftInitialized = false;
 	private bool isCameraRightInitialized = false;
-	//private Matrix4x4 leftPose;
+	private Matrix4x4 leftPose;
 	private Matrix4x4 rightPose;
 
-	//bool updatedLeftPose = false;
-	//bool updatedRightPose = false;
+	bool updatedLeftPose = false;
+	bool updatedRightPose = false;
 
 	//Object to make appear on tracker
 	public TransformSmoother cubeToMove;
 
-	[SerializeField] private bool waitForRequestCompletion = false;
+	public bool useLeftCamera;
+	public bool useRightCamera;
+	public bool useCornerRefinement;
+	public bool waitForCompletion;
+
 
 	void Start()
 	{
@@ -69,47 +75,61 @@ public class DetectionMarkers : MonoBehaviour
 
 		// Create default parameres for detection
 		detectorParameters = DetectorParameters.Create();
-		detectorParameters.DoCornerRefinement = true;
-		detectorParameters.CornerRefinementMinAccuracy = 0.0001;
+		detectorParameters.DoCornerRefinement = useCornerRefinement;
+		detectorParameters.CornerRefinementMinAccuracy = 0.001;
 		detectorParameters.CornerRefinementMaxIterations = 100;
 
 		// Dictionary holds set of all available markers
 		dictionary = CvAruco.GetPredefinedDictionary(dictionaryName);
 
-		//rvecLeft = new double[numberOfMarkers][];
-		//tvecLeft = new double[numberOfMarkers][];
+		rvecLeft = new double[numberOfMarkers][];
+		tvecLeft = new double[numberOfMarkers][];
 		rvecRight = new double[numberOfMarkers][];
 		tvecRight = new double[numberOfMarkers][];
 
-		//rotMatLeft = new double[numberOfMarkers][,];
+		rotMatLeft = new double[numberOfMarkers][,];
 		rotMatRight = new double[numberOfMarkers][,];
-
-		for (int i = 0; i < numberOfMarkers; i++)
-        {
-			rvecRight[i] = null;
-			tvecRight[i] = null;
-			rotMatRight[i] = null;
-        }
-
 	}
 
 	void InitTextures()
 	{
-		//left = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
-		//leftCPU = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
-		right = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
-		rightCPU = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
+		left = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA4444, false);
+		leftCPU = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA4444, false);
+		right = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA4444, false);
+		rightCPU = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA4444, false);
 	}
 
+	void OnCompleteReadbackLeft(AsyncGPUReadbackRequest request)
+	{
+		//texLeftTemp = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
+		//texLeftTemp.LoadRawTextureData(request.GetData<uint>());
+		//texLeftTemp.Apply();
+		//Graphics.CopyTexture(texLeftTemp, leftCPU);
+		leftCPU.LoadRawTextureData(request.GetData<uint>());
+	}
 	void OnCompleteReadbackRight(AsyncGPUReadbackRequest request)
 	{
-		var tex = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
-		tex.LoadRawTextureData(request.GetData<uint>());
-		tex.Apply();
-		Graphics.CopyTexture(tex, rightCPU);
-		Destroy(tex);
+		//texRightTemp = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
+		//texRightTemp.LoadRawTextureData(request.GetData<uint>());
+		//texRightTemp.Apply();
+		//Graphics.CopyTexture(texRightTemp, rightCPU);
+		rightCPU.LoadRawTextureData(request.GetData<uint>());
 	}
 
+	void InitLeftCamera()
+    {
+		cameraLeftMatrix = new double[3, 3] {
+				{ViveSR_DualCameraImageCapture.FocalLengthLeft, 0d, ViveSR_DualCameraImageCapture.UndistortedCxLeft},
+				{0d, ViveSR_DualCameraImageCapture.FocalLengthLeft, ViveSR_DualCameraImageCapture.UndistortedCyLeft},
+				{0d, 0d, 1d}
+			};
+		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out leftPose, out _);
+		if (left != null)
+		{
+			requestLeft = AsyncGPUReadback.Request(left, 0, TextureFormat.RGBA4444, OnCompleteReadbackLeft);
+			isCameraLeftInitialized = true;
+		}
+	}
 	void InitRightCamera()
 	{
 		cameraRightMatrix = new double[3, 3] {
@@ -121,69 +141,98 @@ public class DetectionMarkers : MonoBehaviour
 		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out rightPose);
 		if (right != null)
 		{
-			requestRight = AsyncGPUReadback.Request(right, 0, TextureFormat.RGBA32, OnCompleteReadbackRight);
+			requestRight = AsyncGPUReadback.Request(right, 0, TextureFormat.RGBA4444, OnCompleteReadbackRight);
 			isCameraRightInitialized = true;
 		}
 	}
 
 	private void Update()
 	{
-		//Can't do it in start, as some parameters are not updated on first frame
+
 		if (!initialized && ViveSR_DualCameraImageCapture.UndistortedImageWidth>0)
 		{
 			InitTextures();
 			initialized = true;
 		}
-
+		if (!initialized) { return; }
+		if (!isCameraLeftInitialized && ViveSR_DualCameraImageCapture.FocalLengthLeft > 0)
+		{
+			InitLeftCamera();
+		}
 		if (!isCameraRightInitialized && ViveSR_DualCameraImageCapture.FocalLengthRight > 0)
 		{
 			InitRightCamera();
 		}
-        if (!initialized || !isCameraRightInitialized) { return; }
 
-		UpdateMarkerPoses();
-
-		UpdateCameraImage();
-
-		UpdateObjectTransform();
-    }
-
-	private void UpdateMarkerPoses()
-    {
-		DetectMarkers(rightCPU, out corners, out ids, out _);
-
-		if (ids.Length > 0)
+		if (isCameraLeftInitialized && useLeftCamera && requestLeft.done)
 		{
+			DetectMarkers(leftCPU, out corners, out ids);
+
 			for (int i = 0; i < ids.Length; i++)
 			{
-				if (ids[i] < numberOfMarkers)
+				if (ids[i] == 3)
+				{
+					Cv2.SolvePnP(markerPoints, corners[i], cameraLeftMatrix, distCoeffs, out rvecLeft[ids[i]], out tvecLeft[ids[i]], false, SolvePnPFlags.Iterative);
+					Cv2.Rodrigues(rvecLeft[ids[i]], out rotMatLeft[ids[i]]);
+					updatedLeftPose = true;
+				}
+			}
+
+			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out leftPose, out _);
+			requestLeft = AsyncGPUReadback.Request(left, 0, TextureFormat.RGBA4444, OnCompleteReadbackLeft);
+			if (waitForCompletion) { requestLeft.WaitForCompletion(); }
+		}
+
+		if (isCameraRightInitialized&& useRightCamera && requestRight.done)
+		{
+			DetectMarkers(rightCPU, out corners, out ids);
+
+			for (int i = 0; i < ids.Length; i++)
+			{
+				if (ids[i] == 3)
 				{
 					Cv2.SolvePnP(markerPoints, corners[i], cameraRightMatrix, distCoeffs, out rvecRight[ids[i]], out tvecRight[ids[i]], false, SolvePnPFlags.Iterative);
 					Cv2.Rodrigues(rvecRight[ids[i]], out rotMatRight[ids[i]]);
+					updatedRightPose = true;
 				}
 			}
+
+			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out rightPose);
+			requestRight = AsyncGPUReadback.Request(right, 0, TextureFormat.RGBA4444, OnCompleteReadbackRight);
+			if (waitForCompletion) { requestRight.WaitForCompletion(); }
 		}
 
+		UpdatingPoses();
 	}
 
-	private void UpdateCameraImage()
+	private void UpdatingPoses()
     {
-		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out rightPose);
-		requestRight = AsyncGPUReadback.Request(right, 0, TextureFormat.RGBA32, OnCompleteReadbackRight);
-		if (waitForRequestCompletion)
+		//just taking into account marker 3 for now
+		if (updatedLeftPose && updatedRightPose) //taking the average of the two values
 		{
-			requestRight.WaitForCompletion();
+			GetObjectNewTransform(tvecRight[3], rotMatRight[3], rightPose, out Vector3 worldPosRight, out Quaternion worldRotRight);
+			GetObjectNewTransform(tvecLeft[3], rotMatLeft[3], leftPose, out Vector3 worldPosLeft, out Quaternion worldRotLeft);
+			cubeToMove.SetNewTransform(Vector3.Lerp(worldPosLeft, worldPosRight, 0.5f), Quaternion.Slerp(worldRotLeft, worldRotRight, 0.5f));
+			updatedLeftPose = false;
+			updatedRightPose = false;
 		}
+		else if (updatedRightPose) //taking the right result
+		{
+			GetObjectNewTransform(tvecRight[3], rotMatRight[3], rightPose, out Vector3 worldPos, out Quaternion worldRot);
+			cubeToMove.SetNewTransform(worldPos, worldRot);
+			updatedRightPose = false;
 
+		}
+		else if (updatedLeftPose) //taking the left result
+		{
+			GetObjectNewTransform(tvecLeft[3], rotMatLeft[3], leftPose, out Vector3 worldPos, out Quaternion worldRot);
+			cubeToMove.SetNewTransform(worldPos, worldRot);
+			updatedLeftPose = false;
+		}
+		//else : no updates on both cameras, do nothing
 	}
 
-	private void UpdateObjectTransform()
-    {
-		if (tvecRight[0] == null || tvecRight[2] == null) { return; }
-		double[] averagePosRight = new double[] { (tvecRight[0][0] + tvecRight[2][0]) / 2, (tvecRight[0][1] + tvecRight[2][1]) / 2, (tvecRight[0][2] + tvecRight[2][2]) / 2 };
-		GetObjectNewTransform(averagePosRight, rotMatRight[0], rightPose, out Vector3 worldPos, out Quaternion worldRot);
-		cubeToMove.SetNewTransform(worldPos, worldRot);
-	}
+
 	private Quaternion QuaternionFromMatrix(double[,] m)
 	{
 		// Adapted from: http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm
@@ -217,13 +266,17 @@ public class DetectionMarkers : MonoBehaviour
 
 	}
 
-	private void DetectMarkers(Texture2D image, out Point2f[][] corners,out int[] ids, out Point2f[][] rejectedImgPoints)
+	private void DetectMarkers(Texture2D image, out Point2f[][] corners,out int[] ids)
     {
 		Mat flippedMat = new Mat();
 		Cv2.Flip(OpenCvSharp.Unity.TextureToMat(image), flippedMat, FlipMode.Y); //flipping input cameras, as vive feed is reversed
-		CvAruco.DetectMarkers(flippedMat, dictionary, out corners, out ids, detectorParameters, out rejectedImgPoints);
+		CvAruco.DetectMarkers(flippedMat, dictionary, out corners, out ids, detectorParameters, out _);
 		flippedMat.Dispose();
 	}
 
-
+    private void OnDestroy()
+    {
+		requestRight.WaitForCompletion();
+		requestLeft.WaitForCompletion();
+    }
 }

@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae70f48d1c966f94698c43ceab853ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingAverageLengthPos: 1
+  movingAverageLengthPos: 2
   movingAverageLengthRot: 3
 --- !u!1 &1374991079
 GameObject:
@@ -1045,10 +1045,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 268cc8583cec2214da5fcbe6475fc02b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  markerLength: 0.06
+  markerLength: 0.052
   dictionaryName: 0
   cubeToMove: {fileID: 935432320}
-  waitForRequestCompletion: 1
+  useLeftCamera: 0
+  useRightCamera: 1
+  useCornerRefinement: 1
+  waitForCompletion: 1
 --- !u!4 &1856049634
 Transform:
   m_ObjectHideFlags: 0
@@ -1156,6 +1159,11 @@ PrefabInstance:
       propertyPath: OriginalCamera
       value: 
       objectReference: {fileID: 1640802956}
+    - target: {fileID: 4247000792894347255, guid: 87e5c171db4b11b48bd3d4b6a643019d,
+        type: 3}
+      propertyPath: InitializeNon4KDistortedPassThroughData
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4278888805985285175, guid: 87e5c171db4b11b48bd3d4b6a643019d,
         type: 3}
       propertyPath: m_Name
