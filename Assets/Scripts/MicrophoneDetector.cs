@@ -5,16 +5,16 @@ using UnityEngine;
 public class MicrophoneDetector : MonoBehaviour
 {
     //bool _isInitialized;
-    public static float MicLoudness;
+    public static float MicLoudness; //in db
     private string _device;
     AudioClip _clipRecord;
-    int _sampleWindow = 128;
+    int _sampleWindow = 1024;
 
     //mic initialization
     void InitMic()
     {
         if (_device == null) _device = Microphone.devices[0];
-        _clipRecord = Microphone.Start(_device, true, 999, 44100);
+        _clipRecord = Microphone.Start(_device, true, 999, AudioSettings.outputSampleRate);
     }
 
     void StopMicrophone()
@@ -32,14 +32,21 @@ public class MicrophoneDetector : MonoBehaviour
         if (micPosition < 0) return 0;
         _clipRecord.GetData(waveData, micPosition);
         // Getting a peak on the last 128 samples
+        //for (int i = 0; i < _sampleWindow; i++)
+        //{
+        //    float wavePeak = waveData[i] * waveData[i];
+        //    if (levelMax < wavePeak)
+        //    {
+        //        levelMax = wavePeak;
+        //    }
+        //}
         for (int i = 0; i < _sampleWindow; i++)
         {
-            float wavePeak = waveData[i] * waveData[i];
-            if (levelMax < wavePeak)
-            {
-                levelMax = wavePeak;
-            }
+            levelMax += waveData[i] * waveData[i];
         }
+        levelMax = Mathf.Sqrt(levelMax / _sampleWindow); // rms = square root of average
+        //levelMax = 20 * Mathf.Log10(levelMax); // calculate dB
+
         return levelMax;
     }
 

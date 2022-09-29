@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class VoiceDetector : MonoBehaviour
 {
-    bool isTalking = false;
-    static UnityEngine.Events.UnityEvent startedTalking;
-    static UnityEngine.Events.UnityEvent stoppedTalking;
+    static bool isTalking = false;
+    public static UnityEngine.Events.UnityEvent startedTalking;
+    public static UnityEngine.Events.UnityEvent stoppedTalking;
 
     [SerializeField] private float loudnessThreshold = 10e-4f;
 
