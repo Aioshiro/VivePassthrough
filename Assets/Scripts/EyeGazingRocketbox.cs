@@ -52,12 +52,13 @@ public class EyeGazingRocketbox : MonoBehaviour
 
         Vector3 directionLeft = leftEye.InverseTransformPoint(objectToTrack.transform.position).normalized * 100;
         directionLeft = -directionLeft;
-        if (directionLeft.y < 0)
+        Debug.Log(directionLeft);
+        if (directionLeft.x > 0)
         {
-            meshRenderer.SetBlendShapeWeight(eyeLookDownLeft, Mathf.Clamp(-directionLeft.z, 0, 100));
-            meshRenderer.SetBlendShapeWeight(eyeLookUpLeft, Mathf.Clamp(directionLeft.z, 0, 100));
-            meshRenderer.SetBlendShapeWeight(eyeLookInLeft, Mathf.Clamp(-directionLeft.x, 0, 100));
-            meshRenderer.SetBlendShapeWeight(eyeLookOutLeft, Mathf.Clamp(directionLeft.x, 0, 100));
+            meshRenderer.SetBlendShapeWeight(eyeLookDownLeft, Mathf.Clamp(-directionLeft.y, 0, 100));
+            meshRenderer.SetBlendShapeWeight(eyeLookUpLeft, Mathf.Clamp(directionLeft.y, 0, 100));
+            meshRenderer.SetBlendShapeWeight(eyeLookInLeft, Mathf.Clamp(directionLeft.z, 0, 100));
+            meshRenderer.SetBlendShapeWeight(eyeLookOutLeft, Mathf.Clamp(-directionLeft.z, 0, 100));
         }
         else
         {
@@ -68,12 +69,12 @@ public class EyeGazingRocketbox : MonoBehaviour
         }
         Vector3 directionRight = rightEye.InverseTransformPoint(objectToTrack.transform.position).normalized * 100;
         directionRight = -directionRight;
-        if (directionRight.y < 0)
+        if (directionRight.x > 0)
         {
-            meshRenderer.SetBlendShapeWeight(eyeLookDownRight, Mathf.Clamp(-directionRight.z, 0, 100));
-            meshRenderer.SetBlendShapeWeight(eyeLookUpRight, Mathf.Clamp(directionRight.z, 0, 100));
-            meshRenderer.SetBlendShapeWeight(eyeLookInRight, Mathf.Clamp(directionRight.x, 0, 100));
-            meshRenderer.SetBlendShapeWeight(eyeLookOutRight, Mathf.Clamp(-directionRight.x, 0, 100));
+            meshRenderer.SetBlendShapeWeight(eyeLookDownRight, Mathf.Clamp(-directionRight.y, 0, 100));
+            meshRenderer.SetBlendShapeWeight(eyeLookUpRight, Mathf.Clamp(directionRight.y, 0, 100));
+            meshRenderer.SetBlendShapeWeight(eyeLookInRight, Mathf.Clamp(-directionRight.z, 0, 100));
+            meshRenderer.SetBlendShapeWeight(eyeLookOutRight, Mathf.Clamp(directionRight.z, 0, 100));
         }
         else
         {

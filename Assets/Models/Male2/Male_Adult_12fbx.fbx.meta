@@ -6,6 +6,9 @@ ModelImporter:
   - first:
       74: 8996876661282030961
     second: Bip01|Bip01|Take 001|BaseLayer
+  - first:
+      74: 1359408675128791233
+    second: Bip01|Bip01|Take 001|BaseLayer.001
   externalObjects: {}
   materials:
     materialImportMode: 1
