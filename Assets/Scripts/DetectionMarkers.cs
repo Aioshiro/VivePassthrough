@@ -170,7 +170,7 @@ public class DetectionMarkers : MonoBehaviour
 
 			for (int i = 0; i < ids.Length; i++)
 			{
-				if (ids[i] == 3)
+				if (ids[i] <numberOfMarkers)
 				{
 					Cv2.SolvePnP(markerPoints, corners[i], cameraLeftMatrix, distCoeffs, out rvecLeft[ids[i]], out tvecLeft[ids[i]], false, SolvePnPFlags.Iterative);
 					Cv2.Rodrigues(rvecLeft[ids[i]], out rotMatLeft[ids[i]]);
@@ -189,7 +189,7 @@ public class DetectionMarkers : MonoBehaviour
 
 			for (int i = 0; i < ids.Length; i++)
 			{
-				if (ids[i] == 3)
+				if (ids[i] <numberOfMarkers)
 				{
 					Cv2.SolvePnP(markerPoints, corners[i], cameraRightMatrix, distCoeffs, out rvecRight[ids[i]], out tvecRight[ids[i]], false, SolvePnPFlags.Iterative);
 					Cv2.Rodrigues(rvecRight[ids[i]], out rotMatRight[ids[i]]);
@@ -210,22 +210,28 @@ public class DetectionMarkers : MonoBehaviour
 		//just taking into account marker 3 for now
 		if (updatedLeftPose && updatedRightPose) //taking the average of the two values
 		{
-			GetObjectNewTransform(tvecRight[3], rotMatRight[3], rightPose, out Vector3 worldPosRight, out Quaternion worldRotRight);
-			GetObjectNewTransform(tvecLeft[3], rotMatLeft[3], leftPose, out Vector3 worldPosLeft, out Quaternion worldRotLeft);
+			double[] avgPosLeft = { (tvecLeft[0][0] + tvecLeft[2][0]) / 2, (tvecLeft[0][1] + tvecLeft[2][1]) / 2, (tvecLeft[0][2] + tvecLeft[2][2]) / 2 };
+			double[] avgPosRight = { (tvecRight[0][0] + tvecRight[2][0]) / 2, (tvecRight[0][1] + tvecRight[2][1]) / 2, (tvecRight[0][2] + tvecRight[2][2]) / 2 };
+
+			GetObjectNewTransform(avgPosRight, rotMatRight[0], rightPose, out Vector3 worldPosRight, out Quaternion worldRotRight);
+			GetObjectNewTransform(avgPosLeft, rotMatLeft[0], leftPose, out Vector3 worldPosLeft, out Quaternion worldRotLeft);
 			cubeToMove.SetNewTransform(Vector3.Lerp(worldPosLeft, worldPosRight, 0.5f), Quaternion.Slerp(worldRotLeft, worldRotRight, 0.5f));
 			updatedLeftPose = false;
 			updatedRightPose = false;
 		}
 		else if (updatedRightPose) //taking the right result
 		{
-			GetObjectNewTransform(tvecRight[3], rotMatRight[3], rightPose, out Vector3 worldPos, out Quaternion worldRot);
+			double[] avgPosRight = { (tvecRight[0][0] + tvecRight[2][0]) / 2, (tvecRight[0][1] + tvecRight[2][1]) / 2, (tvecRight[0][2] + tvecRight[2][2]) / 2 };
+
+			GetObjectNewTransform(avgPosRight, rotMatRight[0], rightPose, out Vector3 worldPos, out Quaternion worldRot);
 			cubeToMove.SetNewTransform(worldPos, worldRot);
 			updatedRightPose = false;
 
 		}
 		else if (updatedLeftPose) //taking the left result
 		{
-			GetObjectNewTransform(tvecLeft[3], rotMatLeft[3], leftPose, out Vector3 worldPos, out Quaternion worldRot);
+			double[] avgPosLeft = { (tvecLeft[0][0] + tvecLeft[2][0]) / 2, (tvecLeft[0][1] + tvecLeft[2][1]) / 2, (tvecLeft[0][2] + tvecLeft[2][2]) / 2 };
+			GetObjectNewTransform(avgPosLeft, rotMatLeft[0], leftPose, out Vector3 worldPos, out Quaternion worldRot);
 			cubeToMove.SetNewTransform(worldPos, worldRot);
 			updatedLeftPose = false;
 		}
