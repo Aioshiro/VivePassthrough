@@ -25,13 +25,16 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
 
     int eyesClosed;
 
-    float timeToBlink = 0.05f;
-    float timeBetweenBlinks = 3.5f;
+    const float timeToBlink = 0.05f;
+    const float timeBetweenBlinks = 3.5f;
     float timeUntilNextBlink = 0;
+    const float timeToReset = 0.1f;
+    const float maxLookingSpeed = 0.01f;
 
     bool isOtherTalking = false;
 
-    // Start is called before the first frame update
+    public Coroutine resetCoroutine;
+
     void Start()
     {
         meshRenderer = GetComponent<SkinnedMeshRenderer>();
@@ -64,43 +67,59 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
         isOtherTalking = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //if (!isOtherTalking) { ResetGazeLeft();ResetGazeRight();return; }
-
-        Vector3 directionLeft = leftEye.InverseTransformPoint(objectToTrack.transform.position).normalized*100;
-        if (directionLeft.z< 0)
+        if (!isOtherTalking)
         {
-            meshRenderer.SetBlendShapeWeight(eyeLookDownLeft, Mathf.Clamp(-directionLeft.y, 0, 100));
-            meshRenderer.SetBlendShapeWeight(eyeLookUpLeft,Mathf.Clamp(directionLeft.y, 0, 100));
-            meshRenderer.SetBlendShapeWeight(eyeLookInLeft,Mathf.Clamp(-directionLeft.x, 0, 100));
-            meshRenderer.SetBlendShapeWeight(eyeLookOutLeft,Mathf.Clamp(directionLeft.x, 0, 100));
+            if (resetCoroutine == null) { resetCoroutine = StartCoroutine(nameof(ResetCoroutine)); }
+            return;
         }
-        else
+
+        LookAtObject();
+        UpdateBlink();
+
+    }
+
+    void LookAtObject()
+    {
+        Vector3 directionLeft = leftEye.InverseTransformPoint(objectToTrack.transform.position).normalized * 100;
+        float currentVelocity = 0;
+        if (directionLeft.z < 0)
         {
+            meshRenderer.SetBlendShapeWeight(eyeLookDownLeft, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookDownLeft), Mathf.Clamp(-directionLeft.y, 0, 100), ref currentVelocity, maxLookingSpeed));
+            meshRenderer.SetBlendShapeWeight(eyeLookUpLeft, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookUpLeft), Mathf.Clamp(directionLeft.y, 0, 100), ref currentVelocity, maxLookingSpeed));
+            meshRenderer.SetBlendShapeWeight(eyeLookInLeft, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookInLeft), Mathf.Clamp(-directionLeft.x, 0, 100), ref currentVelocity, maxLookingSpeed));
+            meshRenderer.SetBlendShapeWeight(eyeLookOutLeft, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookOutLeft), Mathf.Clamp(directionLeft.x, 0, 100), ref currentVelocity, maxLookingSpeed));
+        }
+        else //If trying to look at something behind him, probably won't happen
+        {
+            Debug.LogWarning("Tried to look behind him");
             ResetGazeLeft();
         }
         Vector3 directionRight = rightEye.InverseTransformPoint(objectToTrack.transform.position).normalized * 100;
-        if (directionRight.z< 0)
+        if (directionRight.z < 0)
         {
-            meshRenderer.SetBlendShapeWeight(eyeLookDownRight, Mathf.Clamp(-directionRight.y, 0, 100));
-            meshRenderer.SetBlendShapeWeight(eyeLookUpRight, Mathf.Clamp(directionRight.y, 0, 100));
-            meshRenderer.SetBlendShapeWeight(eyeLookInRight,Mathf.Clamp(directionRight.x, 0, 100));
-            meshRenderer.SetBlendShapeWeight(eyeLookOutRight,Mathf.Clamp(-directionRight.x, 0, 100));
+            meshRenderer.SetBlendShapeWeight(eyeLookDownRight, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookDownRight), Mathf.Clamp(-directionRight.y, 0, 100), ref currentVelocity, maxLookingSpeed));
+            meshRenderer.SetBlendShapeWeight(eyeLookUpRight, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookUpRight), Mathf.Clamp(directionRight.y, 0, 100), ref currentVelocity, maxLookingSpeed));
+            meshRenderer.SetBlendShapeWeight(eyeLookInRight, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookInRight), Mathf.Clamp(directionRight.x, 0, 100), ref currentVelocity, maxLookingSpeed));
+            meshRenderer.SetBlendShapeWeight(eyeLookOutRight, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookOutRight), Mathf.Clamp(-directionRight.x, 0, 100), ref currentVelocity, maxLookingSpeed));
         }
-        else
+        else//If trying to look at something behind him, probably won't happen
         {
+            Debug.LogWarning("Tried to look behind him");
             ResetGazeRight();
         }
 
+    }
+
+    void UpdateBlink()
+    {
         timeUntilNextBlink += Time.deltaTime;
         if (timeUntilNextBlink > timeBetweenBlinks)
         {
             timeUntilNextBlink = 0;
             StartCoroutine(nameof(BlinkingCoroutine));
         }
-
     }
 
     IEnumerator BlinkingCoroutine()
@@ -119,6 +138,35 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
             meshRenderer.SetBlendShapeWeight(eyesClosed, t * 100 / timeToBlink);
             yield return new WaitForFixedUpdate();
         }
+    }
+
+    IEnumerator ResetCoroutine()
+    {
+        float initialeyeLookDownLeft = meshRenderer.GetBlendShapeWeight(eyeLookDownLeft);
+        float initialeyeLookDownRight = meshRenderer.GetBlendShapeWeight(eyeLookDownRight);
+        float initialeyeLookUpLeft = meshRenderer.GetBlendShapeWeight(eyeLookUpLeft);
+        float initialeyeLookUpRight = meshRenderer.GetBlendShapeWeight(eyeLookUpRight);
+        float initialeyeLookInLeft = meshRenderer.GetBlendShapeWeight(eyeLookInLeft);
+        float initialeyeLookInRight = meshRenderer.GetBlendShapeWeight(eyeLookInRight);
+        float initialeyeLookOutLeft = meshRenderer.GetBlendShapeWeight(eyeLookOutLeft);
+        float initialeyeLookOutRight = meshRenderer.GetBlendShapeWeight(eyeLookOutRight);
+
+        float t = 0;
+        while (t < timeToReset)
+        {
+            t += Time.deltaTime;
+            float temp = t / timeToReset;
+            meshRenderer.SetBlendShapeWeight(eyeLookDownLeft, Mathf.Lerp(initialeyeLookDownLeft,0, temp));
+            meshRenderer.SetBlendShapeWeight(eyeLookUpLeft, Mathf.Lerp(initialeyeLookUpLeft, 0, temp));
+            meshRenderer.SetBlendShapeWeight(eyeLookInLeft, Mathf.Lerp(initialeyeLookInLeft, 0, temp));
+            meshRenderer.SetBlendShapeWeight(eyeLookOutLeft, Mathf.Lerp(initialeyeLookOutLeft, 0, temp));
+            meshRenderer.SetBlendShapeWeight(eyeLookDownRight, Mathf.Lerp(initialeyeLookDownRight, 0, temp));
+            meshRenderer.SetBlendShapeWeight(eyeLookUpRight, Mathf.Lerp(initialeyeLookUpRight, 0, temp));
+            meshRenderer.SetBlendShapeWeight(eyeLookInRight, Mathf.Lerp(initialeyeLookInRight, 0, temp));
+            meshRenderer.SetBlendShapeWeight(eyeLookOutRight, Mathf.Lerp(initialeyeLookOutRight, 0, temp));
+            yield return new WaitForFixedUpdate();
+        }
+        resetCoroutine = null;
     }
 
     private void ResetGazeRight()

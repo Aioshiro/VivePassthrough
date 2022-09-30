@@ -5,7 +5,7 @@ using UnityEngine;
 public class MicrophoneDetector : MonoBehaviour
 {
     //bool _isInitialized;
-    public static float MicLoudness; //in db
+    public static float MicLoudness;
     private string _device;
     AudioClip _clipRecord;
     int _sampleWindow = 1024;

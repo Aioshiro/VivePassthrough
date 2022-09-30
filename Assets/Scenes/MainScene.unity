@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7752bbb0edf38ce4fa146f9c8e5f279e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loudnessThreshold: 0.01
+  loudnessThreshold: 0.001
 --- !u!1 &752428498
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,7 +900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d73910c0d827ee4ba3b0e1218e894c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToTrack: {fileID: 1676663157}
+  objectToTrack: {fileID: 1199539199}
 --- !u!1 &1545398171
 GameObject:
   m_ObjectHideFlags: 0
