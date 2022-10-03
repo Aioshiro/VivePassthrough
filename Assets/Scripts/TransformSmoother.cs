@@ -11,14 +11,26 @@ public class TransformSmoother : MonoBehaviour
     [SerializeField] private int movingAverageLengthPos = 6;
     [SerializeField] private int movingAverageLengthRot = 3;
 
+    [SerializeField] private float posStrength=1;
+    //[SerializeField] private float rotStrength;
+
+    Vector3 currentVelocity;
+
+    [SerializeField] private bool allowMovement;
+
+    private void Start()
+    {
+        currentVelocity = new Vector3();
+    }
 
     public void SetNewTransform(Vector3 pos, Quaternion rot)
     {
+        if (!allowMovement) { return; }
         count++;
         if (count> movingAverageLengthPos)
         {
             movingAveragePos += (pos - movingAveragePos) / (movingAverageLengthPos + 1);
-            transform.position = movingAveragePos;
+            transform.position = Vector3.SmoothDamp(transform.position,movingAveragePos,ref currentVelocity,Time.deltaTime*posStrength);
         }
         else
         {
@@ -26,7 +38,7 @@ public class TransformSmoother : MonoBehaviour
             if (count == movingAverageLengthPos)
             {
                 movingAveragePos /= count;
-                transform.position = movingAveragePos;
+                transform.position = Vector3.SmoothDamp(transform.position, movingAveragePos, ref currentVelocity, Time.deltaTime * posStrength);
             }
         }
         if (count > movingAverageLengthRot)

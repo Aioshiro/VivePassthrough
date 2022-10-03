@@ -10,7 +10,7 @@ public class VoiceDetector : MonoBehaviour
 
     [SerializeField] private float loudnessThreshold = 10e-4f;
 
-    private void Start()
+    private void Awake()
     {
         startedTalking = new UnityEngine.Events.UnityEvent();
         stoppedTalking = new UnityEngine.Events.UnityEvent();
