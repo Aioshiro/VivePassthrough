@@ -200,18 +200,18 @@ public class DetectionMarkers : MonoBehaviour
 			//imageNumber += 1;
 			DetectMarkers(rightCPU, out corners, out ids);
 			bool updated0 = false;
-			bool updated2 = false;
+			bool updated1 = false;
 			for (int i = 0; i < ids.Length; i++)
 			{
 				if (ids[i] <numberOfMarkers)
 				{
 					if (ids[i]==0) { updated0 = true; }
-					//else if (ids[i] == 2) { updated2 = true; }
+					else if (ids[i] == 1) { updated1 = true; }
 					Cv2.SolvePnP(markerPoints, corners[i], cameraRightMatrix, distCoeffs, out rvecRight[ids[i]], out tvecRight[ids[i]], false, SolvePnPFlags.Iterative);
 					Cv2.Rodrigues(rvecRight[ids[i]], out rotMatRight[ids[i]]);
 				}
 			}
-			updatedRightPose = updated0;
+			updatedRightPose = updated0&&updated1;
 
 			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out rightPose);
 			requestRight = AsyncGPUReadback.Request(right, 0, TextureFormat.RGBA32, OnCompleteReadbackRight);
@@ -227,8 +227,8 @@ public class DetectionMarkers : MonoBehaviour
 		//just taking into account marker 3 for now
 		if (updatedLeftPose && updatedRightPose) //taking the average of the two values
 		{
-			double[] avgPosLeft = { (tvecLeft[0][0] + tvecLeft[2][0]) / 2, (tvecLeft[0][1] + tvecLeft[2][1]) / 2, (tvecLeft[0][2] + tvecLeft[2][2]) / 2 };
-			double[] avgPosRight = { (tvecRight[0][0] + tvecRight[2][0]) / 2, (tvecRight[0][1] + tvecRight[2][1]) / 2, (tvecRight[0][2] + tvecRight[2][2]) / 2 };
+			double[] avgPosLeft = { (tvecLeft[0][0] + tvecLeft[1][0]) / 2, (tvecLeft[0][1] + tvecLeft[1][1]) / 2, (tvecLeft[0][2] + tvecLeft[1][2]) / 2 };
+			double[] avgPosRight = { (tvecRight[0][0] + tvecRight[1][0]) / 2, (tvecRight[0][1] + tvecRight[1][1]) / 2, (tvecRight[0][2] + tvecRight[1][2]) / 2 };
 
 			GetObjectNewTransform(avgPosRight, rotMatRight[0], false, out Vector3 worldPosRight, out Quaternion worldRotRight);
 			GetObjectNewTransform(avgPosLeft, rotMatLeft[0], true, out Vector3 worldPosLeft, out Quaternion worldRotLeft);
@@ -240,9 +240,9 @@ public class DetectionMarkers : MonoBehaviour
 		}
 		else if (updatedRightPose) //taking the right result
 		{
-			//double[] avgPosRight = { (tvecRight[0][0] + tvecRight[2][0]) / 2, (tvecRight[0][1] + tvecRight[2][1]) / 2, (tvecRight[0][2] + tvecRight[2][2]) / 2 };
+			double[] avgPosRight = { (tvecRight[0][0] + tvecRight[1][0]) / 2, (tvecRight[0][1] + tvecRight[1][1]) / 2, (tvecRight[0][2] + tvecRight[1][2]) / 2 };
 
-			GetObjectNewTransform(tvecRight[0], rotMatRight[0], false, out Vector3 worldPos, out Quaternion worldRot);
+			GetObjectNewTransform(avgPosRight, rotMatRight[0], false, out Vector3 worldPos, out Quaternion worldRot);
 			cubeToMove.SetNewTransform(worldPos, worldRot);
 			updatedRightPose = false;
 			//cubeToMove.gameObject.SetActive(true);
@@ -251,7 +251,7 @@ public class DetectionMarkers : MonoBehaviour
 		}
 		else if (updatedLeftPose) //taking the left result
 		{
-			double[] avgPosLeft = { (tvecLeft[0][0] + tvecLeft[2][0]) / 2, (tvecLeft[0][1] + tvecLeft[2][1]) / 2, (tvecLeft[0][2] + tvecLeft[2][2]) / 2 };
+			double[] avgPosLeft = { (tvecLeft[0][0] + tvecLeft[1][0]) / 2, (tvecLeft[0][1] + tvecLeft[1][1]) / 2, (tvecLeft[0][2] + tvecLeft[1][2]) / 2 };
 			GetObjectNewTransform(avgPosLeft, rotMatLeft[0], true, out Vector3 worldPos, out Quaternion worldRot);
 			cubeToMove.SetNewTransform(worldPos, worldRot);
 			updatedLeftPose = false;
