@@ -10,8 +10,8 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
     [SerializeField] private Transform objectToTrack;
     private SkinnedMeshRenderer meshRenderer;
     Mesh skinnedMesh;
-    Transform leftEye;
-    Transform rightEye;
+    [SerializeField] Transform leftEye;
+    [SerializeField] Transform rightEye;
 
     int eyeLookDownLeft;
     int eyeLookInLeft;
@@ -39,8 +39,8 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
     {
         meshRenderer = GetComponent<SkinnedMeshRenderer>();
         skinnedMesh = meshRenderer.sharedMesh;
-        leftEye = transform.GetChild(0);
-        rightEye = transform.GetChild(1);
+        //leftEye = transform.GetChild(0);
+        //rightEye = transform.GetChild(1);
         eyeLookDownLeft = skinnedMesh.GetBlendShapeIndex("eyeLookDownLeft");
         eyeLookInLeft = skinnedMesh.GetBlendShapeIndex("eyeLookInLeft");
         eyeLookOutLeft = skinnedMesh.GetBlendShapeIndex("eyeLookOutLeft");
