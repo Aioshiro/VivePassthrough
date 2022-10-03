@@ -44,8 +44,6 @@ public class DetectionMarkers : MonoBehaviour
 	double[] distCoeffs = new double[4] { 0d, 0d, 0d, 0d }; //no distortion with the Vive Pro 2
  	private bool isCameraLeftInitialized = false;
 	private bool isCameraRightInitialized = false;
-	private Matrix4x4 leftPose;
-	private Matrix4x4 rightPose;
 
 	bool updatedLeftPose = false;
 	bool updatedRightPose = false;
@@ -123,7 +121,7 @@ public class DetectionMarkers : MonoBehaviour
 				{0d, ViveSR_DualCameraImageCapture.FocalLengthLeft, ViveSR_DualCameraImageCapture.UndistortedCyLeft},
 				{0d, 0d, 1d}
 			};
-		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out leftPose, out _);
+		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out _, out _);
 		if (left != null)
 		{
 			requestLeft = AsyncGPUReadback.Request(left, 0, TextureFormat.RGBA4444, OnCompleteReadbackLeft);
@@ -138,7 +136,7 @@ public class DetectionMarkers : MonoBehaviour
 				{0d, 0d, 1d}
 			};
 
-		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out rightPose);
+		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out _);
 		if (right != null)
 		{
 			requestRight = AsyncGPUReadback.Request(right, 0, TextureFormat.RGBA4444, OnCompleteReadbackRight);
@@ -178,7 +176,7 @@ public class DetectionMarkers : MonoBehaviour
 				}
 			}
 
-			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out leftPose, out _);
+			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out _, out _);
 			requestLeft = AsyncGPUReadback.Request(left, 0, TextureFormat.RGBA4444, OnCompleteReadbackLeft);
 			if (waitForCompletion) { requestLeft.WaitForCompletion(); }
 		}
@@ -186,18 +184,21 @@ public class DetectionMarkers : MonoBehaviour
 		if (isCameraRightInitialized&& useRightCamera && requestRight.done)
 		{
 			DetectMarkers(rightCPU, out corners, out ids);
-
+			bool updated0 = false;
+			bool updated2 = false;
 			for (int i = 0; i < ids.Length; i++)
 			{
 				if (ids[i] <numberOfMarkers)
 				{
+					if (ids[i]==0) { updated0 = true; }
+					else if (ids[i] == 2) { updated2 = true; }
 					Cv2.SolvePnP(markerPoints, corners[i], cameraRightMatrix, distCoeffs, out rvecRight[ids[i]], out tvecRight[ids[i]], false, SolvePnPFlags.Iterative);
 					Cv2.Rodrigues(rvecRight[ids[i]], out rotMatRight[ids[i]]);
-					updatedRightPose = true;
 				}
 			}
+			updatedRightPose = updated0 && updated2;
 
-			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out rightPose);
+			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out _);
 			requestRight = AsyncGPUReadback.Request(right, 0, TextureFormat.RGBA4444, OnCompleteReadbackRight);
 			if (waitForCompletion) { requestRight.WaitForCompletion(); }
 		}
@@ -213,29 +214,38 @@ public class DetectionMarkers : MonoBehaviour
 			double[] avgPosLeft = { (tvecLeft[0][0] + tvecLeft[2][0]) / 2, (tvecLeft[0][1] + tvecLeft[2][1]) / 2, (tvecLeft[0][2] + tvecLeft[2][2]) / 2 };
 			double[] avgPosRight = { (tvecRight[0][0] + tvecRight[2][0]) / 2, (tvecRight[0][1] + tvecRight[2][1]) / 2, (tvecRight[0][2] + tvecRight[2][2]) / 2 };
 
-			GetObjectNewTransform(avgPosRight, rotMatRight[0], rightPose, out Vector3 worldPosRight, out Quaternion worldRotRight);
-			GetObjectNewTransform(avgPosLeft, rotMatLeft[0], leftPose, out Vector3 worldPosLeft, out Quaternion worldRotLeft);
+			GetObjectNewTransform(avgPosRight, rotMatRight[0], false, out Vector3 worldPosRight, out Quaternion worldRotRight);
+			GetObjectNewTransform(avgPosLeft, rotMatLeft[0], true, out Vector3 worldPosLeft, out Quaternion worldRotLeft);
 			cubeToMove.SetNewTransform(Vector3.Lerp(worldPosLeft, worldPosRight, 0.5f), Quaternion.Slerp(worldRotLeft, worldRotRight, 0.5f));
 			updatedLeftPose = false;
 			updatedRightPose = false;
+			//cubeToMove.gameObject.SetActive(true);
+
 		}
 		else if (updatedRightPose) //taking the right result
 		{
 			double[] avgPosRight = { (tvecRight[0][0] + tvecRight[2][0]) / 2, (tvecRight[0][1] + tvecRight[2][1]) / 2, (tvecRight[0][2] + tvecRight[2][2]) / 2 };
 
-			GetObjectNewTransform(avgPosRight, rotMatRight[0], rightPose, out Vector3 worldPos, out Quaternion worldRot);
+			GetObjectNewTransform(avgPosRight, rotMatRight[0], false, out Vector3 worldPos, out Quaternion worldRot);
 			cubeToMove.SetNewTransform(worldPos, worldRot);
 			updatedRightPose = false;
+			//cubeToMove.gameObject.SetActive(true);
+
 
 		}
 		else if (updatedLeftPose) //taking the left result
 		{
 			double[] avgPosLeft = { (tvecLeft[0][0] + tvecLeft[2][0]) / 2, (tvecLeft[0][1] + tvecLeft[2][1]) / 2, (tvecLeft[0][2] + tvecLeft[2][2]) / 2 };
-			GetObjectNewTransform(avgPosLeft, rotMatLeft[0], leftPose, out Vector3 worldPos, out Quaternion worldRot);
+			GetObjectNewTransform(avgPosLeft, rotMatLeft[0], true, out Vector3 worldPos, out Quaternion worldRot);
 			cubeToMove.SetNewTransform(worldPos, worldRot);
 			updatedLeftPose = false;
+			//cubeToMove.gameObject.SetActive(true);
+
 		}
-		//else : no updates on both cameras, do nothing
+		else
+        {
+			//cubeToMove.gameObject.SetActive(false);
+        }
 	}
 
 
@@ -255,18 +265,34 @@ public class DetectionMarkers : MonoBehaviour
 		return q;
 	}
 
-	private void GetObjectNewTransform(double[] tvec,double[,] rotMat,Matrix4x4 cameraPose,out Vector3 worldPos, out Quaternion worldRot)
+	private void GetObjectNewTransform(double[] tvec,double[,] rotMat,bool isLeft,out Vector3 worldPos, out Quaternion worldRot)
     {
 		Vector3 cameraSpacePos = new Vector3(-(float)tvec[0], (float)tvec[1], (float)tvec[2]); //x is negative due to flipping of camera image
 
-		worldPos = cameraPose.MultiplyPoint(cameraSpacePos);
+		if (isLeft)
+		{
+			worldPos = ViveSR_DualCameraImageCapture.UndistortedPoseLeft.MultiplyPoint(cameraSpacePos);
+		}
+		else
+		{
+			worldPos = ViveSR_DualCameraImageCapture.UndistortedPoseRight.MultiplyPoint(cameraSpacePos);
+		}
 
 		Quaternion cameraRot = QuaternionFromMatrix(rotMat);
 
 		cameraRot.y = -cameraRot.y;   //have to invert y and z due to right hand convention in OpenCV
 		cameraRot.z = -cameraRot.z;   //and left hand convention in Unity
 
-		Quaternion cameraPos = cameraPose.rotation;
+		Quaternion cameraPos;
+		if (isLeft)
+		{
+			cameraPos = ViveSR_DualCameraImageCapture.UndistortedPoseLeft.rotation;
+		}
+        else
+        {
+			cameraPos = ViveSR_DualCameraImageCapture.UndistortedPoseRight.rotation;
+
+		}
 
 		worldRot = cameraPos * cameraRot;
 

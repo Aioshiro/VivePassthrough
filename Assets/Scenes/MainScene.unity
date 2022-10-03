@@ -541,7 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae70f48d1c966f94698c43ceab853ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingAverageLengthPos: 2
+  movingAverageLengthPos: 3
   movingAverageLengthRot: 3
 --- !u!1 &1199539198
 GameObject:
