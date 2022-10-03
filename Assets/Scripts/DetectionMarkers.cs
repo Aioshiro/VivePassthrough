@@ -41,15 +41,18 @@ public class DetectionMarkers : MonoBehaviour
 	//Camera parameters
 	private double[,] cameraLeftMatrix;
 	private double[,] cameraRightMatrix;
-	double[] distCoeffs = new double[4] { 0d, 0d, 0d, 0d }; //no distortion with the Vive Pro 2
+    readonly double[] distCoeffs = new double[4] { 0d, 0d, 0d, 0d }; //no distortion with the Vive Pro 2
  	private bool isCameraLeftInitialized = false;
 	private bool isCameraRightInitialized = false;
 
 	bool updatedLeftPose = false;
 	bool updatedRightPose = false;
 
-	Matrix4x4 rightPose;
-	Matrix4x4 leftPose;
+	//Matrix4x4 rightPose;
+	//Matrix4x4 leftPose;
+
+	[SerializeField] Transform cameraLeft;
+	[SerializeField] Transform cameraRight;
 
 	//Object to make appear on tracker
 	public TransformSmoother cubeToMove;
@@ -60,18 +63,18 @@ public class DetectionMarkers : MonoBehaviour
 	public bool waitForCompletion;
 
 
-	GameObject[] spheresTest;
+	//GameObject[] spheresTest;
 	//private int imageNumber = 0;
 
 	void Start()
 	{
 		InitArucoParameters();
-		spheresTest = new GameObject[4 * 4];
-		for (int i = 0; i < 16; i++)
-        {
-			spheresTest[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-			spheresTest[i].transform.localScale = Vector3.one * 0.01f;
-        }
+		//spheresTest = new GameObject[4 * 4];
+		//for (int i = 0; i < 16; i++)
+  //      {
+		//	spheresTest[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+		//	spheresTest[i].transform.localScale = Vector3.one * 0.01f;
+  //      }
 	}
 
 	void InitArucoParameters()
@@ -133,7 +136,8 @@ public class DetectionMarkers : MonoBehaviour
 				{0d, ViveSR_DualCameraImageCapture.FocalLengthLeft, ViveSR_DualCameraImageCapture.UndistortedCyLeft},
 				{0d, 0d, 1d}
 			};
-		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out leftPose, out _);
+		//ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out leftPose, out _);
+		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out _, out _);
 		if (left != null)
 		{
 			requestLeft = AsyncGPUReadback.Request(left, 0, TextureFormat.RGBA32, OnCompleteReadbackLeft);
@@ -148,7 +152,8 @@ public class DetectionMarkers : MonoBehaviour
 				{0d, 0d, 1d}
 			};
 
-		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out rightPose);
+		//ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out rightPose);
+		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out _);
 		if (right != null)
 		{
 			requestRight = AsyncGPUReadback.Request(right, 0, TextureFormat.RGBA32, OnCompleteReadbackRight);
@@ -187,7 +192,8 @@ public class DetectionMarkers : MonoBehaviour
 				}
 			}
 
-			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out leftPose, out _);
+			//ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out leftPose, out _);
+			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out _, out _);
 			requestLeft = AsyncGPUReadback.Request(left, 0, TextureFormat.RGBA32, OnCompleteReadbackLeft);
 			if (waitForCompletion) { requestLeft.WaitForCompletion(); }
 		}
@@ -213,7 +219,8 @@ public class DetectionMarkers : MonoBehaviour
 			}
 			updatedRightPose = updated0&&updated1;
 
-			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out rightPose);
+			//ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out rightPose);
+			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out _);
 			requestRight = AsyncGPUReadback.Request(right, 0, TextureFormat.RGBA32, OnCompleteReadbackRight);
 			if (waitForCompletion) { requestRight.WaitForCompletion(); }
 		}
@@ -287,11 +294,13 @@ public class DetectionMarkers : MonoBehaviour
 
 		if (isLeft)
 		{
-			worldPos = leftPose.MultiplyPoint(cameraSpacePos);
+			//worldPos = leftPose.MultiplyPoint(cameraSpacePos);
+			worldPos = cameraLeft.TransformPoint(cameraSpacePos);
 		}
 		else
 		{
-			worldPos = rightPose.MultiplyPoint(cameraSpacePos);
+			//worldPos = rightPose.MultiplyPoint(cameraSpacePos);
+			worldPos = cameraRight.TransformPoint(cameraSpacePos);
 		}
 
 		Quaternion cameraRot = QuaternionFromMatrix(rotMat);
@@ -302,11 +311,14 @@ public class DetectionMarkers : MonoBehaviour
 		Quaternion cameraPos;
 		if (isLeft)
 		{
-			cameraPos = leftPose.rotation;
+			//cameraPos = leftPose.rotation;
+			cameraPos = cameraLeft.rotation;
 		}
         else
         {
-			cameraPos = rightPose.rotation;
+			//cameraPos = rightPose.rotation;
+			cameraPos = cameraRight.rotation;
+
 
 		}
 
@@ -314,15 +326,15 @@ public class DetectionMarkers : MonoBehaviour
 
 	}
 
-	private void DrawMarkers()
-    {
-		for (int i = 0; i < tvecRight.Length; i++)
-        {
-			Vector3 cameraSpacePos = new Vector3(-(float)tvecRight[i][0], (float)tvecRight[i][1], (float)tvecRight[i][2]); //x is negative due to flipping of camera image
-			cameraSpacePos = rightPose.MultiplyPoint(cameraSpacePos);
-			spheresTest[i].transform.position = cameraSpacePos;
-		}
-	}
+	//private void DrawMarkers()
+ //   {
+	//	for (int i = 0; i < tvecRight.Length; i++)
+ //       {
+	//		Vector3 cameraSpacePos = new Vector3(-(float)tvecRight[i][0], (float)tvecRight[i][1], (float)tvecRight[i][2]); //x is negative due to flipping of camera image
+	//		cameraSpacePos = rightPose.MultiplyPoint(cameraSpacePos);
+	//		spheresTest[i].transform.position = cameraSpacePos;
+	//	}
+	//}
 
 	private void DetectMarkers(Texture2D image, out Point2f[][] corners,out int[] ids)
     {

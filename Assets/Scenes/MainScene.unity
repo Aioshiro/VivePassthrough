@@ -1079,6 +1079,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   markerLength: 0.0685
   dictionaryName: 0
+  cameraLeft: {fileID: 1676663157}
+  cameraRight: {fileID: 1387071042}
   cubeToMove: {fileID: 935432320}
   useLeftCamera: 0
   useRightCamera: 1
