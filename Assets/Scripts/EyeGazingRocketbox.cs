@@ -52,7 +52,6 @@ public class EyeGazingRocketbox : MonoBehaviour
 
         Vector3 directionLeft = leftEye.InverseTransformPoint(objectToTrack.transform.position).normalized * 100;
         directionLeft = -directionLeft;
-        Debug.Log(directionLeft);
         if (directionLeft.x > 0)
         {
             meshRenderer.SetBlendShapeWeight(eyeLookDownLeft, Mathf.Clamp(-directionLeft.y, 0, 100));
