@@ -14,6 +14,7 @@ namespace ViveSR
 
                 public bool NeededToGetData = true;
                 private Dictionary<LipShape_v2, float> LipWeightings;
+                [SerializeField] bool multiplyBy100 = false;
 
                 private void Start()
                 {
@@ -79,7 +80,15 @@ namespace ViveSR
                     {
                         int targetIndex = (int)lipShapeTable.lipShapes[i];
                         if (targetIndex > (int)LipShape_v2.Max || targetIndex < 0) continue;
-                        lipShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, weighting[(LipShape_v2)targetIndex] * 100);
+                        if (multiplyBy100)
+                        {
+                            lipShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, weighting[(LipShape_v2)targetIndex] * 100);
+                        }
+                        else
+                        {
+                            lipShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, weighting[(LipShape_v2)targetIndex]);
+
+                        }
                     }
                 }
             }
