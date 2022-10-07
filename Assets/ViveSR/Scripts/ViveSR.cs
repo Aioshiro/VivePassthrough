@@ -217,6 +217,15 @@ namespace Vive.Plugin.SR
                 Modules[2].Release();
             ViveSR_DualCameraDepthCollider.UpdateDepthCollider = false;
         }
+
+        private void OnDestroy()
+        {
+            Debug.Log("Releasing passthrough");
+            Release();
+            StopFramework();
+            SRWorkModule_API.StopViveSR();
+        }
+
         void OnApplicationQuit()
         {
             Release();
@@ -393,5 +402,6 @@ namespace Vive.Plugin.SR
                 number = number >> 1;
             }
         }
+
     }
 }

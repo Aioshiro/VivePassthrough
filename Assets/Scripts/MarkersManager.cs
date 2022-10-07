@@ -1,17 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class MarkersManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
     [SerializeField] TransformSmoother[] markers;
-
-    private void Start()
-    {
-        markers = GetComponentsInChildren<TransformSmoother>();
-    }  
 
     public void UpdateIthMarkerPos(int i,Vector3 pos, Quaternion rot)
     {

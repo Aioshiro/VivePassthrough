@@ -10,7 +10,7 @@ public class ViveSR_SRworkManager : MonoBehaviour {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this);
+            //DontDestroyOnLoad(this);
             name = "[SRwork_FrameWork]";
         }
         else if (this != instance)

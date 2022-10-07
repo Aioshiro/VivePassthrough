@@ -332,6 +332,7 @@ public class DetectionMarkers : MonoBehaviour
 
     private void OnDestroy()
     {
+		Debug.Log("Destroying detection markers..");
 		requestRight.WaitForCompletion();
 		//requestLeft.WaitForCompletion();
     }
