@@ -153,6 +153,7 @@ MonoBehaviour:
   movingAverageLengthPos: 1
   movingAverageLengthRot: 3
   posStrength: 1
+  rotStrength: 0
   allowMovement: 1
 --- !u!4 &9913766
 Transform:
@@ -511,6 +512,7 @@ MonoBehaviour:
   movingAverageLengthPos: 1
   movingAverageLengthRot: 3
   posStrength: 1
+  rotStrength: 0
   allowMovement: 1
 --- !u!4 &315576149
 Transform:
@@ -726,6 +728,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: male2
       objectReference: {fileID: 0}
+    - target: {fileID: 9025942393274135822, guid: 56ebbf29899d6c7489789560b6572d3f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56ebbf29899d6c7489789560b6572d3f, type: 3}
 --- !u!4 &659941717 stripped
@@ -764,8 +771,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingAverageLengthPos: 1
-  movingAverageLengthRot: 3
+  movingAverageLengthRot: 1
   posStrength: 1
+  rotStrength: 0.1
   allowMovement: 1
 --- !u!4 &721718829
 Transform:
@@ -816,8 +824,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingAverageLengthPos: 1
-  movingAverageLengthRot: 3
+  movingAverageLengthRot: 1
   posStrength: 1
+  rotStrength: 0.1
   allowMovement: 1
 --- !u!4 &930948650
 Transform:

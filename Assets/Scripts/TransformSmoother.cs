@@ -12,9 +12,10 @@ public class TransformSmoother : MonoBehaviour
     [SerializeField] private int movingAverageLengthRot = 3;
 
     [SerializeField] private float posStrength=1;
-    //[SerializeField] private float rotStrength;
+    [SerializeField] private float rotStrength=1;
 
     Vector3 currentVelocity;
+    Quaternion currentRotVelocity;
 
     [SerializeField] private bool allowMovement;
 
@@ -45,7 +46,7 @@ public class TransformSmoother : MonoBehaviour
         {
             movingAverageUp += (rot * Vector3.up - movingAverageUp) / (movingAverageLengthRot + 1);
             movingAverageForward += (rot * Vector3.forward - movingAverageForward) / (movingAverageLengthRot + 1);
-            transform.rotation = Quaternion.LookRotation(movingAverageForward, movingAverageUp);
+            transform.rotation = QuaternionUtil.SmoothDamp(transform.rotation,Quaternion.LookRotation(movingAverageForward, movingAverageUp),ref currentRotVelocity,rotStrength);
         }
         else
         {
@@ -55,7 +56,7 @@ public class TransformSmoother : MonoBehaviour
             {
                 movingAverageUp /= count;
                 movingAverageForward /= count;
-                transform.rotation = Quaternion.LookRotation(movingAverageForward, movingAverageUp);
+                transform.rotation =QuaternionUtil.SmoothDamp(transform.rotation, Quaternion.LookRotation(movingAverageForward, movingAverageUp),ref currentRotVelocity,rotStrength);
             }
         }
     }
