@@ -560,7 +560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 13700000, guid: cc2bd8780f283784899dcb72f2f7702f, type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[19]
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 13700000, guid: cc2bd8780f283784899dcb72f2f7702f, type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[20]
@@ -853,9 +853,17 @@ Transform:
   - {fileID: 1455208934}
   - {fileID: 543450651664579064}
   - {fileID: 1797387421332685202}
+  - {fileID: 6917515190188965284}
+  - {fileID: 838216477971937887}
   m_Father: {fileID: 343135742}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &296844388852462175 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3945709551259543944, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3665758059125185495}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &543450651664579064 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8390839574508495225, guid: a685767d31145bb46885e92d11c465c9,
@@ -867,6 +875,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8505406773430988724, guid: 56ebbf29899d6c7489789560b6572d3f,
     type: 3}
   m_PrefabInstance: {fileID: 8179661829782716938}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &838216477971937887 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3228652602211318753, guid: 07637756d98119c4a8f0c6e7eee88c86,
+    type: 3}
+  m_PrefabInstance: {fileID: 2841642849107657150}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1797387420521816911 stripped
 Transform:
@@ -947,8 +961,416 @@ PrefabInstance:
       propertyPath: m_Name
       value: male2Cartoon
       objectReference: {fileID: 0}
+    - target: {fileID: 3405668175426863629, guid: 21371d0c4d4296d4386131b2415ac3be,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21371d0c4d4296d4386131b2415ac3be, type: 3}
+--- !u!1001 &2841642849107657150
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1667454864}
+    m_Modifications:
+    - target: {fileID: 2847870094334386523, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: m_Name
+      value: Male_Adult_06_facial
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847870094334386523, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228652602211318753, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228652602211318753, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228652602211318753, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228652602211318753, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.204
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228652602211318753, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228652602211318753, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228652602211318753, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228652602211318753, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228652602211318753, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228652602211318753, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228652602211318753, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8626745881970621876, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[171]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8626745881970621876, guid: 07637756d98119c4a8f0c6e7eee88c86,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[172]
+      value: -1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 07637756d98119c4a8f0c6e7eee88c86, type: 3}
+--- !u!1001 &3665758059125185495
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1667454864}
+    m_Modifications:
+    - target: {fileID: 3945709551259543944, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.size
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945709551259543944, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[48]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945709551259543944, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[49]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945709551259543944, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[58]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945709551259543944, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[59]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945709551259543944, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[165]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: multiplyBy100
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].skinnedMeshRenderer
+      value: 
+      objectReference: {fileID: 296844388852462175}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.size
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[20]
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[37]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[38]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[39]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[40]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[44]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[45]
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[46]
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[48]
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[49]
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[54]
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[55]
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[58]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[59]
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[62]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[63]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[132]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[133]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[134]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[150]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[151]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[152]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[153]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[154]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[155]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[156]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[157]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[158]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[159]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[160]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[161]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[162]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[163]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[164]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[165]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[166]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[167]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[168]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[169]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170870594077244048, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[170]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380063121610259657, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_Name
+      value: Male_Adult_07_facial
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863444251155785331, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863444251155785331, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863444251155785331, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863444251155785331, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.204
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863444251155785331, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863444251155785331, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863444251155785331, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863444251155785331, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863444251155785331, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863444251155785331, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863444251155785331, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 13909f5e7ca2d6047892b83b4c376d3e, type: 3}
 --- !u!1001 &4697657457064260822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1016,8 +1438,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: female1cartoon
       objectReference: {fileID: 0}
+    - target: {fileID: 8223539894542974466, guid: 783b86a9236ffe543ab6c9e223ebbbe7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 783b86a9236ffe543ab6c9e223ebbbe7, type: 3}
+--- !u!4 &6917515190188965284 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7863444251155785331, guid: 13909f5e7ca2d6047892b83b4c376d3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3665758059125185495}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8179661829782716938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1043,6 +1476,16 @@ PrefabInstance:
     - target: {fileID: 4988166484312864906, guid: 56ebbf29899d6c7489789560b6572d3f,
         type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[59]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988166484312864906, guid: 56ebbf29899d6c7489789560b6572d3f,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[77]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988166484312864906, guid: 56ebbf29899d6c7489789560b6572d3f,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[84]
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4988166484312864906, guid: 56ebbf29899d6c7489789560b6572d3f,
@@ -1073,7 +1516,7 @@ PrefabInstance:
     - target: {fileID: 4988166484312864906, guid: 56ebbf29899d6c7489789560b6572d3f,
         type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[159]
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4988166484312864906, guid: 56ebbf29899d6c7489789560b6572d3f,
         type: 3}
@@ -1094,6 +1537,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[174]
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8179661831060100029, guid: 56ebbf29899d6c7489789560b6572d3f,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[171]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8179661831060100029, guid: 56ebbf29899d6c7489789560b6572d3f,
+        type: 3}
+      propertyPath: LipShapeTables.Array.data[0].lipShapes.Array.data[172]
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 8505406773430988724, guid: 56ebbf29899d6c7489789560b6572d3f,
         type: 3}
@@ -1154,6 +1607,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: male2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025942393274135822, guid: 56ebbf29899d6c7489789560b6572d3f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56ebbf29899d6c7489789560b6572d3f, type: 3}
@@ -1223,6 +1681,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: female1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167517458052824003, guid: a685767d31145bb46885e92d11c465c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a685767d31145bb46885e92d11c465c9, type: 3}
