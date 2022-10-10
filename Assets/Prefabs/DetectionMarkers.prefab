@@ -140,9 +140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingAverageLengthPos: 1
-  movingAverageLengthRot: 3
+  movingAverageLengthRot: 1
   posStrength: 1
-  rotStrength: 0
+  rotStrength: 0.1
   allowMovement: 1
 --- !u!1 &4305857592358447641
 GameObject:
@@ -188,9 +188,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingAverageLengthPos: 1
-  movingAverageLengthRot: 3
+  movingAverageLengthRot: 1
   posStrength: 1
-  rotStrength: 0
+  rotStrength: 0.1
   allowMovement: 1
 --- !u!1 &4305857592688637098
 GameObject:
