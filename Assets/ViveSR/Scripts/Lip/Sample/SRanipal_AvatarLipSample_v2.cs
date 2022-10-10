@@ -12,8 +12,12 @@ namespace ViveSR
             {
                 [SerializeField] private List<LipShapeTable_v2> LipShapeTables;
 
+
                 public bool NeededToGetData = true;
                 private Dictionary<LipShape_v2, float> LipWeightings;
+
+                public float[] overrides;
+
                 [SerializeField] bool multiplyBy100 = false;
 
                 private void Start()
@@ -80,13 +84,14 @@ namespace ViveSR
                     {
                         int targetIndex = (int)lipShapeTable.lipShapes[i];
                         if (targetIndex > (int)LipShape_v2.Max || targetIndex < 0) continue;
+                        float weight = Mathf.Clamp01(weighting[(LipShape_v2)targetIndex] * overrides[targetIndex]);
                         if (multiplyBy100)
                         {
-                            lipShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, weighting[(LipShape_v2)targetIndex] * 100);
+                            lipShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, weight * 100);
                         }
                         else
                         {
-                            lipShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, weighting[(LipShape_v2)targetIndex]);
+                            lipShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, weight);
 
                         }
                     }
