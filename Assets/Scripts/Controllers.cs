@@ -6,17 +6,20 @@ public class Controllers : MonoBehaviour
 {
     private Transform left;
     private Transform right;
-    // Start is called before the first frame update
+
     void Start()
     {
+        //Setting up variables
         left = transform.GetChild(0);
         right = transform.GetChild(1);
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //Manually updating controller poses
         Vive.Plugin.SR.ControllPose.SRWork_Controll_Pose.UpdateData();
+
+        //Updating the transform of each controller
         float[] posLeft = Vive.Plugin.SR.ControllPose.SRWork_Controll_Pose.pos_left;
         left.position = new Vector3(posLeft[0], posLeft[1], posLeft[2]);
         float[] posRight = Vive.Plugin.SR.ControllPose.SRWork_Controll_Pose.pos_right;

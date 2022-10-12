@@ -10,74 +10,47 @@ public class DetectionMarkers : MonoBehaviour
 	//Aruco variables
 	private DetectorParameters detectorParameters;
 	private Dictionary dictionary;
-	//Texture2D left;
 	Texture2D right;
-	//Texture2D leftCPU;
 	Texture2D rightCPU;
-
-	Point3f[] markerPoints;
+	[Tooltip("Check if you want to do AruCo corner refinement (advised)")]
+	public bool useCornerRefinement;
+	Point3f[] markerPoints; //Marker points in object space
 	[Tooltip("Marker length in meters")]
 	[SerializeField] private float markerLength = 0.06f;
+	[Tooltip("Aruco dictionnary to use")]
 	[SerializeField] private PredefinedDictionaryName dictionaryName = PredefinedDictionaryName.Dict4X4_50;
 	const int numberOfMarkers = 4;
-	MarkersManager markersManager;
-	bool[] markersToUpdate;
+	MarkersManager markersManager; //Manager for markers position and smoothering
+	bool[] markersToUpdate; 
 
 	//Aruco results
 	private Point2f[][] corners;
 	private int[] ids;
-	//private Point2f[][] rejectedImgPoints;
-	//double[][,] rotMatLeft;
 	double[][,] rotMatRight;
-	//private double[][] rvecLeft;
-	//private double[][] tvecLeft;
 	private double[][] rvecRight;
 	private double[][] tvecRight;
 
 	//To extract the HMD video frame from GPU to CPU
-	//AsyncGPUReadbackRequest requestLeft;
 	private bool initialized=false;
 	AsyncGPUReadbackRequest requestRight;
-
-	//Camera parameters
-	//private double[,] cameraLeftMatrix;
-	private double[,] cameraRightMatrix;
-    readonly double[] distCoeffs = new double[4] { 0d, 0d, 0d, 0d }; //no distortion with the Vive Pro 2
- 	//private bool isCameraLeftInitialized = false;
-	private bool isCameraRightInitialized = false;
-
-	//bool updatedLeftPose = false;
-	//bool updatedRightPose = false;
-
-	//Matrix4x4 rightPose;
-	//Matrix4x4 leftPose;
-
-	//[SerializeField] Transform cameraLeft;
-	[SerializeField] Transform cameraRight;
-
-	//Object to make appear on tracker
-	//public TransformSmoother cubeToMove;
-
-	//public bool useLeftCamera;
-	//public bool useRightCamera;
-	public bool useCornerRefinement;
+	[Tooltip("Check if you want to wait at each frame for the GPU request to finish")]
 	public bool waitForCompletion;
 
+	//Camera parameters
+	private double[,] cameraRightMatrix; //camera intrinsic parameters
+    readonly double[] distCoeffs = new double[4] { 0d, 0d, 0d, 0d }; //no distortion with the Vive Pro 2
+	private bool isCameraRightInitialized = false;
+	[Tooltip("Right camera transform")]
+	[SerializeField] Transform cameraRight;
 
-	//GameObject[] spheresTest;
-	//private int imageNumber = 0;
+
+
 
 	void Start()
 	{
 		markersManager = GetComponent<MarkersManager>();
 		markersToUpdate = new bool[numberOfMarkers];
 		InitArucoParameters();
-		//spheresTest = new GameObject[4 * 4];
-		//for (int i = 0; i < 16; i++)
-  //      {
-		//	spheresTest[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-		//	spheresTest[i].transform.localScale = Vector3.one * 0.01f;
-  //      }
 	}
 
 	void InitArucoParameters()
@@ -87,7 +60,7 @@ public class DetectionMarkers : MonoBehaviour
 				new Point3f( markerLength / 2f,  markerLength / 2f, 0f),
 				new Point3f( markerLength / 2f, -markerLength / 2f, 0f),
 				new Point3f(-markerLength / 2f, -markerLength / 2f, 0f)
-			};
+			}; 
 
 		// Create default parameres for detection
 		detectorParameters = DetectorParameters.Create();
@@ -98,55 +71,25 @@ public class DetectionMarkers : MonoBehaviour
 		// Dictionary holds set of all available markers
 		dictionary = CvAruco.GetPredefinedDictionary(dictionaryName);
 
-		//rvecLeft = new double[numberOfMarkers][];
-		//tvecLeft = new double[numberOfMarkers][];
 		rvecRight = new double[numberOfMarkers][];
 		tvecRight = new double[numberOfMarkers][];
 
-		//rotMatLeft = new double[numberOfMarkers][,];
 		rotMatRight = new double[numberOfMarkers][,];
 	}
 
 	void InitTextures()
 	{
-		//left = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
-		//leftCPU = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
 		right = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
 		rightCPU = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
 	}
 
-	//void OnCompleteReadbackLeft(AsyncGPUReadbackRequest request)
-	//{
-	//	//texLeftTemp = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
-	//	//texLeftTemp.LoadRawTextureData(request.GetData<uint>());
-	//	//texLeftTemp.Apply();
-	//	//Graphics.CopyTexture(texLeftTemp, leftCPU);
-	//	leftCPU.LoadRawTextureData(request.GetData<uint>());
-	//}
+	//Called when request is finished
 	void OnCompleteReadbackRight(AsyncGPUReadbackRequest request)
 	{
-		//texRightTemp = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
-		//texRightTemp.LoadRawTextureData(request.GetData<uint>());
-		//texRightTemp.Apply();
-		//Graphics.CopyTexture(texRightTemp, rightCPU);
+		//Loading data into texture
 		rightCPU.LoadRawTextureData(request.GetData<uint>());
 	}
 
-	//void InitLeftCamera()
- //   {
-	//	cameraLeftMatrix = new double[3, 3] {
-	//			{ViveSR_DualCameraImageCapture.FocalLengthLeft, 0d, ViveSR_DualCameraImageCapture.UndistortedCxLeft},
-	//			{0d, ViveSR_DualCameraImageCapture.FocalLengthLeft, ViveSR_DualCameraImageCapture.UndistortedCyLeft},
-	//			{0d, 0d, 1d}
-	//		};
-	//	//ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out leftPose, out _);
-	//	ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out _, out _);
-	//	if (left != null)
-	//	{
-	//		requestLeft = AsyncGPUReadback.Request(left, 0, TextureFormat.RGBA32, OnCompleteReadbackLeft);
-	//		isCameraLeftInitialized = true;
-	//	}
-	//}
 	void InitRightCamera()
 	{
 		cameraRightMatrix = new double[3, 3] {
@@ -155,9 +98,8 @@ public class DetectionMarkers : MonoBehaviour
 				{0d, 0d, 1d}
 			};
 
-		//ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out rightPose);
 		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out _);
-		if (right != null)
+		if (right != null) //Sometimes, camera is not active on first frame
 		{
 			requestRight = AsyncGPUReadback.Request(right, 0, TextureFormat.RGBA32, OnCompleteReadbackRight);
 			isCameraRightInitialized = true;
@@ -166,112 +108,48 @@ public class DetectionMarkers : MonoBehaviour
 
 	private void Update()
 	{
-		if (!initialized && ViveSR_DualCameraImageCapture.UndistortedImageWidth>0)
+		if (!initialized && ViveSR_DualCameraImageCapture.UndistortedImageWidth>0) //Sometimes, capture is not initialized on first frame
 		{
 			InitTextures();
 			initialized = true;
 		}
 		if (!initialized) { return; }
-		//if (!isCameraLeftInitialized && ViveSR_DualCameraImageCapture.FocalLengthLeft > 0)
-		//{
-		//	InitLeftCamera();
-		//}
-		if (!isCameraRightInitialized && ViveSR_DualCameraImageCapture.FocalLengthRight > 0)
+
+		if (!isCameraRightInitialized && ViveSR_DualCameraImageCapture.FocalLengthRight > 0) //Sometimes, capture is not initialized on first frame
 		{
 			InitRightCamera();
 		}
 
-		//if (isCameraLeftInitialized && useLeftCamera && requestLeft.done)
-		//{
-		//	DetectMarkers(leftCPU, out corners, out ids);
-
-		//	for (int i = 0; i < ids.Length; i++)
-		//	{
-		//		if (ids[i] <numberOfMarkers)
-		//		{
-		//			Cv2.SolvePnP(markerPoints, corners[i], cameraLeftMatrix, distCoeffs, out rvecLeft[ids[i]], out tvecLeft[ids[i]], false, SolvePnPFlags.Iterative);
-		//			Cv2.Rodrigues(rvecLeft[ids[i]], out rotMatLeft[ids[i]]);
-		//			updatedLeftPose = true;
-		//		}
-		//	}
-
-		//	//ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out leftPose, out _);
-		//	ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out _, out _);
-		//	requestLeft = AsyncGPUReadback.Request(left, 0, TextureFormat.RGBA32, OnCompleteReadbackLeft);
-		//	if (waitForCompletion) { requestLeft.WaitForCompletion(); }
-		//}
-
-		//if (isCameraRightInitialized&& useRightCamera && requestRight.done)
-		if (isCameraRightInitialized&&requestRight.done)
+		if (isCameraRightInitialized&&requestRight.done) //if the camera is initialized and we got the gpu texture
 		{
-			DetectMarkers(rightCPU, out corners, out ids);
-			for (int i = 0; i < ids.Length; i++)
+			DetectMarkers(rightCPU, out corners, out ids); //Detect every marker on the image
+			for (int i = 0; i < ids.Length; i++) //Updating position and rotation of every marker
 			{
 				if (ids[i] <numberOfMarkers)
 				{
 					markersToUpdate[ids[i]] = true;
-					Cv2.SolvePnP(markerPoints, corners[i], cameraRightMatrix, distCoeffs, out rvecRight[ids[i]], out tvecRight[ids[i]], false, SolvePnPFlags.Iterative);
+					Cv2.SolvePnP(markerPoints, corners[i], cameraRightMatrix, distCoeffs, out rvecRight[ids[i]], out tvecRight[ids[i]], false, SolvePnPFlags.Iterative); //Pose estimation, to go from 2d pixels to 3d position in CAMERA space
 					Cv2.Rodrigues(rvecRight[ids[i]], out rotMatRight[ids[i]]);
 				}
 			}
 
-			//ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out rightPose);
 			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out _, out right, out _, out _, out _, out _);
 			requestRight = AsyncGPUReadback.Request(right, 0, TextureFormat.RGBA32, OnCompleteReadbackRight);
 			if (waitForCompletion) { requestRight.WaitForCompletion(); }
 		}
 
-		UpdatingPoses();
-		//DrawMarkers();
+		UpdatingPoses(); //Updating markers 3d pos to manager
 	}
 
+	//Updating markers 3d pos to manager
 	private void UpdatingPoses()
     {
-		//just taking into account marker 0 for now
-		//if (updatedLeftPose && updatedRightPose) //taking the average of the two values
-		//{
-		//	//double[] avgPosLeft = { (tvecLeft[0][0] + tvecLeft[1][0]) / 2, (tvecLeft[0][1] + tvecLeft[1][1]) / 2, (tvecLeft[0][2] + tvecLeft[1][2]) / 2 };
-		//	//double[] avgPosRight = { (tvecRight[0][0] + tvecRight[1][0]) / 2, (tvecRight[0][1] + tvecRight[1][1]) / 2, (tvecRight[0][2] + tvecRight[1][2]) / 2 };
-
-		//	GetObjectNewTransform(tvecRight[0], rotMatRight[0], false, out Vector3 worldPosRight, out Quaternion worldRotRight);
-		//	GetObjectNewTransform(tvecLeft[0], rotMatLeft[0], true, out Vector3 worldPosLeft, out Quaternion worldRotLeft);
-		//	cubeToMove.SetNewTransform(Vector3.Lerp(worldPosLeft, worldPosRight, 0.5f), Quaternion.Slerp(worldRotLeft, worldRotRight, 0.5f));
-		//	updatedLeftPose = false;
-		//	updatedRightPose = false;
-		//	//cubeToMove.gameObject.SetActive(true);
-
-		//}
-		//else if (updatedRightPose) //taking the right result
-		//{
-		//	//double[] avgPosRight = { (tvecRight[0][0] + tvecRight[1][0]) / 2, (tvecRight[0][1] + tvecRight[1][1]) / 2, (tvecRight[0][2] + tvecRight[1][2]) / 2 };
-
-		//	GetObjectNewTransform(tvecRight[0], rotMatRight[0], false, out Vector3 worldPos, out Quaternion worldRot);
-		//	cubeToMove.SetNewTransform(worldPos, worldRot);
-		//	updatedRightPose = false;
-		//	//cubeToMove.gameObject.SetActive(true);
-
-
-		//}
-		//else if (updatedLeftPose) //taking the left result
-		//{
-		//	//double[] avgPosLeft = { (tvecLeft[0][0] + tvecLeft[1][0]) / 2, (tvecLeft[0][1] + tvecLeft[1][1]) / 2, (tvecLeft[0][2] + tvecLeft[1][2]) / 2 };
-		//	GetObjectNewTransform(tvecLeft[0], rotMatLeft[0], true, out Vector3 worldPos, out Quaternion worldRot);
-		//	cubeToMove.SetNewTransform(worldPos, worldRot);
-		//	updatedLeftPose = false;
-		//	//cubeToMove.gameObject.SetActive(true);
-
-		//}
-		//else
-  //      {
-		//	//cubeToMove.gameObject.SetActive(false);
-  //      }
-
 		for (int i = 0; i < markersToUpdate.Length; i++)
         {
-			if (markersToUpdate[i])
+			if (markersToUpdate[i]) //foreach marker detected and so needed to be updated
             {
 				markersToUpdate[i] = false;
-				GetObjectNewTransform(tvecRight[i], rotMatRight[i], out Vector3 worldPos, out Quaternion worldRot);
+				GetObjectNewTransform(tvecRight[i], rotMatRight[i], out Vector3 worldPos, out Quaternion worldRot); //estimating worldspace position
 				markersManager.UpdateIthMarkerPos(i, worldPos, worldRot);
             }
         }
@@ -294,35 +172,26 @@ public class DetectionMarkers : MonoBehaviour
 		return q;
 	}
 
+	//Go from camera space to world space
 	private void GetObjectNewTransform(double[] tvec,double[,] rotMat,out Vector3 worldPos, out Quaternion worldRot)
     {
 		Vector3 cameraSpacePos = new Vector3(-(float)tvec[0], (float)tvec[1], (float)tvec[2]); //x is negative due to flipping of camera image
 
-		//worldPos = rightPose.MultiplyPoint(cameraSpacePos);
-		worldPos = cameraRight.TransformPoint(cameraSpacePos);
+		worldPos = cameraRight.TransformPoint(cameraSpacePos); //straightforward transformation for position
 
-		Quaternion cameraRot = QuaternionFromMatrix(rotMat);
+		Quaternion cameraRot = QuaternionFromMatrix(rotMat); //get the rotation in camera space
 
 		cameraRot.y = -cameraRot.y;   //have to invert y and z due to right hand convention in OpenCV
 		cameraRot.z = -cameraRot.z;   //and left hand convention in Unity
+		 
+		Quaternion cameraPos = cameraRight.rotation; //get the camera rotation
 
-		Quaternion cameraPos = cameraRight.rotation;
-
-		worldRot = cameraPos * cameraRot;
+		worldRot = cameraPos * cameraRot; //composition of rotations by multiplying quaternions
 
 	}
 
-	//private void DrawMarkers()
- //   {
-	//	for (int i = 0; i < tvecRight.Length; i++)
- //       {
-	//		Vector3 cameraSpacePos = new Vector3(-(float)tvecRight[i][0], (float)tvecRight[i][1], (float)tvecRight[i][2]); //x is negative due to flipping of camera image
-	//		cameraSpacePos = rightPose.MultiplyPoint(cameraSpacePos);
-	//		spheresTest[i].transform.position = cameraSpacePos;
-	//	}
-	//}
-
-	private void DetectMarkers(Texture2D image, out Point2f[][] corners,out int[] ids)
+	//Detect markers in the image
+    private void DetectMarkers(Texture2D image, out Point2f[][] corners,out int[] ids)
     {
 		Mat flippedMat = new Mat();
 		Cv2.Flip(OpenCvSharp.Unity.TextureToMat(image), flippedMat, FlipMode.Y); //flipping input cameras, as vive feed is reversed
@@ -330,10 +199,9 @@ public class DetectionMarkers : MonoBehaviour
 		flippedMat.Dispose();
 	}
 
+	//Waiting for end of request when destroying, to fix errors when closing the app
     private void OnDestroy()
     {
-		Debug.Log("Destroying detection markers..");
 		requestRight.WaitForCompletion();
-		//requestLeft.WaitForCompletion();
     }
 }

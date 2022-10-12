@@ -5,13 +5,13 @@ using Mirror;
 
 public class MarkersManager : MonoBehaviour
 {
-    // Start is called before the first frame update
 
     [SerializeField] TransformSmoother[] markers;
 
+
     public void UpdateIthMarkerPos(int i,Vector3 pos, Quaternion rot)
     {
-        if (i >= 0 && i < markers.Length)
+        if (i >= 0 && i < markers.Length) //Ensuring that we care about the marker, in case a wrong marker is detected
         {
             markers[i].SetNewTransform(pos, rot);
         }

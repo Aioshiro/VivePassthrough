@@ -11,6 +11,7 @@ public class AveragePos : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //new object pos is average of the 2 transform poses
         transform.position = (object1.position + object2.position) / 2;
     }
 }

@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class EyeGazingRocketbox : MonoBehaviour
 {
+    [Tooltip("Object to look at")]
     [SerializeField] private Transform objectToTrack;
+
     private SkinnedMeshRenderer meshRenderer;
     Mesh skinnedMesh;
+
+    [Tooltip("Model left eye transform")]
     [SerializeField] Transform leftEye;
+    [Tooltip("Model right eye transform")]
     [SerializeField] Transform rightEye;
 
+    //Bunch of int corresponding to the good blendshapes
     int eyeLookDownLeft;
     int eyeLookInLeft;
     int eyeLookOutLeft;
@@ -22,8 +28,8 @@ public class EyeGazingRocketbox : MonoBehaviour
 
     int eyesClosed;
 
-    float timeToBlink = 0.05f;
-    float timeBetweenBlinks = 3.5f;
+    const float timeToBlink = 0.05f;
+    const float timeBetweenBlinks = 3.5f;
     float timeUntilNextBlink = 0;
 
 

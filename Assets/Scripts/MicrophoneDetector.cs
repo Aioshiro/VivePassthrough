@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MicrophoneDetector : MonoBehaviour
 {
-    //bool _isInitialized;
-    public static float MicLoudness;
+    public static float MicLoudness; //Mic sound level
+
     private string _device;
     AudioClip _clipRecord;
     int _sampleWindow = 1024;
@@ -45,7 +45,6 @@ public class MicrophoneDetector : MonoBehaviour
             levelMax += waveData[i] * waveData[i];
         }
         levelMax = Mathf.Sqrt(levelMax / _sampleWindow); // rms = square root of average
-        //levelMax = 20 * Mathf.Log10(levelMax); // calculate dB
 
         return levelMax;
     }
@@ -78,28 +77,4 @@ public class MicrophoneDetector : MonoBehaviour
         StopMicrophone();
     }
 
-
-    // make sure the mic gets started & stopped when application gets focused
-    //void OnApplicationFocus(bool focus)
-    //{
-    //    if (focus)
-    //    {
-    //        //Debug.Log("Focus");
-
-    //        if (!_isInitialized)
-    //        {
-    //            //Debug.Log("Init Mic");
-    //            InitMic();
-    //            _isInitialized = true;
-    //        }
-    //    }
-    //    if (!focus)
-    //    {
-    //        //Debug.Log("Pause");
-    //        StopMicrophone();
-    //        //Debug.Log("Stop Mic");
-    //        _isInitialized = false;
-
-    //    }
-    //}
 }

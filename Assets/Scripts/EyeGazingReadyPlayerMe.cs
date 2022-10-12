@@ -7,12 +7,18 @@ using UnityEngine;
 public class EyeGazingReadyPlayerMe : MonoBehaviour
 {
 
-    [SerializeField] private Transform objectToTrack;
+    [Tooltip("Object to look at")]
+    public Transform objectToTrack;
+
     private SkinnedMeshRenderer meshRenderer;
     Mesh skinnedMesh;
+
+    [Tooltip("Model left eye transform")]
     [SerializeField] Transform leftEye;
+    [Tooltip("Model right eye transform")]
     [SerializeField] Transform rightEye;
 
+    //Bunch of int corresponding to the good blendshapes
     int eyeLookDownLeft;
     int eyeLookInLeft;
     int eyeLookOutLeft;
@@ -25,12 +31,13 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
 
     int eyesClosed;
 
+    //Constants for gaze behavior
     const float timeToBlink = 0.05f;
     const float timeBetweenBlinks = 3.5f;
-    float timeUntilNextBlink = 0;
     const float timeToReset = 0.1f;
     const float maxLookingSpeed = 0.01f;
 
+    float timeUntilNextBlink = 0;
     bool isOtherTalking = false;
 
     public Coroutine resetCoroutine;
@@ -39,8 +46,6 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
     {
         meshRenderer = GetComponent<SkinnedMeshRenderer>();
         skinnedMesh = meshRenderer.sharedMesh;
-        //leftEye = transform.GetChild(0);
-        //rightEye = transform.GetChild(1);
         eyeLookDownLeft = skinnedMesh.GetBlendShapeIndex("eyeLookDownLeft");
         eyeLookInLeft = skinnedMesh.GetBlendShapeIndex("eyeLookInLeft");
         eyeLookOutLeft = skinnedMesh.GetBlendShapeIndex("eyeLookOutLeft");
@@ -57,11 +62,13 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
         VoiceDetector.stoppedTalking.AddListener(OnOtherStoppedSpeaking);
     }
 
+    //Callback on mic start
     private void OnOtherStartingSpeaking()
     {
         isOtherTalking = true;
     }
 
+    //Callback on mic stop
     private void OnOtherStoppedSpeaking()
     {
         isOtherTalking = false;
@@ -69,22 +76,23 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
 
     void Update()
     {
-        if (!isOtherTalking)
+        UpdateBlink(); //model always blinks
+
+        if (!isOtherTalking) //If not, model looks straight ahead
         {
             if (resetCoroutine == null) { resetCoroutine = StartCoroutine(nameof(ResetCoroutine)); }
             return;
         }
 
-        LookAtObject();
-        UpdateBlink();
+        LookAtObject(); //looking at object otherwise
 
     }
 
     void LookAtObject()
     {
-        Vector3 directionLeft = leftEye.InverseTransformPoint(objectToTrack.transform.position).normalized * 100;
+        Vector3 directionLeft = leftEye.InverseTransformPoint(objectToTrack.transform.position).normalized * 100; //getting direction between eye and object
         float currentVelocity = 0;
-        if (directionLeft.z < 0)
+        if (directionLeft.z < 0) //If the object is in front, setting up blendshapes
         {
             meshRenderer.SetBlendShapeWeight(eyeLookDownLeft, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookDownLeft), Mathf.Clamp(-directionLeft.y, 0, 100), ref currentVelocity, maxLookingSpeed));
             meshRenderer.SetBlendShapeWeight(eyeLookUpLeft, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookUpLeft), Mathf.Clamp(directionLeft.y, 0, 100), ref currentVelocity, maxLookingSpeed));
@@ -96,8 +104,8 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
             Debug.LogWarning("Tried to look behind him");
             ResetGazeLeft();
         }
-        Vector3 directionRight = rightEye.InverseTransformPoint(objectToTrack.transform.position).normalized * 100;
-        if (directionRight.z < 0)
+        Vector3 directionRight = rightEye.InverseTransformPoint(objectToTrack.transform.position).normalized * 100; //getting direction between eye and object
+        if (directionRight.z < 0) //If the object is in front, setting up blendshapes
         {
             meshRenderer.SetBlendShapeWeight(eyeLookDownRight, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookDownRight), Mathf.Clamp(-directionRight.y, 0, 100), ref currentVelocity, maxLookingSpeed));
             meshRenderer.SetBlendShapeWeight(eyeLookUpRight, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookUpRight), Mathf.Clamp(directionRight.y, 0, 100), ref currentVelocity, maxLookingSpeed));
@@ -115,7 +123,7 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
     void UpdateBlink()
     {
         timeUntilNextBlink += Time.deltaTime;
-        if (timeUntilNextBlink > timeBetweenBlinks)
+        if (timeUntilNextBlink > timeBetweenBlinks) //If time between blinks is elapsed, we blink
         {
             timeUntilNextBlink = 0;
             StartCoroutine(nameof(BlinkingCoroutine));
@@ -140,7 +148,7 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
         }
     }
 
-    IEnumerator ResetCoroutine()
+    IEnumerator ResetCoroutine() //Setting gradually eye blendshapes to 0
     {
         float initialeyeLookDownLeft = meshRenderer.GetBlendShapeWeight(eyeLookDownLeft);
         float initialeyeLookDownRight = meshRenderer.GetBlendShapeWeight(eyeLookDownRight);
@@ -169,6 +177,7 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
         resetCoroutine = null;
     }
 
+    //Resetting gaze to 0, very brutal, unadvised
     private void ResetGazeRight()
     {
         meshRenderer.SetBlendShapeWeight(eyeLookDownRight, 0);
@@ -177,6 +186,7 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
         meshRenderer.SetBlendShapeWeight(eyeLookOutRight, 0);
     }
 
+    //Resetting gaze to 0, very brutal, unadvised
     private void ResetGazeLeft()
     {
         meshRenderer.SetBlendShapeWeight(eyeLookDownLeft, 0);

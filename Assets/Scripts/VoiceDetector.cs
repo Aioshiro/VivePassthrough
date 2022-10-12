@@ -8,6 +8,7 @@ public class VoiceDetector : MonoBehaviour
     public static UnityEngine.Events.UnityEvent startedTalking;
     public static UnityEngine.Events.UnityEvent stoppedTalking;
 
+    [Tooltip("Microphone level at which we considered there is someone talking")]
     [SerializeField] private float loudnessThreshold = 10e-4f;
 
     private void Awake()
@@ -21,7 +22,6 @@ public class VoiceDetector : MonoBehaviour
     }
 
 
-    // Update is called once per frame
     void Update()
     {
         //Debug.Log(MicrophoneDetector.MicLoudness);
