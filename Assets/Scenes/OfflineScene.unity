@@ -1331,6 +1331,61 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4970704623792889700}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &493931829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493931828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277413883961f5a4d82c23a9b627a704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LipShapeTables:
+  - skinnedMeshRenderer: {fileID: 1946253432}
+    lipShapes: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff110000001000000012000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff020000000100000003000000000000000400000016000000150000001800000008000000190000000a000000070000000b0000000f0000000e0000000d0000000c00000017000000060000000900000005000000ffffffffffffffffffffffffffffffff
+  NeededToGetData: 1
+  ownNumber: 0
+  overrides:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  multiplyBy100: 1
 --- !u!1 &509811235
 GameObject:
   m_ObjectHideFlags: 0
@@ -2193,7 +2248,7 @@ PrefabInstance:
     - target: {fileID: 332219743821531467, guid: 21371d0c4d4296d4386131b2415ac3be,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 332219743821531467, guid: 21371d0c4d4296d4386131b2415ac3be,
         type: 3}
@@ -2255,7 +2310,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2048524640492187536, guid: 21371d0c4d4296d4386131b2415ac3be, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 21371d0c4d4296d4386131b2415ac3be, type: 3}
 --- !u!4 &1116897045 stripped
 Transform:
@@ -2269,6 +2325,61 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1116897044}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1116897047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116897046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277413883961f5a4d82c23a9b627a704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LipShapeTables:
+  - skinnedMeshRenderer: {fileID: 1642465352}
+    lipShapes: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0200000001000000000000000f0000000c000000ffffffff19000000ffffffffffffffffffffffff1600000015000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff10000000ffffffffffffffff03000000ffffffff0b000000ffffffffffffffffffffffffffffffff1800000017000000ffffffffffffffff14000000130000000d0000000c000000ffffffffffffffffffffffffffffffffffffffffffffffff
+  NeededToGetData: 1
+  ownNumber: 0
+  overrides:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  multiplyBy100: 0
 --- !u!1 &1126716923
 GameObject:
   m_ObjectHideFlags: 0
@@ -2445,7 +2556,7 @@ PrefabInstance:
     - target: {fileID: 6467438201791182148, guid: 783b86a9236ffe543ab6c9e223ebbbe7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6467438201791182148, guid: 783b86a9236ffe543ab6c9e223ebbbe7,
         type: 3}
@@ -2536,7 +2647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LipShapeTables:
   - skinnedMeshRenderer: {fileID: 2021256000}
-    lipShapes: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff020000000100000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff1600000015000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff14000000130000000d0000000c000000ffffffffffffffffffffffffffffffffffffffffffffffff
+    lipShapes: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0200000001000000000000000f0000000c000000ffffffff19000000ffffffffffffffffffffffff1600000015000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff10000000ffffffffffffffff03000000ffffffff0b000000ffffffffffffffffffffffffffffffff1800000017000000ffffffffffffffff14000000130000000d0000000c000000ffffffffffffffffffffffffffffffffffffffffffffffff
   NeededToGetData: 1
   ownNumber: 0
   overrides:
@@ -3044,6 +3155,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509445706}
   m_CullTransparentMesh: 0
+--- !u!137 &1642465352 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8441772646240280498, guid: 21371d0c4d4296d4386131b2415ac3be,
+    type: 3}
+  m_PrefabInstance: {fileID: 1116897044}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1891088409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3185,7 +3302,13 @@ MonoBehaviour:
   - 1
   - 1
   - 1
-  multiplyBy100: 0
+  multiplyBy100: 1
+--- !u!137 &1946253432 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4988166484312864906, guid: 56ebbf29899d6c7489789560b6572d3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 4970704623792889700}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1958228483
 GameObject:
   m_ObjectHideFlags: 0
