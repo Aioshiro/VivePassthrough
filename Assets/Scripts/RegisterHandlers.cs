@@ -8,14 +8,21 @@ public class RegisterHandlers : MonoBehaviour
 
     [SerializeField] List<AvatarLipMulti> LipScripts;
 
+#if (UNITY_SERVER)
+#else
     //Registering handlers on awake, with prefilled list, to make sure they are initialized before client connects to server
     private void Awake()
     {
-        foreach (var lip in LipScripts)
+        NetworkClient.RegisterHandler<AvatarLipMulti.PlayerInfo>(GetPlayerNumber);
+    }
+
+    private void GetPlayerNumber(AvatarLipMulti.PlayerInfo info)
+    {
+        foreach(var lip in LipScripts)
         {
-            NetworkClient.RegisterHandler<AvatarLipMulti.PlayerInfo>(lip.GetPlayerNumber);
+            lip.GetPlayerNumber(info.playerNumber);
         }
     }
 
-    
+#endif
 }

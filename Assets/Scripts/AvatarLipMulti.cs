@@ -64,9 +64,9 @@ public class AvatarLipMulti : MonoBehaviour
 
     //Callback when recieveing PlayerInfo message from server,
     //Initialized in RegisterHandlers.cs
-    public void GetPlayerNumber(PlayerInfo info)
+    public void GetPlayerNumber(int number)
     {
-        ownNumber = info.playerNumber;
+        ownNumber = number;
     }
 
     //Setting up lipShapesTables, code taken from Vive Samples

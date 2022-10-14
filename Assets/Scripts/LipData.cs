@@ -11,8 +11,6 @@ public class LipData : NetworkBehaviour
     public readonly SyncDictionary<LipShape_v2, float> LipWeightingsFirstPlayer = new SyncDictionary<LipShape_v2, float>();
     public readonly SyncDictionary<LipShape_v2, float> LipWeightingsSecondPlayer = new SyncDictionary<LipShape_v2, float>();
 
-
-
     //on server start, intialiazing the dictionnaries
     public override void OnStartServer()
     {
@@ -45,7 +43,7 @@ public class LipData : NetworkBehaviour
     //Uploading individual (key,value) tuples on server
     //upload is made on server to be authorized and sync to clients
     //Upload is made for each tuple individually as Dictionary is not a supported type in [Command] functions
-    [Command]
+    [Command(requiresAuthority =false)]
     public void UpdateDictionnaryOnServer(LipShape_v2 key, float value, int playerNumber)
     {
         if (playerNumber == 0)
