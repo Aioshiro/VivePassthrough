@@ -16,7 +16,7 @@ public class NetworkConnection : NetworkManager
         base.Start();
         var LipFrameWork = FindObjectOfType<ViveSR.anipal.Lip.SRanipal_Lip_Framework>();
 #if (UNITY_SERVER)
-        base.StartServer();
+        //base.StartServer(); //If autostart is not activated in the networkManager
         //Destroy(GameObject.FindGameObjectWithTag("Player"));
         //Destroy(LipFrameWork.gameObject);
 #elif (UNITY_STANDALONE || UNITY_EDITOR)//If it's the client, we enable the lip framework

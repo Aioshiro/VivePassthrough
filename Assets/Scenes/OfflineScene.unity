@@ -3445,9 +3445,9 @@ MonoBehaviour:
   Port: 7777
   DualMode: 1
   NoDelay: 1
-  Interval: 10
+  Interval: 0
   Timeout: 100000
-  FastResend: 2
+  FastResend: 4
   CongestionWindow: 0
   SendWindowSize: 4096
   ReceiveWindowSize: 4096
@@ -5033,7 +5033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingAverageLengthPos: 1
   movingAverageLengthRot: 1
-  posStrength: 1
+  posMaxDistance: 0.012
   rotStrength: 0.1
   allowMovement: 1
 --- !u!114 &6633921406565113620
@@ -5049,7 +5049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.1
+  syncInterval: 0
   clientAuthority: 0
   sendInterval: 0
   syncPosition: 1
@@ -5062,11 +5062,11 @@ MonoBehaviour:
   bufferSizeLimit: 64
   catchupThreshold: 4
   catchupMultiplier: 0.1
-  onlySyncOnChange: 1
+  onlySyncOnChange: 0
   bufferResetMultiplier: 5
-  positionSensitivity: 0.01
-  rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
+  positionSensitivity: 0
+  rotationSensitivity: 0
+  scaleSensitivity: 0
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
@@ -5118,7 +5118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingAverageLengthPos: 1
   movingAverageLengthRot: 1
-  posStrength: 1
+  posMaxDistance: 0.01
   rotStrength: 0.1
   allowMovement: 1
 --- !u!4 &6633921406769166103
@@ -5166,7 +5166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingAverageLengthPos: 1
   movingAverageLengthRot: 3
-  posStrength: 1
+  posMaxDistance: 0.01
   rotStrength: 0
   allowMovement: 1
 --- !u!4 &6633921407193331311
@@ -5228,7 +5228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingAverageLengthPos: 1
   movingAverageLengthRot: 3
-  posStrength: 1
+  posMaxDistance: 0.01
   rotStrength: 0
   allowMovement: 1
 --- !u!4 &6633921407802697944
@@ -5277,10 +5277,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useCornerRefinement: 1
-  markerLength: 0.0662
+  markerLength: 0.11
   dictionaryName: 0
   waitForCompletion: 1
   cameraRight: {fileID: 4284090277549211643}
+  cameraLeft: {fileID: 4281744101811716179}
+  useLeftCamera: 0
+  useRightCamera: 1
 --- !u!114 &6633921407802697948
 MonoBehaviour:
   m_ObjectHideFlags: 0
