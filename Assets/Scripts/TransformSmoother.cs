@@ -13,8 +13,8 @@ public class TransformSmoother : MonoBehaviour
     [Tooltip("Number of samples to take for the average of the rotation")]
     [SerializeField] private int movingAverageLengthRot = 3;
 
-    [Tooltip("Time factor for the max time to go to new position")]
-    [SerializeField] private float posStrength=1;
+    [Tooltip("Max distance between frames to go to new position")]
+    [SerializeField] private float posMaxDistance=0.01f;
     [Tooltip("Time factor for the max time to go to new rotation")]
     [SerializeField] private float rotStrength=1;
 
@@ -28,7 +28,6 @@ public class TransformSmoother : MonoBehaviour
     {
         currentVelocity = new Vector3();
     }
-
     public void SetNewTransform(Vector3 pos, Quaternion rot)
     {
         if (!allowMovement) { return; }
@@ -36,7 +35,7 @@ public class TransformSmoother : MonoBehaviour
         if (count> movingAverageLengthPos) //If we have enough samples, we update the position
         {
             movingAveragePos += (pos - movingAveragePos) / (movingAverageLengthPos + 1); //new theoretical position
-            transform.position = Vector3.SmoothDamp(transform.position,movingAveragePos,ref currentVelocity,Time.deltaTime*posStrength); //Go to new position with some dampning
+            transform.position = Vector3.MoveTowards(transform.position,movingAveragePos,posMaxDistance); //Go to new position with some dampning
         }
         else 
         {
@@ -44,7 +43,7 @@ public class TransformSmoother : MonoBehaviour
             if (count == movingAverageLengthPos) // and update immediatlly if we have enough
             {
                 movingAveragePos /= count;
-                transform.position = Vector3.SmoothDamp(transform.position, movingAveragePos, ref currentVelocity, Time.deltaTime * posStrength);
+                transform.position = Vector3.SmoothDamp(transform.position, movingAveragePos, ref currentVelocity, Time.deltaTime * posMaxDistance);
             }
         }
 
