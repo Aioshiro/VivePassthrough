@@ -6,7 +6,22 @@ ModelImporter:
   - first:
       74: 1827226128182048838
     second: Take 001
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m011_body
+    second: {fileID: 2100000, guid: 0dea194025f7bf64a98a98299521642c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m011_head
+    second: {fileID: 2100000, guid: 3cf4485d846360e4c8b1f7592b74e1b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m011_opacity
+    second: {fileID: 2100000, guid: aace80f14a1e49d4bb1b4fcf4d29cb20, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
