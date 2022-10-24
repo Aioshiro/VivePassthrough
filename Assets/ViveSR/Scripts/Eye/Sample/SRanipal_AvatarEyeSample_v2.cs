@@ -27,13 +27,18 @@ namespace ViveSR
                 /// </summary>
                 [SerializeField] private AnimationCurve EyebrowAnimationCurveHorizontal;
 
+                [Range(0,1)]
+                public float gazeSensibility;
+
                 public bool NeededToGetData = true;
-                private Dictionary<EyeShape_v2, float> EyeWeightings = new Dictionary<EyeShape_v2, float>();
+                private Dictionary<EyeShape_v2, float> eyeWeightings = new Dictionary<EyeShape_v2, float>();
                 private AnimationCurve[] EyebrowAnimationCurves = new AnimationCurve[(int)EyeShape_v2.Max];
                 private GameObject[] EyeAnchors;
                 private const int NUM_OF_EYES = 2;
                 private static EyeData_v2 eyeData = new EyeData_v2();
                 private bool eye_callback_registered = false;
+                
+                Vector3 GazeDirectionCombinedLocal;
                 private void Start()
                 {
                     if (!SRanipal_Eye_Framework.Instance.EnableEye)
@@ -53,6 +58,16 @@ namespace ViveSR
                         else curves[i] = EyebrowAnimationCurveHorizontal;
                     }
                     SetEyeShapeAnimationCurves(curves);
+
+                    EyeParameter StartingEyeParameter = new EyeParameter
+                    {
+                        gaze_ray_parameter = new GazeRayParameter
+                        {
+                            sensitive_factor = gazeSensibility
+                        }
+                    };
+
+                    SRanipal_Eye_API.SetEyeParameter(StartingEyeParameter);
                 }
 
                 private void Update()
@@ -91,37 +106,44 @@ namespace ViveSR
                         if (isLeftEyeActive || isRightEyeAcitve)
                         {
                             if (eye_callback_registered == true)
-                                SRanipal_Eye_v2.GetEyeWeightings(out EyeWeightings, eyeData);
+                                SRanipal_Eye_v2.GetEyeWeightings(out eyeWeightings, eyeData);
                             else
-                                SRanipal_Eye_v2.GetEyeWeightings(out EyeWeightings);
-                            UpdateEyeShapes(EyeWeightings);
+                                SRanipal_Eye_v2.GetEyeWeightings(out eyeWeightings);
+                            UpdateEyeShapes(eyeWeightings);
                         }
                         else
                         {
                             for (int i = 0; i < (int)EyeShape_v2.Max; ++i)
                             {
                                 bool isBlink = ((EyeShape_v2)i == EyeShape_v2.Eye_Left_Blink || (EyeShape_v2)i == EyeShape_v2.Eye_Right_Blink);
-                                EyeWeightings[(EyeShape_v2)i] = isBlink ? 1 : 0;
+                                eyeWeightings[(EyeShape_v2)i] = isBlink ? 1 : 0;
                             }
 
-                            UpdateEyeShapes(EyeWeightings);
+                            UpdateEyeShapes(eyeWeightings);
 
                             return;
                         }
 
-                        Vector3 GazeOriginCombinedLocal, GazeDirectionCombinedLocal = Vector3.zero;
+                        Vector3 GazeOriginCombinedLocal = Vector3.zero;
                         if (eye_callback_registered == true)
                         {
-                            if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.COMBINE, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal, eyeData)) { }
+                            if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.COMBINE, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal, eyeData)) {}
                             else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.LEFT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal, eyeData)) { }
                             else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.RIGHT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal, eyeData)) { }
+                            else
+                            {
+                                return;
+                            }
                         }
                         else
                         {
                             if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.COMBINE, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal)) { }
                             else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.LEFT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal)) { }
                             else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.RIGHT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal)) { }
-
+                            else
+                            {
+                                return;
+                            }
                         }
                         UpdateGazeRay(GazeDirectionCombinedLocal);
                     }
@@ -191,7 +213,10 @@ namespace ViveSR
                     for (int i = 0; i < EyesModels.Length; ++i)
                     {
                         Vector3 target = EyeAnchors[i].transform.TransformPoint(gazeDirectionCombinedLocal);
+                        Debug.DrawLine(EyeAnchors[i].transform.position, target, Color.red);
+                        //EyesModels[i].rotation = Quaternion.LookRotation(target);
                         EyesModels[i].LookAt(target);
+                        //EyesModels[i].rotation = Quaternion.LookRotation(EyesModels[i].forward, target);
                     }
                 }
 
@@ -223,11 +248,13 @@ namespace ViveSR
                     EyeAnchors = new GameObject[NUM_OF_EYES];
                     for (int i = 0; i < NUM_OF_EYES; ++i)
                     {
-                        EyeAnchors[i] = new GameObject();
-                        EyeAnchors[i].name = "EyeAnchor_" + i;
+                        EyeAnchors[i] = new GameObject
+                        {
+                            name = "EyeAnchor_" + i
+                        };
                         EyeAnchors[i].transform.SetParent(gameObject.transform);
-                        EyeAnchors[i].transform.localPosition = EyesModels[i].localPosition;
-                        EyeAnchors[i].transform.localRotation = EyesModels[i].localRotation;
+                        EyeAnchors[i].transform.position = EyesModels[i].position;
+                        EyeAnchors[i].transform.rotation = EyesModels[i].rotation;
                         EyeAnchors[i].transform.localScale = EyesModels[i].localScale;
                     }
                 }

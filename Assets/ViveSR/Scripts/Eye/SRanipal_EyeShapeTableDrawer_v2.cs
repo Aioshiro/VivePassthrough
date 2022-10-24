@@ -21,6 +21,7 @@ namespace ViveSR
                     newFieldPosition.height = EditorGUIUtility.singleLineHeight;
                     Rect newLabelPosition = position;
                     newLabelPosition.width -= newFieldPosition.width;
+                    newLabelPosition.height = newFieldPosition.height;
 
                     SerializedProperty propSkinedMesh = property.FindPropertyRelative("skinnedMeshRenderer");
                     SerializedProperty propEyeShapes = property.FindPropertyRelative("eyeShapes");

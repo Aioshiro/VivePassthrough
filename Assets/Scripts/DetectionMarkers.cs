@@ -17,9 +17,9 @@ public class DetectionMarkers : MonoBehaviour
 	Texture2D rightCPU;
 	[Tooltip("Check if you want to do AruCo corner refinement (advised)")]
 	public bool useCornerRefinement;
-	Point3f[] markerPoints; //Marker points in object space
+	Point3f[][] markerPoints; //Marker points in object space
 	[Tooltip("Marker length in meters")]
-	[SerializeField] private float markerLength = 0.06f;
+	[SerializeField] private List<float> markerLength;
 	[Tooltip("Aruco dictionnary to use")]
 	[SerializeField] private PredefinedDictionaryName dictionaryName = PredefinedDictionaryName.Dict4X4_50;
 	const int numberOfMarkers = 4;
@@ -58,7 +58,7 @@ public class DetectionMarkers : MonoBehaviour
 	public bool useLeftCamera;
 	public bool useRightCamera;
 
-
+	[SerializeField] Material planeMaterial;
 
 	void Start()
 	{
@@ -71,19 +71,37 @@ public class DetectionMarkers : MonoBehaviour
 
 	void InitArucoParameters()
     {
-		markerPoints = new Point3f[] {
-				new Point3f(-markerLength / 2f,  markerLength / 2f, 0f),
-				new Point3f( markerLength / 2f,  markerLength / 2f, 0f),
-				new Point3f( markerLength / 2f, -markerLength / 2f, 0f),
-				new Point3f(-markerLength / 2f, -markerLength / 2f, 0f)
-			}; 
+		markerPoints = new Point3f[numberOfMarkers][];
+		for (int i = 0; i < numberOfMarkers; i++)
+		{
+			markerPoints[i] = new Point3f[] {
+				new Point3f(-markerLength[i] / 2f,  markerLength[i] / 2f, 0f),
+				new Point3f( markerLength[i] / 2f,  markerLength[i] / 2f, 0f),
+				new Point3f( markerLength[i] / 2f, -markerLength[i] / 2f, 0f),
+				new Point3f(-markerLength[i] / 2f, -markerLength[i] / 2f, 0f)
+			};
+		}
 
 		// Create default parameres for detection
 		detectorParameters = DetectorParameters.Create();
 		detectorParameters.DoCornerRefinement = useCornerRefinement;
-		detectorParameters.CornerRefinementWinSize = 2;
-		detectorParameters.CornerRefinementMinAccuracy = 0.00001;
-		detectorParameters.CornerRefinementMaxIterations = 100000;
+
+		//detectorParameters.AdaptiveThreshConstant = 7; // found no effect
+		//detectorParameters.AdaptiveThreshWinSizeMax = 23; //found no effect
+		//detectorParameters.AdaptiveThreshWinSizeMin = 3; //found no effect
+		//detectorParameters.AdaptiveThreshWinSizeStep = 10; //found no effect
+		detectorParameters.CornerRefinementWinSize = 9;
+		//detectorParameters.CornerRefinementMinAccuracy = 0.1; //found no effect
+		//detectorParameters.CornerRefinementMaxIterations = int.MaxValue; //found no effect
+		//detectorParameters.MarkerBorderBits =1 //always one for us
+		//detectorParameters.MaxErroneousBitsInBorderRate = 0.35 //no issues or erroneous bits
+		//detectorParameters.MaxMarkerPerimeterRate = 4;
+		//detectorParameters.MinCornerDistanceRate = 0.05;
+		detectorParameters.MinDistanceToBorder = 100; //increased quite a bit, as the other person head tend to be in the center
+		//detectorParameters.MinMarkerDistanceRate = 0.05;
+		detectorParameters.MinMarkerPerimeterRate = 0.04; //Increase a little bit to filter small wrong markers
+		 //detectorParameters.MinOtsuStdDev = 5; no effect
+		//detectorParameters.PolygonalApproxAccuracyRate = 0.03; no effect
 
 		// Dictionary holds set of all available markers
 		dictionary = CvAruco.GetPredefinedDictionary(dictionaryName);
@@ -98,6 +116,69 @@ public class DetectionMarkers : MonoBehaviour
 
 		rotMatRight = new double[numberOfMarkers][,];
 	}
+
+	public void IncreaseWindow(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+		if (context.started)
+		{
+			detectorParameters.CornerRefinementWinSize += 1;
+			Debug.Log("Window size is " + detectorParameters.CornerRefinementWinSize.ToString());
+		}
+    }
+	public void DecreaseWindow(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+		if (context.started)
+		{
+			detectorParameters.CornerRefinementWinSize -= 1;
+			if (detectorParameters.CornerRefinementWinSize <= 0)
+			{
+				detectorParameters.CornerRefinementWinSize = 1;
+			}
+			Debug.Log("Window size is " + detectorParameters.CornerRefinementWinSize.ToString());
+		}
+	}
+
+	public void IncreaseCornerMinAccuracy(UnityEngine.InputSystem.InputAction.CallbackContext context)
+	{
+		if (context.started)
+        {
+			detectorParameters.CornerRefinementMinAccuracy *= 10;
+			Debug.Log("Min accuracy is " + detectorParameters.CornerRefinementMinAccuracy.ToString());
+        }
+	}
+
+	public void DecreaseCornerMinAccuracy(UnityEngine.InputSystem.InputAction.CallbackContext context)
+	{
+		if (context.started)
+		{
+			detectorParameters.CornerRefinementMinAccuracy /= 10;
+			Debug.Log("Min accuracy is " + detectorParameters.CornerRefinementMinAccuracy.ToString());
+		}
+	}
+
+	public void DecreasePolygonalApproxAccuracyRate(UnityEngine.InputSystem.InputAction.CallbackContext context)
+	{
+		if (context.started)
+		{
+			detectorParameters.PolygonalApproxAccuracyRate -= 0.01;
+			if (detectorParameters.PolygonalApproxAccuracyRate <= 0)
+            {
+				detectorParameters.PolygonalApproxAccuracyRate = 0.01;
+            }
+			Debug.Log("Adaptive PolygonalApproxAccuracyRate is " + detectorParameters.PolygonalApproxAccuracyRate.ToString());
+		}
+	}
+
+	public void IncreasePolygonalApproxAccuracyRate(UnityEngine.InputSystem.InputAction.CallbackContext context)
+	{
+		if (context.started)
+		{
+			detectorParameters.PolygonalApproxAccuracyRate += 0.01;
+			Debug.Log("Adaptive PolygonalApproxAccuracyRate is " + detectorParameters.PolygonalApproxAccuracyRate.ToString());
+		}
+	}
+
+
 
 	void InitTextures()
 	{
@@ -180,7 +261,7 @@ public class DetectionMarkers : MonoBehaviour
 				if (ids[i] <numberOfMarkers)
 				{
 					markersToUpdateRight[ids[i]] = true;
-					Cv2.SolvePnP(markerPoints, corners[i], cameraRightMatrix, distCoeffs, out rvecRight[ids[i]], out tvecRight[ids[i]], false, SolvePnPFlags.Iterative); //Pose estimation, to go from 2d pixels to 3d position in CAMERA space
+					Cv2.SolvePnP(markerPoints[ids[i]], corners[i], cameraRightMatrix, distCoeffs, out rvecRight[ids[i]], out tvecRight[ids[i]], false, SolvePnPFlags.Iterative); //Pose estimation, to go from 2d pixels to 3d position in CAMERA space
 					Cv2.Rodrigues(rvecRight[ids[i]], out rotMatRight[ids[i]]);
 				}
 			}
@@ -198,7 +279,7 @@ public class DetectionMarkers : MonoBehaviour
 				if (ids[i] < numberOfMarkers)
 				{
 					markersToUpdateLeft[ids[i]] = true;
-					Cv2.SolvePnP(markerPoints, corners[i], cameraLeftMatrix, distCoeffs, out rvecLeft[ids[i]], out tvecLeft[ids[i]], false, SolvePnPFlags.Iterative); //Pose estimation, to go from 2d pixels to 3d position in CAMERA space
+					Cv2.SolvePnP(markerPoints[ids[i]], corners[i], cameraLeftMatrix, distCoeffs, out rvecLeft[ids[i]], out tvecLeft[ids[i]], false, SolvePnPFlags.Iterative); //Pose estimation, to go from 2d pixels to 3d position in CAMERA space
 					Cv2.Rodrigues(rvecLeft[ids[i]], out rotMatLeft[ids[i]]);
 				}
 			}
@@ -223,20 +304,27 @@ public class DetectionMarkers : MonoBehaviour
 				GetObjectNewTransform(tvecRight[i], rotMatRight[i], false, out Vector3 worldPosRight, out Quaternion worldRotRight); //estimating worldspace position
 				GetObjectNewTransform(tvecLeft[i], rotMatLeft[i],true, out Vector3 worldPosLeft, out Quaternion worldRotLeft); //estimating worldspace position
 				markersManager.UpdateIthMarkerPos(i, (worldPosLeft + worldPosRight) / 2, Quaternion.Slerp(worldRotRight,worldRotLeft,0.5f));
+				//markersManager.SetActiveIthMarker(i, true);
 			}
             else if(markersToUpdateLeft[i])
 			{
 				markersToUpdateLeft[i] = false;
 				GetObjectNewTransform(tvecLeft[i],rotMatLeft[i],true, out Vector3 worldPos, out Quaternion worldRot); //estimating worldspace position
 				markersManager.UpdateIthMarkerPos(i, worldPos, worldRot);
+				//markersManager.SetActiveIthMarker(i, true);
 			}
 			else if (markersToUpdateRight[i])
             {
 				markersToUpdateRight[i] = false;
 				GetObjectNewTransform(tvecRight[i], rotMatRight[i],false, out Vector3 worldPos, out Quaternion worldRot); //estimating worldspace position
 				markersManager.UpdateIthMarkerPos(i, worldPos, worldRot);
+				//markersManager.SetActiveIthMarker(i, true);
 			}
-        }
+            else
+            {
+				//markersManager.SetActiveIthMarker(i, false);
+			}
+		}
 	}
 
 
@@ -295,6 +383,8 @@ public class DetectionMarkers : MonoBehaviour
 		Mat flippedMat = new Mat();
 		Cv2.Flip(OpenCvSharp.Unity.TextureToMat(image), flippedMat, FlipMode.Y); //flipping input cameras, as vive feed is reversed
 		CvAruco.DetectMarkers(flippedMat, dictionary, out corners, out ids, detectorParameters, out _);
+		//CvAruco.DrawDetectedMarkers(flippedMat, corners, ids);
+		//planeMaterial.mainTexture = OpenCvSharp.Unity.MatToTexture(flippedMat);
 		flippedMat.Dispose();
 	}
 

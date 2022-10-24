@@ -21,4 +21,9 @@ public class MarkersManager : MonoBehaviour
         }
     }
 
+    public void SetActiveIthMarker(int i,bool setActive)
+    {
+        markers[i].gameObject.SetActive(setActive);
+    }
+
 }

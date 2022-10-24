@@ -16,20 +16,32 @@ public class TransformSmoother : MonoBehaviour
     [Tooltip("Max distance between frames to go to new position")]
     [SerializeField] private float posMaxDistance=0.01f;
     [Tooltip("Time factor for the max time to go to new rotation")]
-    [SerializeField] private float rotStrength=1;
+    [SerializeField] private float rotMaxDegrees=1;
 
-    Vector3 currentVelocity;
-    Quaternion currentRotVelocity;
+    bool initialized = false;
 
     [Tooltip("Uncheck to freeze object")]
     [SerializeField] private bool allowMovement;
 
-    private void Start()
-    {
-        currentVelocity = new Vector3();
-    }
+    [SerializeField] private bool allowRotation;
+
+    [SerializeField] Transform leftCamera;
+
+    public bool wasPointingDown = false;
+    //public bool wasPointingRight = false;
+    Quaternion rotDerivate;
+    public float dangerZoneTolerance;
+
+    //public Material cubeColor;
+
     public void SetNewTransform(Vector3 pos, Quaternion rot)
     {
+        if (!initialized)
+        {
+            transform.position = pos;
+            transform.rotation = rot;
+            initialized = true;
+        }
         if (!allowMovement) { return; }
         count++;
         if (count> movingAverageLengthPos) //If we have enough samples, we update the position
@@ -43,18 +55,45 @@ public class TransformSmoother : MonoBehaviour
             if (count == movingAverageLengthPos) // and update immediatlly if we have enough
             {
                 movingAveragePos /= count;
-                transform.position = Vector3.SmoothDamp(transform.position, movingAveragePos, ref currentVelocity, Time.deltaTime * posMaxDistance);
+                transform.position = Vector3.MoveTowards(transform.position, movingAveragePos, posMaxDistance);
             }
         }
 
+        if (!allowRotation) { return; }
         //For the rotation, we do the average of the Up and Forward vectors of the rotation, as it's a bit complicated to do averages with quaternions
         // Though, as we move from and to very close rotations, average are possible
+
+        Vector3 markerToCamera = (leftCamera.position - pos).normalized;
+        Vector3 crossForward = Vector3.Cross(markerToCamera, rot * Vector3.forward);
+        if (Vector3.Dot(markerToCamera,rot*Vector3.forward)>dangerZoneTolerance)
+        {
+            //cubeColor.color = Color.red;
+            bool isCurrentlyPointingDown = Vector3.Dot(crossForward, rot * Vector3.right) > 0;
+
+            if ((isCurrentlyPointingDown&& !wasPointingDown) || (!isCurrentlyPointingDown&&wasPointingDown))
+            {
+                
+                Debug.Log("problème");
+                //Vector3 newForward = rot * Vector3.forward;
+                //newForward.y = -newForward.y;
+                //rot = Quaternion.LookRotation(newForward, rot * Vector3.up);
+                rot = EstimateNewRot(transform.rotation, rotDerivate, Time.deltaTime);
+                //return;
+            }
+        }
+        else
+        {
+            //cubeColor.color = Color.green;
+            wasPointingDown = Vector3.Dot(crossForward, rot * Vector3.right) > 0;
+            // wasPointingRight = Vector3.Dot(crossForward, rot * Vector3.up) > 0;
+            rotDerivate = DerivateQuaternion(transform.rotation, rot, Time.deltaTime);
+        }
 
         if (count > movingAverageLengthRot) //If we have enough samples, we update the rotation
         {
             movingAverageUp += (rot * Vector3.up - movingAverageUp) / (movingAverageLengthRot + 1);//new theoretical up vector
             movingAverageForward += (rot * Vector3.forward - movingAverageForward) / (movingAverageLengthRot + 1); //new theoretical forward vector
-            transform.rotation = QuaternionUtil.SmoothDamp(transform.rotation,Quaternion.LookRotation(movingAverageForward, movingAverageUp),ref currentRotVelocity,rotStrength); //Go to new rotation with some dampning
+            transform.rotation = Quaternion.RotateTowards(transform.rotation,Quaternion.LookRotation(movingAverageForward, movingAverageUp),rotMaxDegrees); //Go to new rotation with some dampning
         }
         else
         {
@@ -64,9 +103,36 @@ public class TransformSmoother : MonoBehaviour
             {
                 movingAverageUp /= count;
                 movingAverageForward /= count;
-                transform.rotation =QuaternionUtil.SmoothDamp(transform.rotation, Quaternion.LookRotation(movingAverageForward, movingAverageUp),ref currentRotVelocity,rotStrength);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(movingAverageForward, movingAverageUp),rotMaxDegrees);
             }
         }
     }
 
+    private Quaternion DerivateQuaternion(Quaternion initial, Quaternion final, float time)
+    {
+        return new Quaternion
+        {
+            x = (final.x - initial.x) / time,
+            y = (final.y - initial.y) / time,
+            z = (final.z - initial.z) / time,
+            w = (final.w - initial.w) / time,
+        };
+
+    }
+
+    private Quaternion EstimateNewRot(Quaternion initial,Quaternion derivative,float time)
+    {
+        Quaternion newRot = new Quaternion
+        {
+            x = initial.x + derivative.x * time,
+            y = initial.y + derivative.y * time,
+            z = initial.z + derivative.z * time,
+            w = initial.w + derivative.w * time
+
+        };
+
+        newRot.Normalize();
+
+        return newRot;
+    }
 }

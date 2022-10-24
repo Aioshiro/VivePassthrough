@@ -9,7 +9,6 @@ public class MarkersManagerMulti : NetworkBehaviour
     [SerializeField] TransformSmoother[] markers;
 
 
-
     [Command(requiresAuthority =false)]
     public void UpdateIthMarkerPos(int i, Vector3 pos, Quaternion rot)
     {
