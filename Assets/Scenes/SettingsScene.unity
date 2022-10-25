@@ -2930,7 +2930,7 @@ GameObject:
   - component: {fileID: 1718097148}
   - component: {fileID: 1718097147}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Start exp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3007,7 +3007,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MainScene
+          m_StringArgument: OfflineScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1718097148
@@ -3510,6 +3510,7 @@ MonoBehaviour:
   isMale: 0
   participantID: -1
   allowSceneChange: 0
+  playerNumber: 0
 --- !u!4 &2011042604
 Transform:
   m_ObjectHideFlags: 0

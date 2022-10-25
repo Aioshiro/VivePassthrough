@@ -7,17 +7,8 @@ using Mirror;
 public class AvatarLipMulti : MonoBehaviour
 {
 
-    //struct necessary to recieve messages from the server (player number here)
-    public struct PlayerInfo : NetworkMessage
-    {
-        public int playerNumber;
-    }
-
     [Tooltip("Lip shape tables for correspondancies between vive tracker and the model blendshapes")]
     [SerializeField] private List<LipShapeTable_v2> LipShapeTables;
-
-    [Tooltip("The client player number")]
-    public int ownNumber = 0;
 
     //Reference to LipData script, to upload data to server and get other player data
     private LipData lipData;
@@ -47,10 +38,10 @@ public class AvatarLipMulti : MonoBehaviour
         //Getting facial tracker data
         SRanipal_Lip_v2.GetLipWeightings(out var weightings);
         //Uploading facial tracker to server
-        lipData.UpdateWeightings(weightings, ownNumber);
+        lipData.UpdateWeightings(weightings, GameManager.Instance.playerNumber);
 
         //Uploading local model blenshapes values
-        if (ownNumber == 0)
+        if (GameManager.Instance.playerNumber == 0)
         {
             //UpdateLipShapes(lipData.LipWeightingsSecondPlayer);
             UpdateLipShapes(lipData.LipWeightingsFirstPlayer);
@@ -60,13 +51,6 @@ public class AvatarLipMulti : MonoBehaviour
             UpdateLipShapes(lipData.LipWeightingsFirstPlayer);
         }
 
-    }
-
-    //Callback when recieveing PlayerInfo message from server,
-    //Initialized in RegisterHandlers.cs
-    public void GetPlayerNumber(int number)
-    {
-        ownNumber = number;
     }
 
     //Setting up lipShapesTables, code taken from Vive Samples

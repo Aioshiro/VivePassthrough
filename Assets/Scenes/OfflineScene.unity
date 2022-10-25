@@ -1899,7 +1899,6 @@ MonoBehaviour:
   LipShapeTables:
   - skinnedMeshRenderer: {fileID: 1946253432}
     lipShapes: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff110000001000000012000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff020000000100000003000000000000000400000016000000150000001800000008000000190000000a000000070000000b0000000f0000000e0000000d0000000c00000017000000060000000900000005000000ffffffffffffffffffffffffffffffff
-  ownNumber: 0
   overrides:
   - 1
   - 1
@@ -1948,7 +1947,6 @@ GameObject:
   m_Component:
   - component: {fileID: 509811237}
   - component: {fileID: 509811236}
-  - component: {fileID: 509811238}
   m_Layer: 0
   m_Name: LipframeWork
   m_TagString: Untagged
@@ -1984,21 +1982,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &509811238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509811235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81889b39132718743a5317909bfd8bd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LipScripts:
-  - {fileID: 1891088412}
-  - {fileID: 1351679651}
 --- !u!1 &510244998
 GameObject:
   m_ObjectHideFlags: 0
@@ -3510,7 +3493,6 @@ MonoBehaviour:
   LipShapeTables:
   - skinnedMeshRenderer: {fileID: 1642465352}
     lipShapes: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0200000001000000000000000f0000000c000000ffffffff19000000ffffffffffffffffffffffff1600000015000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff10000000ffffffffffffffff03000000ffffffff0b000000ffffffffffffffffffffffffffffffff1800000017000000ffffffffffffffff14000000130000000d0000000c000000ffffffffffffffffffffffffffffffffffffffffffffffff
-  ownNumber: 0
   overrides:
   - 1
   - 1
@@ -3815,6 +3797,55 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1181722218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1181722220}
+  - component: {fileID: 1181722219}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1181722219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181722218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb3a9b63602b1a4b937265ad6dfaea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadsActive: 0
+  isCartoon: 0
+  isMale: 0
+  participantID: -1
+  allowSceneChange: 0
+  playerNumber: 0
+--- !u!4 &1181722220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181722218}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.1766224, y: -0.8919902, z: 1.2675472}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1201405537
 GameObject:
   m_ObjectHideFlags: 0
@@ -3996,7 +4027,6 @@ MonoBehaviour:
   LipShapeTables:
   - skinnedMeshRenderer: {fileID: 2021256000}
     lipShapes: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0200000001000000000000000f0000000c000000ffffffff19000000ffffffffffffffffffffffff1600000015000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff10000000ffffffffffffffff03000000ffffffff0b000000ffffffffffffffffffffffffffffffff1800000017000000ffffffffffffffff14000000130000000d0000000c000000ffffffffffffffffffffffffffffffffffffffffffffffff
-  ownNumber: 0
   overrides:
   - 1
   - 1
@@ -5026,7 +5056,6 @@ MonoBehaviour:
   LipShapeTables:
   - skinnedMeshRenderer: {fileID: 913178618}
     lipShapes: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff110000001000000012000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff020000000100000003000000000000000400000016000000150000001800000008000000190000000a000000070000000b0000000f0000000e0000000d0000000c00000017000000060000000900000005000000ffffffffffffffffffffffffffffffff
-  ownNumber: 0
   overrides:
   - 1
   - 1

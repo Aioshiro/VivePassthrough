@@ -1,9 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class GameManager : MonoBehaviour
 {
+
+    //struct necessary to recieve messages from the server (player number here)
+    public struct PlayerInfo : NetworkMessage
+    {
+        public int playerNumber;
+    }
 
     public static GameManager Instance;
 
@@ -12,6 +19,12 @@ public class GameManager : MonoBehaviour
     public bool isMale = false;
     public int participantID = -1;
     public bool allowSceneChange = false;
+    public int playerNumber = 0;
+
+    private void Awake()
+    {
+        NetworkClient.RegisterHandler<PlayerInfo>(SetPlayerNumber,false);
+    }
 
     void Start()
     {
@@ -58,6 +71,11 @@ public class GameManager : MonoBehaviour
     public void ToggleGender()
     {
         isMale = !isMale;
+    }
+
+    public void SetPlayerNumber(PlayerInfo playerInfo)
+    {
+        playerNumber = playerInfo.playerNumber;
     }
 
 }

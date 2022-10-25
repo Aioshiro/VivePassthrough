@@ -55,7 +55,7 @@ public class NetworkConnection : NetworkManager
         //Assigning player numbers so we know who's who
         if (firstPlayer)
         {
-            AvatarLipMulti.PlayerInfo info = new AvatarLipMulti.PlayerInfo
+            GameManager.PlayerInfo info = new GameManager.PlayerInfo
             {
                 playerNumber = 0
             };
@@ -64,12 +64,13 @@ public class NetworkConnection : NetworkManager
         }
         else
         {
-            AvatarLipMulti.PlayerInfo info = new AvatarLipMulti.PlayerInfo
+            GameManager.PlayerInfo info = new GameManager.PlayerInfo
             {
                 playerNumber = 1
             };
             conn.Send(info);
         }
+        Debug.Log("Player connected");
     }
 
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
