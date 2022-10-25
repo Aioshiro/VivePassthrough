@@ -18,8 +18,6 @@ public class TransformSmoother : MonoBehaviour
     [Tooltip("Time factor for the max time to go to new rotation")]
     [SerializeField] private float rotMaxDegrees=1;
 
-    bool initialized = false;
-
     [Tooltip("Uncheck to freeze object")]
     [SerializeField] private bool allowMovement;
 
@@ -33,6 +31,10 @@ public class TransformSmoother : MonoBehaviour
     public float dangerZoneTolerance;
 
     //public Material cubeColor;
+
+    public bool xRotationAllowed = true;
+    public bool yRotationAllowed = true;
+    public bool zRotationAllowed = true;
 
     public void SetNewTransform(Vector3 pos, Quaternion rot)
     {
@@ -53,7 +55,6 @@ public class TransformSmoother : MonoBehaviour
             }
         }
 
-        if (!allowRotation) { return; }
         //For the rotation, we do the average of the Up and Forward vectors of the rotation, as it's a bit complicated to do averages with quaternions
         // Though, as we move from and to very close rotations, average are possible
 
@@ -67,7 +68,7 @@ public class TransformSmoother : MonoBehaviour
             if ((isCurrentlyPointingDown&& !wasPointingDown) || (!isCurrentlyPointingDown&&wasPointingDown))
             {
                 
-                Debug.Log("problème");
+                //Debug.Log("problème");
                 //Vector3 newForward = rot * Vector3.forward;
                 //newForward.y = -newForward.y;
                 //rot = Quaternion.LookRotation(newForward, rot * Vector3.up);
@@ -100,6 +101,26 @@ public class TransformSmoother : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(movingAverageForward, movingAverageUp),rotMaxDegrees);
             }
         }
+        ApplyFreezes();
+    }
+
+    private void ApplyFreezes()
+    {
+        Vector3 euler = transform.rotation.eulerAngles;
+        if (!xRotationAllowed)
+        {
+            euler.x = 0;
+        }
+        if (!yRotationAllowed)
+        {
+            euler.y = 0;
+        }
+        if (!zRotationAllowed)
+        {
+            euler.z = 0;
+        }
+
+        transform.rotation = Quaternion.Euler(euler);
     }
 
     private Quaternion DerivateQuaternion(Quaternion initial, Quaternion final, float time)

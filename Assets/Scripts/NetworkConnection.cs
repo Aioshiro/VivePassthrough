@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEditor;
+using ViveHandTracking;
 
 public class NetworkConnection : NetworkManager
 {
@@ -24,6 +25,8 @@ public class NetworkConnection : NetworkManager
         player.SetActive(true);
         LipFrameWork.EnableLip = true;
         LipFrameWork.StartFramework();
+        var gestureProvider = FindObjectOfType<GestureProvider>();
+        gestureProvider.enabled = true;
 #endif
     }
 
