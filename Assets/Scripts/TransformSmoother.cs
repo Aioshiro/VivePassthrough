@@ -36,12 +36,6 @@ public class TransformSmoother : MonoBehaviour
 
     public void SetNewTransform(Vector3 pos, Quaternion rot)
     {
-        if (!initialized)
-        {
-            transform.position = pos;
-            transform.rotation = rot;
-            initialized = true;
-        }
         if (!allowMovement) { return; }
         count++;
         if (count> movingAverageLengthPos) //If we have enough samples, we update the position
