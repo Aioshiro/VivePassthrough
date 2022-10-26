@@ -22,9 +22,9 @@ public class DetectionMarkers : MonoBehaviour
 	[SerializeField] private List<float> markerLength;
 	[Tooltip("Aruco dictionnary to use")]
 	[SerializeField] private PredefinedDictionaryName dictionaryName = PredefinedDictionaryName.Dict4X4_50;
-	const int numberOfMarkers = 4;
-	//MarkersManager markersManager; //Manager for markers position and smoothering
-	MarkersManagerMulti markersManager;
+	[SerializeField] int numberOfMarkers = 10;
+	MarkersManager markersManager; //Manager for markers position and smoothering
+	//MarkersManagerMulti markersManager;
 	bool[] markersToUpdateRight;
 	bool[] markersToUpdateLeft;
 
@@ -58,12 +58,12 @@ public class DetectionMarkers : MonoBehaviour
 	public bool useLeftCamera;
 	public bool useRightCamera;
 
-	//[SerializeField] Material planeMaterial;
+	[SerializeField] Material planeMaterial;
 
 	void Start()
 	{
-		markersManager = GetComponent<MarkersManagerMulti>();
-		//markersManager = GetComponent<MarkersManager>();
+		//markersManager = GetComponent<MarkersManagerMulti>();
+		markersManager = GetComponent<MarkersManager>();
 		markersToUpdateLeft = new bool[numberOfMarkers];
 		markersToUpdateRight = new bool[numberOfMarkers];
 		InitArucoParameters();
@@ -320,72 +320,59 @@ public class DetectionMarkers : MonoBehaviour
 				markersManager.UpdateIthMarkerPos(i, worldPos, worldRot);
 				//markersManager.SetActiveIthMarker(i, true);
 			}
-            else
-            {
-				//markersManager.SetActiveIthMarker(i, false);
-			}
+   //         else
+   //         {
+			//	//markersManager.SetActiveIthMarker(i, false);
+			//}
 		}
-	}
-
-
-	private Quaternion QuaternionFromMatrix(double[,] m)
-	{
-		// Adapted from: http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm
-		Quaternion q = new Quaternion
-		{
-			w = Mathf.Sqrt(Mathf.Max(0, (float)(1 + m[0, 0] + m[1, 1] + m[2, 2]))) / 2,
-			x = Mathf.Sqrt(Mathf.Max(0, (float)(1 + m[0, 0] - m[1, 1] - m[2, 2]))) / 2,
-			y = Mathf.Sqrt(Mathf.Max(0, (float)(1 - m[0, 0] + m[1, 1] - m[2, 2]))) / 2,
-			z = Mathf.Sqrt(Mathf.Max(0, (float)(1 - m[0, 0] - m[1, 1] + m[2, 2]))) / 2
-		};
-		q.x *= Mathf.Sign((float)(q.x * (m[2, 1] - m[1, 2])));
-		q.y *= Mathf.Sign((float)(q.y * (m[0, 2] - m[2, 0])));
-		q.z *= Mathf.Sign((float)(q.z * (m[1, 0] - m[0, 1])));
-		return q;
 	}
 
 	//Go from camera space to world space
 	private void GetObjectNewTransform(double[] tvec,double[,] rotMat, bool isLeft,out Vector3 worldPos, out Quaternion worldRot)
     {
-		Vector3 cameraSpacePos = new Vector3(-(float)tvec[0], (float)tvec[1], (float)tvec[2]); //x is negative due to flipping of camera image
+		worldPos = new Vector3(-(float)tvec[0], (float)tvec[1], (float)tvec[2]); //initial pos in cameraSpace,  x is negative due to flipping of camera image
 
+		//now going from camera space to worldspace
 		if (isLeft)
 		{
-			worldPos = cameraLeft.TransformPoint(cameraSpacePos); //straightforward transformation for position
+			worldPos = cameraLeft.TransformPoint(worldPos); //straightforward transformation for position
 		}
 		else
 		{
-			worldPos = cameraRight.TransformPoint(cameraSpacePos); //straightforward transformation for position
+			worldPos = cameraRight.TransformPoint(worldPos); //straightforward transformation for position
 		}
 
-		Quaternion cameraRot = QuaternionFromMatrix(rotMat); //get the rotation in camera space
+		Quaternion cameraRot = QuaternionUtil.QuaternionFromMatrix(rotMat); //get the rotation in camera space
 
 		cameraRot.y = -cameraRot.y;   //have to invert y and z due to right hand convention in OpenCV
 		cameraRot.z = -cameraRot.z;   //and left hand convention in Unity
 
-		Quaternion cameraPos;
+		//Quaternion cameraPos;
 		if (isLeft)
         {
-			cameraPos = cameraLeft.rotation; //get the camera rotation
+			worldRot = cameraLeft.rotation * cameraRot;
+			//cameraPos = cameraLeft.rotation; //get the camera rotation
 		}
         else
         {
-			cameraPos = cameraRight.rotation; //get the camera rotation
+			worldRot = cameraRight.rotation * cameraRot;
+			//cameraPos = cameraRight.rotation; //get the camera rotation
 		}
 
-		worldRot = cameraPos * cameraRot; //composition of rotations by multiplying quaternions
+		//worldRot = cameraPos * cameraRot; //composition of rotations by multiplying quaternions
 
 	}
 
 	//Detect markers in the image
     private void DetectMarkers(Texture2D image, out Point2f[][] corners,out int[] ids)
     {
-		Mat flippedMat = new Mat();
-		Cv2.Flip(OpenCvSharp.Unity.TextureToMat(image), flippedMat, FlipMode.Y); //flipping input cameras, as vive feed is reversed
-		CvAruco.DetectMarkers(flippedMat, dictionary, out corners, out ids, detectorParameters, out _);
-		//CvAruco.DrawDetectedMarkers(flippedMat, corners, ids);
-		//planeMaterial.mainTexture = OpenCvSharp.Unity.MatToTexture(flippedMat);
-		flippedMat.Dispose();
+		using (Mat flippedMat = new Mat())
+		{
+			Cv2.Flip(OpenCvSharp.Unity.TextureToMat(image), flippedMat, FlipMode.Y); //flipping input cameras, as vive feed is reversed
+			CvAruco.DetectMarkers(flippedMat, dictionary, out corners, out ids, detectorParameters, out _);
+			//CvAruco.DrawDetectedMarkers(flippedMat, corners, ids);
+			//planeMaterial.mainTexture = OpenCvSharp.Unity.MatToTexture(flippedMat);
+		}
 	}
 
 	//Waiting for end of request when destroying, to fix errors when closing the app

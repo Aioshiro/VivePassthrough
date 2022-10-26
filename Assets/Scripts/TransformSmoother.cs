@@ -72,7 +72,7 @@ public class TransformSmoother : MonoBehaviour
                 //Vector3 newForward = rot * Vector3.forward;
                 //newForward.y = -newForward.y;
                 //rot = Quaternion.LookRotation(newForward, rot * Vector3.up);
-                rot = EstimateNewRot(transform.rotation, rotDerivate, Time.deltaTime);
+                rot = QuaternionUtil.EstimateNewRot(transform.rotation, rotDerivate, Time.deltaTime);
                 //return;
             }
         }
@@ -81,7 +81,7 @@ public class TransformSmoother : MonoBehaviour
             //cubeColor.color = Color.green;
             wasPointingDown = Vector3.Dot(crossForward, rot * Vector3.right) > 0;
             // wasPointingRight = Vector3.Dot(crossForward, rot * Vector3.up) > 0;
-            rotDerivate = DerivateQuaternion(transform.rotation, rot, Time.deltaTime);
+            rotDerivate = QuaternionUtil.DerivateQuaternion(transform.rotation, rot, Time.deltaTime);
         }
 
         if (count > movingAverageLengthRot) //If we have enough samples, we update the rotation
@@ -123,31 +123,4 @@ public class TransformSmoother : MonoBehaviour
         transform.rotation = Quaternion.Euler(euler);
     }
 
-    private Quaternion DerivateQuaternion(Quaternion initial, Quaternion final, float time)
-    {
-        return new Quaternion
-        {
-            x = (final.x - initial.x) / time,
-            y = (final.y - initial.y) / time,
-            z = (final.z - initial.z) / time,
-            w = (final.w - initial.w) / time,
-        };
-
-    }
-
-    private Quaternion EstimateNewRot(Quaternion initial,Quaternion derivative,float time)
-    {
-        Quaternion newRot = new Quaternion
-        {
-            x = initial.x + derivative.x * time,
-            y = initial.y + derivative.y * time,
-            z = initial.z + derivative.z * time,
-            w = initial.w + derivative.w * time
-
-        };
-
-        newRot.Normalize();
-
-        return newRot;
-    }
 }
