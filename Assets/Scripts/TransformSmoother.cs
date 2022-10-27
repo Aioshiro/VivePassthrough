@@ -44,7 +44,7 @@ public class TransformSmoother : MonoBehaviour
         {
             movingAveragePos += (pos - movingAveragePos) / (movingAverageLengthPos + 1); //new theoretical position
             transform.position = Vector3.MoveTowards(transform.position,movingAveragePos,posMaxDistance); //Go to new position with some dampning
-            //Debug.Log("new pos is " + transform.position.ToString());
+            Debug.Log("new pos is " + transform.position.ToString());
         }
         else 
         {
@@ -53,7 +53,7 @@ public class TransformSmoother : MonoBehaviour
             {
                 movingAveragePos /= count;
                 transform.position = Vector3.MoveTowards(transform.position, movingAveragePos, posMaxDistance);
-                //Debug.Log("new pos is " + transform.position.ToString());
+                Debug.Log("new pos is " + transform.position.ToString());
             }
         }
 
