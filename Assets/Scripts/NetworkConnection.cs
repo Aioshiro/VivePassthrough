@@ -23,8 +23,8 @@ public class NetworkConnection : NetworkManager
 #elif (UNITY_STANDALONE || UNITY_EDITOR)//If it's the client, we enable the lip framework
         base.StartClient();
         player.SetActive(true);
-        LipFrameWork.EnableLip = true;
-        LipFrameWork.StartFramework();
+        //LipFrameWork.EnableLip = true;
+        //LipFrameWork.StartFramework();
         var gestureProvider = FindObjectOfType<GestureProvider>();
         gestureProvider.enabled = true;
 #endif
