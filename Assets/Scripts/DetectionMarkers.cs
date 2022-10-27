@@ -23,8 +23,8 @@ public class DetectionMarkers : MonoBehaviour
 	[Tooltip("Aruco dictionnary to use")]
 	[SerializeField] private PredefinedDictionaryName dictionaryName = PredefinedDictionaryName.Dict4X4_50;
 	[SerializeField] int numberOfMarkers = 10;
-	MarkersManager markersManager; //Manager for markers position and smoothering
-	//MarkersManagerMulti markersManager;
+	//MarkersManager markersManager; //Manager for markers position and smoothering
+	MarkersManagerMulti markersManager;
 	bool[] markersToUpdateRight;
 	bool[] markersToUpdateLeft;
 
@@ -62,8 +62,8 @@ public class DetectionMarkers : MonoBehaviour
 
 	void Start()
 	{
-		//markersManager = GetComponent<MarkersManagerMulti>();
-		markersManager = GetComponent<MarkersManager>();
+		markersManager = GetComponent<MarkersManagerMulti>();
+		//markersManager = GetComponent<MarkersManager>();
 		markersToUpdateLeft = new bool[numberOfMarkers];
 		markersToUpdateRight = new bool[numberOfMarkers];
 		InitArucoParameters();
