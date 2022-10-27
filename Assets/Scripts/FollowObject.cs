@@ -25,7 +25,7 @@ public class FollowObject : NetworkBehaviour
     {
         transform.position = objectToFollow.position;
         transform.rotation = objectToFollow.rotation;
-        UpdateTransformServer(objectToFollow.position, objectToFollow.rotation);
+        //UpdateTransformServer(objectToFollow.position, objectToFollow.rotation);
     }
 
     [Command]
