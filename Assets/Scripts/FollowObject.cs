@@ -23,6 +23,8 @@ public class FollowObject : NetworkBehaviour
 
     void UpdateTransformLocal()
     {
+        transform.position = objectToFollow.position;
+        transform.rotation = objectToFollow.rotation;
         UpdateTransformServer(objectToFollow.position, objectToFollow.rotation);
     }
 
