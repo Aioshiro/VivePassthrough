@@ -31,5 +31,6 @@ public class FollowObject : NetworkBehaviour
     {
         transform.position = pos;
         transform.rotation = rot;
+        Debug.Log(pos);
     }
 }
