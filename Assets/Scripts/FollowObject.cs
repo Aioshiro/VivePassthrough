@@ -16,8 +16,10 @@ public class FollowObject : NetworkBehaviour
             {
                 objectToFollow = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0);
             }
-
-            UpdateTransform();
+            else
+            {
+                UpdateTransform();
+            }
         }
     }
 
