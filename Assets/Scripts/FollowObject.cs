@@ -21,9 +21,12 @@ public class FollowObject : NetworkBehaviour
                 UpdateTransform();
             }
         }
+        if (netIdentity.isServer)
+        {
+            Debug.Log(transform.position);
+        }
     }
 
-    [Command]
     void UpdateTransform()
     {
         transform.position = objectToFollow.position;
