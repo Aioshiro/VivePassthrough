@@ -17,8 +17,14 @@ public class FollowObject : NetworkBehaviour
                 objectToFollow = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0);
             }
 
-            transform.position = objectToFollow.position;
-            transform.rotation = objectToFollow.rotation;
+            UpdateTransform();
         }
+    }
+
+    [Command]
+    void UpdateTransform()
+    {
+        transform.position = objectToFollow.position;
+        transform.rotation = objectToFollow.rotation;
     }
 }
