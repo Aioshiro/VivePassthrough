@@ -21,6 +21,7 @@ public class FollowObject : NetworkBehaviour
         }
     }
 
+    [Command]
     void UpdateTransform()
     {
         transform.position = objectToFollow.position;
