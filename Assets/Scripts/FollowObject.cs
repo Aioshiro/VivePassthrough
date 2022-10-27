@@ -10,11 +10,15 @@ public class FollowObject : NetworkBehaviour
 
     private void Update()
     {
-        if (netIdentity.isLocalPlayer&& objectToFollow == null)
+        if (netIdentity.isLocalPlayer)
         {
-            objectToFollow = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0);
+            if (objectToFollow == null)
+            {
+                objectToFollow = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0);
+            }
+
+            transform.position = objectToFollow.position;
+            transform.rotation = objectToFollow.rotation;
         }
-        transform.position = objectToFollow.position;
-        transform.rotation = objectToFollow.rotation;
     }
 }
