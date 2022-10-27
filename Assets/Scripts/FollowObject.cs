@@ -17,14 +17,19 @@ public class FollowObject : NetworkBehaviour
     {
         if (netIdentity.isLocalPlayer)
         {
-            UpdateTransform();
+            UpdateTransformLocal();
         }
     }
 
-    [Command]
-    void UpdateTransform()
+    void UpdateTransformLocal()
     {
-        transform.position = objectToFollow.position;
-        transform.rotation = objectToFollow.rotation;
+        UpdateTransformServer(objectToFollow.position, objectToFollow.rotation);
+    }
+
+    [Command]
+    void UpdateTransformServer(Vector3 pos, Quaternion rot)
+    {
+        transform.position = pos;
+        transform.rotation = rot;
     }
 }
