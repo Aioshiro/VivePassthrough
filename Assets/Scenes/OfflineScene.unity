@@ -2030,6 +2030,56 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4703040164061203154, guid: a860be41d684e0146b78491aeb06fb02,
+        type: 3}
+      propertyPath: leftCamera
+      value: 
+      objectReference: {fileID: 4281744101811716179}
+    - target: {fileID: 4703040164388321921, guid: a860be41d684e0146b78491aeb06fb02,
+        type: 3}
+      propertyPath: leftCamera
+      value: 
+      objectReference: {fileID: 4281744101811716179}
+    - target: {fileID: 4703040165100032657, guid: a860be41d684e0146b78491aeb06fb02,
+        type: 3}
+      propertyPath: leftCamera
+      value: 
+      objectReference: {fileID: 4281744101811716179}
+    - target: {fileID: 4703040165438241428, guid: a860be41d684e0146b78491aeb06fb02,
+        type: 3}
+      propertyPath: leftCamera
+      value: 
+      objectReference: {fileID: 4281744101811716179}
+    - target: {fileID: 4703040165544837749, guid: a860be41d684e0146b78491aeb06fb02,
+        type: 3}
+      propertyPath: leftCamera
+      value: 
+      objectReference: {fileID: 4281744101811716179}
+    - target: {fileID: 4703040165618133010, guid: a860be41d684e0146b78491aeb06fb02,
+        type: 3}
+      propertyPath: leftCamera
+      value: 
+      objectReference: {fileID: 4281744101811716179}
+    - target: {fileID: 4703040165645737346, guid: a860be41d684e0146b78491aeb06fb02,
+        type: 3}
+      propertyPath: leftCamera
+      value: 
+      objectReference: {fileID: 4281744101811716179}
+    - target: {fileID: 4703040165797255448, guid: a860be41d684e0146b78491aeb06fb02,
+        type: 3}
+      propertyPath: leftCamera
+      value: 
+      objectReference: {fileID: 4281744101811716179}
+    - target: {fileID: 4703040165872580504, guid: a860be41d684e0146b78491aeb06fb02,
+        type: 3}
+      propertyPath: leftCamera
+      value: 
+      objectReference: {fileID: 4281744101811716179}
+    - target: {fileID: 4703040166034756585, guid: a860be41d684e0146b78491aeb06fb02,
+        type: 3}
+      propertyPath: leftCamera
+      value: 
+      objectReference: {fileID: 4281744101811716179}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a860be41d684e0146b78491aeb06fb02, type: 3}
 --- !u!1 &510350902 stripped
@@ -5388,9 +5438,9 @@ MonoBehaviour:
   MaximizeSendReceiveBuffersToOSLimit: 1
   ReliableMaxMessageSize: 298449
   UnreliableMaxMessageSize: 1199
-  debugLog: 0
+  debugLog: 1
   statisticsGUI: 0
-  statisticsLog: 0
+  statisticsLog: 1
 --- !u!114 &2066929826
 MonoBehaviour:
   m_ObjectHideFlags: 0
