@@ -723,6 +723,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerOneHead
       objectReference: {fileID: 0}
+    - target: {fileID: 8223539894542974466, guid: 783b86a9236ffe543ab6c9e223ebbbe7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 783b86a9236ffe543ab6c9e223ebbbe7, type: 3}
 --- !u!1 &218051510 stripped
@@ -4414,6 +4419,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTwoHead
       objectReference: {fileID: 0}
+    - target: {fileID: 8223539894542974466, guid: 783b86a9236ffe543ab6c9e223ebbbe7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 783b86a9236ffe543ab6c9e223ebbbe7, type: 3}
 --- !u!1 &1540797786 stripped
@@ -7734,6 +7744,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Heads
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777282332823249054, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f00ab75208b0c44a7ff89d6b85ced9, type: 3}
