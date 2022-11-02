@@ -36,7 +36,7 @@ public class SyncHeads : NetworkBehaviour
         }
     }
 
-    [Command]
+    [Command(requiresAuthority =false)]
     void UpdateListValue(int index, Vector3 newValue)
     {
         playersHeadsLocalPositions[index] = newValue;
