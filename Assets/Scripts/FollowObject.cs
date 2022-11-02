@@ -10,7 +10,7 @@ public class FollowObject : NetworkBehaviour
 
     private void Start()
     {
-        if (netIdentity.isLocalPlayer) { objectToFollow = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0); }
+        if (netIdentity.isLocalPlayer) { objectToFollow = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(2); }
     }
 
     private void Update()
