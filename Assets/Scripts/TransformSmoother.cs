@@ -56,12 +56,9 @@ public class TransformSmoother : MonoBehaviour
         else 
         {
             movingAveragePos += pos; //we register the new sample
-            if (count == movingAverageLengthPos) // and update immediatlly if we have enough
-            {
-                movingAveragePos /= count;
-                transform.position = Vector3.MoveTowards(transform.position, movingAveragePos, posMaxDistance);
-                //Debug.Log("new pos is " + transform.position.ToString());
-            }
+            movingAveragePos /= count;
+            transform.position = Vector3.MoveTowards(transform.position, movingAveragePos, posMaxDistance);
+            //Debug.Log("new pos is " + transform.position.ToString());
         }
 
         //For the rotation, we do the average of the Up and Forward vectors of the rotation, as it's a bit complicated to do averages with quaternions
