@@ -50,6 +50,7 @@ public class TransformSmoother : MonoBehaviour
             if (stopOnAverageObtained)
             {
                 allowMovement = false;
+                Debug.Log("stoppping");
             }
         }
         else 
