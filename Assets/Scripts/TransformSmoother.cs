@@ -55,6 +55,7 @@ public class TransformSmoother : MonoBehaviour
         }
         else 
         {
+            transform.position = pos;
             movingAveragePos += pos; //we register the new sample
             movingAveragePos /= count;
             transform.position = Vector3.MoveTowards(transform.position, movingAveragePos, posMaxDistance);
