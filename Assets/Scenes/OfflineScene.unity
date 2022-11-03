@@ -4954,8 +4954,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae70f48d1c966f94698c43ceab853ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingAverageLengthPos: 50
-  movingAverageLengthRot: 50
+  movingAverageLengthPos: 200
+  movingAverageLengthRot: 200
   posMaxDistance: 100
   rotMaxDegrees: 100
   allowMovement: 1

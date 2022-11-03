@@ -30,6 +30,10 @@ public class SyncHeads : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (localRigTrackedCamera == null)
+        {
+            localRigTrackedCamera = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(2);
+        }
         if (isClientOnly)
         {
             int playerNumber = GameManager.Instance.playerNumber;

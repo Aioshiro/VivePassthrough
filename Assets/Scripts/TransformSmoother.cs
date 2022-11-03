@@ -38,6 +38,14 @@ public class TransformSmoother : MonoBehaviour
     public bool yRotationAllowed = true;
     public bool zRotationAllowed = true;
 
+    public void Update()
+    {
+        if (leftCamera == null)
+        {
+            leftCamera = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0);
+        }
+    }
+
     public void SetNewTransform(Vector3 pos, Quaternion rot)
     {
         if (!allowMovement) { return; }

@@ -252,7 +252,14 @@ public class DetectionMarkers : MonoBehaviour
 		{
 			InitLeftCamera();
 		}
-
+		if(cameraLeft == null)
+        {
+			cameraLeft = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0);
+        }
+		if (cameraRight == null)
+        {
+			cameraRight = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(1);
+		}
 		if (useRightCamera && isCameraRightInitialized&&requestRight.done) //if the camera is initialized and we got the gpu texture
 		{
 			DetectMarkers(rightCPU, out corners, out ids); //Detect every marker on the image
