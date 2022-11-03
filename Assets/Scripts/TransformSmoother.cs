@@ -104,6 +104,7 @@ public class TransformSmoother : MonoBehaviour
         {
             movingAverageForward += rot * Vector3.forward;
             movingAverageUp += rot * Vector3.up;
+            transform.rotation = rot;
             if (count == movingAverageLengthRot)
             {
                 movingAverageUp /= count;
