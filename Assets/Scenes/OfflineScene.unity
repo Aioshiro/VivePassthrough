@@ -4957,12 +4957,12 @@ MonoBehaviour:
   movingAverageLengthPos: 200
   movingAverageLengthRot: 200
   posMaxDistance: 100
-  rotMaxDegrees: 100
+  rotMaxDegrees: 360
   allowMovement: 1
   allowRotation: 1
   leftCamera: {fileID: 4281744101811716179}
   wasPointingDown: 0
-  dangerZoneTolerance: 0.99
+  dangerZoneTolerance: 1.5
   stopOnAverageObtained: 1
   xRotationAllowed: 1
   yRotationAllowed: 1
