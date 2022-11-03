@@ -35,7 +35,7 @@ public class SyncHeads : NetworkBehaviour
             int playerNumber = GameManager.Instance.playerNumber;
             //First, upload own headPos and headRot
             UpdatePosValue(playerNumber, markerWorldOrigin.transform.InverseTransformPoint(localRigTrackedCamera.position));
-            UpdateRotValue(playerNumber, localRigTrackedCamera.transform.rotation * markerWorldOrigin.transform.rotation);
+            UpdateRotValue(playerNumber, Quaternion.Inverse(markerWorldOrigin.rotation)* localRigTrackedCamera.transform.rotation);
             //Then, download other headPos and headRot
             playersHeads[(playerNumber + 1) % 2].transform.position = markerWorldOrigin.transform.TransformPoint(playersHeadsLocalPositions[(playerNumber + 1) % 2]);
             playersHeads[(playerNumber + 1) % 2].transform.rotation = markerWorldOrigin.transform.rotation*playersHeadsLocalRotations[(playerNumber + 1) % 2];
