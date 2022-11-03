@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     public void SetPlayerNumber(PlayerInfo playerInfo)
     {
-        playerNumber = playerInfo.playerNumber;
+        GameManager.Instance.playerNumber = playerInfo.playerNumber;
     }
 
 }

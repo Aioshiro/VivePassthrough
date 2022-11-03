@@ -61,6 +61,7 @@ public class NetworkConnection : NetworkManager
             };
             conn.Send(info);
             firstPlayer = false;
+            Debug.Log("Assigned player 0");
         }
         else
         {
@@ -69,8 +70,8 @@ public class NetworkConnection : NetworkManager
                 playerNumber = 1
             };
             conn.Send(info);
+            Debug.Log("Assigned player 1");
         }
-        Debug.Log("Player connected");
     }
 
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
