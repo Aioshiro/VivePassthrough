@@ -110,4 +110,9 @@ public static class QuaternionUtil
 
         return newRot;
     }
+
+    public static float Magnitude(Quaternion quaternion)
+    {
+        return Mathf.Sqrt(Mathf.Pow(quaternion.x, 2) + Mathf.Pow(quaternion.y, 2) + Mathf.Pow(quaternion.z, 2) + Mathf.Pow(quaternion.w, 2));
+    }
 }
