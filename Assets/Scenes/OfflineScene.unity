@@ -4950,9 +4950,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingAverageLengthPos: 100
-  movingAverageLengthRot: 1
+  movingAverageLengthRot: 100
   posMaxDistance: 100
-  rotMaxDegrees: 15
+  rotMaxDegrees: 100
   allowMovement: 1
   allowRotation: 1
   leftCamera: {fileID: 4281744101811716179}
