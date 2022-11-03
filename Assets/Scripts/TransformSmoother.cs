@@ -30,6 +30,8 @@ public class TransformSmoother : MonoBehaviour
     Quaternion rotDerivate;
     public float dangerZoneTolerance;
 
+    public bool stopOnAverageObtained=false;
+
     //public Material cubeColor;
 
     public bool xRotationAllowed = true;
@@ -45,6 +47,10 @@ public class TransformSmoother : MonoBehaviour
             movingAveragePos += (pos - movingAveragePos) / (movingAverageLengthPos + 1); //new theoretical position
             transform.position = Vector3.MoveTowards(transform.position,movingAveragePos,posMaxDistance); //Go to new position with some dampning
             //Debug.Log("new pos is " + transform.position.ToString());
+            if (stopOnAverageObtained)
+            {
+                allowMovement = false;
+            }
         }
         else 
         {
