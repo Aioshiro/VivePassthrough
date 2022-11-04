@@ -5008,7 +5008,7 @@ MonoBehaviour:
   MaximizeSendReceiveBuffersToOSLimit: 1
   ReliableMaxMessageSize: 298449
   UnreliableMaxMessageSize: 1199
-  debugLog: 1
+  debugLog: 0
   statisticsGUI: 0
   statisticsLog: 0
 --- !u!114 &2066929826
@@ -5031,7 +5031,7 @@ MonoBehaviour:
   onlineScene: 
   transport: {fileID: 2066929825}
   networkAddress: localhost
-  maxConnections: 100
+  maxConnections: 2
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 7555634126866374984, guid: 0ec5dc330d70b6544bfa0de8d7bf7f3a,
     type: 3}
