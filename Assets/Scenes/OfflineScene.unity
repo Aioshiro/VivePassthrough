@@ -2044,6 +2044,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796889342}
   m_CullTransparentMesh: 0
+--- !u!1 &806801399 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4278888805985285175, guid: 4fa5ba9262b6b244b9b38de82502827c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1896519277}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &827089801 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 561071287468709184, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
@@ -4690,7 +4696,7 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
-  player: {fileID: 0}
+  player: {fileID: 806801399}
   objectsToGiveAuthorityOn: []
 --- !u!4 &2066929827
 Transform:
