@@ -7,7 +7,7 @@ public class SyncHeads : NetworkBehaviour
 {
     readonly SyncList<Vector3> playersHeadsLocalPositions = new SyncList<Vector3>();
     readonly SyncList<Quaternion> playersHeadsLocalRotations = new SyncList<Quaternion>();
-    [SerializeField] List<GameObject> playersHeads;
+    [SerializeField] GameObject otherPlayerHead;
     [SerializeField] Transform markerWorldOrigin;
     [SerializeField] Transform localRigTrackedCamera;
 
@@ -41,8 +41,8 @@ public class SyncHeads : NetworkBehaviour
             UpdatePosValue(playerNumber, markerWorldOrigin.transform.InverseTransformPoint(localRigTrackedCamera.position));
             UpdateRotValue(playerNumber, Quaternion.Inverse(markerWorldOrigin.rotation)* localRigTrackedCamera.transform.rotation);
             //Then, download other headPos and headRot
-            playersHeads[(playerNumber + 1) % 2].transform.position = markerWorldOrigin.transform.TransformPoint(playersHeadsLocalPositions[(playerNumber + 1) % 2]);
-            playersHeads[(playerNumber + 1) % 2].transform.rotation = markerWorldOrigin.transform.rotation*playersHeadsLocalRotations[(playerNumber + 1) % 2];
+            otherPlayerHead.transform.position = markerWorldOrigin.transform.TransformPoint(playersHeadsLocalPositions[(playerNumber + 1) % 2]);
+            otherPlayerHead.transform.rotation = markerWorldOrigin.transform.rotation*playersHeadsLocalRotations[(playerNumber + 1) % 2];
         }
     }
 
