@@ -4475,7 +4475,7 @@ MonoBehaviour:
   rotMaxDegrees: 360
   allowMovement: 1
   allowRotation: 1
-  leftCamera: {fileID: 0}
+  leftCamera: {fileID: 2050918624}
   wasPointingDown: 0
   dangerZoneTolerance: 1.5
   stopOnAverageObtained: 1
@@ -4603,6 +4603,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 30d14b584964be5489bed9ae108c9259,
     type: 3}
   m_PrefabInstance: {fileID: 4703040164925870699}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2050918624 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4281744102317684365, guid: 4fa5ba9262b6b244b9b38de82502827c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1896519277}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2066929824
 GameObject:
@@ -5010,7 +5016,7 @@ MonoBehaviour:
   rotMaxDegrees: 15
   allowMovement: 1
   allowRotation: 1
-  leftCamera: {fileID: 0}
+  leftCamera: {fileID: 2050918624}
   wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
@@ -5538,7 +5544,7 @@ MonoBehaviour:
   rotMaxDegrees: 15
   allowMovement: 1
   allowRotation: 1
-  leftCamera: {fileID: 0}
+  leftCamera: {fileID: 2050918624}
   wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
@@ -6092,7 +6098,7 @@ MonoBehaviour:
   rotMaxDegrees: 15
   allowMovement: 1
   allowRotation: 1
-  leftCamera: {fileID: 0}
+  leftCamera: {fileID: 2050918624}
   wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
@@ -6167,7 +6173,7 @@ MonoBehaviour:
   rotMaxDegrees: 8
   allowMovement: 1
   allowRotation: 1
-  leftCamera: {fileID: 0}
+  leftCamera: {fileID: 2050918624}
   wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
@@ -6318,7 +6324,7 @@ MonoBehaviour:
   rotMaxDegrees: 15
   allowMovement: 1
   allowRotation: 1
-  leftCamera: {fileID: 0}
+  leftCamera: {fileID: 2050918624}
   wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
@@ -6470,7 +6476,7 @@ MonoBehaviour:
   rotMaxDegrees: 15
   allowMovement: 1
   allowRotation: 1
-  leftCamera: {fileID: 0}
+  leftCamera: {fileID: 2050918624}
   wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
@@ -6712,7 +6718,7 @@ MonoBehaviour:
   rotMaxDegrees: 15
   allowMovement: 1
   allowRotation: 1
-  leftCamera: {fileID: 0}
+  leftCamera: {fileID: 2050918624}
   wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
@@ -6754,7 +6760,7 @@ MonoBehaviour:
   rotMaxDegrees: 15
   allowMovement: 1
   allowRotation: 1
-  leftCamera: {fileID: 0}
+  leftCamera: {fileID: 2050918624}
   wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
@@ -6828,7 +6834,7 @@ MonoBehaviour:
   rotMaxDegrees: 15
   allowMovement: 1
   allowRotation: 1
-  leftCamera: {fileID: 0}
+  leftCamera: {fileID: 2050918624}
   wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
@@ -6886,7 +6892,7 @@ MonoBehaviour:
   rotMaxDegrees: 15
   allowMovement: 1
   allowRotation: 1
-  leftCamera: {fileID: 0}
+  leftCamera: {fileID: 2050918624}
   wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
