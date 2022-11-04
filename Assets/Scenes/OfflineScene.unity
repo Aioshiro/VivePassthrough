@@ -878,6 +878,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 293828202}
   m_CullTransparentMesh: 0
+--- !u!4 &302144843 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4284365916226088493, guid: 4fa5ba9262b6b244b9b38de82502827c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1896519277}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &322136159
 GameObject:
   m_ObjectHideFlags: 0
@@ -4408,7 +4414,7 @@ MonoBehaviour:
   - {fileID: 1585693352}
   - {fileID: 1251994547}
   markerWorldOrigin: {fileID: 1998164380}
-  localRigTrackedCamera: {fileID: 0}
+  localRigTrackedCamera: {fileID: 302144843}
 --- !u!114 &1945066174
 MonoBehaviour:
   m_ObjectHideFlags: 0
