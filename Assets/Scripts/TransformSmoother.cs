@@ -48,7 +48,7 @@ public class TransformSmoother : MonoBehaviour
 
     public void SetNewTransform(Vector3 pos, Quaternion rot)
     {
-        if (!allowMovement) { return; }
+        if (!allowMovement || Vector3.SqrMagnitude(leftCamera.transform.position)<0.001f) { return; } // if the camera is at the origin, that means the head position is not tracked yet, and so it gives a false position which gives a false mean
         count++;
         if (count> movingAverageLengthPos) //If we have enough samples, we update the position
         {
