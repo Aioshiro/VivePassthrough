@@ -11,6 +11,8 @@ public class NetworkConnection : NetworkManager
     [SerializeField] List<NetworkIdentity> objectsToGiveAuthorityOn;
     private bool firstPlayer = true;
 
+    private NetworkConnectionToClient[] clientConn;
+
     // Start is called before the first frame update
     override public void Start()
     {
@@ -20,6 +22,7 @@ public class NetworkConnection : NetworkManager
         //base.StartServer(); //If autostart is not activated in the networkManager
         //Destroy(GameObject.FindGameObjectWithTag("Player"));
         //Destroy(LipFrameWork.gameObject);
+        clientConn = new NetworkConnectionToClient[2];
 #elif (UNITY_STANDALONE || UNITY_EDITOR)//If it's the client, we enable the lip framework
         base.StartClient();
         player.SetActive(true);
@@ -62,6 +65,7 @@ public class NetworkConnection : NetworkManager
             conn.Send(info);
             firstPlayer = false;
             Debug.Log("Assigned player 0");
+            clientConn[0] = conn;
         }
         else
         {
@@ -71,6 +75,7 @@ public class NetworkConnection : NetworkManager
             };
             conn.Send(info);
             Debug.Log("Assigned player 1");
+            clientConn[1] = conn;
         }
     }
 
@@ -86,5 +91,16 @@ public class NetworkConnection : NetworkManager
             }
         }
         base.OnServerDisconnect(conn);
+        if (clientConn[0] == conn)
+        {
+            clientConn[0] = null;
+            firstPlayer = true;
+        }
+        else
+        {
+            clientConn[1] = null;
+            firstPlayer = false;
+        }
+
     }
 }
