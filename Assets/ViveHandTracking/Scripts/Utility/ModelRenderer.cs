@@ -26,10 +26,6 @@ namespace ViveHandTracking
 
         private List<Transform> colliders = null;
         private Quaternion[] jointRotation;
-        public Transform trackedHead;
-        private Quaternion headSpeed;
-        private Quaternion oldRot;
-        const float speedLimit = 0.3f;
 
 
         void Awake()
@@ -69,7 +65,6 @@ namespace ViveHandTracking
             {
                 this.enabled = false;
             }
-            trackedHead = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(2);
         }
 
         void Update()
@@ -81,17 +76,6 @@ namespace ViveHandTracking
                 return;
             }
             Hand.SetActive(true);
-
-            headSpeed = QuaternionUtil.DerivateQuaternion(oldRot, trackedHead.rotation, Time.deltaTime);
-            oldRot = trackedHead.rotation;
-            if (QuaternionUtil.Magnitude(headSpeed) > speedLimit)
-            {
-                Hand.SetActive(false);
-            }
-            else
-            {
-                Hand.SetActive(true);
-            }
 
             transform.localPosition = result.points[0];
             transform.localRotation = result.rotation * Quaternion.Euler(initialRotation);
