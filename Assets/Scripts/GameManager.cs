@@ -21,6 +21,12 @@ public class GameManager : MonoBehaviour
     public int participantID = -1;
     public bool allowSceneChange = false;
     public int playerNumber = 0;
+    public enum Ethnie 
+    {Asian,African,Caucasian,Latino};
+
+    public Ethnie chosedEthnie = Ethnie.Caucasian;
+
+
 
     private void Awake()
     {
@@ -72,6 +78,36 @@ public class GameManager : MonoBehaviour
     public void ToggleGender()
     {
         isMale = !isMale;
+    }
+
+    public void OnCaucasianToggle(bool value)
+    {
+        if (value)
+        {
+            chosedEthnie = Ethnie.Caucasian;
+        }
+    }
+
+    public void OnAsianToggle(bool value)
+    {
+        if (value)
+        {
+            chosedEthnie = Ethnie.Asian;
+        }
+    }
+    public void OnLatinoToggle(bool value)
+    {
+        if (value)
+        {
+            chosedEthnie = Ethnie.Latino;
+        }
+    }
+    public void OnAfricanToggle(bool value)
+    {
+        if (value)
+        {
+            chosedEthnie = Ethnie.African;
+        }
     }
 
     public void SetPlayerNumber(PlayerInfo playerInfo)

@@ -29,7 +29,7 @@ public class InstructionUpdater : MonoBehaviour
 
     void UpdateInstructions(string text)
     {
-        GetComponent<TMPro.TMP_Text>().text = text.Replace("\\", "\n");
+        GetComponent<TMPro.TMP_Text>().text = text.Replace("\\", "\n"); //the replace is a workaround "\n" being desactivativated when input text to GUI
     }
 #endif
 }

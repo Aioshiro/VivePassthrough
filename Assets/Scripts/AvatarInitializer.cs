@@ -7,15 +7,23 @@ public class AvatarInitializer : MonoBehaviour
 
     [SerializeField] List<GameObject> maleHeads;
     [SerializeField] List<GameObject> womanHeads;
-    [SerializeField] GameObject cartoonHeads;
-    [SerializeField] GameObject realisticHeads;
+    [SerializeField] List<GameObject> cartoonHeads;
+    [SerializeField] List<GameObject> realisticHeads;
+    [SerializeField] GameObject africanHeads;
+    [SerializeField] GameObject asianHeads;
+    [SerializeField] GameObject caucasianHeads;
+    [SerializeField] GameObject latinoHeads;
 
     private void Start()
     {
         SetActiveList(maleHeads, false);
         SetActiveList(womanHeads, false);
-        cartoonHeads.SetActive(false);
-        realisticHeads.SetActive(false);
+        SetActiveList(cartoonHeads,false);
+        SetActiveList(realisticHeads,false);
+        africanHeads.SetActive(false);
+        asianHeads.SetActive(false);
+        caucasianHeads.SetActive(false);
+        latinoHeads.SetActive(false);
         InitializeHeads();
     }
 
@@ -23,8 +31,28 @@ public class AvatarInitializer : MonoBehaviour
     {
         if (!GameManager.Instance.HeadsActive) { return; }
 
-        if (GameManager.Instance.isCartoon) { cartoonHeads.SetActive(true); }
-        else { realisticHeads.SetActive(true); }
+        switch (GameManager.Instance.chosedEthnie)
+        {
+            case GameManager.Ethnie.Asian:
+                asianHeads.SetActive(true);
+                break;
+
+            case GameManager.Ethnie.African:
+                africanHeads.SetActive(true);
+                break;
+
+            case GameManager.Ethnie.Caucasian:
+                caucasianHeads.SetActive(true);
+                break;
+
+            case GameManager.Ethnie.Latino:
+                latinoHeads.SetActive(true);
+                break;
+
+        }
+
+        if (GameManager.Instance.isCartoon) { SetActiveList(cartoonHeads,true); }
+        else { SetActiveList(realisticHeads,true); }
 
         if (GameManager.Instance.isMale) { SetActiveList(maleHeads, true); }
         else { SetActiveList(womanHeads, true); }
