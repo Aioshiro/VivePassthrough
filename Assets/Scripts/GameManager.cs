@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour
 
     public void SetPlayerNumber(PlayerInfo playerInfo)
     {
-        GameManager.Instance.playerNumber = playerInfo.playerNumber;
+        GameManager.Instance.playerNumber = playerInfo.playerNumber;        
     }
 
 }
