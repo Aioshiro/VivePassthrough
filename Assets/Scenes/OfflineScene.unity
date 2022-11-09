@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1590,7 +1590,7 @@ PrefabInstance:
     - target: {fileID: 386691732823715896, guid: 65fdeaef2b185534daacacd5e27940a0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 386691732823715896, guid: 65fdeaef2b185534daacacd5e27940a0,
         type: 3}
@@ -1610,7 +1610,7 @@ PrefabInstance:
     - target: {fileID: 386691732823715896, guid: 65fdeaef2b185534daacacd5e27940a0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 386691732823715896, guid: 65fdeaef2b185534daacacd5e27940a0,
         type: 3}
@@ -1620,7 +1620,7 @@ PrefabInstance:
     - target: {fileID: 386691732823715896, guid: 65fdeaef2b185534daacacd5e27940a0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0101
+      value: -0.0061
       objectReference: {fileID: 0}
     - target: {fileID: 386691732823715896, guid: 65fdeaef2b185534daacacd5e27940a0,
         type: 3}
@@ -3532,7 +3532,7 @@ PrefabInstance:
     - target: {fileID: 5947733090777839138, guid: f6ecbadb6dab24545a7168f433e8548a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.011
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5947733090777839138, guid: f6ecbadb6dab24545a7168f433e8548a,
         type: 3}
@@ -5697,7 +5697,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4703040164358260738}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.011, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
   m_Children: []
   m_Father: {fileID: 4703040165470651557}
@@ -6851,7 +6851,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4703040166055986609}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.01645001}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.013, y: 0.012999999, z: 0.012999999}
   m_Children: []
   m_Father: {fileID: 4703040165592827357}
