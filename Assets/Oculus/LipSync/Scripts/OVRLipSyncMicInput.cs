@@ -366,7 +366,7 @@ public class OVRLipSyncMicInput : MonoBehaviour
     float GetAveragedVolume()
     {
         // We will use the SR to get average volume
-        // return OVRSpeechRec.GetAverageVolume();
+       // return OVRSpeechRec.GetAverageVolume();
         return 0.0f;
     }
 }
