@@ -13,7 +13,7 @@ public class InstructionUpdater : MonoBehaviour
     {
         if (GameManager.Instance.playerNumber >= 0)
         {
-            UpdateInstructions(instructions[GameManager.Instance.playerNumber]);
+            UpdateInstructions();
             initialized = true;
         }
     }
@@ -22,14 +22,20 @@ public class InstructionUpdater : MonoBehaviour
     {
         if (!initialized && GameManager.Instance.playerNumber >= 0)
         {
-            UpdateInstructions(instructions[GameManager.Instance.playerNumber]);
+            UpdateInstructions();
             initialized = true;
         }
     }
 
-    void UpdateInstructions(string text)
+    void UpdateInstructions()
     {
-        GetComponent<TMPro.TMP_Text>().text = text.Replace("\\", "\n"); //the replace is a workaround "\n" being desactivativated when input text to GUI
+        TMPro.TMP_Text shownText = GetComponent<TMPro.TMP_Text>();
+        int start = 0;
+        if (GameManager.Instance.playerNumber == 1) { start = 5; }
+        for (int i = 0; i < 5; i++)
+        {
+            shownText.text += instructions[start + i] + "\n";
+        }
     }
 #endif
 }

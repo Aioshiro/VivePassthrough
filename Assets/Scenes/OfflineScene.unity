@@ -3404,6 +3404,7 @@ MonoBehaviour:
   participantID: -1
   allowSceneChange: 0
   playerNumber: 0
+  chosedEthnie: 2
 --- !u!4 &1181722220
 Transform:
   m_ObjectHideFlags: 0
@@ -4243,12 +4244,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instructions:
-  - "- Les r\xE9sidences se trouvent \xE0 c\xF4t\xE9 d'un parc.\\\\- Le gratte-ciel
-    est proche de la rive ouest.\\\\- La mairie est au centre de la ville.\\\\- L'\xE9cole
-    est adjacente \xE0 la mairie.\\\\- L'h\xF4pital se trouve sur la rive est."
-  - "- L'\xE9glise se trouve au nord.\\\\- Le stade est encadr\xE9 par deux b\xE2timents.\\\\-
-    La gare se trouve \xE0 l'est.\\\\- La caserne de pompiers est adjacente \xE0
-    l'h\xF4pital.\\\\- L'\xE9glise et la gare sont diam\xE9tralement oppos\xE9s."
+  - "- Les r\xE9sidences se trouvent \xE0 c\xF4t\xE9 d'un parc."
+  - "- L'\xE9glise se trouve au nord."
+  - "- Le stade est encadr\xE9 par deux b\xE2timents."
+  - "- La gare se trouve \xE0 l'est."
+  - "- La caserne de pompiers est adjacente \xE0 l'h\xF4pital."
+  - "- L'\xE9glise et la gare sont diam\xE9tralement oppos\xE9s."
+  - '- Le gratte-ciel est proche de la rive ouest.'
+  - '- La mairie est au centre de la ville.'
+  - "- L'\xE9cole est adjacente \xE0 la mairie."
+  - "- L'h\xF4pital se trouve sur la rive est."
 --- !u!1001 &1585693351
 PrefabInstance:
   m_ObjectHideFlags: 0
