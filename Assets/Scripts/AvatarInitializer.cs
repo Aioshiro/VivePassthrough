@@ -29,7 +29,7 @@ public class AvatarInitializer : MonoBehaviour
 
     private void InitializeHeads()
     {
-        if (!GameManager.Instance.HeadsActive) { return; }
+        if (GameManager.Instance == null || !GameManager.Instance.HeadsActive) { return; }
 
         switch (GameManager.Instance.chosedEthnie)
         {
