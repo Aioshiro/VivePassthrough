@@ -25,6 +25,10 @@ public class NetworkConnection : NetworkManager
         clientConn = new NetworkConnectionToClient[2];
 #elif (UNITY_STANDALONE || UNITY_EDITOR)//If it's the client, we enable the lip framework
         networkAddress = GameManager.Instance.serverIp;
+        if (networkAddress == "")
+        {
+            networkAddress = "localhost";
+        }
         base.StartClient();
         player.SetActive(true);
         //LipFrameWork.EnableLip = true;
