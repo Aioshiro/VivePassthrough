@@ -4252,7 +4252,7 @@ MonoBehaviour:
   - "- L'\xE9glise et la gare sont diam\xE9tralement oppos\xE9s."
   - '- Le gratte-ciel est proche de la rive ouest.'
   - '- La mairie est au centre de la ville.'
-  - "- L'\xE9cole est adjacente \xE0 la mairie."
+  - "- L'\xE9cole est adjacente \xE0 la mairie et au sud de l'\xE9glise."
   - "- L'h\xF4pital se trouve sur la rive est."
 --- !u!1001 &1585693351
 PrefabInstance:
