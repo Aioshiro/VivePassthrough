@@ -57,6 +57,7 @@ public class SyncViseme : NetworkBehaviour
             OVRLipSync.Frame frame = lipsyncContext.GetCurrentPhonemeFrame();
             //upload own viseme
             UpdateVisemes(playerNumber, frame.Visemes);
+            Debug.Log(playerOneViseme[5]);
         }
     }
 
@@ -69,6 +70,7 @@ public class SyncViseme : NetworkBehaviour
             {
                 playerOneViseme[i] = newValues[i];
             }
+            Debug.Log(playerOneViseme[5]);
         }
         else
         {
@@ -81,6 +83,7 @@ public class SyncViseme : NetworkBehaviour
 
     void OnPlayerOneUpdated(SyncList<float>.Operation op, int index, float oldItem, float newItem)
     {
+        if (GameManager.Instance.playerNumber == 1) { Debug.Log("Updated other player head"); }
         switch (op)
         {
             case SyncList<float>.Operation.OP_ADD:
@@ -108,6 +111,7 @@ public class SyncViseme : NetworkBehaviour
 
     void OnPlayerTwoUpdated(SyncList<float>.Operation op, int index, float oldItem, float newItem)
     {
+        if (GameManager.Instance.playerNumber == 0) { Debug.Log("Updated other player head"); }
         switch (op)
         {
             case SyncList<float>.Operation.OP_ADD:
