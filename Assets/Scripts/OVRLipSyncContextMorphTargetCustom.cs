@@ -79,6 +79,7 @@ public class OVRLipSyncContextMorphTargetCustom : MonoBehaviour
     public int smoothAmount = 70;
 
     public bool multiplyInputBy100 = false;
+    public bool GetVisemeFromNetwork = false;
 
     // PRIVATE
 
@@ -98,6 +99,8 @@ public class OVRLipSyncContextMorphTargetCustom : MonoBehaviour
                 "Please set the target Skinned Mesh Renderer to be controlled!");
             return;
         }
+
+        if (GetVisemeFromNetwork) { return; }
 
         // make sure there is a phoneme context assigned to this object
         lipsyncContext = GetComponent<OVRLipSyncContextBase>();
@@ -161,23 +164,63 @@ public class OVRLipSyncContextMorphTargetCustom : MonoBehaviour
     /// </summary>
     void SetVisemeToMorphTarget(OVRLipSync.Frame frame)
     {
-        for (int i = 0; i < visemeToBlendTargets.Length; i++)
+        if (!GetVisemeFromNetwork)
         {
-            if (visemeToBlendTargets[i] != -1)
+            for (int i = 0; i < visemeToBlendTargets.Length; i++)
             {
-                if (multiplyInputBy100)
+                if (visemeToBlendTargets[i] != -1)
                 {
+                    if (multiplyInputBy100)
+                    {
+                        // Viseme blend weights are in range of 0->1.0, we need to make range 100
+                        skinnedMeshRenderer.SetBlendShapeWeight(visemeToBlendTargets[i], frame.Visemes[i] * 100.0f);
+                    }
+                    else
+                    {
+                        skinnedMeshRenderer.SetBlendShapeWeight(visemeToBlendTargets[i], frame.Visemes[i]);
+                    }
 
-                    // Viseme blend weights are in range of 0->1.0, we need to make range 100
-                    skinnedMeshRenderer.SetBlendShapeWeight(
-                        visemeToBlendTargets[i],
-                        frame.Visemes[i] * 100.0f);
                 }
-                else
+            }
+        }
+        else
+        {
+            if (GameManager.Instance.playerNumber == 0)
+            {
+                for (int i = 0; i < visemeToBlendTargets.Length; i++)
                 {
-                    skinnedMeshRenderer.SetBlendShapeWeight(
-    visemeToBlendTargets[i],
-    frame.Visemes[i]);
+                    if (visemeToBlendTargets[i] != -1)
+                    {
+                        if (multiplyInputBy100)
+                        {
+                            // Viseme blend weights are in range of 0->1.0, we need to make range 100
+                            skinnedMeshRenderer.SetBlendShapeWeight(visemeToBlendTargets[i], SyncViseme.instance.playerTwoViseme[i] * 100.0f);
+                        }
+                        else
+                        {
+                            skinnedMeshRenderer.SetBlendShapeWeight(visemeToBlendTargets[i], SyncViseme.instance.playerTwoViseme[i]);
+                        }
+
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < visemeToBlendTargets.Length; i++)
+                {
+                    if (visemeToBlendTargets[i] != -1)
+                    {
+                        if (multiplyInputBy100)
+                        {
+                            // Viseme blend weights are in range of 0->1.0, we need to make range 100
+                            skinnedMeshRenderer.SetBlendShapeWeight(visemeToBlendTargets[i], SyncViseme.instance.playerOneViseme[i] * 100.0f);
+                        }
+                        else
+                        {
+                            skinnedMeshRenderer.SetBlendShapeWeight(visemeToBlendTargets[i], SyncViseme.instance.playerOneViseme[i]);
+                        }
+
+                    }
                 }
             }
         }
