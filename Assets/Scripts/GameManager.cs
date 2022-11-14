@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     public Ethnie chosedEthnie = Ethnie.Caucasian;
 
-    public string serverIp;
+    public string serverIp = "localhost";
 
 
 
