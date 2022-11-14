@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    public bool HeadsActive = false;
-    public bool isCartoon = false;
+    public bool HeadsActive = true;
+    public bool isCartoon = true;
     public bool isMale = false;
     public int participantID = -1;
     public bool allowSceneChange = false;
