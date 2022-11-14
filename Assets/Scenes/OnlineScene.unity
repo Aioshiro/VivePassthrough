@@ -133,7 +133,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &88837409
+--- !u!114 &88837408
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,20 +142,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 88837407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 1716438330}
   visemeToBlendTargets: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
   laughterBlendTarget: 15
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
-  GetVisemeFromNetwork: 1
 --- !u!1 &98541164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,7 +1078,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &349288158
+--- !u!114 &349288157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1091,20 +1087,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 349288156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 1261115939}
   visemeToBlendTargets: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
   laughterBlendTarget: 15
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
-  GetVisemeFromNetwork: 1
 --- !u!1 &366353474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,7 +1756,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &662148808
+--- !u!114 &662148807
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1773,20 +1765,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 662148806}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 2098326870}
   visemeToBlendTargets: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
   laughterBlendTarget: 15
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
-  GetVisemeFromNetwork: 1
 --- !u!4 &673008113 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4863481099474810676, guid: 9ef98429c9c7fbb48bb76df8cb86296d,
@@ -2426,7 +2414,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &824092236
+--- !u!114 &824092235
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2435,20 +2423,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 824092234}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 801371077}
   visemeToBlendTargets: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
   laughterBlendTarget: 15
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
-  GetVisemeFromNetwork: 1
 --- !u!4 &827089801 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 561071287468709184, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
@@ -2673,7 +2657,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &846201870
+--- !u!114 &846201869
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2682,20 +2666,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 846201868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 1896228902}
   visemeToBlendTargets: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
-  laughterBlendTarget: 15
+  laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 0
-  GetVisemeFromNetwork: 1
 --- !u!1 &857589062
 GameObject:
   m_ObjectHideFlags: 0
@@ -2784,7 +2764,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &862809791
+--- !u!114 &862809790
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2793,20 +2773,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 862809789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 625228595}
   visemeToBlendTargets: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
-  laughterBlendTarget: 15
+  laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 0
-  GetVisemeFromNetwork: 1
 --- !u!1 &876956681
 GameObject:
   m_ObjectHideFlags: 0
@@ -2887,7 +2863,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &880685296
+--- !u!114 &880685295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2896,20 +2872,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 880685294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 303846508}
   visemeToBlendTargets: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
-  laughterBlendTarget: 15
+  laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 0
-  GetVisemeFromNetwork: 1
 --- !u!137 &881311213 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7816178448646728909, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
@@ -3276,7 +3248,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &957742777
+--- !u!114 &957742776
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3285,20 +3257,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 957742775}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 16392413}
   visemeToBlendTargets: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
-  laughterBlendTarget: 15
+  laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 0
-  GetVisemeFromNetwork: 1
 --- !u!137 &992945915 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3599850244753950041, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
@@ -3311,7 +3279,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1006323710
+--- !u!114 &1006323709
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3320,20 +3288,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1006323708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 1669349016}
   visemeToBlendTargets: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
-  laughterBlendTarget: 15
+  laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 0
-  GetVisemeFromNetwork: 1
 --- !u!137 &1026905133 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 5131963989216576618, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
@@ -3994,7 +3958,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1223609042
+--- !u!114 &1223609041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4003,20 +3967,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1223609040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 1640925112}
   visemeToBlendTargets: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
   laughterBlendTarget: 15
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
-  GetVisemeFromNetwork: 1
 --- !u!1001 &1251097848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4489,7 +4449,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1395688824
+--- !u!114 &1395688823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4498,20 +4458,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1395688822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 992945915}
   visemeToBlendTargets: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
   laughterBlendTarget: 15
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
-  GetVisemeFromNetwork: 1
 --- !u!4 &1469386239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2985085809941214552, guid: ee78d442fc3471d4aa8b8e48af6b7c7b,
@@ -4721,7 +4677,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1553774491
+--- !u!114 &1553774490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4730,20 +4686,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1553774489}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 1118701057}
   visemeToBlendTargets: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
-  laughterBlendTarget: 15
+  laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 0
-  GetVisemeFromNetwork: 1
 --- !u!1 &1565233030
 GameObject:
   m_ObjectHideFlags: 0
@@ -4988,6 +4940,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5307275156684586518, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5650251554050650650, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
         type: 3}
       propertyPath: m_IsActive
@@ -5121,7 +5078,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1895809754
+--- !u!114 &1895809753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5130,20 +5087,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1895809752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 1784307110}
   visemeToBlendTargets: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
-  laughterBlendTarget: 15
+  laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 0
-  GetVisemeFromNetwork: 1
 --- !u!137 &1896228902 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3892096279443724591, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
@@ -5628,7 +5581,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2039036222
+--- !u!114 &2039036221
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5637,20 +5590,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2039036220}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 604950414}
   visemeToBlendTargets: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
   laughterBlendTarget: 15
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
-  GetVisemeFromNetwork: 1
 --- !u!4 &2050918624 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4281744102317684365, guid: 4fa5ba9262b6b244b9b38de82502827c,
@@ -5796,7 +5745,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2104306121
+--- !u!114 &2104306120
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5805,27 +5754,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 2104306119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 881311213}
   visemeToBlendTargets: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
-  laughterBlendTarget: 15
+  laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 0
-  GetVisemeFromNetwork: 1
 --- !u!1 &2133936790 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 281141468435700614, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2133936792
+--- !u!114 &2133936791
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5834,20 +5779,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2133936790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a5ae20aad2b964bb4523d1bb945837, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 1026905133}
   visemeToBlendTargets: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
-  enableVisemeTestKeys: 0
-  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
-  laughterKey: 301
   laughterBlendTarget: 15
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
-  GetVisemeFromNetwork: 1
 --- !u!1001 &275473072550971378
 PrefabInstance:
   m_ObjectHideFlags: 0
