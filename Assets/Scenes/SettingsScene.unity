@@ -5333,7 +5333,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2011042603}
-        m_MethodName: ChangeParticipantID
+        m_MethodName: SetServerIp
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
