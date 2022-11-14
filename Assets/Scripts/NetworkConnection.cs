@@ -33,6 +33,12 @@ public class NetworkConnection : NetworkManager
 #endif
     }
 
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        networkAddress = GameManager.Instance.serverIp;
+    }
+
 
     public override void OnClientConnect()
     {

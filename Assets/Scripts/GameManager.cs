@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     public Ethnie chosedEthnie = Ethnie.Caucasian;
 
+    public string serverIp;
+
 
 
     private void Awake()
@@ -113,6 +115,11 @@ public class GameManager : MonoBehaviour
     public void SetPlayerNumber(PlayerInfo playerInfo)
     {
         GameManager.Instance.playerNumber = playerInfo.playerNumber;        
+    }
+
+    public void SetServerIp(string ip)
+    {
+        serverIp = ip;
     }
 
 }
