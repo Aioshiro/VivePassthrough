@@ -10,6 +10,8 @@ public class SphereOccluder : MonoBehaviour
     [Tooltip("Root object of skinned mesh")]
     public GameObject Hand = null;
 
+    Vector3 initialScale;
+    bool rescaleOccluder = true;
 
     void Awake()
     {
@@ -23,6 +25,7 @@ public class SphereOccluder : MonoBehaviour
         {
             this.enabled = false;
         }
+        initialScale = Hand.transform.localScale;
     }
 
     void Update()
@@ -37,6 +40,10 @@ public class SphereOccluder : MonoBehaviour
 
         transform.localPosition = result.position;
         transform.localRotation = result.rotation;
+
+        if (!rescaleOccluder) { return; }
+        float handLength = (result.points[12] - result.position).magnitude; //distance between palm and end of major
+        Hand.transform.localScale = new Vector3(initialScale.x,Mathf.Clamp(initialScale.y*handLength/0.13f,0.1f,initialScale.y),initialScale.z);
     }
 }
 
