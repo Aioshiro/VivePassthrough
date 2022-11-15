@@ -253,7 +253,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 267056088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d5ed157083b494e85013bad8fd5e12, type: 3}
+  m_Script: {fileID: 11500000, guid: 926ea01955e6a2e439aa80db879ed3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
@@ -264,6 +264,8 @@ MonoBehaviour:
   micControl: 2
   micActivationKey: 32
   selectedDevice: 
+  startRecordOnStart: 1
+  recordLength: 600
 --- !u!114 &267056091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,6 +410,7 @@ MonoBehaviour:
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
+  GetVisemeFromNetwork: 0
 --- !u!114 &267056094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,6 +433,7 @@ MonoBehaviour:
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
+  GetVisemeFromNetwork: 0
 --- !u!4 &328419937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4575382478150018, guid: 0d336f164a5a4454db3960b2f9fc7a85,
@@ -909,6 +913,7 @@ MonoBehaviour:
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 0
+  GetVisemeFromNetwork: 0
 --- !u!114 &994605226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1414,6 +1419,7 @@ MonoBehaviour:
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
+  GetVisemeFromNetwork: 0
 --- !u!114 &1076347311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1436,6 +1442,7 @@ MonoBehaviour:
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
+  GetVisemeFromNetwork: 0
 --- !u!1 &1097741358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1637,6 +1644,7 @@ MonoBehaviour:
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
+  GetVisemeFromNetwork: 0
 --- !u!114 &1097741364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1659,6 +1667,7 @@ MonoBehaviour:
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
+  GetVisemeFromNetwork: 0
 --- !u!1001 &1122882814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2145,6 +2154,57 @@ MonoBehaviour:
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
+--- !u!1 &1489818464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1489818466}
+  - component: {fileID: 1489818465}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1489818465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489818464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb3a9b63602b1a4b937265ad6dfaea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadsActive: 1
+  isCartoon: 1
+  isMale: 0
+  participantID: -1
+  allowSceneChange: 0
+  playerNumber: 0
+  chosedEthnie: 2
+  serverIp: localhost
+--- !u!4 &1489818466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489818464}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 355.0455, y: 162.15637, z: -88.03771}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1566719886
 GameObject:
   m_ObjectHideFlags: 0
@@ -2663,6 +2723,7 @@ MonoBehaviour:
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
+  GetVisemeFromNetwork: 0
 --- !u!114 &2080632576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2685,6 +2746,7 @@ MonoBehaviour:
   laughterMultiplier: 1.5
   smoothAmount: 70
   multiplyInputBy100: 1
+  GetVisemeFromNetwork: 0
 --- !u!1001 &2121479392
 PrefabInstance:
   m_ObjectHideFlags: 0
