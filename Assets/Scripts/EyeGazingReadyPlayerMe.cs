@@ -44,7 +44,7 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
 
     void Start()
     {
-        meshRenderer = GetComponent<SkinnedMeshRenderer>();
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         skinnedMesh = meshRenderer.sharedMesh;
         eyeLookDownLeft = skinnedMesh.GetBlendShapeIndex("eyeLookDownLeft");
         eyeLookInLeft = skinnedMesh.GetBlendShapeIndex("eyeLookInLeft");
@@ -90,27 +90,28 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
 
     void LookAtObject()
     {
-        Vector3 directionLeft = leftEye.InverseTransformPoint(objectToTrack.transform.position).normalized * 100; //getting direction between eye and object
+        Vector3 directionLeft = leftEye.InverseTransformPoint(objectToTrack.transform.position).normalized; //getting direction between eye and object
+        Debug.Log(directionLeft);
         float currentVelocity = 0;
         if (directionLeft.z < 0) //If the object is in front, setting up blendshapes
         {
-            meshRenderer.SetBlendShapeWeight(eyeLookDownLeft, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookDownLeft), Mathf.Clamp(-directionLeft.y, 0, 100), ref currentVelocity, maxLookingSpeed));
-            meshRenderer.SetBlendShapeWeight(eyeLookUpLeft, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookUpLeft), Mathf.Clamp(directionLeft.y, 0, 100), ref currentVelocity, maxLookingSpeed));
-            meshRenderer.SetBlendShapeWeight(eyeLookInLeft, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookInLeft), Mathf.Clamp(-directionLeft.x, 0, 100), ref currentVelocity, maxLookingSpeed));
-            meshRenderer.SetBlendShapeWeight(eyeLookOutLeft, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookOutLeft), Mathf.Clamp(directionLeft.x, 0, 100), ref currentVelocity, maxLookingSpeed));
+            meshRenderer.SetBlendShapeWeight(eyeLookDownLeft, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookDownLeft), Mathf.Clamp(-directionLeft.y, 0, 1), ref currentVelocity, maxLookingSpeed));
+            meshRenderer.SetBlendShapeWeight(eyeLookUpLeft, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookUpLeft), Mathf.Clamp(directionLeft.y, 0, 1), ref currentVelocity, maxLookingSpeed));
+            meshRenderer.SetBlendShapeWeight(eyeLookInLeft, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookInLeft), Mathf.Clamp(-directionLeft.x, 0, 1), ref currentVelocity, maxLookingSpeed));
+            meshRenderer.SetBlendShapeWeight(eyeLookOutLeft, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookOutLeft), Mathf.Clamp(directionLeft.x, 0, 1), ref currentVelocity, maxLookingSpeed));
         }
         else //If trying to look at something behind him, probably won't happen
         {
             Debug.LogWarning("Tried to look behind him");
             ResetGazeLeft();
         }
-        Vector3 directionRight = rightEye.InverseTransformPoint(objectToTrack.transform.position).normalized * 100; //getting direction between eye and object
+        Vector3 directionRight = rightEye.InverseTransformPoint(objectToTrack.transform.position).normalized; //getting direction between eye and object
         if (directionRight.z < 0) //If the object is in front, setting up blendshapes
         {
-            meshRenderer.SetBlendShapeWeight(eyeLookDownRight, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookDownRight), Mathf.Clamp(-directionRight.y, 0, 100), ref currentVelocity, maxLookingSpeed));
-            meshRenderer.SetBlendShapeWeight(eyeLookUpRight, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookUpRight), Mathf.Clamp(directionRight.y, 0, 100), ref currentVelocity, maxLookingSpeed));
-            meshRenderer.SetBlendShapeWeight(eyeLookInRight, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookInRight), Mathf.Clamp(directionRight.x, 0, 100), ref currentVelocity, maxLookingSpeed));
-            meshRenderer.SetBlendShapeWeight(eyeLookOutRight, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookOutRight), Mathf.Clamp(-directionRight.x, 0, 100), ref currentVelocity, maxLookingSpeed));
+            meshRenderer.SetBlendShapeWeight(eyeLookDownRight, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookDownRight), Mathf.Clamp(-directionRight.y, 0, 1), ref currentVelocity, maxLookingSpeed));
+            meshRenderer.SetBlendShapeWeight(eyeLookUpRight, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookUpRight), Mathf.Clamp(directionRight.y, 0, 1), ref currentVelocity, maxLookingSpeed));
+            meshRenderer.SetBlendShapeWeight(eyeLookInRight, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookInRight), Mathf.Clamp(directionRight.x, 0, 1), ref currentVelocity, maxLookingSpeed));
+            meshRenderer.SetBlendShapeWeight(eyeLookOutRight, Mathf.SmoothDamp(meshRenderer.GetBlendShapeWeight(eyeLookOutRight), Mathf.Clamp(-directionRight.x, 0, 1), ref currentVelocity, maxLookingSpeed));
         }
         else//If trying to look at something behind him, probably won't happen
         {
@@ -136,14 +137,14 @@ public class EyeGazingReadyPlayerMe : MonoBehaviour
         while (t < timeToBlink)
         {
             t += Time.deltaTime;
-            meshRenderer.SetBlendShapeWeight(eyesClosed, t*100/timeToBlink);
+            meshRenderer.SetBlendShapeWeight(eyesClosed, t/timeToBlink);
             yield return new WaitForFixedUpdate();
         }
         t = timeToBlink;
         while (t > 0)
         {
             t -= Time.deltaTime;
-            meshRenderer.SetBlendShapeWeight(eyesClosed, t * 100 / timeToBlink);
+            meshRenderer.SetBlendShapeWeight(eyesClosed, t/ timeToBlink);
             yield return new WaitForFixedUpdate();
         }
     }
