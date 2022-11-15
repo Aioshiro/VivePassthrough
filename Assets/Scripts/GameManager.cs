@@ -32,11 +32,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        NetworkClient.RegisterHandler<PlayerInfo>(SetPlayerNumber,false);
-    }
-
-    void Start()
-    {
         if (Instance == null)
         {
             Instance = this;
@@ -46,6 +41,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        NetworkClient.RegisterHandler<PlayerInfo>(SetPlayerNumber,false);
     }
 
     public void ChangeScene(string SceneToLoad)

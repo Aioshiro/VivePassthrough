@@ -572,6 +572,7 @@ MonoBehaviour:
   allowSceneChange: 0
   playerNumber: -1
   chosedEthnie: 2
+  serverIp: localhost
 --- !u!4 &784619238
 Transform:
   m_ObjectHideFlags: 0
