@@ -38,6 +38,8 @@ public class TransformSmoother : MonoBehaviour
     public bool yRotationAllowed = true;
     public bool zRotationAllowed = true;
 
+    public Vector3 freezeRotValues;
+
     public void Update()
     {
         if (leftCamera == null)
@@ -127,15 +129,15 @@ public class TransformSmoother : MonoBehaviour
         Vector3 euler = transform.rotation.eulerAngles;
         if (!xRotationAllowed)
         {
-            euler.x = 0;
+            euler.x = freezeRotValues.x;
         }
         if (!yRotationAllowed)
         {
-            euler.y = 0;
+            euler.y = freezeRotValues.y;
         }
         if (!zRotationAllowed)
         {
-            euler.z = 0;
+            euler.z = freezeRotValues.z;
         }
 
         transform.rotation = Quaternion.Euler(euler);
