@@ -2203,7 +2203,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   enableMicSelectionGUI: 0
   micSelectionGUIKey: 109
-  micInputVolume: 40
+  micInputVolume: 50
   micFrequency: 48000
   micControl: 2
   micActivationKey: 32
