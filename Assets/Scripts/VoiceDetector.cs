@@ -17,8 +17,8 @@ public class VoiceDetector : MonoBehaviour
         stoppedTalking = new UnityEngine.Events.UnityEvent();
 
 
-        startedTalking.AddListener(DebugStartTalking);
-        stoppedTalking.AddListener(DebugStopTalking);
+        //startedTalking.AddListener(DebugStartTalking);
+        //stoppedTalking.AddListener(DebugStopTalking);
     }
 
 

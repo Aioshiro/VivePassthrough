@@ -691,6 +691,10 @@ namespace NAudio.Lame.DLL
             const string libname = @"mp3lame";
 #endif
 
+#if UNITY_SERVER
+            const string libname = @"libmp3lame.dll";
+
+#endif
             // typedef void (*lame_report_function)(const char *format, va_list ap);
 
             #region Startup/Shutdown
@@ -714,9 +718,9 @@ namespace NAudio.Lame.DLL
             [DllImport(libname, CallingConvention = CallingConvention.Cdecl)]
             internal static extern int lame_close(IntPtr context);
 
-            #endregion
+#endregion
 
-            #region LAME information
+#region LAME information
 
             /*
 			 * OPTIONAL:
@@ -746,9 +750,9 @@ namespace NAudio.Lame.DLL
             [DllImport(libname, CallingConvention = CallingConvention.Cdecl)]
             internal static extern void get_lame_version_numerical([Out]LAMEVersion ver);
 
-            #endregion
+#endregion
 
-            #region Input Stream Description
+#region Input Stream Description
 
             /* number of samples.  default = 2^32-1   */
             // int CDECL lame_set_num_samples(lame_global_flags *, unsigned long);
@@ -822,9 +826,9 @@ namespace NAudio.Lame.DLL
             [DllImport(libname, CallingConvention = CallingConvention.Cdecl)]
             internal static extern int lame_get_out_samplerate(IntPtr context);
 
-            #endregion
+#endregion
 
-            #region General control parameters
+#region General control parameters
 
             /* 1=cause LAME to collect data for an MP3 frame analyzer. default=0 */
             // int CDECL lame_set_analysis(lame_global_flags *, int);
@@ -974,9 +978,9 @@ namespace NAudio.Lame.DLL
             [DllImport(libname, CallingConvention = CallingConvention.Cdecl)]
             internal static extern int lame_set_asm_optimizations(IntPtr context, ASMOptimizations opt, [MarshalAs(UnmanagedType.Bool)] bool val);
 
-            #endregion
+#endregion
 
-            #region Frame parameters
+#region Frame parameters
 
             /* mark as copyright.  default=0 */
             // int CDECL lame_set_copyright(lame_global_flags *, int);
@@ -1028,9 +1032,9 @@ namespace NAudio.Lame.DLL
             [return: MarshalAs(UnmanagedType.Bool)]
             internal static extern bool lame_get_strict_ISO(IntPtr context);
 
-            #endregion
+#endregion
 
-            #region Quantization/Noise Shaping
+#region Quantization/Noise Shaping
 
             /* disable the bit reservoir. For testing only. default=0 */
             // int CDECL lame_set_disable_reservoir(lame_global_flags *, int);
@@ -1102,9 +1106,9 @@ namespace NAudio.Lame.DLL
             [DllImport(libname, CallingConvention = CallingConvention.Cdecl)]
             internal static extern int lame_get_msfix(IntPtr context);
 
-            #endregion
+#endregion
 
-            #region VBR control
+#region VBR control
 
             /* Types of VBR.  default = vbr_off = CBR */
             // int CDECL lame_set_VBR(lame_global_flags *, vbr_mode);
@@ -1171,9 +1175,9 @@ namespace NAudio.Lame.DLL
             [return: MarshalAs(UnmanagedType.Bool)]
             internal static extern bool lame_get_VBR_hard_min(IntPtr context);
 
-            #endregion
+#endregion
 
-            #region Filtering control
+#region Filtering control
 
             /* freq in Hz to apply lowpass. Default = 0 = lame chooses.  -1 = disabled */
             // int CDECL lame_set_lowpassfreq(lame_global_flags *, int);
@@ -1211,9 +1215,9 @@ namespace NAudio.Lame.DLL
             [DllImport(libname, CallingConvention = CallingConvention.Cdecl)]
             internal static extern int lame_get_highpasswidth(IntPtr context);
 
-            #endregion
+#endregion
 
-            #region Psychoacoustics and other advanced settings
+#region Psychoacoustics and other advanced settings
 
             /* only use ATH for masking */
             // int CDECL lame_set_ATHonly(lame_global_flags *, int);
@@ -1345,9 +1349,9 @@ namespace NAudio.Lame.DLL
             [DllImport(libname, CallingConvention = CallingConvention.Cdecl)]
             internal static extern int lame_get_emphasis(IntPtr context);
 
-            #endregion
+#endregion
 
-            #region Internal state variables, read only
+#region Internal state variables, read only
 
             /* version  0=MPEG-2  1=MPEG-1  (2=MPEG-2.5)     */
             // int CDECL lame_get_version(const lame_global_flags *);
@@ -1433,9 +1437,9 @@ namespace NAudio.Lame.DLL
             [DllImport(libname, CallingConvention = CallingConvention.Cdecl)]
             internal static extern float lame_get_noclipScale(IntPtr context);
 
-            #endregion
+#endregion
 
-            #region Processing
+#region Processing
 
             /*
 		 * REQUIRED:
@@ -1763,9 +1767,9 @@ namespace NAudio.Lame.DLL
             [DllImport(libname, CallingConvention = CallingConvention.Cdecl)]
             internal static extern int lame_init_bitstream(IntPtr context);
 
-            #endregion
+#endregion
 
-            #region Reporting callbacks
+#region Reporting callbacks
 
             [UnmanagedFunctionPointer(CallingConvention.Cdecl, SetLastError = true, CharSet = CharSet.Ansi)]
             internal delegate void delReportFunction(string fmt, IntPtr args);
@@ -1786,10 +1790,10 @@ namespace NAudio.Lame.DLL
             internal static extern void lame_print_internals(IntPtr context);
 
 
-            #endregion
+#endregion
 
 
-            #region 'printf' support for reporting functions
+#region 'printf' support for reporting functions
 
             //[DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, ThrowOnUnmappableChar = true, BestFitMapping = false)]
             //internal static extern int _vsnprintf_s(
@@ -1806,7 +1810,7 @@ namespace NAudio.Lame.DLL
             //    return sb.ToString().Replace("\xFF", "\t");
             //}
 
-            #endregion
+#endregion
         }
 
         ///// <summary>Print out LAME configuration to standard output, or to registered output function</summary>
@@ -1821,7 +1825,7 @@ namespace NAudio.Lame.DLL
         //    NativeMethods.lame_print_internals(context);
         //}
 
-        #region Reporting function support
+#region Reporting function support
 
   //      /// <summary>Delegate for receiving output messages</summary>
   //      /// <param name="text">Text to output</param>
@@ -1883,6 +1887,6 @@ namespace NAudio.Lame.DLL
   //          rptMsg = fn;
   //      }
 
-        #endregion
+#endregion
     }
 }
