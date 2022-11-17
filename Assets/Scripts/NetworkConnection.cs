@@ -33,6 +33,8 @@ public class NetworkConnection : NetworkManager
         player.SetActive(true);
         //LipFrameWork.EnableLip = true;
         //LipFrameWork.StartFramework();
+        ViveSR.anipal.Eye.SRanipal_Eye_Framework.Instance.EnableEye = true;
+        ViveSR.anipal.Eye.SRanipal_Eye_Framework.Instance.StartFramework();
         var gestureProvider = FindObjectOfType<GestureProvider>();
         gestureProvider.enabled = true;
 #endif
