@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     {Asian,African,Caucasian,Latino};
 
     public Ethnie chosedEthnie = Ethnie.Caucasian;
+    public float otherPersonHeadLength = 0.17f; //average person head length from chin to midpoint of hairline (crinion)
 
     public string serverIp = "localhost";
 
