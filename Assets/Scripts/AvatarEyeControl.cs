@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using ViveSR.anipal.Eye;
-
+using System;
 public class AvatarEyeControl : MonoBehaviour
 {
     [SerializeField] private Transform[] EyesModels = new Transform[0];
@@ -35,6 +35,8 @@ public class AvatarEyeControl : MonoBehaviour
     bool missingFrames = false;
     const float timeToIgnoreFrames = 0.35f;
     float currentIgnoredTime = 0;
+
+    public bool multiplyBlendshapeBy100 = false;
 
     Vector3 GazeDirectionCombinedLocal;
     private void Start()
@@ -264,11 +266,11 @@ public class AvatarEyeControl : MonoBehaviour
             if (eyeShape > EyeShape_v2.Max || eyeShape < 0) continue;
 
             if (eyeShape == EyeShape_v2.Eye_Left_Blink || eyeShape == EyeShape_v2.Eye_Right_Blink)
-                eyeShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, weighting[eyeShape] * 100f);
+                eyeShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, weighting[eyeShape] *(100f*Convert.ToUInt16(multiplyBlendshapeBy100)+1));
             else
             {
                 AnimationCurve curve = EyebrowAnimationCurves[(int)eyeShape];
-                eyeShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, curve.Evaluate(weighting[eyeShape]) * 100f);
+                eyeShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, curve.Evaluate(weighting[eyeShape]) * (100f * Convert.ToUInt16(multiplyBlendshapeBy100) + 1));
             }
         }
     }
