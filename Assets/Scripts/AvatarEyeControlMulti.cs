@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using ViveSR.anipal.Eye;
-
+using System;
 public class AvatarEyeControlMulti : MonoBehaviour
 {
     [SerializeField] private Transform[] EyesModels = new Transform[0];
@@ -21,7 +21,6 @@ public class AvatarEyeControlMulti : MonoBehaviour
     /// </summary>
     [SerializeField] private AnimationCurve EyebrowAnimationCurveHorizontal;
 
-    public bool NeededToGetData = true;
     private AnimationCurve[] EyebrowAnimationCurves = new AnimationCurve[(int)EyeShape_v2.Max];
     private GameObject[] EyeAnchors;
     private const int NUM_OF_EYES = 2;
@@ -29,6 +28,8 @@ public class AvatarEyeControlMulti : MonoBehaviour
     const float timeToIgnoreFrames = 0.35f;
     float currentIgnoredTime = 0;
     bool missingFramesInternal;
+
+    public bool multiplyBlendshapeBy100 = false;
 
     private void Start()
     {
@@ -169,11 +170,11 @@ public class AvatarEyeControlMulti : MonoBehaviour
             if (eyeShape > EyeShape_v2.Max || eyeShape < 0) continue;
 
             if (eyeShape == EyeShape_v2.Eye_Left_Blink || eyeShape == EyeShape_v2.Eye_Right_Blink)
-                eyeShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, weighting[eyeShape] * 100f);
+                eyeShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, weighting[eyeShape] * (99f * Convert.ToUInt16(multiplyBlendshapeBy100) + 1));
             else
             {
                 AnimationCurve curve = EyebrowAnimationCurves[(int)eyeShape];
-                eyeShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, curve.Evaluate(weighting[eyeShape]) * 100f);
+                eyeShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, curve.Evaluate(weighting[eyeShape]) * (99f * Convert.ToUInt16(multiplyBlendshapeBy100) + 1));
             }
         }
     }

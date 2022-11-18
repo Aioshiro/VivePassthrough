@@ -266,11 +266,11 @@ public class AvatarEyeControl : MonoBehaviour
             if (eyeShape > EyeShape_v2.Max || eyeShape < 0) continue;
 
             if (eyeShape == EyeShape_v2.Eye_Left_Blink || eyeShape == EyeShape_v2.Eye_Right_Blink)
-                eyeShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, weighting[eyeShape] *(100f*Convert.ToUInt16(multiplyBlendshapeBy100)+1));
+                eyeShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, weighting[eyeShape] *(99f*Convert.ToUInt16(multiplyBlendshapeBy100)+1));
             else
             {
                 AnimationCurve curve = EyebrowAnimationCurves[(int)eyeShape];
-                eyeShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, curve.Evaluate(weighting[eyeShape]) * (100f * Convert.ToUInt16(multiplyBlendshapeBy100) + 1));
+                eyeShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, curve.Evaluate(weighting[eyeShape]) * (99f * Convert.ToUInt16(multiplyBlendshapeBy100) + 1));
             }
         }
     }
