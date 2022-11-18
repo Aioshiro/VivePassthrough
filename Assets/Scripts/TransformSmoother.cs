@@ -7,9 +7,9 @@ public class TransformSmoother : MonoBehaviour
     private Vector3 movingAveragePos;
     private Vector3 movingAverageUp;
     private Vector3 movingAverageForward;
-    private int count=0;
+    public int count=0;
     [Tooltip("Number of samples to take for the average of the position")]
-    [SerializeField] private int movingAverageLengthPos = 6;
+    [SerializeField] public int movingAverageLengthPos = 6;
     [Tooltip("Number of samples to take for the average of the rotation")]
     [SerializeField] private int movingAverageLengthRot = 3;
 

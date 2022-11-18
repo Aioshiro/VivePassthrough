@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
     public string serverIp = "localhost";
 
 
-
     private void Awake()
     {
         if (Instance == null)

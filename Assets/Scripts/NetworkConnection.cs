@@ -85,6 +85,7 @@ public class NetworkConnection : NetworkManager
         }
     }
 
+
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
         var ownedObjects = new NetworkIdentity[conn.clientOwnedObjects.Count];
