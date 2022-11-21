@@ -24,11 +24,6 @@ public class LipSyncMulti: MonoBehaviour
     [Tooltip("Laughter animation linear multiplier, the final output will be clamped to 1.0")]
     public float laughterMultiplier = 1.5f;
 
-    // smoothing amount
-    [Range(1, 100)]
-    [Tooltip("Smoothing of 1 will yield only the current predicted viseme, 100 will yield an extremely smooth viseme response.")]
-    public int smoothAmount = 70;
-
     public bool multiplyInputBy100 = false;
 
 
