@@ -72,6 +72,7 @@ public class ExperimentStarter : NetworkBehaviour
         {
             obje.SetActive(false);
         }
+        FindObjectOfType<RegisterResults>().chronometer.StartChronometer();
     }
 
     [Command(requiresAuthority =false)]

@@ -9,13 +9,21 @@ using System;
 public class RegisterResults : MonoBehaviour
 {
 
+    public Chronometer chronometer;
+
     void Start()
+    {
+        chronometer = new Chronometer();
+    }
+
+    private void OnApplicationQuit()
     {
         Save();
     }
 
     void Save()
     {
+        float totalTime = chronometer.StopChronometer();
         string filePath = GetPath();
 
         StringBuilder csv = new StringBuilder();
@@ -51,7 +59,7 @@ public class RegisterResults : MonoBehaviour
            male = "";
         }
         string ethnic = GameManager.Instance.chosedEthnie.ToString();
-        string time = "45";
+        string time = totalTime.ToString();
         var newLine = string.Format("{0};{1};{2};{3};{4};{5}", id,avatarOn,cartoon,male,ethnic, time);
         csv.AppendLine(newLine);
 
