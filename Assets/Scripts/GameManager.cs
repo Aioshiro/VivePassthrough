@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public int participantID = -1;
     public bool allowSceneChange = false;
     public int playerNumber = 0;
+
+    public bool facialTracker = false;
     public enum Ethnie 
     {Asian,African,Caucasian,Latino};
 
@@ -106,6 +108,11 @@ public class GameManager : MonoBehaviour
         {
             chosedEthnie = Ethnie.African;
         }
+    }
+
+    public void OnFacialTrackerToggle(bool value)
+    {
+        facialTracker = value;
     }
 
     public void SetPlayerNumber(PlayerInfo playerInfo)

@@ -24,6 +24,17 @@ public class AvatarInitializer : MonoBehaviour
         asianHeads.SetActive(false);
         caucasianHeads.SetActive(false);
         latinoHeads.SetActive(false);
+        AvatarLipMulti[] facialScripts = FindObjectsOfType<AvatarLipMulti>();
+        foreach (var script in facialScripts)
+        {
+            script.enabled = false;
+        }
+        LipSyncMulti[] lipSyncScripts = FindObjectsOfType<LipSyncMulti>();
+        foreach(var script in lipSyncScripts)
+        {
+            script.enabled = false;
+        }
+
         InitializeHeads();
     }
 
@@ -56,6 +67,23 @@ public class AvatarInitializer : MonoBehaviour
 
         if (GameManager.Instance.isMale) { SetActiveList(maleHeads, true); }
         else { SetActiveList(womanHeads, true); }
+
+        if (GameManager.Instance.facialTracker)
+        {
+            AvatarLipMulti[] facialScripts = FindObjectsOfType<AvatarLipMulti>();
+            foreach (var script in facialScripts)
+            {
+                script.enabled = true;
+            }
+        }
+        else
+        {
+            LipSyncMulti[] lipSyncScripts = FindObjectsOfType<LipSyncMulti>();
+            foreach (var script in lipSyncScripts)
+            {
+                script.enabled = true;
+            }
+        }
     }
 
 

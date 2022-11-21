@@ -105,6 +105,8 @@ GameObject:
   - component: {fileID: 77225887848227205}
   - component: {fileID: 1558119852724334024}
   - component: {fileID: 207208377883400131}
+  - component: {fileID: 6569455717193990865}
+  - component: {fileID: 1154755810717859788}
   m_Layer: 0
   m_Name: africanMale
   m_TagString: Untagged
@@ -232,6 +234,78 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   multiplyBlendshapeBy100: 0
+--- !u!114 &6569455717193990865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3084202377634982595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinnedMeshRenderer: {fileID: 8118063711445333884}
+  visemeToBlendTargets: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
+  laughterBlendTarget: 16
+  laughterThreshold: 0.5
+  laughterMultiplier: 1.5
+  smoothAmount: 70
+  multiplyInputBy100: 0
+--- !u!114 &1154755810717859788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3084202377634982595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277413883961f5a4d82c23a9b627a704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LipShapeTables:
+  - skinnedMeshRenderer: {fileID: 8118063711445333884}
+    lipShapes: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0200000001000000000000000f0000000e000000ffffffff19000000ffffffffffffffffffffffff1600000015000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff10000000ffffffffffffffff03000000ffffffff0b000000ffffffffffffffffffffffffffffffff1800000017000000ffffffffffffffff14000000130000000d0000000c000000ffffffffffffffffffffffffffffffffffffffffffffffff
+  overrides:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  multiplyBy100: 0
 --- !u!1 &3392030795777877710
 GameObject:
   m_ObjectHideFlags: 0
