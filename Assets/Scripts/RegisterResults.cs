@@ -4,9 +4,10 @@ using UnityEngine;
 using System.Text;
 using System.IO;
 using System;
+using Mirror;
 
 
-public class RegisterResults : MonoBehaviour
+public class RegisterResults : NetworkBehaviour
 {
 
     public Chronometer chronometer;
@@ -18,13 +19,15 @@ public class RegisterResults : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        Save();
+        if (isClient)
+        {
+            Save();
+        }
     }
 
     void Save()
     {
         float totalTime = chronometer.StopChronometer();
-        string filePath = GetPath();
 
         StringBuilder csv = new StringBuilder();
 
@@ -63,9 +66,25 @@ public class RegisterResults : MonoBehaviour
         var newLine = string.Format("{0};{1};{2};{3};{4};{5}", id,avatarOn,cartoon,male,ethnic, time);
         csv.AppendLine(newLine);
 
-        //after your loop
-        File.AppendAllText(filePath, csv.ToString());
+        SaveLocally(csv.ToString());
+        SaveOnServer(csv.ToString());
     }
+
+    void SaveLocally(string newLine)
+    {
+        Debug.Log("Saving data locally");
+        string filePath = GetPath();
+        File.AppendAllText(filePath, newLine);
+    }
+
+    [Command(requiresAuthority =false)]
+    void SaveOnServer(string newLine)
+    {
+        Debug.Log("Saving data on server");
+        string filePath = GetPath();
+        File.AppendAllText(filePath, newLine);
+    }
+
 
     // Following method is used to retrive the relative path as device platform
     private string GetPath()
