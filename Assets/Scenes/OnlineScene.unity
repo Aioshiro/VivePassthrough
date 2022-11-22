@@ -133,31 +133,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &88837407 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5744355877958524200, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &88837409
-MonoBehaviour:
+--- !u!1001 &85669476
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 88837407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 1716438330}
-  visemeToBlendTargets: 0c0000000a000000040000000e0000000200000006000000010000000d000000070000000b0000000000000003000000050000000800000009000000
-  laughterBlendTarget: 15
-  laughterThreshold: 0.5
-  laughterMultiplier: 1.5
-  smoothAmount: 70
-  multiplyInputBy100: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6800098776588118026, guid: 6fe0d6362eb29934ab8f511a28710014,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800098776588118026, guid: 6fe0d6362eb29934ab8f511a28710014,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800098776588118026, guid: 6fe0d6362eb29934ab8f511a28710014,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800098776588118026, guid: 6fe0d6362eb29934ab8f511a28710014,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800098776588118026, guid: 6fe0d6362eb29934ab8f511a28710014,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800098776588118026, guid: 6fe0d6362eb29934ab8f511a28710014,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800098776588118026, guid: 6fe0d6362eb29934ab8f511a28710014,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800098776588118026, guid: 6fe0d6362eb29934ab8f511a28710014,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800098776588118026, guid: 6fe0d6362eb29934ab8f511a28710014,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800098776588118026, guid: 6fe0d6362eb29934ab8f511a28710014,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800098776588118026, guid: 6fe0d6362eb29934ab8f511a28710014,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800098776588118027, guid: 6fe0d6362eb29934ab8f511a28710014,
+        type: 3}
+      propertyPath: m_Name
+      value: Occlusion (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fe0d6362eb29934ab8f511a28710014, type: 3}
 --- !u!1 &98541164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,31 +1336,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -39}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &349288156 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5642345976708748271, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &349288158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349288156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 1261115939}
-  visemeToBlendTargets: 0c0000000a000000040000000e0000000200000006000000010000000d000000070000000b0000000000000003000000050000000800000009000000
-  laughterBlendTarget: 15
-  laughterThreshold: 0.5
-  laughterMultiplier: 1.5
-  smoothAmount: 70
-  multiplyInputBy100: 1
 --- !u!1 &366353474
 GameObject:
   m_ObjectHideFlags: 0
@@ -2019,12 +2038,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 275473072550971378}
   m_PrefabAsset: {fileID: 0}
---- !u!137 &604950414 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 3903411029089968789, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
 --- !u!137 &625228595 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6881351879291368462, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
@@ -2105,31 +2118,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633017922}
   m_CullTransparentMesh: 0
---- !u!1 &662148806 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8404985156260710943, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &662148808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 662148806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 2098326870}
-  visemeToBlendTargets: 0c0000000a000000040000000e0000000200000006000000010000000d000000070000000b0000000000000003000000050000000800000009000000
-  laughterBlendTarget: 15
-  laughterThreshold: 0.5
-  laughterMultiplier: 1.5
-  smoothAmount: 70
-  multiplyInputBy100: 1
 --- !u!4 &673008113 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4863481099474810676, guid: 9ef98429c9c7fbb48bb76df8cb86296d,
@@ -2751,43 +2739,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796889342}
   m_CullTransparentMesh: 0
---- !u!137 &801371077 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8599944508849379245, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &806801399 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4278888805985285175, guid: 4fa5ba9262b6b244b9b38de82502827c,
     type: 3}
   m_PrefabInstance: {fileID: 1896519277}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &824092234 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3713100609003309121, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &824092236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 824092234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 801371077}
-  visemeToBlendTargets: 0c0000000a000000040000000e0000000200000006000000010000000d000000070000000b0000000000000003000000050000000800000009000000
-  laughterBlendTarget: 15
-  laughterThreshold: 0.5
-  laughterMultiplier: 1.5
-  smoothAmount: 70
-  multiplyInputBy100: 1
 --- !u!4 &827089801 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 561071287468709184, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
@@ -3029,7 +2986,6 @@ MonoBehaviour:
   laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
-  smoothAmount: 70
   multiplyInputBy100: 0
 --- !u!1 &855634855
 GameObject:
@@ -3218,7 +3174,6 @@ MonoBehaviour:
   laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
-  smoothAmount: 70
   multiplyInputBy100: 0
 --- !u!1 &876956681
 GameObject:
@@ -3317,7 +3272,6 @@ MonoBehaviour:
   laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
-  smoothAmount: 70
   multiplyInputBy100: 0
 --- !u!137 &881311213 stripped
 SkinnedMeshRenderer:
@@ -3708,14 +3662,7 @@ MonoBehaviour:
   laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
-  smoothAmount: 70
   multiplyInputBy100: 0
---- !u!137 &992945915 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 3599850244753950041, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1006323708 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6575759469795089144, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
@@ -3739,14 +3686,7 @@ MonoBehaviour:
   laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
-  smoothAmount: 70
   multiplyInputBy100: 0
---- !u!137 &1026905133 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5131963989216576618, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1038136950
 GameObject:
   m_ObjectHideFlags: 0
@@ -4301,6 +4241,7 @@ MonoBehaviour:
   participantID: -1
   allowSceneChange: 0
   playerNumber: 0
+  facialTracker: 0
   chosedEthnie: 2
   otherPersonHeadLength: 0.17
   serverIp: localhost
@@ -4397,31 +4338,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201405537}
   m_Mesh: {fileID: 4308702566386029478, guid: 9e7d77c7c57b22d42ac872cf9611e61e, type: 3}
---- !u!1 &1223609040 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3489355713810729812, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1223609042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223609040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 1640925112}
-  visemeToBlendTargets: 0c0000000a000000040000000e0000000200000006000000010000000d000000070000000b0000000000000003000000050000000800000009000000
-  laughterBlendTarget: 15
-  laughterThreshold: 0.5
-  laughterMultiplier: 1.5
-  smoothAmount: 70
-  multiplyInputBy100: 1
 --- !u!1001 &1251097848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4511,12 +4427,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5947733090777839138, guid: f6ecbadb6dab24545a7168f433e8548a,
     type: 3}
   m_PrefabInstance: {fileID: 1251097848}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &1261115939 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 761976292562193411, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1362148720 stripped
 Transform:
@@ -4888,31 +4798,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 78.573006, y: 0, z: 0}
---- !u!1 &1395688822 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8442993772183001781, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1395688824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395688822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 992945915}
-  visemeToBlendTargets: 0c0000000a000000040000000e0000000200000006000000010000000d000000070000000b0000000000000003000000050000000800000009000000
-  laughterBlendTarget: 15
-  laughterThreshold: 0.5
-  laughterMultiplier: 1.5
-  smoothAmount: 70
-  multiplyInputBy100: 1
 --- !u!4 &1469386239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2985085809941214552, guid: ee78d442fc3471d4aa8b8e48af6b7c7b,
@@ -5139,7 +5024,6 @@ MonoBehaviour:
   laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
-  smoothAmount: 70
   multiplyInputBy100: 0
 --- !u!1 &1565233030
 GameObject:
@@ -5482,12 +5366,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8450692960774578450}
   m_PrefabAsset: {fileID: 0}
---- !u!137 &1640925112 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8408810027557524664, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
 --- !u!137 &1669349016 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 82652704096454471, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
@@ -5573,12 +5451,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674124874}
   m_Mesh: {fileID: 957254569271664374, guid: 9e7d77c7c57b22d42ac872cf9611e61e, type: 3}
---- !u!137 &1716438330 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 821550276530995908, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
 --- !u!137 &1784307110 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7631847065390082907, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
@@ -5808,7 +5680,6 @@ MonoBehaviour:
   laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
-  smoothAmount: 70
   multiplyInputBy100: 0
 --- !u!137 &1896228902 stripped
 SkinnedMeshRenderer:
@@ -6473,31 +6344,6 @@ RectTransform:
   m_AnchoredPosition: {x: -139, y: -82.40001}
   m_SizeDelta: {x: 275.47986, y: 166.88843}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &2039036220 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8283532610896657785, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2039036222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2039036220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 604950414}
-  visemeToBlendTargets: 0c0000000a000000040000000e0000000200000006000000010000000d000000070000000b0000000000000003000000050000000800000009000000
-  laughterBlendTarget: 15
-  laughterThreshold: 0.5
-  laughterMultiplier: 1.5
-  smoothAmount: 70
-  multiplyInputBy100: 1
 --- !u!4 &2050918624 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4281744102317684365, guid: 4fa5ba9262b6b244b9b38de82502827c,
@@ -6631,12 +6477,6 @@ Transform:
   m_Father: {fileID: 857589063}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!137 &2098326870 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 3493165844815271411, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2104306119 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3899214254159425906, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
@@ -6660,33 +6500,7 @@ MonoBehaviour:
   laughterBlendTarget: 16
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
-  smoothAmount: 70
   multiplyInputBy100: 0
---- !u!1 &2133936790 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 281141468435700614, guid: e8f00ab75208b0c44a7ff89d6b85ced9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585693351}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2133936792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2133936790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0e4221e07d36148a1f8ffeca266588, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 1026905133}
-  visemeToBlendTargets: 0c0000000a000000040000000e0000000200000006000000010000000d000000070000000b0000000000000003000000050000000800000009000000
-  laughterBlendTarget: 15
-  laughterThreshold: 0.5
-  laughterMultiplier: 1.5
-  smoothAmount: 70
-  multiplyInputBy100: 1
 --- !u!1001 &275473072550971378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6841,6 +6655,36 @@ PrefabInstance:
     - target: {fileID: 414849379476709523, guid: 917c8358b64d0524c863bd3b5a27f69b,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419172448896253270, guid: 917c8358b64d0524c863bd3b5a27f69b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419172448896253270, guid: 917c8358b64d0524c863bd3b5a27f69b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419172448896253270, guid: 917c8358b64d0524c863bd3b5a27f69b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419284055467579697, guid: 917c8358b64d0524c863bd3b5a27f69b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419284055467579697, guid: 917c8358b64d0524c863bd3b5a27f69b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419284055467579697, guid: 917c8358b64d0524c863bd3b5a27f69b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
