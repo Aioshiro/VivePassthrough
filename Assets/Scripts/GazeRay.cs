@@ -1,5 +1,4 @@
-﻿//========= Copyright 2018, HTC Corporation. All rights reserved. ===========
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Assertions;
 using ViveSR.anipal.Eye;
@@ -7,83 +6,77 @@ public class GazeRay : MonoBehaviour
 {
     public int LengthOfRay = 25;
     [SerializeField] private LineRenderer GazeRayRenderer;
-    private static EyeData_v2 eyeData = new EyeData_v2();
-    private bool eye_callback_registered = false;
 
-    [SerializeField]
-    float totalTimeLookingAtHead = 0;
-    [SerializeField]
-    float relativeTimeLookingAtHead = 0;
+    public float totalTimeLookingAtHead = 0;
+
+    public bool showGazeRay;
+    private bool missingFrames;
+    Vector3 oldGazeDirectionCombined;
+    float currentIgnoredTime = 0;
+    const float timeToIgnoreFrames = 0.35f;
 
 
     [SerializeField] Transform headTransform;
 
     private void Start()
     {
-        if (!SRanipal_Eye_Framework.Instance.EnableEye)
-        {
-            enabled = false;
-            return;
-        }
         Assert.IsNotNull(GazeRayRenderer);
+        if (headTransform == null)
+        {
+            headTransform = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).GetChild(2);
+        }
     }
 
     private void Update()
     {
         if (SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.WORKING &&
             SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.NOT_SUPPORT) return;
-
-        if (SRanipal_Eye_Framework.Instance.EnableEyeDataCallback == true && eye_callback_registered == false)
+        if (headTransform == null)
         {
-            SRanipal_Eye_v2.WrapperRegisterEyeDataCallback(Marshal.GetFunctionPointerForDelegate((SRanipal_Eye_v2.CallbackBasic)EyeCallback));
-            eye_callback_registered = true;
+            headTransform = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).GetChild(2);
         }
-        else if (SRanipal_Eye_Framework.Instance.EnableEyeDataCallback == false && eye_callback_registered == true)
-        {
-            SRanipal_Eye_v2.WrapperUnRegisterEyeDataCallback(Marshal.GetFunctionPointerForDelegate((SRanipal_Eye_v2.CallbackBasic)EyeCallback));
-            eye_callback_registered = false;
-        }
-        relativeTimeLookingAtHead = 100 * totalTimeLookingAtHead / Time.fixedTime;
 
-        Vector3 GazeOriginCombinedLocal, GazeDirectionCombinedLocal;
-
-        if (eye_callback_registered)
-        {
-            if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.COMBINE, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal, eyeData)) { }
-            else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.LEFT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal, eyeData)) { }
-            else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.RIGHT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal, eyeData)) { }
-            else return;
-        }
+        if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.COMBINE, out Vector3 GazeOriginCombinedLocal, out Vector3 GazeDirectionCombinedLocal, EyeDataGetter.ownEyeData)) { }
+        else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.LEFT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal, EyeDataGetter.ownEyeData)) { }
+        else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.RIGHT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal, EyeDataGetter.ownEyeData)) { }
         else
         {
-            if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.COMBINE, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal)) { }
-            else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.LEFT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal)) { }
-            else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.RIGHT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal)) { }
-            else return;
+            missingFrames = true;
+            return;
         }
-        
 
-        Vector3 GazeDirectionCombined = headTransform.TransformDirection(GazeDirectionCombinedLocal);
+        Vector3 GazeDirectionCombined;
+        if (missingFrames)
+        {
+            GazeDirectionCombined = oldGazeDirectionCombined;
+            currentIgnoredTime += Time.deltaTime;
+            if (currentIgnoredTime > timeToIgnoreFrames)
+            {
+                currentIgnoredTime = 0;
+                missingFrames = false;
+            }
+            else
+            {
+                return;
+            }
+        }
+        GazeDirectionCombined = Camera.main.transform.TransformDirection(GazeDirectionCombinedLocal).normalized;
+        oldGazeDirectionCombined = GazeDirectionCombined;
 
-        if (Physics.Raycast(headTransform.position - headTransform.up * 0.05f + headTransform.right * 0.02f, GazeDirectionCombined, 25, LayerMask.GetMask("Head")))
+        if (Physics.Raycast(headTransform.position, GazeDirectionCombined, 25, LayerMask.GetMask("Head")))
         {
             Debug.Log("Looking at head");
             totalTimeLookingAtHead += Time.deltaTime;
         }
-
-        GazeRayRenderer.SetPosition(0, headTransform.position - headTransform.up * 0.05f+headTransform.right*0.02f);
-        GazeRayRenderer.SetPosition(1, headTransform.position + GazeDirectionCombined * LengthOfRay);
-    }
-    private void Release()
-    {
-        if (eye_callback_registered == true)
+        if (showGazeRay)
         {
-            SRanipal_Eye_v2.WrapperUnRegisterEyeDataCallback(Marshal.GetFunctionPointerForDelegate((SRanipal_Eye_v2.CallbackBasic)EyeCallback));
-            eye_callback_registered = false;
+            GazeRayRenderer.enabled = true;
+            GazeRayRenderer.SetPosition(0, headTransform.position - headTransform.up * 0.05f + headTransform.right * 0.02f);
+            GazeRayRenderer.SetPosition(1, headTransform.position + GazeDirectionCombined * LengthOfRay);
         }
-    }
-    private static void EyeCallback(ref EyeData_v2 eye_data)
-    {
-        eyeData = eye_data;
+        else
+        {
+            GazeRayRenderer.enabled = false;
+        }
     }
 }

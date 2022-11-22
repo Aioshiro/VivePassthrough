@@ -11,10 +11,12 @@ public class RegisterResults : NetworkBehaviour
 {
 
     public Chronometer chronometer;
+    public GazeRay gazeRay;
 
     void Start()
     {
         chronometer = new Chronometer();
+        gazeRay = GetComponentInChildren<GazeRay>();
     }
 
     private void OnApplicationQuit()
@@ -63,7 +65,8 @@ public class RegisterResults : NetworkBehaviour
         }
         string ethnic = GameManager.Instance.chosedEthnie.ToString();
         string time = totalTime.ToString();
-        var newLine = string.Format("{0};{1};{2};{3};{4};{5}", id,avatarOn,cartoon,male,ethnic, time);
+        string percentage = (gazeRay.totalTimeLookingAtHead * 100 / totalTime).ToString();
+        var newLine = string.Format("{0};{1};{2};{3};{4};{5};{6}", id,avatarOn,cartoon,male,ethnic, time,percentage);
         csv.AppendLine(newLine);
 
         SaveLocally(csv.ToString());
