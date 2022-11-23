@@ -31,7 +31,8 @@ public class InstructionCanvas : MonoBehaviour
     {
         if (!positionned && playerRig.position!= Vector3.zero)
         {
-            canvasTransform.SetPositionAndRotation(playerRig.position + playerRig.transform.forward * 0.5f, playerRig.rotation);
+            Vector3 forward = Vector3.ProjectOnPlane(playerRig.transform.forward, Vector3.up);
+            canvasTransform.SetPositionAndRotation(playerRig.position + forward * 0.5f, Quaternion.Euler(0, playerRig.rotation.eulerAngles.y,0));
             positionned = true;
         }
         fillingImage.fillAmount = (float) mapMarker.count /  (float) mapMarker.movingAverageLengthPos;
