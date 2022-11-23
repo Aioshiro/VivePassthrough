@@ -60,7 +60,7 @@ public class GazeRay : MonoBehaviour
                 return;
             }
         }
-        GazeDirectionCombined = Camera.main.transform.TransformDirection(GazeDirectionCombinedLocal).normalized;
+        GazeDirectionCombined = headTransform.TransformDirection(GazeDirectionCombinedLocal).normalized;
         oldGazeDirectionCombined = GazeDirectionCombined;
 
         if (Physics.Raycast(headTransform.position, GazeDirectionCombined, 25, LayerMask.GetMask("Head")))
