@@ -21,6 +21,7 @@ public class EyeDataGetter : MonoBehaviour
 
     private void Start()
     {
+        //setting up gaze sensibility
 
         EyeParameter StartingEyeParameter = new EyeParameter
         {
@@ -32,6 +33,7 @@ public class EyeDataGetter : MonoBehaviour
 
         SRanipal_Eye_API.SetEyeParameter(StartingEyeParameter);
 
+        //Initializing dictionnaries
         for (int i=0;i<(int)EyeShape_v2.Max; i++)
         {
             ownEyeWeightings.Add((EyeShape_v2)i, 0);
@@ -42,6 +44,7 @@ public class EyeDataGetter : MonoBehaviour
 
     private void Update()
     {
+        //just making sure the callback is there
         if (SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.WORKING &&
             SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.NOT_SUPPORT) return;
 
@@ -62,6 +65,7 @@ public class EyeDataGetter : MonoBehaviour
 
     private static void EyeCallback(ref EyeData_v2 eye_data)
     {
+        //getting eyedata and updating weighting (blendshapes) values
         ownEyeData = eye_data;
         SRanipal_Eye_v2.GetEyeWeightings(out ownEyeWeightings, ownEyeData);
     }

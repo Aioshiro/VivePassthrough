@@ -16,6 +16,7 @@ public class AvatarInitializer : MonoBehaviour
 
     private void Start()
     {
+        //We make sure everything is unactive, just in case
         SetActiveList(maleHeads, false);
         SetActiveList(womanHeads, false);
         SetActiveList(cartoonHeads,false);
@@ -35,6 +36,7 @@ public class AvatarInitializer : MonoBehaviour
             script.enabled = false;
         }
 
+        //We initialize properly depending on the settings
         InitializeHeads();
     }
 

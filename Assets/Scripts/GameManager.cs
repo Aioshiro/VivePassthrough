@@ -15,17 +15,25 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
+    [Tooltip("Does the other player have an avatar ?")]
     public bool HeadsActive = true;
+    [Tooltip("Is the other player avatar cartoon ?")]
     public bool isCartoon = true;
+    [Tooltip("Is the other player avatar male ?")]
     public bool isMale = false;
+
+    [Tooltip("Participant id to save results")]
     public int participantID = -1;
-    public bool allowSceneChange = false;
+    private bool allowSceneChange = false;
+    [Tooltip("Player number, 0 is first, 1 is second")]
     public int playerNumber = 0;
 
+    [Tooltip("Are we using the facial tracker (or the lip sync instead)")]
     public bool facialTracker = false;
     public enum Ethnie 
     {Asian,African,Caucasian,Latino};
 
+    [Tooltip("Other player ethnic")]
     public Ethnie chosedEthnie = Ethnie.Caucasian;
     public float otherPersonHeadLength = 0.17f; //average person head length from chin to midpoint of hairline (crinion)
 
@@ -43,6 +51,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        //register callback when server sends player number
         NetworkClient.RegisterHandler<PlayerInfo>(SetPlayerNumber,false);
     }
 

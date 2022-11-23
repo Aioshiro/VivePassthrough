@@ -33,6 +33,8 @@ public class AvatarEyeControlMulti : MonoBehaviour
 
     private void Start()
     {
+        //setting up as in the script samples
+
         SetEyesModels(EyesModels[0], EyesModels[1]);
         SetEyeShapeTables(EyeShapeTables);
 
@@ -51,6 +53,8 @@ public class AvatarEyeControlMulti : MonoBehaviour
         if (SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.WORKING &&
             SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.NOT_SUPPORT) return;
         int playerNumber = GameManager.Instance.playerNumber;
+
+        //Checking if other player has missing frames (during a blink generally)
         bool missingFrames;
         if (playerNumber == 0)
         {
@@ -61,15 +65,18 @@ public class AvatarEyeControlMulti : MonoBehaviour
             missingFrames = EyeDataGetter.playerOneMissingFrames;
         }
 
+        //If other player miss frame now or has been recently
         if (missingFrames||missingFramesInternal)
         {
             missingFramesInternal = true;
             currentIgnoredTime += Time.deltaTime;
+            //if enough time has passed since we starting ignore frames, we go back to normal
             if (currentIgnoredTime > timeToIgnoreFrames)
             {
                 currentIgnoredTime = 0;
                 missingFramesInternal = false;
             }
+            //Otherwise, we make the blink longer to hide the missing frames
             else
             {
                 float closedValue;
@@ -88,6 +95,7 @@ public class AvatarEyeControlMulti : MonoBehaviour
             }
         }
 
+        //If everything fine, we just update the blendshapes
         UpdateEyeShapes(EyeDataGetter.otherEyeWeightings);
         
     }
