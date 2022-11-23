@@ -35,6 +35,7 @@ public class InstructionCanvas : MonoBehaviour
             canvasTransform.SetPositionAndRotation(playerRig.position + forward * 0.5f, Quaternion.Euler(0, playerRig.rotation.eulerAngles.y,0));
             positionned = true;
         }
+        fillingImage.transform.position = mapMarker.transform.position;
         fillingImage.fillAmount = (float) mapMarker.count /  (float) mapMarker.movingAverageLengthPos;
         if (fillingImage.fillAmount > 0.99)
         {
