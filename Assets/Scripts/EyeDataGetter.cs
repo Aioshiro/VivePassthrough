@@ -18,6 +18,7 @@ public class EyeDataGetter : MonoBehaviour
     static public bool playerTwoMissingFrames;
 
     private bool eye_callback_registered=false;
+    public static bool needToUpdateWeightings = false;
 
     private void Start()
     {
@@ -60,13 +61,17 @@ public class EyeDataGetter : MonoBehaviour
         }
         else if (!SRanipal_Eye_Framework.Instance.EnableEyeDataCallback)
             SRanipal_Eye_API.GetEyeData_v2(ref ownEyeData);
-
+        if (needToUpdateWeightings)
+        {
+            SRanipal_Eye_v2.GetEyeWeightings(out ownEyeWeightings, ownEyeData);
+            needToUpdateWeightings = false;
+        }
     }
 
     private static void EyeCallback(ref EyeData_v2 eye_data)
     {
         //getting eyedata and updating weighting (blendshapes) values
         ownEyeData = eye_data;
-        SRanipal_Eye_v2.GetEyeWeightings(out ownEyeWeightings, ownEyeData);
+        needToUpdateWeightings = true;
     }
 }
