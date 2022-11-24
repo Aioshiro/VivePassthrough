@@ -124,6 +124,11 @@ public class GameManager : MonoBehaviour
         facialTracker = value;
     }
 
+    public void OnHeadLengthEnter(string value)
+    {
+        otherPersonHeadLength= float.Parse(value)/100;
+    }
+
     public void SetPlayerNumber(PlayerInfo playerInfo)
     {
         GameManager.Instance.playerNumber = playerInfo.playerNumber;        
