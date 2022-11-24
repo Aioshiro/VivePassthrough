@@ -4078,7 +4078,6 @@ MonoBehaviour:
   isCartoon: 0
   isMale: 0
   participantID: -1
-  allowSceneChange: 0
   playerNumber: 0
   facialTracker: 0
   chosedEthnie: 2
@@ -5592,6 +5591,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.002
+  playerOneGazeDirectionLocal: {x: 0, y: 0, z: 0}
+  playerTwoGazeDirectionLocal: {x: 0, y: 0, z: 0}
+  playerOneMissingFrames: 0
+  playerTwoMissingFrames: 0
 --- !u!114 &1974001559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5670,7 +5673,7 @@ MonoBehaviour:
   LengthOfRay: 25
   GazeRayRenderer: {fileID: 1993913569}
   totalTimeLookingAtHead: 0
-  showGazeRay: 1
+  showGazeRay: 0
   headTransform: {fileID: 302144843}
 --- !u!120 &1993913569
 LineRenderer:

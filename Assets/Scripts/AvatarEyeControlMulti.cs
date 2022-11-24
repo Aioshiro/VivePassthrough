@@ -157,7 +157,7 @@ public class AvatarEyeControlMulti : MonoBehaviour
         for (int i = 0; i < EyesModels.Length; ++i)
         {
             Vector3 target = EyeAnchors[i].transform.TransformPoint(gazeDirectionCombinedLocal);
-            Debug.DrawLine(EyeAnchors[i].transform.position, target, Color.red);
+            //Debug.DrawLine(EyeAnchors[i].transform.position, target, Color.red);
             //EyesModels[i].rotation = Quaternion.LookRotation(target);
             EyesModels[i].LookAt(target);
             //EyesModels[i].rotation = Quaternion.LookRotation(EyesModels[i].forward, target);
