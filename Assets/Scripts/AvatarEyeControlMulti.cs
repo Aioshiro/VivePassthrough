@@ -27,7 +27,7 @@ public class AvatarEyeControlMulti : MonoBehaviour
 
     const float timeToIgnoreFrames = 0.35f;
     float currentIgnoredTime = 0;
-    bool missingFramesInternal;
+    bool missingFramesInternal=false;
 
     public bool multiplyBlendshapeBy100 = false;
 

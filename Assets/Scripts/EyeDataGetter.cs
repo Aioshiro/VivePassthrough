@@ -13,6 +13,7 @@ public class EyeDataGetter : MonoBehaviour
     public bool NeededToGetData = true;
     public static Dictionary<EyeShape_v2, float> ownEyeWeightings = new Dictionary<EyeShape_v2, float>();
     public static Dictionary<EyeShape_v2, float> otherEyeWeightings = new Dictionary<EyeShape_v2, float>();
+
     public static EyeData_v2 ownEyeData = new EyeData_v2();
 
     static public bool playerOneMissingFrames;
@@ -34,12 +35,13 @@ public class EyeDataGetter : MonoBehaviour
         SRanipal_Eye_API.SetEyeParameter(StartingEyeParameter);
 
         //Initializing dictionnaries
-        for (int i=0;i<(int)EyeShape_v2.Max; i++)
+        for (int i= (int)EyeShape_v2.None; i<=(int)EyeShape_v2.Max; i++)
         {
             ownEyeWeightings.Add((EyeShape_v2)i, 0);
             otherEyeWeightings.Add((EyeShape_v2)i, 0);
 
         }
+        otherEyeWeightings[EyeShape_v2.Eye_Left_Left] = 1;
     }
 
 
@@ -57,6 +59,13 @@ public class EyeDataGetter : MonoBehaviour
         }
         //SRanipal_Eye_API.GetEyeData_v2(ref ownEyeData);
         SRanipal_Eye_v2.GetEyeWeightings(out ownEyeWeightings, ownEyeData);
+        foreach (var key in ownEyeWeightings.Keys)
+        {
+            Debug.Log(key);
+            Debug.Log($"Own value of {key} is {ownEyeWeightings[key]}");
+            Debug.Log($"other value of {key} is {otherEyeWeightings[key]}");
+
+        }
 
     }
     private static void EyeCallback(ref EyeData_v2 eye_data)
