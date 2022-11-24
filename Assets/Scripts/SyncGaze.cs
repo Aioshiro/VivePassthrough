@@ -11,9 +11,9 @@ public class SyncGaze : NetworkBehaviour
     public readonly SyncList<float> playerTwoGaze = new SyncList<float>();
 
     [SyncVar]
-    bool playerOneMissingFrames;
+    public bool playerOneMissingFrames;
     [SyncVar]
-    bool playerTwoMissingFrames;
+    public bool playerTwoMissingFrames;
 
     public override void OnStartServer()
     {
@@ -36,9 +36,9 @@ public class SyncGaze : NetworkBehaviour
             UpdateDict(playerNumber,EyeDataGetter.ownEyeWeightings);
             ApplyOtherEyeData(playerNumber);
 
-            if (GetGazeRayValidity(GazeIndex.COMBINE,EyeDataGetter.ownEyeData)) { }
-            else if (GetGazeRayValidity(GazeIndex.LEFT,  EyeDataGetter.ownEyeData)) { }
-            else if (GetGazeRayValidity(GazeIndex.RIGHT,  EyeDataGetter.ownEyeData)) { }
+            if (GetGazeRayValidity(GazeIndex.COMBINE,EyeDataGetter.ownEyeData)) { UpdateMissingFrames(playerNumber, false); }
+            else if (GetGazeRayValidity(GazeIndex.LEFT,  EyeDataGetter.ownEyeData)) { UpdateMissingFrames(playerNumber, false); }
+            else if (GetGazeRayValidity(GazeIndex.RIGHT,  EyeDataGetter.ownEyeData)) { UpdateMissingFrames(playerNumber, false); }
             else
             {
                 UpdateMissingFrames(playerNumber, true);
