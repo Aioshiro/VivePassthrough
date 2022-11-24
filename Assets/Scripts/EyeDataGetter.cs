@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using ViveSR.anipal.Eye;
+using Unity.Jobs;
 
 public class EyeDataGetter : MonoBehaviour
 {
@@ -16,9 +17,7 @@ public class EyeDataGetter : MonoBehaviour
 
     static public bool playerOneMissingFrames;
     static public bool playerTwoMissingFrames;
-
-    private bool eye_callback_registered=false;
-    public static bool needToUpdateWeightings = false;
+    private static bool eye_callback_registered = false;
 
     private void Start()
     {
@@ -43,6 +42,8 @@ public class EyeDataGetter : MonoBehaviour
         }
     }
 
+
+
     private void Update()
     {
         //just making sure the callback is there
@@ -54,24 +55,14 @@ public class EyeDataGetter : MonoBehaviour
             SRanipal_Eye_v2.WrapperRegisterEyeDataCallback(Marshal.GetFunctionPointerForDelegate((SRanipal_Eye_v2.CallbackBasic)EyeCallback));
             eye_callback_registered = true;
         }
-        else if (!SRanipal_Eye_Framework.Instance.EnableEyeDataCallback  && eye_callback_registered)
-        {
-            SRanipal_Eye_v2.WrapperUnRegisterEyeDataCallback(Marshal.GetFunctionPointerForDelegate((SRanipal_Eye_v2.CallbackBasic)EyeCallback));
-            eye_callback_registered = false;
-        }
-        else if (!SRanipal_Eye_Framework.Instance.EnableEyeDataCallback)
-            SRanipal_Eye_API.GetEyeData_v2(ref ownEyeData);
-        if (needToUpdateWeightings)
-        {
-            SRanipal_Eye_v2.GetEyeWeightings(out ownEyeWeightings, ownEyeData);
-            needToUpdateWeightings = false;
-        }
-    }
+        //SRanipal_Eye_API.GetEyeData_v2(ref ownEyeData);
+        SRanipal_Eye_v2.GetEyeWeightings(out ownEyeWeightings, ownEyeData);
 
+    }
     private static void EyeCallback(ref EyeData_v2 eye_data)
     {
         //getting eyedata and updating weighting (blendshapes) values
         ownEyeData = eye_data;
-        needToUpdateWeightings = true;
     }
+
 }
