@@ -14,6 +14,9 @@ public class EyeDataGetter : MonoBehaviour
     public static Dictionary<EyeShape_v2, float> ownEyeWeightings = new Dictionary<EyeShape_v2, float>();
     public static Dictionary<EyeShape_v2, float> otherEyeWeightings = new Dictionary<EyeShape_v2, float>();
 
+    public static Vector3 ownGazeDirectionLocal;
+    public static Vector3 otherGazeDirectionLocal;
+
     public static EyeData_v2 ownEyeData = new EyeData_v2();
 
     static public bool playerOneMissingFrames;
@@ -57,15 +60,13 @@ public class EyeDataGetter : MonoBehaviour
             SRanipal_Eye_v2.WrapperRegisterEyeDataCallback(Marshal.GetFunctionPointerForDelegate((SRanipal_Eye_v2.CallbackBasic)EyeCallback));
             eye_callback_registered = true;
         }
+
+        if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.COMBINE, out _, out ownGazeDirectionLocal, ownEyeData)) { }
+        else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.LEFT, out _, out ownGazeDirectionLocal, ownEyeData)) { }
+        else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.RIGHT, out _, out ownGazeDirectionLocal, ownEyeData)) { }
+
         //SRanipal_Eye_API.GetEyeData_v2(ref ownEyeData);
         SRanipal_Eye_v2.GetEyeWeightings(out ownEyeWeightings, ownEyeData);
-        foreach (var key in ownEyeWeightings.Keys)
-        {
-            Debug.Log(key);
-            Debug.Log($"Own value of {key} is {ownEyeWeightings[key]}");
-            Debug.Log($"other value of {key} is {otherEyeWeightings[key]}");
-
-        }
 
     }
     private static void EyeCallback(ref EyeData_v2 eye_data)

@@ -11,6 +11,11 @@ public class SyncGaze : NetworkBehaviour
     public readonly SyncList<float> playerTwoGaze = new SyncList<float>();
 
     [SyncVar]
+    public Vector3 playerOneGazeDirectionLocal;
+    [SyncVar]
+    public Vector3 playerTwoGazeDirectionLocal;
+
+    [SyncVar]
     public bool playerOneMissingFrames;
     [SyncVar]
     public bool playerTwoMissingFrames;
@@ -35,6 +40,9 @@ public class SyncGaze : NetworkBehaviour
             UploadDict(playerNumber,EyeDataGetter.ownEyeWeightings);
             ApplyOtherEyeData(playerNumber);
 
+            UploadOwnGazeDirectionLocal(playerNumber,EyeDataGetter.ownGazeDirectionLocal);
+            UpdateOtherGazeDirectionLocal(playerNumber);
+
             if (GetGazeRayValidity(GazeIndex.COMBINE,EyeDataGetter.ownEyeData)) { UploadMissingFrames(playerNumber, false); }
             else if (GetGazeRayValidity(GazeIndex.LEFT,  EyeDataGetter.ownEyeData)) { UploadMissingFrames(playerNumber, false); }
             else if (GetGazeRayValidity(GazeIndex.RIGHT,  EyeDataGetter.ownEyeData)) { UploadMissingFrames(playerNumber, false); }
@@ -46,6 +54,31 @@ public class SyncGaze : NetworkBehaviour
             EyeDataGetter.playerOneMissingFrames = playerOneMissingFrames;
             EyeDataGetter.playerTwoMissingFrames = playerTwoMissingFrames;
 
+        }
+    }
+
+    [Command(requiresAuthority =false)]
+    void UploadOwnGazeDirectionLocal(int playerNumber,Vector3 ownGazeDirectionLocal)
+    {
+        if (playerNumber == 0)
+        {
+            playerOneGazeDirectionLocal = ownGazeDirectionLocal;
+        }
+        else
+        {
+            playerTwoGazeDirectionLocal = ownGazeDirectionLocal;
+        }
+    }
+
+    void UpdateOtherGazeDirectionLocal(int playerNumber)
+    {
+        if (playerNumber == 0)
+        {
+            EyeDataGetter.otherGazeDirectionLocal = playerTwoGazeDirectionLocal;
+        }
+        else
+        {
+            EyeDataGetter.otherGazeDirectionLocal = playerOneGazeDirectionLocal;
         }
     }
 

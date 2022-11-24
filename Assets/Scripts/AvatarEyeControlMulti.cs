@@ -97,7 +97,7 @@ public class AvatarEyeControlMulti : MonoBehaviour
 
         //If everything fine, we just update the blendshapes
         UpdateEyeShapes(EyeDataGetter.otherEyeWeightings);
-        
+        UpdateGazeRay(EyeDataGetter.otherGazeDirectionLocal);
     }
 
     private void OnDestroy()
