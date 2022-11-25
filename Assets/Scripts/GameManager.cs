@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
         }
         //register callback when server sends player number
         NetworkClient.RegisterHandler<PlayerInfo>(SetPlayerNumber,false);
+        Debug.Log("Handling PlayerInfo");
     }
 
     public void ChangeScene(string SceneToLoad)
