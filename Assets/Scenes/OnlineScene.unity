@@ -4082,6 +4082,7 @@ MonoBehaviour:
   facialTracker: 0
   chosedEthnie: 2
   otherPersonHeadLength: 0.17
+  languageSetToEnglish: 0
   serverIp: localhost
 --- !u!4 &1181722220
 Transform:
@@ -4996,6 +4997,17 @@ MonoBehaviour:
   - '- La mairie est au centre de la ville.'
   - "- L'\xE9cole est adjacente \xE0 la mairie et au sud de l'\xE9glise."
   - "- L'h\xF4pital se trouve sur la rive est."
+  englishInstructions:
+  - '- The residential homes are near a park.'
+  - '- The church is located to the north.'
+  - '- The stadium is framed by two buildings.'
+  - '- The train station is located to the east.'
+  - '- The fire station is adjacent to the hospital.'
+  - '- The church and the train station are diametrically opposed.'
+  - '- The skyscraper is close to the west bank.'
+  - '- The town hall is in the center of the city.'
+  - '- The school is adjacent to the town hall and south of the church.'
+  - '- The hospital is located on the east bank.'
 --- !u!1 &1571186346
 GameObject:
   m_ObjectHideFlags: 0

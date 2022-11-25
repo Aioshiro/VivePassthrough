@@ -56,7 +56,14 @@ public class ExperimentStarter : NetworkBehaviour
         instructionsCanvasText.fontSize *= 2;
         while (timeUntilExperimentStart > 0)
         {
-            instructionsCanvasText.text = "L'expérience débutera dans " + timeUntilExperimentStart.ToString() + " secondes.";
+            if (GameManager.Instance.languageSetToEnglish)
+            {
+                instructionsCanvasText.text = "The experiment will start in " + timeUntilExperimentStart.ToString() + " seconds.";
+            }
+            else
+            {
+                instructionsCanvasText.text = "L'expérience débutera dans " + timeUntilExperimentStart.ToString() + " secondes.";
+            }
             timeUntilExperimentStart -= 1;
             yield return new WaitForSeconds(1);
         }

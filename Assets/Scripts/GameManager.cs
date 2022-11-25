@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("Other player ethnic")]
     public Ethnie chosedEthnie = Ethnie.Caucasian;
     public float otherPersonHeadLength = 0.17f; //average person head length from chin to midpoint of hairline (crinion)
+    public bool languageSetToEnglish = false;
 
     public string serverIp = "localhost";
 
@@ -82,6 +83,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ToggleLanguage(bool value)
+    {
+        languageSetToEnglish = value;
+    }
     public void ToggleHeads()
     {
         HeadsActive = !HeadsActive;

@@ -41,7 +41,14 @@ public class InstructionCanvas : MonoBehaviour
         {
             fillingImage.enabled = false;
             markerImage.enabled = false;
-            text.text = "En attente du second participant...";
+            if (GameManager.Instance.languageSetToEnglish)
+            {
+                text.text = "Waiting for second participant";
+            }
+            else
+            {
+                text.text = "En attente du second participant...";
+            }
             ExperimentStarter.instance.SetPlayerReady(GameManager.Instance.playerNumber);
             this.enabled = false;
         }
