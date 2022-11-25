@@ -1152,7 +1152,7 @@ MonoBehaviour:
   enableTouchInput: 0
   audioLoopback: 0
   loopbackKey: 108
-  showVisemes: 0
+  showVisemes: 1
   debugVisemesKey: 100
   skipAudioSource: 0
   gain: 1
