@@ -1190,7 +1190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.1
+  syncInterval: 0.001
   smoothAmount: 70
 --- !u!114 &1876685525
 MonoBehaviour:
