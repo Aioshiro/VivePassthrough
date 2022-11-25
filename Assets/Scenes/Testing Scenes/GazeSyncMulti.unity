@@ -560,7 +560,7 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
-  player: {fileID: 0}
+  player: {fileID: 377291005}
   objectsToGiveAuthorityOn: []
 --- !u!4 &1194642646
 Transform:
