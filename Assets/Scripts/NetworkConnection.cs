@@ -36,7 +36,10 @@ public class NetworkConnection : NetworkManager
         ViveSR.anipal.Eye.SRanipal_Eye_Framework.Instance.EnableEye = true;
         ViveSR.anipal.Eye.SRanipal_Eye_Framework.Instance.StartFramework();
         var gestureProvider = FindObjectOfType<GestureProvider>();
-        gestureProvider.enabled = true;
+        if (gestureProvider != null)
+        {
+            gestureProvider.enabled = true;
+        }
 #endif
     }
 
