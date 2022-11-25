@@ -52,7 +52,12 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         //register callback when server sends player number
-        NetworkClient.RegisterHandler<PlayerInfo>(SetPlayerNumber,false);
+        RegisterHandler();
+    }
+
+    public void RegisterHandler()
+    {
+        NetworkClient.RegisterHandler<PlayerInfo>(SetPlayerNumber, false);
         Debug.Log("Handling PlayerInfo");
     }
 

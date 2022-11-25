@@ -120,6 +120,7 @@ public class NetworkConnection : NetworkManager
         networkAddress = GUI.TextField(new Rect(0, 70, 200, 20),networkAddress);
         if (GUI.Button(new Rect(0, 100, 200, 20), "Connect"))
         {
+            GameManager.Instance.RegisterHandler();
             base.StartClient();
         }
     
