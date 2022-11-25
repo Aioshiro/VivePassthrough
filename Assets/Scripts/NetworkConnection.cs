@@ -121,6 +121,7 @@ public class NetworkConnection : NetworkManager
         if (GUI.Button(new Rect(0, 100, 200, 20), "Connect"))
         {
             GameManager.Instance.RegisterHandler();
+            base.StopClient();
             base.StartClient();
         }
     
