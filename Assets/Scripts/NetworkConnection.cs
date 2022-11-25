@@ -33,8 +33,11 @@ public class NetworkConnection : NetworkManager
         player.SetActive(true);
         //LipFrameWork.EnableLip = true;
         //LipFrameWork.StartFramework();
-        ViveSR.anipal.Eye.SRanipal_Eye_Framework.Instance.EnableEye = true;
-        ViveSR.anipal.Eye.SRanipal_Eye_Framework.Instance.StartFramework();
+        if (ViveSR.anipal.Eye.SRanipal_Eye_Framework.Instance != null)
+        {
+            ViveSR.anipal.Eye.SRanipal_Eye_Framework.Instance.EnableEye = true;
+            ViveSR.anipal.Eye.SRanipal_Eye_Framework.Instance.StartFramework();
+        }
         var gestureProvider = FindObjectOfType<GestureProvider>();
         if (gestureProvider != null)
         {

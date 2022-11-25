@@ -10,7 +10,6 @@ public class SetUpNext : MonoBehaviour
 
     private void Update()
     {
-        if (SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.WORKING) return;
         SetMirroTransform();
     }
 

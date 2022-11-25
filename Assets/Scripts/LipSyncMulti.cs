@@ -46,7 +46,7 @@ public class LipSyncMulti: MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (skinnedMeshRenderer != null)
+        if (skinnedMeshRenderer != null && SyncViseme.instance != null)
         {
             SetVisemeToMorphTargetNetwork();
         }

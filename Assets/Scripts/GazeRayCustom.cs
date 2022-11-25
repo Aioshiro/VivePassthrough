@@ -49,7 +49,9 @@ public class GazeRayCustom : MonoBehaviour
             if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.COMBINE, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal, eyeData)) { }
             else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.LEFT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal, eyeData)) { }
             else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.RIGHT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal, eyeData)) { }
-            else { missingFrames = true; return; }
+            else { missingFrames = true;
+                GazeRayRenderer.material.color = Color.red;
+                return; }
         }
         else
         {
@@ -77,6 +79,7 @@ public class GazeRayCustom : MonoBehaviour
         {
             GazeDirectionCombined = Camera.main.transform.TransformDirection(GazeDirectionCombinedLocal).normalized;
         }
+        GazeRayRenderer.material.color = Color.green;
         oldGazeDirectionCombined = GazeDirectionCombined;
         GazeRayRenderer.SetPosition(0, Camera.main.transform.position - Camera.main.transform.up * 0.05f);
         GazeRayRenderer.SetPosition(1, Camera.main.transform.position + GazeDirectionCombined * LengthOfRay);
