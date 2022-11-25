@@ -504,7 +504,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02dc39413f12abc438232ced1789bc2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToGoNext: {fileID: 0}
 --- !u!1 &1194642643
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,7 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnableEye: 0
-  EnableEyeDataCallback: 0
+  EnableEyeDataCallback: 1
   EnableEyeVersion: 1
 --- !u!4 &1606552516
 Transform:
