@@ -11,21 +11,21 @@ public class ExperimentEnder : NetworkBehaviour
     public bool playerTwoFinished = false;
 
 
-    public void SetPlayerAsFinished()
+    public void TogglePlayerAsFinished()
     {
-        Cmd_SetPlayerAsFinished(GameManager.Instance.playerNumber);
+        Cmd_TogglePlayerAsFinished(GameManager.Instance.playerNumber);
     }
 
     [Command(requiresAuthority =false)]
-    public void Cmd_SetPlayerAsFinished(int index)
+    public void Cmd_TogglePlayerAsFinished(int index)
     {
         if (index == 0)
         {
-            playerOneFinished = true;
+            playerOneFinished = !playerOneFinished;
         }
         else
         {
-            playerTwoFinished = true;
+            playerTwoFinished = !playerTwoFinished;
         }
         if (playerOneFinished && playerTwoFinished)
         {
