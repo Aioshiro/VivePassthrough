@@ -40,6 +40,7 @@ public class ExperimentStarter : NetworkBehaviour
         if (playerOneReady && playerTwoReady && !startedExperiment)
         {
             startedExperiment = true;
+            Debug.Log("Starting exp on clients");
             RpcStartExperimentCountDown();
             this.enabled = false;
         }
@@ -48,11 +49,13 @@ public class ExperimentStarter : NetworkBehaviour
     [ClientRpc]
     private void RpcStartExperimentCountDown()
     {
+        Debug.Log("Starting exp coroutine");
         StartCoroutine(nameof(ExperimentCountdown));
     }
 
     IEnumerator ExperimentCountdown()
     {
+        Debug.Log("Starting exp countdown");
         instructionsCanvasText.fontSize *= 2;
         while (timeUntilExperimentStart > 0)
         {
