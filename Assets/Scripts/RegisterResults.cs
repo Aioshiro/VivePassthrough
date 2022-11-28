@@ -89,7 +89,7 @@ public class RegisterResults : NetworkBehaviour
 #if UNITY_EDITOR
         return Application.dataPath + "/CSV/" + fileName;
 #else
-        return Application.dataPath + fileName;
+        return Application.dataPath + "/"+ fileName;
 #endif
     }
 }
