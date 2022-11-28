@@ -50,7 +50,11 @@ public class ExperimentStarter : NetworkBehaviour
     private void RpcStartExperimentCountDown()
     {
         Debug.Log("Starting exp coroutine");
-        StartCoroutine(nameof(ExperimentCountdown));
+        if (!startedExperiment)
+        {
+            startedExperiment = true;
+            StartCoroutine(nameof(ExperimentCountdown));
+        }
     }
 
     IEnumerator ExperimentCountdown()
