@@ -387,6 +387,7 @@ public class OculusLipSyncMicInput : MonoBehaviour
 
     public void StartMicrophoneRecord(int soundLenSec)
     {
+        Debug.Log("Starting mic record");
         StopMicrophone();
         StartMicrophone(soundLenSec);
         _isRecordingSpeech = true;
@@ -416,6 +417,7 @@ public class OculusLipSyncMicInput : MonoBehaviour
                 }
                 _croppedClip = AudioClip.Create(_recordedClip.name, recordedSamples, _recordedClip.channels, _recordedClip.frequency, false);
                 _croppedClip.SetData(croppedData, 0);
+                SavWav.SaveWav(Application.dataPath + "/" + GameManager.Instance.participantID.ToString() + "Cropped.wav", _croppedClip);
             }
             _isRecordingSpeech = false;
         }

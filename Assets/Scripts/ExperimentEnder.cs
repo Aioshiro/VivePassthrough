@@ -37,6 +37,7 @@ public class ExperimentEnder : NetworkBehaviour
     void Rpc_EndExperiment()
     {
         FindObjectOfType<RegisterResults>().Save();
+        FindObjectOfType<OculusLipSyncMicInput>().EndMicrophoneRecord();
         Application.Quit();
     }
 }
