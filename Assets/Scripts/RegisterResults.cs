@@ -19,15 +19,7 @@ public class RegisterResults : NetworkBehaviour
         gazeRay = GetComponentInChildren<GazeRay>();
     }
 
-    private void OnApplicationQuit()
-    {
-        if (isClient)
-        {
-            Save();
-        }
-    }
-
-    void Save()
+    public void Save()
     {
         float totalTime = chronometer.StopChronometer();
 
