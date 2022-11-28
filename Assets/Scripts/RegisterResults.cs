@@ -16,7 +16,7 @@ public class RegisterResults : NetworkBehaviour
     void Start()
     {
         chronometer = new Chronometer();
-        gazeRay = GetComponentInChildren<GazeRay>();
+        //gazeRay = GetComponentInChildren<GazeRay>();
     }
 
     public void Save()
@@ -89,7 +89,7 @@ public class RegisterResults : NetworkBehaviour
 #if UNITY_EDITOR
         return Application.dataPath + "/CSV/" + fileName;
 #else
-        return Application.dataPath +"/"+ fileName;
+        return Application.dataPath + fileName;
 #endif
     }
 }
