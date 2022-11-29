@@ -722,7 +722,7 @@ MonoBehaviour:
   isMale: 1
   participantID: -1
   playerNumber: 0
-  facialTracker: 0
+  facialTracker: 1
   chosedEthnie: 2
   otherPersonHeadLength: 0.17
   languageSetToEnglish: 0
