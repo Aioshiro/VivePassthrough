@@ -21,11 +21,6 @@ public class AvatarLipMulti : MonoBehaviour
 
     private void Start()
     {
-        if (!SRanipal_Lip_Framework.Instance.EnableLip)
-        {
-            enabled = false;
-            return;
-        }
         lipData = FindObjectOfType<LipData>();
         SetLipShapeTables(LipShapeTables);
     }
