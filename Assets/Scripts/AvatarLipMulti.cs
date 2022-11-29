@@ -38,13 +38,17 @@ public class AvatarLipMulti : MonoBehaviour
         //Getting facial tracker data
         SRanipal_Lip_v2.GetLipWeightings(out var weightings);
         //Uploading facial tracker to server
+        if (lipData == null)
+        {
+            lipData = FindObjectOfType<LipData>();
+        }
         lipData.UpdateWeightings(weightings, GameManager.Instance.playerNumber);
 
         //Uploading local model blenshapes values
         if (GameManager.Instance.playerNumber == 0)
         {
-            //UpdateLipShapes(lipData.LipWeightingsSecondPlayer);
-            UpdateLipShapes(lipData.LipWeightingsFirstPlayer);
+            UpdateLipShapes(lipData.LipWeightingsSecondPlayer);
+            //UpdateLipShapes(lipData.LipWeightingsFirstPlayer);
         }
         else
         {

@@ -31,8 +31,11 @@ public class NetworkConnection : NetworkManager
         }
         base.StartClient();
         player.SetActive(true);
-        //LipFrameWork.EnableLip = true;
-        //LipFrameWork.StartFramework();
+        if (LipFrameWork != null)
+        {
+            LipFrameWork.EnableLip = true;
+            LipFrameWork.StartFramework();
+        }
         if (ViveSR.anipal.Eye.SRanipal_Eye_Framework.Instance != null)
         {
             ViveSR.anipal.Eye.SRanipal_Eye_Framework.Instance.EnableEye = true;
