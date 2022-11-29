@@ -32,8 +32,6 @@ public class AvatarLipMulti : MonoBehaviour
 
     private void Update()
     {
-        //If issue with framework, we stop
-        if (SRanipal_Lip_Framework.Status != SRanipal_Lip_Framework.FrameworkStatus.WORKING) return;
 
         //Getting facial tracker data
         SRanipal_Lip_v2.GetLipWeightings(out var weightings);
