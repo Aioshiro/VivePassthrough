@@ -1,2 +1,2 @@
-ID;Heads active;Cartoon;Male;Ethnic;Time (s)
--1;Not active;;;Caucasian;4,066284
+ID;Heads active;Cartoon;Male;Ethnic;Time of experiment (s);Time spent looking at head (s);Time spent looking at eyes (s);Time spent looking at mouth (s);Time spent looking at forehead (s);Number of fixations on head;Average fixation duration (s)
+-1;Not active;;;Caucasian;4,066284;;;;;;

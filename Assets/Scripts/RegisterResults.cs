@@ -57,8 +57,13 @@ public class RegisterResults : NetworkBehaviour
         }
         string ethnic = GameManager.Instance.chosedEthnie.ToString();
         string time = totalTime.ToString();
-        string percentage = (gazeRay.totalTimeLookingAtHead * 100 / totalTime).ToString();
-        var newLine = string.Format("{0};{1};{2};{3};{4};{5};{6}", id,avatarOn,cartoon,male,ethnic, time,percentage);
+        string timeLookingAtHead = gazeRay.totalTimeLookingAtHead.ToString();
+        string timeLookingAtEyes = gazeRay.timeLookingAtEyes.ToString();
+        string timeLookingAtMouth = gazeRay.timeLookingAtMouth.ToString();
+        string timeLookingAtForehead = gazeRay.timeLookingAtForehead.ToString();
+        string numberOfFixations = gazeRay.numberOfFixations.ToString();
+        string averageFixationTime = (gazeRay.totalFixationTime / gazeRay.numberOfFixations).ToString();
+        var newLine = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11}", id,avatarOn,cartoon,male,ethnic, time,timeLookingAtHead, timeLookingAtEyes, timeLookingAtMouth, timeLookingAtForehead,numberOfFixations,averageFixationTime);
         csv.AppendLine(newLine);
 
         SaveLocally(csv.ToString());
