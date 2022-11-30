@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InstructionCanvas : MonoBehaviour
 {
-    bool positionned = false;
+    bool positionned = true;
     [SerializeField]
     Transform playerRig;
     RectTransform canvasTransform;
@@ -18,8 +18,6 @@ public class InstructionCanvas : MonoBehaviour
     Image markerImage;
     [SerializeField]
     TransformSmoother mapMarker;
-    
-
 
     private void Start()
     {
@@ -36,11 +34,14 @@ public class InstructionCanvas : MonoBehaviour
             positionned = true;
         }
         fillingImage.transform.position = mapMarker.transform.position;
+        fillingImage.transform.rotation = mapMarker.transform.rotation;
         fillingImage.fillAmount = (float) mapMarker.count /  (float) mapMarker.movingAverageLengthPos;
         if (fillingImage.fillAmount > 0.99)
         {
             fillingImage.enabled = false;
             markerImage.enabled = false;
+            this.transform.parent = null;
+            canvasTransform.position = mapMarker.transform.position;
             if (GameManager.Instance.languageSetToEnglish)
             {
                 text.text = "Waiting for second participant";
