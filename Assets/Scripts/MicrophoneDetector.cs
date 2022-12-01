@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script to detect microphone level
+/// </summary>
+[System.Obsolete("Not used now that we use Oculus lip sync")]
 public class MicrophoneDetector : MonoBehaviour
 {
     public static float MicLoudness; //Mic sound level

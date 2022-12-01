@@ -2,15 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-
+/// <summary>
+/// Sync the head positions and rotations of the players on the server.
+/// <para>It uploads the local position and rotation in the marker 10 space, so both client have same origin</para>
+/// </summary>
 public class SyncHeads : NetworkBehaviour
 {
+    [Tooltip("List of players heads local position")]
     readonly SyncList<Vector3> playersHeadsLocalPositions = new SyncList<Vector3>();
+
+    [Tooltip("List of players heads local rotation")]
     readonly SyncList<Quaternion> playersHeadsLocalRotations = new SyncList<Quaternion>();
+
+    [Tooltip("Other player head")]
     [SerializeField] GameObject otherPlayerHead;
+
+    [Tooltip("Marker 10 transform")]
     [SerializeField] Transform markerWorldOrigin;
+
+    [Tooltip("Local rig tracked camera")]
     [SerializeField] Transform localRigTrackedCamera;
 
+    /// <summary>
+    /// On server start, initialize SyncLists
+    /// </summary>
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -20,6 +35,9 @@ public class SyncHeads : NetworkBehaviour
         playersHeadsLocalRotations.Add(Quaternion.identity);
     }
 
+    /// <summary>
+    /// On start client, register callbacks
+    /// </summary>
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -41,23 +59,39 @@ public class SyncHeads : NetworkBehaviour
             UpdatePosValue(playerNumber, markerWorldOrigin.transform.InverseTransformPoint(localRigTrackedCamera.position));
             UpdateRotValue(playerNumber, Quaternion.Inverse(markerWorldOrigin.rotation)* localRigTrackedCamera.transform.rotation);
             //Then, download other headPos and headRot
-            otherPlayerHead.transform.position = markerWorldOrigin.transform.TransformPoint(playersHeadsLocalPositions[(playerNumber + 1) % 2]);
-            otherPlayerHead.transform.rotation = markerWorldOrigin.transform.rotation*playersHeadsLocalRotations[(playerNumber + 1) % 2];
+            otherPlayerHead.transform.SetPositionAndRotation(markerWorldOrigin.transform.TransformPoint(playersHeadsLocalPositions[(playerNumber + 1) % 2]), markerWorldOrigin.transform.rotation*playersHeadsLocalRotations[(playerNumber + 1) % 2]);
         }
     }
 
+    /// <summary>
+    /// Upload local position on server
+    /// </summary>
+    /// <param name="index"> Player number</param>
+    /// <param name="newValue"> New local position value</param>
     [Command(requiresAuthority =false)]
     void UpdatePosValue(int index, Vector3 newValue)
     {
         playersHeadsLocalPositions[index] = newValue;
     }
 
+    /// <summary>
+    /// Upload local rotation on server
+    /// </summary>
+    /// <param name="index"> Player number</param>
+    /// <param name="newValue"> New local rotation value</param>
     [Command(requiresAuthority = false)]
     void UpdateRotValue(int index, Quaternion newValue)
     {
         playersHeadsLocalRotations[index] = newValue;
     }
 
+    /// <summary>
+    /// Callback when position is updated
+    /// </summary>
+    /// <param name="op"></param>
+    /// <param name="index"></param>
+    /// <param name="oldItem"></param>
+    /// <param name="newItem"></param>
     void OnPosUpdated(SyncList<Vector3>.Operation op, int index, Vector3 oldItem, Vector3 newItem)
     {
         switch (op)
@@ -85,6 +119,13 @@ public class SyncHeads : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Callback when rotation is updated
+    /// </summary>
+    /// <param name="op"></param>
+    /// <param name="index"></param>
+    /// <param name="oldItem"></param>
+    /// <param name="newItem"></param>
     void OnRotUpdated(SyncList<Quaternion>.Operation op, int index, Quaternion oldItem, Quaternion newItem)
     {
         switch (op)

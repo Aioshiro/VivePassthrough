@@ -3,19 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+/// <summary>
+/// Sync the visemes of the players on the server
+/// </summary>
 public class SyncViseme : NetworkBehaviour
 {
-
+    /// <summary>
+    /// Singleton isntance
+    /// </summary>
     public static SyncViseme instance;
+    /// <summary>
+    /// OVRLipSyncContext, OculusLipSyncMicInput here
+    /// </summary>
     private OVRLipSyncContextBase lipsyncContext = null;
     [Range(1, 100)]
     [Tooltip("Smoothing of 1 will yield only the current predicted viseme, 100 will yield an extremely smooth viseme response.")]
     public int smoothAmount = 70;
 
-
+    /// <summary>
+    /// Player one list of visemes
+    /// </summary>
     readonly public SyncList<float> playerOneViseme = new SyncList<float>();
+
+    /// <summary>
+    /// Player two list of visemes
+    /// </summary>
     readonly public SyncList<float> playerTwoViseme = new SyncList<float>();
 
+    /// <summary>
+    /// On server start, initialize syncLists of visemes
+    /// </summary>
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -25,7 +42,9 @@ public class SyncViseme : NetworkBehaviour
             playerTwoViseme.Add(0);
         }
     }
-
+    /// <summary>
+    /// On client start, register callbacks and find OverLipSyncContextBase
+    /// </summary>
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -46,7 +65,15 @@ public class SyncViseme : NetworkBehaviour
 
     private void Start()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+        
     }
 
     void Update()
@@ -60,6 +87,11 @@ public class SyncViseme : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Upload Visemes on server
+    /// </summary>
+    /// <param name="index"> Player number</param>
+    /// <param name="newValues"> New visemes values </param>
     [Command(requiresAuthority = false)]
     void UpdateVisemes(int index, float[] newValues)
     {
@@ -79,6 +111,13 @@ public class SyncViseme : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Callback when player one has updated values
+    /// </summary>
+    /// <param name="op"></param>
+    /// <param name="index"></param>
+    /// <param name="oldItem"></param>
+    /// <param name="newItem"></param>
     void OnPlayerOneUpdated(SyncList<float>.Operation op, int index, float oldItem, float newItem)
     {
         switch (op)
@@ -105,7 +144,13 @@ public class SyncViseme : NetworkBehaviour
                 break;
         }
     }
-
+    /// <summary>
+    /// Callback when player two has updated values
+    /// </summary>
+    /// <param name="op"></param>
+    /// <param name="index"></param>
+    /// <param name="oldItem"></param>
+    /// <param name="newItem"></param>
     void OnPlayerTwoUpdated(SyncList<float>.Operation op, int index, float oldItem, float newItem)
     {
         switch (op)

@@ -4,16 +4,22 @@ using UnityEngine;
 using ViveSR.anipal.Lip;
 using Mirror;
 
+
+/// <summary>
+/// Updates avatar mouth with the other player facial tracker's data, using LipData.cs
+/// </summary>
 public class AvatarLipMulti : MonoBehaviour
 {
 
     [Tooltip("Lip shape tables for correspondancies between vive tracker and the model blendshapes")]
     [SerializeField] private List<LipShapeTable_v2> LipShapeTables;
 
-    //Reference to LipData script, to upload data to server and get other player data
+    /// <summary>
+    /// Reference to LipData script, to upload data to server and get other player data
+    /// </summary>
     private LipData lipData;
 
-    //overrides multiplicators for facial tracker, in case we need to amplify some values
+    [Tooltip("Overrides multiplicators for facial tracker, in case we need to amplify some values")]
     public float[] overrides;
 
     [Tooltip("Check to multiply facial tracker input by 100, in case model blendshape goes from 0 to 100")]
@@ -53,7 +59,10 @@ public class AvatarLipMulti : MonoBehaviour
 
     }
 
-    //Setting up lipShapesTables, code taken from Vive Samples
+    /// <summary>
+    /// Setting up lipShapesTables, code taken from Vive Samples
+    /// </summary>
+    /// <param name="lipShapeTables"> Lip shape tables to update</param>
     public void SetLipShapeTables(List<LipShapeTable_v2> lipShapeTables)
     {
         bool valid = true;
@@ -85,14 +94,21 @@ public class AvatarLipMulti : MonoBehaviour
             LipShapeTables = lipShapeTables;
     }
 
-    //Updating every lipshape table, code taken from Vive Samples
+    /// <summary>
+    /// Updating every lipshape table, code taken from Vive Samples
+    /// </summary>
+    /// <param name="lipWeightings"> Dictionnary of lip weighting</param>
     public void UpdateLipShapes(SyncDictionary<LipShape_v2, float> lipWeightings)
     {
         foreach (var table in LipShapeTables)
             RenderModelLipShape(table, lipWeightings);
     }
 
-    //Updating individual lipshape table, code taken from Vive samples
+    /// <summary>
+    /// Updating individual lipshape table, code taken from Vive samples
+    /// </summary>
+    /// <param name="lipShapeTable">Lipshape table to update</param>
+    /// <param name="weighting">Dictionnary of lip weighting</param>
     private void RenderModelLipShape(LipShapeTable_v2 lipShapeTable, SyncDictionary<LipShape_v2, float> weighting)
     {
         for (int i = 0; i < lipShapeTable.lipShapes.Length; i++)

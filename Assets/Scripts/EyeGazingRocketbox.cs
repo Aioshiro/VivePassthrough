@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script for Ready player me avatar eye to follow object.
+/// </summary>
+[System.Obsolete("Not used because we use eye tracking")]
 public class EyeGazingRocketbox : MonoBehaviour
 {
     [Tooltip("Object to look at")]

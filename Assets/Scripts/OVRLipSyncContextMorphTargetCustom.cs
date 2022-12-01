@@ -23,6 +23,7 @@ limitations under the License.
 using UnityEngine;
 using System.Linq;
 
+[System.Obsolete("See AvatarLipMulti.cs and LipSyncMulti.cs")]
 public class OVRLipSyncContextMorphTargetCustom : MonoBehaviour
 {
     // PUBLIC

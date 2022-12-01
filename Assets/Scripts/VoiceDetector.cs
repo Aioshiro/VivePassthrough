@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Detects if someone is talking
+/// </summary>
+[System.Obsolete("Not used since we use Oculus lip sync")]
 public class VoiceDetector : MonoBehaviour
 {
     static bool isTalking = false;

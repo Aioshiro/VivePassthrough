@@ -4,14 +4,25 @@ using UnityEngine;
 using ViveSR.anipal.Lip;
 using Mirror;
 
+/// <summary>
+/// Script to synchronize data from facial tracker
+/// </summary>
 public class LipData : NetworkBehaviour
 {
 
-    //The synchronized dictionnary for each player, they are automatically synced on clients when they change on server
+    /// <summary>
+    /// The synchronized dictionnary for player one, it is automatically synced on clients when they change on server
+    /// </summary>
     public readonly SyncDictionary<LipShape_v2, float> LipWeightingsFirstPlayer = new SyncDictionary<LipShape_v2, float>();
+
+    /// <summary>
+    /// The synchronized dictionnary for player two, it is automatically synced on clients when they change on server
+    /// </summary>
     public readonly SyncDictionary<LipShape_v2, float> LipWeightingsSecondPlayer = new SyncDictionary<LipShape_v2, float>();
 
-    //on server start, intialiazing the dictionnaries
+    /// <summary>
+    /// On server start, intialiazing the dictionnaries
+    /// </summary>
     public override void OnStartServer()
     {
         for (int i = 0; i < (int)LipShape_v2.Max - 1; i++)
@@ -21,7 +32,6 @@ public class LipData : NetworkBehaviour
         }
     }
 
-    //In case we need to do other things on dictionnary change
     //Dictionnary are automatically synced, no need to initialized on client
     //public override void OnStartClient()
     //{
@@ -30,7 +40,11 @@ public class LipData : NetworkBehaviour
 
     //}
 
-    //Updating new lip data
+    /// <summary>
+    /// Uploading the new lip data on the server
+    /// </summary>
+    /// <param name="dict"> Lip weightings</param>
+    /// <param name="playerNumber"> Player number</param>
     public void UpdateWeightings(Dictionary<LipShape_v2,float> dict, int playerNumber)
     {
         foreach (KeyValuePair<LipShape_v2, float> kvp in dict)
@@ -40,11 +54,16 @@ public class LipData : NetworkBehaviour
 
     }
 
-    //Uploading individual (key,value) tuples on server
-    //upload is made on server to be authorized and sync to clients
-    //Upload is made for each tuple individually as Dictionary is not a supported type in [Command] functions
+    /// <summary>
+    /// Uploading individual (key,value) tuples on server.
+    /// <para> Upload is made on server to be authorized and sync to clients </para>
+    /// Upload is made for each tuple individually as Dictionary is not a supported type in [Command] functions
+    /// </summary>
+    /// <param name="key"> Dictionnary key</param>
+    /// <param name="value"> New dictionnary value</param>
+    /// <param name="playerNumber"> Player number</param>
     [Command(requiresAuthority =false)]
-    public void UpdateDictionnaryOnServer(LipShape_v2 key, float value, int playerNumber)
+    private void UpdateDictionnaryOnServer(LipShape_v2 key, float value, int playerNumber)
     {
         if (playerNumber == 0)
         {
@@ -57,7 +76,12 @@ public class LipData : NetworkBehaviour
     }
 
 
-    //In case we need to do additional things on dictionnary change
+    /// <summary>
+    /// Callback when player one dictionnary changes
+    /// </summary>
+    /// <param name="op"></param>
+    /// <param name="key"></param>
+    /// <param name="item"></param>
     void OnFirstPlayerChange(SyncDictionary<LipShape_v2, float>.Operation op, LipShape_v2 key, float item)
     {
         switch (op)
@@ -77,6 +101,12 @@ public class LipData : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Callback when player two dictionnary changes
+    /// </summary>
+    /// <param name="op"></param>
+    /// <param name="key"></param>
+    /// <param name="item"></param>
     void OnSecondPlayerChange(SyncDictionary<LipShape_v2, float>.Operation op, LipShape_v2 key, float item)
     {
         switch (op)

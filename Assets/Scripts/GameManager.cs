@@ -4,15 +4,23 @@ using UnityEngine;
 using Mirror;
 using TMPro;
 
+/// <summary>
+/// GameManager script to set up experiments settings
+/// </summary>
 public class GameManager : MonoBehaviour
 {
 
-    //struct necessary to recieve messages from the server (player number here)
+    /// <summary>
+    /// Struct necessary to recieve player info from the server (player number for now)
+    /// </summary>
     public struct PlayerInfo : NetworkMessage
     {
         public int playerNumber;
     }
 
+    /// <summary>
+    /// Game Manager singleton instance
+    /// </summary>
     public static GameManager Instance;
 
     [Tooltip("Does the other player have an avatar ?")]
@@ -35,9 +43,14 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("Other player ethnic")]
     public Ethnie chosedEthnie = Ethnie.Caucasian;
+
+    [Tooltip("Other person head length from chin to midpoint of hairline")]
     public float otherPersonHeadLength = 0.17f; //average person head length from chin to midpoint of hairline (crinion)
+
+    [Tooltip("Is language set to english ? (French otherwise)")]
     public bool languageSetToEnglish = false;
 
+    [Tooltip("The server's ip")]
     public string serverIp = "localhost";
 
 
@@ -55,13 +68,18 @@ public class GameManager : MonoBehaviour
         //register callback when server sends player number
         RegisterHandler();
     }
-
+    /// <summary>
+    /// Registering handler for playerInfo messages
+    /// </summary>
     public void RegisterHandler()
     {
         NetworkClient.RegisterHandler<PlayerInfo>(SetPlayerNumber, false);
         Debug.Log("Handling PlayerInfo");
     }
-
+    /// <summary>
+    /// Change the scene
+    /// </summary>
+    /// <param name="SceneToLoad"> Scene's name</param>
     public void ChangeScene(string SceneToLoad)
     {
         if (allowSceneChange)
@@ -69,7 +87,10 @@ public class GameManager : MonoBehaviour
             UnityEngine.SceneManagement.SceneManager.LoadScene(SceneToLoad);
         }
     }
-
+    /// <summary>
+    /// Change the particpant's id
+    /// </summary>
+    /// <param name="id"></param>
     public void ChangeParticipantID(string id)
     {
         try
@@ -83,23 +104,40 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Toggle language
+    /// </summary>
+    /// <param name="value"> True if English, false otherwise</param>
     public void ToggleLanguage(bool value)
     {
         languageSetToEnglish = value;
     }
+    /// <summary>
+    /// Toggle avatar activation
+    /// </summary>
     public void ToggleHeads()
     {
         HeadsActive = !HeadsActive;
     }
+    /// <summary>
+    /// Toggles cartoon avatars
+    /// </summary>
     public void ToggleCartoon()
     {
         isCartoon = !isCartoon;
     }
+    /// <summary>
+    /// Toggle gender
+    /// </summary>
     public void ToggleGender()
     {
         isMale = !isMale;
     }
 
+    /// <summary>
+    /// If input is true, activate caucasian avatars
+    /// </summary>
+    /// <param name="value"></param>
     public void OnCaucasianToggle(bool value)
     {
         if (value)
@@ -108,6 +146,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// If input is true, activate asian avatars
+    /// </summary>
+    /// <param name="value"></param>
     public void OnAsianToggle(bool value)
     {
         if (value)
@@ -115,6 +157,10 @@ public class GameManager : MonoBehaviour
             chosedEthnie = Ethnie.Asian;
         }
     }
+    /// <summary>
+    /// If input is true, activate latino avatars
+    /// </summary>
+    /// <param name="value"></param>
     public void OnLatinoToggle(bool value)
     {
         if (value)
@@ -122,6 +168,10 @@ public class GameManager : MonoBehaviour
             chosedEthnie = Ethnie.Latino;
         }
     }
+    /// <summary>
+    /// If input is true, activate african avatars
+    /// </summary>
+    /// <param name="value"></param>
     public void OnAfricanToggle(bool value)
     {
         if (value)
@@ -130,21 +180,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// If input is true, activate facial tracker input for mouth
+    /// </summary>
+    /// <param name="value"></param>
     public void OnFacialTrackerToggle(bool value)
     {
         facialTracker = value;
     }
 
+    /// <summary>
+    /// Updates other player head length
+    /// </summary>
+    /// <param name="value"> String containing head length in cm</param>
     public void OnHeadLengthEnter(string value)
     {
         otherPersonHeadLength= float.Parse(value)/100;
     }
-
+    /// <summary>
+    /// Sets player number
+    /// </summary>
+    /// <param name="playerInfo"> The PlayerInfo containing the player number </param>
     public void SetPlayerNumber(PlayerInfo playerInfo)
     {
         GameManager.Instance.playerNumber = playerInfo.playerNumber;        
     }
 
+    /// <summary>
+    /// Sets the server ip
+    /// </summary>
+    /// <param name="ip">Server's ip</param>
     public void SetServerIp(string ip)
     {
         serverIp = ip;

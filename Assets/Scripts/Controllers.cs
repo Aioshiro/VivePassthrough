@@ -2,9 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script to update controllers position
+/// </summary>
+[System.Obsolete("We do not use controllers",false)]
 public class Controllers : MonoBehaviour
 {
+    /// <summary>
+    /// Left controller transform
+    /// </summary>
     private Transform left;
+    /// <summary>
+    /// Right controller transform
+    /// </summary>
     private Transform right;
 
     void Start()

@@ -4,40 +4,76 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using ViveSR.anipal.Eye;
 using System;
+
+/// <summary>
+/// Moves an avatar eyes with the output of own's Vive's eye tracker
+/// </summary>
 public class AvatarEyeControl : MonoBehaviour
 {
+    [Tooltip("Transform of left eye and then right eye, must have a 0 rotation when looking forward")]
     [SerializeField] private Transform[] EyesModels = new Transform[0];
+
+    [Tooltip("List of eyeshapes tables to link eye output and blendshapes")]
     [SerializeField] private List<EyeShapeTable_v2> EyeShapeTables;
-    /// <summary>
-    /// Customize this curve to fit the blend shapes of your avatar.
-    /// </summary>
+
+    [Tooltip("Customize this curve to fit the blend shapes of your avatar.")]
     [SerializeField] private AnimationCurve EyebrowAnimationCurveUpper;
-    /// <summary>
-    /// Customize this curve to fit the blend shapes of your avatar.
-    /// </summary>
+
+    [Tooltip("Customize this curve to fit the blend shapes of your avatar.")]
     [SerializeField] private AnimationCurve EyebrowAnimationCurveLower;
-    /// <summary>
-    /// Customize this curve to fit the blend shapes of your avatar.
-    /// </summary>
+
+    [Tooltip("Customize this curve to fit the blend shapes of your avatar.")]
     [SerializeField] private AnimationCurve EyebrowAnimationCurveHorizontal;
 
+    [Tooltip("Gaze sensibility. The bigger factor is, the more sensitive the gaze ray is.")]
     [Range(0, 1)]
     public float gazeSensibility;
 
+    [Tooltip("Should the data be updated ?")]
     public bool NeededToGetData = true;
+    /// <summary>
+    /// Weightings associated with each blendshape
+    /// </summary>
     private Dictionary<EyeShape_v2, float> eyeWeightings = new Dictionary<EyeShape_v2, float>();
     private AnimationCurve[] EyebrowAnimationCurves = new AnimationCurve[(int)EyeShape_v2.Max];
+    /// <summary>
+    /// Eyes anchors to link object on eyes
+    /// </summary>
     private GameObject[] EyeAnchors;
+    /// <summary>
+    /// Should rarely be different than two
+    /// </summary>
     private const int NUM_OF_EYES = 2;
+    /// <summary>
+    /// The raw eye data
+    /// </summary>
     private static EyeData_v2 eyeData = new EyeData_v2();
+    /// <summary>
+    /// Is the callback been registered
+    /// </summary>
     private bool eye_callback_registered = false;
 
+    /// <summary>
+    /// Is true when some of the gaze frames are missing, mainly during blinks
+    /// </summary>
     bool missingFrames = false;
+    /// <summary>
+    /// Max time during which we ignore frames
+    /// </summary>
     const float timeToIgnoreFrames = 0.35f;
+    /// <summary>
+    /// Clock to see how much time has passed since we started to ignore frames
+    /// </summary>
     float currentIgnoredTime = 0;
-
+    
+    /// <summary>
+    /// Should the weight for the blendshapes be between [0,1] or [0,100] ?
+    /// </summary>
     public bool multiplyBlendshapeBy100 = false;
 
+    /// <summary>
+    /// The gaze direction in the camera space
+    /// </summary>
     Vector3 GazeDirectionCombinedLocal;
     private void Start()
     {
@@ -180,6 +216,9 @@ public class AvatarEyeControl : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// Releasing the eye callback
+    /// </summary>
     private void Release()
     {
         if (eye_callback_registered == true)
@@ -188,11 +227,19 @@ public class AvatarEyeControl : MonoBehaviour
             eye_callback_registered = false;
         }
     }
+    /// <summary>
+    /// Destroying EyeAnchors on destroy
+    /// </summary>
     private void OnDestroy()
     {
         DestroyEyeAnchors();
     }
 
+    /// <summary>
+    /// Setting up eye models and anchors.
+    /// </summary>
+    /// <param name="leftEye"> Left eye transform</param>
+    /// <param name="rightEye"> Right eye transform</param>
     public void SetEyesModels(Transform leftEye, Transform rightEye)
     {
         if (leftEye != null && rightEye != null)
@@ -203,6 +250,10 @@ public class AvatarEyeControl : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Setting up eye shapes tables
+    /// </summary>
+    /// <param name="eyeShapeTables"> The eyeshapes tables list</param>
     public void SetEyeShapeTables(List<EyeShapeTable_v2> eyeShapeTables)
     {
         bool valid = true;
@@ -234,12 +285,21 @@ public class AvatarEyeControl : MonoBehaviour
             EyeShapeTables = eyeShapeTables;
     }
 
+    /// <summary>
+    /// Setting up eye brow animation curves
+    /// </summary>
+    /// <param name="eyebrowAnimationCurves"></param>
     public void SetEyeShapeAnimationCurves(AnimationCurve[] eyebrowAnimationCurves)
     {
         if (eyebrowAnimationCurves.Length == (int)EyeShape_v2.Max)
             EyebrowAnimationCurves = eyebrowAnimationCurves;
     }
 
+    /// <summary>
+    /// Updating gaze ray direction
+    /// </summary>
+    /// <param name="gazeDirectionCombinedLocal"> The gaze direction in the camera space
+    /// </param>
     public void UpdateGazeRay(Vector3 gazeDirectionCombinedLocal)
     {
         for (int i = 0; i < EyesModels.Length; ++i)
@@ -247,17 +307,26 @@ public class AvatarEyeControl : MonoBehaviour
             Vector3 target = EyeAnchors[i].transform.TransformPoint(gazeDirectionCombinedLocal);
             Debug.DrawLine(EyeAnchors[i].transform.position, target, Color.red);
             //EyesModels[i].rotation = Quaternion.LookRotation(target);
-            EyesModels[i].LookAt(target);
+            EyesModels[i].LookAt(target); //this is why the L/R eyes transform must have a zero rotation when looking forward
             //EyesModels[i].rotation = Quaternion.LookRotation(EyesModels[i].forward, target);
         }
     }
 
+    /// <summary>
+    /// Updating all eye shapes
+    /// </summary>
+    /// <param name="eyeWeightings"> The weightings obtained from Vive's SRanipal </param>
     public void UpdateEyeShapes(Dictionary<EyeShape_v2, float> eyeWeightings)
     {
         foreach (var table in EyeShapeTables)
             RenderModelEyeShape(table, eyeWeightings);
     }
 
+    /// <summary>
+    /// Updating individual eye shape table
+    /// </summary>
+    /// <param name="eyeShapeTable"> The eyeShapeTable to update</param>
+    /// <param name="weighting">The weightings obtained from Vive's SRanipal</param>
     private void RenderModelEyeShape(EyeShapeTable_v2 eyeShapeTable, Dictionary<EyeShape_v2, float> weighting)
     {
         for (int i = 0; i < eyeShapeTable.eyeShapes.Length; ++i)
@@ -275,6 +344,9 @@ public class AvatarEyeControl : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Creating EyeAnchors
+    /// </summary>
     private void CreateEyeAnchors()
     {
         EyeAnchors = new GameObject[NUM_OF_EYES];
@@ -291,6 +363,9 @@ public class AvatarEyeControl : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Destroying eye anchors
+    /// </summary>
     private void DestroyEyeAnchors()
     {
         if (EyeAnchors != null)
@@ -299,6 +374,10 @@ public class AvatarEyeControl : MonoBehaviour
                 if (obj != null) Destroy(obj);
         }
     }
+    /// <summary>
+    /// The eye data callback, updated at 90hz (I believe)
+    /// </summary>
+    /// <param name="eye_data"> The output of the eye tracker</param>
     private static void EyeCallback(ref EyeData_v2 eye_data)
     {
         eyeData = eye_data;

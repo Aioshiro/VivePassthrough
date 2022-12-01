@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Mirror class to test feed back of own avatar in solo
+/// </summary>
 public class Miror : MonoBehaviour
 {
     private const float Distance = 0.6f;

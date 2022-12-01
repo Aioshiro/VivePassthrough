@@ -68,7 +68,9 @@ public class DetectionMarkers : MonoBehaviour
 		markersToUpdateRight = new bool[numberOfMarkers];
 		InitArucoParameters();
 	}
-
+	/// <summary>
+	/// Initializing aruco's parameters
+	/// </summary>
 	void InitArucoParameters()
     {
 		markerPoints = new Point3f[numberOfMarkers][];
@@ -179,7 +181,9 @@ public class DetectionMarkers : MonoBehaviour
 	}
 
 
-
+	/// <summary>
+	/// Initializing the textures for the camera's outputs
+	/// </summary>
 	void InitTextures()
 	{
 		left = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
@@ -188,20 +192,28 @@ public class DetectionMarkers : MonoBehaviour
 		rightCPU = new Texture2D(ViveSR_DualCameraImageCapture.UndistortedImageWidth, ViveSR_DualCameraImageCapture.UndistortedImageHeight, TextureFormat.RGBA32, false);
 	}
 
-	//Called when request is finished
+	/// <summary>
+	/// Called when left camera request is finished
+	/// </summary>
 	void OnCompleteReadbackLeft(AsyncGPUReadbackRequest request)
 	{
 		//Loading data into texture
 		leftCPU.LoadRawTextureData(request.GetData<uint>());
 	}
 
-	//Called when request is finished
+	/// <summary>
+	/// Called when right camera request is finished
+	/// </summary>
+	/// <param name="request"></param>
 	void OnCompleteReadbackRight(AsyncGPUReadbackRequest request)
 	{
 		//Loading data into texture
 		rightCPU.LoadRawTextureData(request.GetData<uint>());
 	}
 
+	/// <summary>
+	/// Initialize the left camera
+	/// </summary>
 	void InitLeftCamera()
 	{
 		cameraLeftMatrix = new double[3, 3] {
@@ -218,6 +230,9 @@ public class DetectionMarkers : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Initialize the right camera
+	/// </summary>
 	void InitRightCamera()
 	{
 		cameraRightMatrix = new double[3, 3] {
@@ -299,7 +314,9 @@ public class DetectionMarkers : MonoBehaviour
 		UpdatingPoses(); //Updating markers 3d pos to manager
 	}
 
-	//Updating markers 3d pos to manager
+	/// <summary>
+	/// Sending calculated poses to Marker Manager
+	/// </summary>
 	private void UpdatingPoses()
 	{
 		for (int i = 0; i < markersToUpdateLeft.Length; i++)
@@ -334,7 +351,14 @@ public class DetectionMarkers : MonoBehaviour
 		}
 	}
 
-	//Go from camera space to world space
+	/// <summary>
+	/// Go from camera space to world space
+	/// </summary>
+	/// <param name="tvec"> Translation vector of object</param>
+	/// <param name="rotMat"> Rotation matrix of object</param>
+	/// <param name="isLeft"> True if this is left camera, right otherwise</param>
+	/// <param name="worldPos"> Object position in world space</param>
+	/// <param name="worldRot"> Object rotation in world space</param>
 	private void GetObjectNewTransform(double[] tvec,double[,] rotMat, bool isLeft,out Vector3 worldPos, out Quaternion worldRot)
     {
 		worldPos = new Vector3(-(float)tvec[0], (float)tvec[1], (float)tvec[2]); //initial pos in cameraSpace,  x is negative due to flipping of camera image
@@ -370,7 +394,12 @@ public class DetectionMarkers : MonoBehaviour
 
 	}
 
-	//Detect markers in the image
+	/// <summary>
+	/// Detects the markers on an image
+	/// </summary>
+	/// <param name="image"> The Texture2D to analyze</param>
+	/// <param name="corners"> Output of the corners of all detected markers, size of [numberOfMarkersDetected,4] </param>
+	/// <param name="ids"> Output of the ids associated with each markers, corners[i] corresponds to the marker with id ids[i] </param>
     private void DetectMarkers(Texture2D image, out Point2f[][] corners,out int[] ids)
     {
 		using (Mat flippedMat = new Mat())
@@ -382,8 +411,10 @@ public class DetectionMarkers : MonoBehaviour
 		}
 	}
 
-	//Waiting for end of request when destroying, to fix errors when closing the app
-    private void OnDestroy()
+	/// <summary>
+	/// Waiting for end of request when destroying, to fix errors when closing the app
+	/// </summary>
+	private void OnDestroy()
     {
 		requestLeft.WaitForCompletion();
 		requestRight.WaitForCompletion();

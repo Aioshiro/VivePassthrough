@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using ViveHandTracking;
 
+/// <summary>
+/// Sphere occluder for the hands
+/// </summary>
 public class SphereOccluder : MonoBehaviour
 {
     [Tooltip("Draw left hand if true, right hand otherwise")]
@@ -10,7 +13,13 @@ public class SphereOccluder : MonoBehaviour
     [Tooltip("Root object of skinned mesh")]
     public GameObject Hand = null;
 
+    /// <summary>
+    /// Initial sphere scale
+    /// </summary>
     Vector3 initialScale;
+    /// <summary>
+    /// Should the sphere be rescaled ?
+    /// </summary>
     bool rescaleOccluder = true;
 
     void Awake()

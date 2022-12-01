@@ -27,8 +27,11 @@ using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 using System.Threading;
 
-[RequireComponent(typeof(AudioSource))]
+/// <summary>
+/// OculusLipSyncMicInput script, to send data to lip sync from mic, customed to save microphone output as wav file
+/// </summary>
 
+[RequireComponent(typeof(AudioSource))]
 public class OculusLipSyncMicInput : MonoBehaviour
 {
     public enum micActivation

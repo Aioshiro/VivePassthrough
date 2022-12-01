@@ -4,18 +4,29 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
 
+/// <summary>
+/// Instruction canvas for before experiment start
+/// </summary>
 public class InstructionCanvas : MonoBehaviour
 {
-    bool positionned = true;
-    [SerializeField]
-    Transform playerRig;
+    /// <summary>
+    /// Canvas transform (in world space)
+    /// </summary>
     RectTransform canvasTransform;
+
+    [Tooltip("Text to update")]
     [SerializeField]
     TMPro.TMP_Text text;
+
+    [Tooltip("The image to fill")]
     [SerializeField]
     Image fillingImage;
+
+    [Tooltip("Marker 10's image")]
     [SerializeField]
     Image markerImage;
+
+    [Tooltip("Marker 10's TransformSmoother")]
     [SerializeField]
     TransformSmoother mapMarker;
 
@@ -27,14 +38,7 @@ public class InstructionCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!positionned && playerRig.position!= Vector3.zero)
-        {
-            Vector3 forward = Vector3.ProjectOnPlane(playerRig.transform.forward, Vector3.up);
-            canvasTransform.SetPositionAndRotation(playerRig.position + forward * 0.5f, Quaternion.Euler(0, playerRig.rotation.eulerAngles.y,0));
-            positionned = true;
-        }
-        fillingImage.transform.position = mapMarker.transform.position;
-        fillingImage.transform.rotation = mapMarker.transform.rotation;
+        fillingImage.transform.SetPositionAndRotation(mapMarker.transform.position, mapMarker.transform.rotation);
         fillingImage.fillAmount = (float) mapMarker.count /  (float) mapMarker.movingAverageLengthPos;
         if (fillingImage.fillAmount > 0.99)
         {

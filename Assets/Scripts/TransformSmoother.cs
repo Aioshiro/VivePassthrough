@@ -2,11 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Smoothes new transform input
+/// </summary>
 public class TransformSmoother : MonoBehaviour
 {
+    /// <summary>
+    /// Moving average of the position
+    /// </summary>
     private Vector3 movingAveragePos;
+    /// <summary>
+    /// Moving average of the up direction vector
+    /// </summary>
     private Vector3 movingAverageUp;
+    /// <summary>
+    /// Moving average of the forward direction vector
+    /// </summary>
     private Vector3 movingAverageForward;
+    /// <summary>
+    /// Count of number of values updated
+    /// </summary>
     public int count=0;
     [Tooltip("Number of samples to take for the average of the position")]
     [SerializeField] public int movingAverageLengthPos = 6;
@@ -18,26 +33,36 @@ public class TransformSmoother : MonoBehaviour
     [Tooltip("Time factor for the max time to go to new rotation")]
     [SerializeField] private float rotMaxDegrees=1;
 
-    [Tooltip("Uncheck to freeze object")]
+    [Tooltip("Uncheck to freeze position")]
     [SerializeField] private bool allowMovement;
-
+    [Tooltip("Unceck to freeze object rotation")]
     [SerializeField] private bool allowRotation;
 
+    [Tooltip("Left tracked camera")]
     [SerializeField] Transform leftCamera;
 
-    public bool wasPointingDown = false;
+    [Tooltip("Was the marker pointing down ?")]
+    private bool wasPointingDown = false;
     //public bool wasPointingRight = false;
     Quaternion rotDerivate;
+    [Tooltip("Tolerance for danger zone")]
+    [Range(0,1)]
     public float dangerZoneTolerance;
 
+    [Tooltip("Should we stop updating position once we have finished gathering an average")]
     public bool stopOnAverageObtained=false;
 
     //public Material cubeColor;
-
+    [Tooltip("Is X rotation allowed ?")]
     public bool xRotationAllowed = true;
+
+    [Tooltip("Is Y rotation allowed ?")]
     public bool yRotationAllowed = true;
+
+    [Tooltip("Is Z rotation allowed ?")]
     public bool zRotationAllowed = true;
 
+    [Tooltip("Initial rotation values")]
     public Vector3 freezeRotValues;
 
     public void Update()
@@ -48,6 +73,11 @@ public class TransformSmoother : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Set transform of object by smoothing inputs
+    /// </summary>
+    /// <param name="pos"> Position input</param>
+    /// <param name="rot"> Rotation input </param>
     public void SetNewTransform(Vector3 pos, Quaternion rot)
     {
         if (!allowMovement || Vector3.SqrMagnitude(leftCamera.transform.position)<0.001f) { return; } // if the camera is at the origin, that means the head position is not tracked yet, and so it gives a false position which gives a false mean
@@ -124,6 +154,9 @@ public class TransformSmoother : MonoBehaviour
         ApplyFreezes();
     }
 
+    /// <summary>
+    /// Applying rotation freezes
+    /// </summary>
     private void ApplyFreezes()
     {
         Vector3 euler = transform.rotation.eulerAngles;

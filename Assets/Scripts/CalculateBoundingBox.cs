@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Calculates the bounding box of a set of objects, mainly an hand
+/// </summary>
 public class CalculateBoundingBox : MonoBehaviour
 {
+    [Tooltip("Root object of the hand")]
     public GameObject hand;
-    public Renderer meshRenderer;
-    public Transform[] transformsToInclude;
+
+    [Tooltip("Transforms to include in the bounding box")]
+    [SerializeField] Transform[] transformsToInclude;
+
+    [Tooltip("Bounding box gameObject")]
     public GameObject box;
+
+    [Tooltip("How much more bigger should the box be compared to the true bounding box ?")]
     public float extendAmount;
 
     private void Start()

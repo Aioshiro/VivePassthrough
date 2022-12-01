@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+/// <summary>
+/// Marker manager to gather data of markers positions, multi version to sync transform on server
+/// </summary>
 public class MarkersManagerMulti : NetworkBehaviour
 {
 
     [SerializeField] TransformSmoother[] markers;
 
-
+    /// <summary>
+    /// Send data to the right's marker TransformSmoother on server
+    /// </summary>
+    /// <param name="i"> Marker's id</param>
+    /// <param name="pos"> World position input </param>
+    /// <param name="rot"> World rotation input</param>
     [Command(requiresAuthority =false)]
     public void UpdateIthMarkerPos(int i, Vector3 pos, Quaternion rot)
     {

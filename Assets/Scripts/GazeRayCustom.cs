@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using ViveSR.anipal.Eye;
 
+[System.Obsolete("Obsolte, use GazeRay.cs",true)]
 public class GazeRayCustom : MonoBehaviour
 {
     public int LengthOfRay = 25;

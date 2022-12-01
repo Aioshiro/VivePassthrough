@@ -6,11 +6,18 @@ using System.IO;
 using System;
 using Mirror;
 
-
+/// <summary>
+/// Script to register results of experiment
+/// </summary>
 public class RegisterResults : NetworkBehaviour
 {
-
+    /// <summary>
+    /// Chronometer to measure time of experiment
+    /// </summary>
     public Chronometer chronometer;
+    /// <summary>
+    /// GazeRay to gather gaze data
+    /// </summary>
     public GazeRay gazeRay;
 
     void Start()
@@ -19,6 +26,9 @@ public class RegisterResults : NetworkBehaviour
         //gazeRay = GetComponentInChildren<GazeRay>();
     }
 
+    /// <summary>
+    /// Formats the data to save it in csv on client and on server
+    /// </summary>
     public void Save()
     {
         float totalTime = chronometer.StopChronometer();
@@ -69,7 +79,10 @@ public class RegisterResults : NetworkBehaviour
         SaveLocally(csv.ToString());
         SaveOnServer(csv.ToString());
     }
-
+    /// <summary>
+    /// Saves data locally
+    /// </summary>
+    /// <param name="newLine">String of data to save</param>
     void SaveLocally(string newLine)
     {
         Debug.Log("Saving data locally");
@@ -77,6 +90,10 @@ public class RegisterResults : NetworkBehaviour
         File.AppendAllText(filePath, newLine);
     }
 
+    /// <summary>
+    /// Saves data on client
+    /// </summary>
+    /// <param name="newLine"> String of data to save </param>
     [Command(requiresAuthority =false)]
     void SaveOnServer(string newLine)
     {
@@ -86,7 +103,10 @@ public class RegisterResults : NetworkBehaviour
     }
 
 
-    // Following method is used to retrive the relative path as device platform
+    /// <summary>
+    /// Following method is used to retrive the relative path as device platform
+    /// </summary>
+    /// <returns></returns>
     private string GetPath()
     {
 

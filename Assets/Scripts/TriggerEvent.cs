@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Trigger event wto enable hands when above map
+/// </summary>
 public class TriggerEvent : MonoBehaviour
 {
 

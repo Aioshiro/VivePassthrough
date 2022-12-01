@@ -5,12 +5,23 @@ using Mirror;
 using UnityEditor;
 using ViveHandTracking;
 
+/// <summary>
+/// Network manager to connect to server and properly initialize clients
+/// </summary>
 public class NetworkConnection : NetworkManager
 {
+    [Tooltip("Player rig game object")]
     [SerializeField] GameObject player;
+    [Tooltip("Objects we want to give a player authority")]
     [SerializeField] List<NetworkIdentity> objectsToGiveAuthorityOn;
+    /// <summary>
+    /// Is this the first player to connect ?
+    /// </summary>
     private bool firstPlayer = true;
 
+    /// <summary>
+    /// Client connections in case we need them
+    /// </summary>
     private NetworkConnectionToClient[] clientConn;
 
     // Start is called before the first frame update
@@ -61,7 +72,10 @@ public class NetworkConnection : NetworkManager
         Debug.LogWarning("Client disconnected");
     }
 
-    //Called on the server when the client's ready
+    /// <summary>
+    /// Called on the server when the client's ready, send the player number to the client and give him object authority
+    /// </summary>
+    /// <param name="conn"></param>
     public override void OnServerReady(NetworkConnectionToClient conn)
     {
         base.OnServerReady(conn);
@@ -94,7 +108,10 @@ public class NetworkConnection : NetworkManager
         }
     }
 
-
+    /// <summary>
+    /// When client disconnect, remove its objects and authority
+    /// </summary>
+    /// <param name="conn"></param>
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
         var ownedObjects = new NetworkIdentity[conn.clientOwnedObjects.Count];
@@ -119,7 +136,9 @@ public class NetworkConnection : NetworkManager
         }
 
     }
-
+    /// <summary>
+    /// Renders button on the UI to make a connection at a chosen ip
+    /// </summary>
     private void OnGUI()
     {
 

@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Linq;
 
+/// <summary>
+/// Updates blendshape on data obtained from SyncViseme
+/// </summary>
 public class LipSyncMulti: MonoBehaviour
 {
-    // PUBLIC
 
     // Manually assign the skinned mesh renderer to this script
     [Tooltip("Skinned Mesh Rendered target to be driven by Oculus Lipsync")]
@@ -24,6 +26,7 @@ public class LipSyncMulti: MonoBehaviour
     [Tooltip("Laughter animation linear multiplier, the final output will be clamped to 1.0")]
     public float laughterMultiplier = 1.5f;
 
+    [Tooltip("Check to multiply facial tracker input by 100, in case model blendshape goes from 0 to 100")]
     public bool multiplyInputBy100 = false;
 
 
@@ -52,6 +55,9 @@ public class LipSyncMulti: MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets data based on SyncViseme values
+    /// </summary>
     void SetVisemeToMorphTargetNetwork()
     {
         if (GameManager.Instance.playerNumber == 0)

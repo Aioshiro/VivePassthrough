@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using ViveSR.anipal.Lip;
 
+/// <summary>
+/// Debug script to show input of facial tracker camera data
+/// </summary>
 public class LipCameraShow : MonoBehaviour
 {
     Texture2D lipTexture;

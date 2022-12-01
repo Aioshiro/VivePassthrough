@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+/// <summary>
+/// Used for an object to follow the player's head
+/// </summary>
+
+[System.Obsolete("Not used since the two local clients don't have the same origin, see SyncHeads.cs",false)]
 public class FollowObject : NetworkBehaviour
 {
 

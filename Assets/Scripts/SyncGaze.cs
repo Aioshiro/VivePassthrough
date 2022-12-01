@@ -4,22 +4,36 @@ using UnityEngine;
 using Mirror;
 using ViveSR.anipal.Eye;
 
+/// <summary>
+/// Sync the gaze of the players on the server
+/// </summary>
 public class SyncGaze : NetworkBehaviour
 {
-
+    [Tooltip("List of the gaze data for player one")]
     public readonly SyncList<float> playerOneGaze = new SyncList<float>();
+
+    [Tooltip("List of the gaze data for player two")]
     public readonly SyncList<float> playerTwoGaze = new SyncList<float>();
 
+    [Tooltip("Player one gaze direction in camera space")]
     [SyncVar]
     public Vector3 playerOneGazeDirectionLocal;
+
+    [Tooltip("Player two gaze direction in camera space")]
     [SyncVar]
     public Vector3 playerTwoGazeDirectionLocal;
 
+    [Tooltip("Has player one missed a data frame ?")]
     [SyncVar]
     public bool playerOneMissingFrames;
+
+    [Tooltip("Has player one missed a data frame ?")]
     [SyncVar]
     public bool playerTwoMissingFrames;
 
+    /// <summary>
+    /// On server start, initialize lists
+    /// </summary>
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -57,6 +71,12 @@ public class SyncGaze : NetworkBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Upload local gaze direction on server
+    /// </summary>
+    /// <param name="playerNumber"> Player number</param>
+    /// <param name="ownGazeDirectionLocal"> Local gaze direction</param>
     [Command(requiresAuthority =false)]
     void UploadOwnGazeDirectionLocal(int playerNumber,Vector3 ownGazeDirectionLocal)
     {
@@ -70,6 +90,10 @@ public class SyncGaze : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Send other player local gaze direction to server
+    /// </summary>
+    /// <param name="playerNumber"> Player number</param>
     void UpdateOtherGazeDirectionLocal(int playerNumber)
     {
         if (playerNumber == 0)
@@ -82,6 +106,11 @@ public class SyncGaze : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Upload dictionnary of values on server, individually by (key,value)
+    /// </summary>
+    /// <param name="index"> Player number</param>
+    /// <param name="newValues"> Dictionnary of new values</param>
     void UploadDict(int index,Dictionary<EyeShape_v2,float> newValues)
     {
         foreach (var key in newValues.Keys)
@@ -92,7 +121,11 @@ public class SyncGaze : NetworkBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// Upload missing frames on the server
+    /// </summary>
+    /// <param name="index"> Player number</param>
+    /// <param name="value"> Value of missing frame</param>
     [Command(requiresAuthority =false)]
     void UploadMissingFrames(int index, bool value)
     {
@@ -106,6 +139,12 @@ public class SyncGaze : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Upload individual (key,values) couples on the server
+    /// </summary>
+    /// <param name="index"> Player number</param>
+    /// <param name="key"> Key of the dictionnary </param>
+    /// <param name="value"> New dictionnary value</param>
     [Command(requiresAuthority =false)]
     void UploadIndividualValue(int index, EyeShape_v2 key, float value)
     {
@@ -119,6 +158,10 @@ public class SyncGaze : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Applying dictionnary values download from server on EyeDataScript
+    /// </summary>
+    /// <param name="index"></param>
     void ApplyOtherEyeData(int index)
     {
         if (index == 0)
@@ -137,6 +180,12 @@ public class SyncGaze : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if a gazeRay is valid
+    /// </summary>
+    /// <param name="gazeIndex"></param>
+    /// <param name="eye_data"></param>
+    /// <returns></returns>
     private bool GetGazeRayValidity(GazeIndex gazeIndex, EyeData_v2 eye_data)
     {
         if (SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.WORKING)

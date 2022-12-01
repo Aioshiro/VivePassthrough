@@ -5,22 +5,46 @@ using UnityEngine;
 using ViveSR.anipal.Eye;
 using Unity.Jobs;
 
+
+/// <summary>
+/// Gather eye data from local eye tracker and from server data (other player).
+/// Data is updated with SyncGaze script
+/// </summary>
 public class EyeDataGetter : MonoBehaviour
 {
+    [Tooltip("Gaze sensibility. The bigger factor is, the more sensitive the gaze ray is.")]
     [Range(0, 1)]
     public float gazeSensibility;
 
+    [Tooltip("Should the data be updated ?")]
     public bool NeededToGetData = true;
+
+    [Tooltip("Own (local) player eye weightings data")]
     public static Dictionary<EyeShape_v2, float> ownEyeWeightings = new Dictionary<EyeShape_v2, float>();
+
+    [Tooltip("Other player eye weightings data")]
     public static Dictionary<EyeShape_v2, float> otherEyeWeightings = new Dictionary<EyeShape_v2, float>();
 
+    [Tooltip("Own (local) player local gaze direction")]
     public static Vector3 ownGazeDirectionLocal;
+
+    [Tooltip("Other player local gaze direction")]
     public static Vector3 otherGazeDirectionLocal;
 
+    /// <summary>
+    /// Own raw eye data
+    /// </summary>
     public static EyeData_v2 ownEyeData = new EyeData_v2();
 
+    [Tooltip("True if player one is missing frames")]
     static public bool playerOneMissingFrames;
+
+    [Tooltip("True if player two is missing frames")]
     static public bool playerTwoMissingFrames;
+
+    /// <summary>
+    /// Is the eye called been registered ?
+    /// </summary>
     private static bool eye_callback_registered = false;
 
     private void Start()
@@ -69,6 +93,11 @@ public class EyeDataGetter : MonoBehaviour
         SRanipal_Eye_v2.GetEyeWeightings(out ownEyeWeightings, ownEyeData);
 
     }
+
+    /// <summary>
+    /// Eye callback, called at 90Hz (I believe)
+    /// </summary>
+    /// <param name="eye_data"> Raw eye data from tracker</param>
     private static void EyeCallback(ref EyeData_v2 eye_data)
     {
         //getting eyedata and updating weighting (blendshapes) values
