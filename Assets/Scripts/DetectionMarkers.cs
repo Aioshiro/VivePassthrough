@@ -4,7 +4,12 @@ using OpenCvSharp.Aruco;
 using UnityEngine.Rendering;
 using Vive.Plugin.SR;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
+/// <summary>
+/// Detect markers in the image and update their world position
+/// <para> For best results, as this script use Task and threading, make it be one the first Update in Unity Script Execution Order !</para>
+/// </summary>
 public class DetectionMarkers : MonoBehaviour
 {
 
@@ -27,6 +32,8 @@ public class DetectionMarkers : MonoBehaviour
 	//MarkersManagerMulti markersManager;
 	//bool[] markersToUpdateRight;
 	bool[] markersToUpdateLeft;
+
+	private Task<(Point2f[][], int[])> t = null;
 
 	//Aruco results
 	private Point2f[][] corners;
@@ -299,23 +306,14 @@ public class DetectionMarkers : MonoBehaviour
 
 		if (useLeftCamera && isCameraLeftInitialized && requestLeft.done) //if the camera is initialized and we got the gpu texture
 		{
-			DetectMarkers(leftCPU, out corners, out ids); //Detect every marker on the image
-			for (int i = 0; i < ids.Length; i++) //Updating position and rotation of every marker
-			{
-				if (ids[i] < numberOfMarkers)
-				{
-					markersToUpdateLeft[ids[i]] = true;
-					Cv2.SolvePnP(markerPoints[ids[i]], corners[i], cameraLeftMatrix, distCoeffs, out rvecLeft[ids[i]], out tvecLeft[ids[i]], false, SolvePnPFlags.Iterative); //Pose estimation, to go from 2d pixels to 3d position in CAMERA space
-					Cv2.Rodrigues(rvecLeft[ids[i]], out rotMatLeft[ids[i]]);
-				}
-			}
-
-			ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out _, out _);
-			requestLeft = AsyncGPUReadback.Request(left, 0, TextureFormat.RGBA32, OnCompleteReadbackLeft);
-			if (waitForCompletion) { requestLeft.WaitForCompletion(); }
+			//Starting task for marker detection, will wait for it in LateUpdate;
+			Mat mat = OpenCvSharp.Unity.TextureToMat(leftCPU, conversionParams);
+			t = Task.Factory.StartNew(() => {
+				CvAruco.DetectMarkers(mat, dictionary, out Point2f[][] cornersInternal, out int[] idsInternal, detectorParameters, out _);
+				return (cornersInternal, idsInternal);
+			});
+			//DetectMarkers(leftCPU, out corners, out ids); //Detect every marker on the image
 		}
-
-		UpdatingPoses(); //Updating markers 3d pos to manager
 	}
 
 	/// <summary>
@@ -325,17 +323,6 @@ public class DetectionMarkers : MonoBehaviour
 	{
 		for (int i = 0; i < markersToUpdateLeft.Length; i++)
 		{
-			//if (markersToUpdateLeft[i] && markersToUpdateRight[i]) //foreach marker detected and so needed to be updated
-			//{
-			//	markersToUpdateLeft[i] = false;
-			//	markersToUpdateRight[i] = false;
-			//	GetObjectNewTransform(tvecRight[i], rotMatRight[i], false, out Vector3 worldPosRight, out Quaternion worldRotRight); //estimating worldspace position
-			//	GetObjectNewTransform(tvecLeft[i], rotMatLeft[i],true, out Vector3 worldPosLeft, out Quaternion worldRotLeft); //estimating worldspace position
-			//	markersManager.UpdateIthMarkerPos(i, (worldPosLeft + worldPosRight) / 2, Quaternion.Slerp(worldRotRight,worldRotLeft,0.5f));
-			//	//markersManager.SetActiveIthMarker(i, true);
-			//}
-			// else if(markersToUpdateLeft[i])
-
 			if (markersToUpdateLeft[i])
 			{
 				markersToUpdateLeft[i] = false;
@@ -343,13 +330,6 @@ public class DetectionMarkers : MonoBehaviour
 				markersManager.UpdateIthMarkerPos(i, worldPos, worldRot);
 				//markersManager.SetActiveIthMarker(i, true);
 			}
-			//else if (markersToUpdateRight[i])
-			//{
-			//	markersToUpdateRight[i] = false;
-			//	GetObjectNewTransform(tvecRight[i], rotMatRight[i], false, out Vector3 worldPos, out Quaternion worldRot); //estimating worldspace position
-			//	markersManager.UpdateIthMarkerPos(i, worldPos, worldRot);
-			//	//markersManager.SetActiveIthMarker(i, true);
-			//}
    //         else
    //         {
 			//	//markersManager.SetActiveIthMarker(i, false);
@@ -390,11 +370,47 @@ public class DetectionMarkers : MonoBehaviour
 	/// <param name="image"> The Texture2D to analyze</param>
 	/// <param name="corners"> Output of the corners of all detected markers, size of [numberOfMarkersDetected,4] </param>
 	/// <param name="ids"> Output of the ids associated with each markers, corners[i] corresponds to the marker with id ids[i] </param>
-    private void DetectMarkers(Texture2D image, out Point2f[][] corners,out int[] ids)
+ //   private void DetectMarkers(Texture2D image, out Point2f[][] corners,out int[] ids)
+ //   {
+	//	Mat mat = OpenCvSharp.Unity.TextureToMat(image, conversionParams);
+	//	Task<(Point2f[][],int[])> t = Task.Factory.StartNew(() => { 
+	//		CvAruco.DetectMarkers(mat, dictionary, out Point2f[][] cornersInternal, out int[] idsInternal, detectorParameters, out _);
+	//		return (cornersInternal, idsInternal);
+	//	});
+	//	//t.Wait();
+	//	//corners = t.Result.Item1;
+	//	//ids = t.Result.Item2;
+	//	//CvAruco.DetectMarkers(mat, dictionary, out corners, out ids, detectorParameters, out _);
+	//	//CvAruco.DrawDetectedMarkers(flippedMat, corners, ids);
+	//	//planeMaterial.mainTexture = OpenCvSharp.Unity.MatToTexture(flippedMat);
+	//}
+
+    private void LateUpdate()
     {
-		CvAruco.DetectMarkers(OpenCvSharp.Unity.TextureToMat(image, conversionParams), dictionary, out corners, out ids, detectorParameters, out _);
-		//CvAruco.DrawDetectedMarkers(flippedMat, corners, ids);
-		//planeMaterial.mainTexture = OpenCvSharp.Unity.MatToTexture(flippedMat);
+		if (t == null)
+        {
+			return;
+        }
+		//We wait for the task to finish, and get results
+		t.Wait();
+		corners = t.Result.Item1;
+		ids = t.Result.Item2;
+		//then we update the markers position
+		for (int i = 0; i < ids.Length; i++) //Updating position and rotation of every marker
+		{
+			if (ids[i] < numberOfMarkers)
+			{
+				markersToUpdateLeft[ids[i]] = true;
+				Cv2.SolvePnP(markerPoints[ids[i]], corners[i], cameraLeftMatrix, distCoeffs, out rvecLeft[ids[i]], out tvecLeft[ids[i]], false, SolvePnPFlags.Iterative); //Pose estimation, to go from 2d pixels to 3d position in CAMERA space
+				Cv2.Rodrigues(rvecLeft[ids[i]], out rotMatLeft[ids[i]]);
+			}
+		}
+
+		ViveSR_DualCameraImageCapture.GetUndistortedTexture(out left, out _, out _, out _, out _, out _);
+		requestLeft = AsyncGPUReadback.Request(left, 0, TextureFormat.RGBA32, OnCompleteReadbackLeft);
+		if (waitForCompletion) { requestLeft.WaitForCompletion(); }
+		UpdatingPoses(); //Updating markers 3d pos to manager
+
 	}
 
 	/// <summary>
