@@ -58,6 +58,8 @@ public class DetectionMarkers : MonoBehaviour
 	public bool useLeftCamera;
 	public bool useRightCamera;
 
+	OpenCvSharp.Unity.TextureConversionParams conversionParams;
+
 	[SerializeField] Material planeMaterial;
 
 	void Start()
@@ -84,6 +86,8 @@ public class DetectionMarkers : MonoBehaviour
 			};
 		}
 
+		conversionParams = OpenCvSharp.Unity.TextureConversionParams.Default;
+		conversionParams.FlipHorizontally = true;
 		// Create default parameres for detection
 		detectorParameters = DetectorParameters.Create();
 		detectorParameters.DoCornerRefinement = useCornerRefinement;
@@ -402,13 +406,9 @@ public class DetectionMarkers : MonoBehaviour
 	/// <param name="ids"> Output of the ids associated with each markers, corners[i] corresponds to the marker with id ids[i] </param>
     private void DetectMarkers(Texture2D image, out Point2f[][] corners,out int[] ids)
     {
-		using (Mat flippedMat = new Mat())
-		{
-			Cv2.Flip(OpenCvSharp.Unity.TextureToMat(image), flippedMat, FlipMode.Y); //flipping input cameras, as vive feed is reversed
-			CvAruco.DetectMarkers(flippedMat, dictionary, out corners, out ids, detectorParameters, out _);
-			//CvAruco.DrawDetectedMarkers(flippedMat, corners, ids);
-			//planeMaterial.mainTexture = OpenCvSharp.Unity.MatToTexture(flippedMat);
-		}
+		CvAruco.DetectMarkers(OpenCvSharp.Unity.TextureToMat(image, conversionParams), dictionary, out corners, out ids, detectorParameters, out _);
+		//CvAruco.DrawDetectedMarkers(flippedMat, corners, ids);
+		//planeMaterial.mainTexture = OpenCvSharp.Unity.MatToTexture(flippedMat);
 	}
 
 	/// <summary>

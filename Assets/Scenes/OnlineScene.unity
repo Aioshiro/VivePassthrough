@@ -5848,10 +5848,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca1bf73400696274ba432f2bdf1e3268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showGazeRay: 0
   LengthOfRay: 25
   GazeRayRenderer: {fileID: 1993913569}
   totalTimeLookingAtHead: 0
-  showGazeRay: 0
   numberOfFixations: 0
   totalFixationTime: 0
   timeLookingAtEyes: 0
@@ -5992,7 +5992,6 @@ MonoBehaviour:
   allowMovement: 1
   allowRotation: 1
   leftCamera: {fileID: 2050918624}
-  wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 1
   xRotationAllowed: 1
@@ -6199,7 +6198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b756fa8c2a9a5469727bb9afeb73be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRig: {fileID: 302144843}
   text: {fileID: 316506164}
   fillingImage: {fileID: 633017924}
   markerImage: {fileID: 297155694}
@@ -6782,7 +6780,6 @@ MonoBehaviour:
   allowMovement: 1
   allowRotation: 1
   leftCamera: {fileID: 2050918624}
-  wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
   xRotationAllowed: 0
@@ -7316,7 +7313,6 @@ MonoBehaviour:
   allowMovement: 1
   allowRotation: 1
   leftCamera: {fileID: 2050918624}
-  wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
   xRotationAllowed: 0
@@ -7453,10 +7449,8 @@ MonoBehaviour:
   dictionaryName: 0
   numberOfMarkers: 11
   waitForCompletion: 1
-  cameraRight: {fileID: 0}
-  cameraLeft: {fileID: 0}
+  cameraLeft: {fileID: 2050918624}
   useLeftCamera: 1
-  useRightCamera: 0
   planeMaterial: {fileID: 2100000, guid: be73f94f07ba86848b1661ece76a8fe0, type: 2}
 --- !u!4 &4703040164457372522
 Transform:
@@ -7706,7 +7700,6 @@ MonoBehaviour:
   allowMovement: 1
   allowRotation: 1
   leftCamera: {fileID: 2050918624}
-  wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
   xRotationAllowed: 0
@@ -7782,7 +7775,6 @@ MonoBehaviour:
   allowMovement: 1
   allowRotation: 1
   leftCamera: {fileID: 2050918624}
-  wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
   xRotationAllowed: 1
@@ -7936,7 +7928,6 @@ MonoBehaviour:
   allowMovement: 1
   allowRotation: 1
   leftCamera: {fileID: 2050918624}
-  wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
   xRotationAllowed: 0
@@ -8090,7 +8081,6 @@ MonoBehaviour:
   allowMovement: 1
   allowRotation: 1
   leftCamera: {fileID: 2050918624}
-  wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
   xRotationAllowed: 0
@@ -8164,7 +8154,6 @@ MonoBehaviour:
   allowMovement: 1
   allowRotation: 1
   leftCamera: {fileID: 2050918624}
-  wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
   xRotationAllowed: 0
@@ -8208,7 +8197,6 @@ MonoBehaviour:
   allowMovement: 1
   allowRotation: 1
   leftCamera: {fileID: 2050918624}
-  wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
   xRotationAllowed: 0
@@ -8282,7 +8270,6 @@ MonoBehaviour:
   allowMovement: 1
   allowRotation: 1
   leftCamera: {fileID: 2050918624}
-  wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
   xRotationAllowed: 0
@@ -8341,7 +8328,6 @@ MonoBehaviour:
   allowMovement: 1
   allowRotation: 1
   leftCamera: {fileID: 2050918624}
-  wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 0
   xRotationAllowed: 0
