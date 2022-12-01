@@ -5852,6 +5852,11 @@ MonoBehaviour:
   GazeRayRenderer: {fileID: 1993913569}
   totalTimeLookingAtHead: 0
   showGazeRay: 0
+  numberOfFixations: 0
+  totalFixationTime: 0
+  timeLookingAtEyes: 0
+  timeLookingAtForehead: 0
+  timeLookingAtMouth: 0
   headTransform: {fileID: 302144843}
 --- !u!120 &1993913569
 LineRenderer:
@@ -5990,7 +5995,7 @@ MonoBehaviour:
   wasPointingDown: 0
   dangerZoneTolerance: 0.99
   stopOnAverageObtained: 1
-  xRotationAllowed: 0
+  xRotationAllowed: 1
   yRotationAllowed: 1
   zRotationAllowed: 1
   freezeRotValues: {x: -90, y: 0, z: 0}

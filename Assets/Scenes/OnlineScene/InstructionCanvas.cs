@@ -41,7 +41,8 @@ public class InstructionCanvas : MonoBehaviour
             fillingImage.enabled = false;
             markerImage.enabled = false;
             this.transform.parent = null;
-            canvasTransform.position = mapMarker.transform.position;
+            canvasTransform.SetPositionAndRotation(mapMarker.transform.position, mapMarker.transform.rotation);
+            canvasTransform.transform.localScale = new Vector3(-1, 1, 1); //flipping x to have panel in right orientation
             if (GameManager.Instance.languageSetToEnglish)
             {
                 text.text = "Waiting for second participant";
