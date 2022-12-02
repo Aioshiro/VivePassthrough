@@ -48,6 +48,11 @@ public class SyncViseme : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
+        if (GameManager.Instance.facialTracker)
+        {
+            this.enabled = false;
+            return;
+        }
         playerOneViseme.Callback += OnPlayerOneUpdated;
         playerTwoViseme.Callback += OnPlayerTwoUpdated;
         lipsyncContext = FindObjectOfType<OVRLipSyncContextBase>();
@@ -80,6 +85,11 @@ public class SyncViseme : NetworkBehaviour
     {
         if (isClientOnly)
         {
+            if (lipsyncContext == null)
+            {
+                lipsyncContext = FindObjectOfType<OVRLipSyncContextBase>();
+                return;
+            }
             int playerNumber = GameManager.Instance.playerNumber;
             OVRLipSync.Frame frame = lipsyncContext.GetCurrentPhonemeFrame();
             //upload own viseme
