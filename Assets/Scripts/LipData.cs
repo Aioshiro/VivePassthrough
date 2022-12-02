@@ -35,10 +35,22 @@ public class LipData : NetworkBehaviour
     //Dictionnary are automatically synced, no need to initialized on client
     //public override void OnStartClient()
     //{
-        //LipWeightingsFirstPlayer.Callback += OnFirstPlayerChange;
-        //LipWeightingsSecondPlayer.Callback += OnSecondPlayerChange;
+    //LipWeightingsFirstPlayer.Callback += OnFirstPlayerChange;
+    //LipWeightingsSecondPlayer.Callback += OnSecondPlayerChange;
 
     //}
+
+    public void Update()
+    {
+        if (!SRanipal_Lip_Framework.Instance.EnableLip)
+        {
+            return;
+        }
+
+        SRanipal_Lip_v2.GetLipWeightings(out var weightings);
+        //Uploading facial tracker to server
+        UpdateWeightings(weightings, GameManager.Instance.playerNumber);
+    }
 
     /// <summary>
     /// Uploading the new lip data on the server
