@@ -90,7 +90,7 @@ public class AvatarInitializer : MonoBehaviour
         if (GameManager.Instance.isMale) { SetActiveList(maleHeads, true); }
         else { SetActiveList(womanHeads, true); }
 
-        if (GameManager.Instance.facialTracker)
+        if (!GameManager.Instance.facialTracker) //We're using facial tracker, so we recieve input from other"s lip sync
         {
             AvatarLipMulti[] facialScripts = FindObjectsOfType<AvatarLipMulti>();
             foreach (var script in facialScripts)
@@ -98,7 +98,7 @@ public class AvatarInitializer : MonoBehaviour
                 script.enabled = true;
             }
         }
-        else
+        else//We're using lip sync, so we recieve input from other's facial tracker
         {
             LipSyncMulti[] lipSyncScripts = FindObjectsOfType<LipSyncMulti>();
             foreach (var script in lipSyncScripts)
