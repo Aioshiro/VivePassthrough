@@ -33,10 +33,6 @@ public class AvatarLipMulti : MonoBehaviour
 
     private void Update()
     {
-        if (!SRanipal_Lip_Framework.Instance.EnableLip)
-        {
-            return;
-        }
 
         //Uploading local model blenshapes values
         if (GameManager.Instance.playerNumber == 0)
