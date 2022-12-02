@@ -7339,7 +7339,7 @@ MonoBehaviour:
   isMale: 0
   participantID: -1
   playerNumber: 0
-  facialTracker: 1
+  facialTracker: 0
   chosedEthnie: 2
   otherPersonHeadLength: 0.17
   languageSetToEnglish: 0
