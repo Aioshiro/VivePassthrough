@@ -42,7 +42,7 @@ public class NetworkConnection : NetworkManager
         }
         base.StartClient();
         player.SetActive(true);
-        if (LipFrameWork != null)
+        if (LipFrameWork != null && GameManager.Instance.facialTracker)
         {
             LipFrameWork.EnableLip = true;
             LipFrameWork.StartFramework();
