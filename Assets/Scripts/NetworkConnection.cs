@@ -57,10 +57,6 @@ public class NetworkConnection : NetworkManager
         {
             gestureProvider.enabled = true;
         }
-        if (!GameManager.Instance.facialTracker)
-        {
-            GameObject.Find("DataToSync").transform.GetChild(0).gameObject.SetActive(true);
-        }
         
 #endif
     }
