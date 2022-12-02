@@ -48,11 +48,6 @@ public class SyncViseme : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        if (GameManager.Instance.facialTracker)
-        {
-            this.enabled = false;
-            return;
-        }
         playerOneViseme.Callback += OnPlayerOneUpdated;
         playerTwoViseme.Callback += OnPlayerTwoUpdated;
         lipsyncContext = FindObjectOfType<OVRLipSyncContextBase>();
