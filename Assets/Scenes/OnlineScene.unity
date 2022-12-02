@@ -188,6 +188,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Occlusion (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6800098776588118027, guid: 6fe0d6362eb29934ab8f511a28710014,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fe0d6362eb29934ab8f511a28710014, type: 3}
 --- !u!1 &98541164
@@ -3058,7 +3063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &857589063
 Transform:
   m_ObjectHideFlags: 0
@@ -6547,6 +6552,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 299050694724166599, guid: 917c8358b64d0524c863bd3b5a27f69b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 300599991164313864, guid: 917c8358b64d0524c863bd3b5a27f69b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 311943463910018283, guid: 917c8358b64d0524c863bd3b5a27f69b,
+        type: 3}
+      propertyPath: colliderType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 312149957429197588, guid: 917c8358b64d0524c863bd3b5a27f69b,
+        type: 3}
+      propertyPath: colliderType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 414849379476709522, guid: 917c8358b64d0524c863bd3b5a27f69b,
         type: 3}
       propertyPath: m_RootOrder
