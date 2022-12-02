@@ -34,7 +34,7 @@ public class NetworkConnection : NetworkManager
         //Destroy(GameObject.FindGameObjectWithTag("Player"));
         //Destroy(LipFrameWork.gameObject);
         clientConn = new NetworkConnectionToClient[2];
-#elif (UNITY_STANDALONE || UNITY_EDITOR)//If it's the client, we enable the lip framework
+#elif (UNITY_STANDALONE || UNITY_EDITOR)
         networkAddress = GameManager.Instance.serverIp;
         if (networkAddress == "")
         {
@@ -57,6 +57,11 @@ public class NetworkConnection : NetworkManager
         {
             gestureProvider.enabled = true;
         }
+        if (!GameManager.Instance.facialTracker)
+        {
+            GameObject.Find("DataToSync").transform.GetChild(0).gameObject.SetActive(true);
+        }
+        
 #endif
     }
 
