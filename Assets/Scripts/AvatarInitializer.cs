@@ -33,26 +33,6 @@ public class AvatarInitializer : MonoBehaviour
 
     private void Start()
     {
-        //We make sure everything is unactive, just in case
-        SetActiveList(maleHeads, false);
-        SetActiveList(womanHeads, false);
-        SetActiveList(cartoonHeads,false);
-        SetActiveList(realisticHeads,false);
-        africanHeads.SetActive(false);
-        asianHeads.SetActive(false);
-        caucasianHeads.SetActive(false);
-        latinoHeads.SetActive(false);
-        AvatarLipMulti[] facialScripts = FindObjectsOfType<AvatarLipMulti>();
-        foreach (var script in facialScripts)
-        {
-            script.enabled = false;
-        }
-        LipSyncMulti[] lipSyncScripts = FindObjectsOfType<LipSyncMulti>();
-        foreach(var script in lipSyncScripts)
-        {
-            script.enabled = false;
-        }
-
         //We initialize properly depending on the settings
         InitializeHeads();
     }
@@ -62,6 +42,27 @@ public class AvatarInitializer : MonoBehaviour
     /// </summary>
     private void InitializeHeads()
     {
+
+        //We make sure everything is unactive, just in case
+        SetActiveList(maleHeads, false);
+        SetActiveList(womanHeads, false);
+        SetActiveList(cartoonHeads, false);
+        SetActiveList(realisticHeads, false);
+        africanHeads.SetActive(false);
+        asianHeads.SetActive(false);
+        caucasianHeads.SetActive(false);
+        latinoHeads.SetActive(false);
+        AvatarLipMulti[] facialScripts = GetComponentsInChildren<AvatarLipMulti>(true);
+        foreach (var script in facialScripts)
+        {
+            script.enabled = false;
+        }
+        LipSyncMulti[] lipSyncScripts = GetComponentsInChildren<LipSyncMulti>(true);
+        foreach (var script in lipSyncScripts)
+        {
+            script.enabled = false;
+        }
+
         if (GameManager.Instance == null || !GameManager.Instance.HeadsActive) { return; }
 
         switch (GameManager.Instance.chosedEthnie)
@@ -92,7 +93,7 @@ public class AvatarInitializer : MonoBehaviour
 
         if (!GameManager.Instance.facialTracker) //We're using facial tracker, so we recieve input from other"s lip sync
         {
-            AvatarLipMulti[] facialScripts = FindObjectsOfType<AvatarLipMulti>();
+            //AvatarLipMulti[] facialScripts = GetComponentsInChildren<AvatarLipMulti>();
             foreach (var script in facialScripts)
             {
                 script.enabled = true;
@@ -100,7 +101,7 @@ public class AvatarInitializer : MonoBehaviour
         }
         else//We're using lip sync, so we recieve input from other's facial tracker
         {
-            LipSyncMulti[] lipSyncScripts = FindObjectsOfType<LipSyncMulti>();
+            //LipSyncMulti[] lipSyncScripts = GetComponentsInChildren<LipSyncMulti>();
             foreach (var script in lipSyncScripts)
             {
                 script.enabled = true;
