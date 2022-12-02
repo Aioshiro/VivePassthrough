@@ -1,7 +1,6 @@
 // created on 27/12/2002 at 20:20
 using System;
 using System.IO;
-using NAudio.Lame;
 
 namespace NAudio.Wave.WZT
 {
