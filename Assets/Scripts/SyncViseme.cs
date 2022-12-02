@@ -80,15 +80,18 @@ public class SyncViseme : NetworkBehaviour
     {
         if (isClientOnly)
         {
-            if (lipsyncContext == null)
+            if (!GameManager.Instance.facialTracker)
             {
-                lipsyncContext = FindObjectOfType<OVRLipSyncContextBase>();
-                return;
+                if (lipsyncContext == null)
+                {
+                    lipsyncContext = FindObjectOfType<OVRLipSyncContextBase>();
+                    return;
+                }
+                int playerNumber = GameManager.Instance.playerNumber;
+                OVRLipSync.Frame frame = lipsyncContext.GetCurrentPhonemeFrame();
+                //upload own viseme
+                UpdateVisemes(playerNumber, frame.Visemes);
             }
-            int playerNumber = GameManager.Instance.playerNumber;
-            OVRLipSync.Frame frame = lipsyncContext.GetCurrentPhonemeFrame();
-            //upload own viseme
-            UpdateVisemes(playerNumber, frame.Visemes);
         }
     }
 
