@@ -22,7 +22,7 @@ public class NetworkConnection : NetworkManager
     /// <summary>
     /// Client connections in case we need them
     /// </summary>
-    public NetworkConnectionToClient[] clientConn;
+    private NetworkConnectionToClient[] clientConn;
 
     // Start is called before the first frame update
     override public void Start()
