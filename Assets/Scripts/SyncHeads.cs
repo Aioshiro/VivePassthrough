@@ -67,7 +67,7 @@ public class SyncHeads : NetworkBehaviour
             UpdateRotValue(playerNumber, Quaternion.Inverse(markerWorldOrigin.transform.rotation)* localRigTrackedCamera.transform.rotation);
             //Then, download other headPos and headRot
             otherPlayerHead.transform.SetPositionAndRotation(markerWorldOrigin.transform.TransformPoint(playersHeadsLocalPositions[(playerNumber + 1) % 2]), markerWorldOrigin.transform.rotation*playersHeadsLocalRotations[(playerNumber + 1) % 2]);
-            if (!hasSentMarkerTransform && markerWorldOrigin.count == markerWorldOrigin.movingAverageLengthPos && markerWorldOrigin.movingAverageLengthPos !=0)
+            if (!hasSentMarkerTransform && markerWorldOrigin.count == markerWorldOrigin.movingAverageLengthPos)
             {
                 SendMarkerPosToServer(playerNumber, markerWorldOrigin.transform.position);
                 hasSentMarkerTransform = true;
