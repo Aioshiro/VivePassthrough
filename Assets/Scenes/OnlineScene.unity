@@ -3735,7 +3735,7 @@ MonoBehaviour:
   allowMovement: 1
   allowRotation: 1
   leftCamera: {fileID: 2050918624}
-  dangerZoneTolerance: 0.99
+  dangerZoneTolerance: 1
   stopOnAverageObtained: 1
   xRotationAllowed: 1
   yRotationAllowed: 1
