@@ -93,6 +93,7 @@ public class DetectionMarkers : MonoBehaviour
 			};
 		}
 
+		
 		conversionParams = OpenCvSharp.Unity.TextureConversionParams.Default;
 		conversionParams.FlipHorizontally = true;
 		// Create default parameres for detection
@@ -103,14 +104,14 @@ public class DetectionMarkers : MonoBehaviour
 		//detectorParameters.AdaptiveThreshWinSizeMax = 23; //found no effect
 		//detectorParameters.AdaptiveThreshWinSizeMin = 3; //found no effect
 		//detectorParameters.AdaptiveThreshWinSizeStep = 10; //found no effect
-		detectorParameters.CornerRefinementWinSize = 9;
-		//detectorParameters.CornerRefinementMinAccuracy = 0.1; //found no effect
+		detectorParameters.CornerRefinementWinSize = 5;
+		detectorParameters.CornerRefinementMinAccuracy = 0.001; //found no effect
 		//detectorParameters.CornerRefinementMaxIterations = int.MaxValue; //found no effect
 		//detectorParameters.MarkerBorderBits =1 //always one for us
 		//detectorParameters.MaxErroneousBitsInBorderRate = 0.35 //no issues or erroneous bits
 		//detectorParameters.MaxMarkerPerimeterRate = 4;
 		//detectorParameters.MinCornerDistanceRate = 0.05;
-		detectorParameters.MinDistanceToBorder = 100; //increased quite a bit, as the other person head tend to be in the center
+		//detectorParameters.MinDistanceToBorder = 100; //increased quite a bit, as the other person head tend to be in the center
 		//detectorParameters.MinMarkerDistanceRate = 0.05;
 		detectorParameters.MinMarkerPerimeterRate = 0.04; //Increase a little bit to filter small wrong markers
 		 //detectorParameters.MinOtsuStdDev = 5; no effect
@@ -403,6 +404,7 @@ public class DetectionMarkers : MonoBehaviour
 				markersToUpdateLeft[ids[i]] = true;
 				Cv2.SolvePnP(markerPoints[ids[i]], corners[i], cameraLeftMatrix, distCoeffs, out rvecLeft[ids[i]], out tvecLeft[ids[i]], false, SolvePnPFlags.Iterative); //Pose estimation, to go from 2d pixels to 3d position in CAMERA space
 				Cv2.Rodrigues(rvecLeft[ids[i]], out rotMatLeft[ids[i]]);
+				
 			}
 		}
 
