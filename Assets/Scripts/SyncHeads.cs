@@ -26,6 +26,8 @@ public class SyncHeads : NetworkBehaviour
     Vector3 playerOneMarkerPos =Vector3.zero;
     Vector3 playerTwoMarkerPos = Vector3.zero;
 
+    Quaternion playerOneMarkerRot = Quaternion.identity;
+
     bool hasSentMarkerTransform;
 
     /// <summary>
@@ -110,24 +112,30 @@ public class SyncHeads : NetworkBehaviour
         if (playerOneMarkerPos != Vector3.zero && playerOneMarkerPos != Vector3.zero && Vector3.Distance(playerTwoMarkerPos, playerOneMarkerPos) < 0.01f)
         {
             var networkConnection = FindObjectOfType<NetworkConnection>();
-            Transform newTrans = GetMarker10Transform(networkConnection.clientConn[0]);
-            SetMarker10Transform(networkConnection.clientConn[1], newTrans);
+            GetMarker10Rot(networkConnection.clientConn[0]);
+            SetMarker10Transform(networkConnection.clientConn[1], playerOneMarkerPos,playerOneMarkerRot);
             Debug.Log("Synchronising markers pos on cients");
         }
     }
 
-    [TargetRpc]
-    Transform GetMarker10Transform(Mirror.NetworkConnection target)
+    [Command(requiresAuthority =false)]
+    void SetRotation(Quaternion rot)
     {
-        Debug.Log("Sending marker transform");
-        return markerWorldOrigin.transform;
+        playerOneMarkerRot = rot;
     }
 
     [TargetRpc]
-    void SetMarker10Transform(Mirror.NetworkConnection target, Transform newTransform)
+    void GetMarker10Rot(Mirror.NetworkConnection target)
+    {
+        Debug.Log("Uploading marker rot");
+        SetRotation(markerWorldOrigin.transform.rotation);
+    }
+
+    [TargetRpc]
+    void SetMarker10Transform(Mirror.NetworkConnection target, Vector3 newPos,Quaternion newRot)
     {
         Debug.Log("recieving marker transform");
-        markerWorldOrigin.transform.SetPositionAndRotation(newTransform.position, newTransform.rotation);
+        markerWorldOrigin.transform.SetPositionAndRotation(newPos, newRot);
     }
 
 
