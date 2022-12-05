@@ -96,6 +96,17 @@ public class GazeRay : MonoBehaviour
         }
         GazeDirectionCombined = headTransform.TransformDirection(GazeDirectionCombinedLocal).normalized;
 
+        if (showGazeRay)
+        {
+            GazeRayRenderer.enabled = true;
+            GazeRayRenderer.SetPosition(0, headTransform.position - headTransform.up * 0.05f + headTransform.right * 0.02f);
+            GazeRayRenderer.SetPosition(1, headTransform.position + GazeDirectionCombined * LengthOfRay);
+        }
+        else
+        {
+            GazeRayRenderer.enabled = false;
+        }
+
         if (Physics.Raycast(headTransform.position, GazeDirectionCombined,out RaycastHit info,25, LayerMask.GetMask("Eyes","Mouth","Forehead")))
         {
             //Debug.Log(info.collider.gameObject.layer);
@@ -127,16 +138,6 @@ public class GazeRay : MonoBehaviour
                 totalFixationTime += currentFixationTime;
             }
             currentFixationTime = 0;
-        }
-        if (showGazeRay)
-        {
-            GazeRayRenderer.enabled = true;
-            GazeRayRenderer.SetPosition(0, headTransform.position - headTransform.up * 0.05f + headTransform.right * 0.02f);
-            GazeRayRenderer.SetPosition(1, headTransform.position + GazeDirectionCombined * LengthOfRay);
-        }
-        else
-        {
-            GazeRayRenderer.enabled = false;
         }
     }
 }
