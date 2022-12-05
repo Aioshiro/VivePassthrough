@@ -105,7 +105,7 @@ public class DetectionMarkers : MonoBehaviour
 		//detectorParameters.AdaptiveThreshWinSizeMin = 3; //found no effect
 		//detectorParameters.AdaptiveThreshWinSizeStep = 10; //found no effect
 		detectorParameters.CornerRefinementWinSize = 5;
-		detectorParameters.CornerRefinementMinAccuracy = 0.001; //found no effect
+		detectorParameters.CornerRefinementMinAccuracy = 0.0001; //found no effect
 		//detectorParameters.CornerRefinementMaxIterations = int.MaxValue; //found no effect
 		//detectorParameters.MarkerBorderBits =1 //always one for us
 		//detectorParameters.MaxErroneousBitsInBorderRate = 0.35 //no issues or erroneous bits
