@@ -18,10 +18,15 @@ public class SyncHeads : NetworkBehaviour
     [SerializeField] GameObject otherPlayerHead;
 
     [Tooltip("Marker 10 transform")]
-    [SerializeField] Transform markerWorldOrigin;
+    [SerializeField] TransformSmoother markerWorldOrigin;
 
     [Tooltip("Local rig tracked camera")]
     [SerializeField] Transform localRigTrackedCamera;
+
+    Vector3 playerOneMarkerPos =Vector3.zero;
+    Vector3 playerTwoMarkerPos = Vector3.zero;
+
+    bool hasSentMarkerTransform;
 
     /// <summary>
     /// On server start, initialize SyncLists
@@ -57,9 +62,15 @@ public class SyncHeads : NetworkBehaviour
             int playerNumber = GameManager.Instance.playerNumber;
             //First, upload own headPos and headRot
             UpdatePosValue(playerNumber, markerWorldOrigin.transform.InverseTransformPoint(localRigTrackedCamera.position));
-            UpdateRotValue(playerNumber, Quaternion.Inverse(markerWorldOrigin.rotation)* localRigTrackedCamera.transform.rotation);
+            UpdateRotValue(playerNumber, Quaternion.Inverse(markerWorldOrigin.transform.rotation)* localRigTrackedCamera.transform.rotation);
             //Then, download other headPos and headRot
             otherPlayerHead.transform.SetPositionAndRotation(markerWorldOrigin.transform.TransformPoint(playersHeadsLocalPositions[(playerNumber + 1) % 2]), markerWorldOrigin.transform.rotation*playersHeadsLocalRotations[(playerNumber + 1) % 2]);
+            if (!hasSentMarkerTransform && markerWorldOrigin.count == markerWorldOrigin.movingAverageLengthPos)
+            {
+                SendMarkerPosToServer(playerNumber, markerWorldOrigin.transform.position);
+                hasSentMarkerTransform = true;
+                Debug.Log("Sending marker pos to server");
+            }
         }
     }
 
@@ -84,6 +95,41 @@ public class SyncHeads : NetworkBehaviour
     {
         playersHeadsLocalRotations[index] = newValue;
     }
+
+    [Command(requiresAuthority =false)]
+    void SendMarkerPosToServer(int index,Vector3 pos)
+    {
+        if (index == 0)
+        {
+            playerOneMarkerPos = pos;
+        }
+        else
+        {
+            playerTwoMarkerPos = pos;
+        }
+        if (playerOneMarkerPos != Vector3.zero && playerOneMarkerPos != Vector3.zero && Vector3.Distance(playerTwoMarkerPos, playerOneMarkerPos) < 0.01f)
+        {
+            var networkConnection = FindObjectOfType<NetworkConnection>();
+            Transform newTrans = GetMarker10Transform(networkConnection.clientConn[0]);
+            SetMarker10Transform(networkConnection.clientConn[1], newTrans);
+            Debug.Log("Synchronising markers pos on cients");
+        }
+    }
+
+    [TargetRpc]
+    Transform GetMarker10Transform(Mirror.NetworkConnection target)
+    {
+        Debug.Log("Sending marker transform");
+        return markerWorldOrigin.transform;
+    }
+
+    [TargetRpc]
+    void SetMarker10Transform(Mirror.NetworkConnection target, Transform newTransform)
+    {
+        Debug.Log("recieving marker transform");
+        markerWorldOrigin.transform.SetPositionAndRotation(newTransform.position, newTransform.rotation);
+    }
+
 
     /// <summary>
     /// Callback when position is updated
