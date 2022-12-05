@@ -40,7 +40,7 @@ public class InstructionCanvas : MonoBehaviour
     {
         fillingImage.transform.SetPositionAndRotation(mapMarker.transform.position, mapMarker.transform.rotation);
         fillingImage.fillAmount = (float) mapMarker.count /  (float) mapMarker.movingAverageLengthPos;
-        if (fillingImage.fillAmount > 0.99)
+        if (mapMarker.count==mapMarker.movingAverageLengthPos)
         {
             fillingImage.enabled = false;
             markerImage.enabled = false;

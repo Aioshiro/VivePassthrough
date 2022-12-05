@@ -44,6 +44,7 @@ public class Button : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        buttonTop.transform.localPosition = new Vector3(0, 0, Mathf.Min(buttonTop.transform.localPosition.z,0));
         if (buttonTop.transform.localPosition.z < maxDist/2)
         {
             if (!hasCalledEvent)
@@ -55,7 +56,7 @@ public class Button : MonoBehaviour
 
             if (buttonTop.transform.localPosition.z < maxDist)
             {
-                buttonTop.transform.localPosition = new Vector3(buttonTop.transform.localPosition.x, buttonTop.transform.localPosition.y, maxDist);
+                buttonTop.transform.localPosition = new Vector3(0, 0, maxDist);
             }
             
         }
