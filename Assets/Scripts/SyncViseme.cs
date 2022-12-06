@@ -23,12 +23,12 @@ public class SyncViseme : NetworkBehaviour
     /// <summary>
     /// Player one list of visemes
     /// </summary>
-    readonly public SyncList<float> playerOneViseme = new SyncList<float>();
+    public readonly SyncList<float> playerOneViseme = new SyncList<float>();
 
     /// <summary>
     /// Player two list of visemes
     /// </summary>
-    readonly public SyncList<float> playerTwoViseme = new SyncList<float>();
+    public readonly SyncList<float> playerTwoViseme = new SyncList<float>();
 
     /// <summary>
     /// On server start, initialize syncLists of visemes
@@ -146,6 +146,7 @@ public class SyncViseme : NetworkBehaviour
                 // index is of the item that was changed
                 // oldItem is the previous value for the item at the index
                 // newItem is the new value for the item at the index
+                playerOneViseme[index] = newItem;
                 break;
             case SyncList<float>.Operation.OP_CLEAR:
                 // list got cleared
@@ -179,6 +180,7 @@ public class SyncViseme : NetworkBehaviour
                 // index is of the item that was changed
                 // oldItem is the previous value for the item at the index
                 // newItem is the new value for the item at the index
+                playerTwoViseme[index] = newItem;
                 break;
             case SyncList<float>.Operation.OP_CLEAR:
                 // list got cleared
