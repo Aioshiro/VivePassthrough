@@ -3395,7 +3395,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.002
   otherPlayerHead: {fileID: 1585693352}
-  markerWorldOrigin: {fileID: 1998164379}
   localRigTrackedCamera: {fileID: 302144843}
 --- !u!114 &1945066174
 MonoBehaviour:
@@ -3676,8 +3675,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   count: 0
-  movingAverageLengthPos: 500
-  movingAverageLengthRot: 500
+  movingAverageLengthPos: 100
+  movingAverageLengthRot: 100
   posMaxDistance: 100
   rotMaxDegrees: 360
   allowMovement: 1
