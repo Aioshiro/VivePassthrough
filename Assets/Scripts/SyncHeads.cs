@@ -22,7 +22,9 @@ public class SyncHeads : NetworkBehaviour
     //[SerializeField] TransformSmoother markerWorldOrigin;
 
     private GameObject baseStationOrigin;
-    Valve.VR.TrackedDevicePose_t[] stationsPose = new Valve.VR.TrackedDevicePose_t[3];
+
+
+    Valve.VR.TrackedDevicePose_t[] stationsPose = new Valve.VR.TrackedDevicePose_t[3]; //Storing the poses
 
 
     [Tooltip("Local rig tracked camera")]
@@ -69,20 +71,20 @@ public class SyncHeads : NetworkBehaviour
         {
             int playerNumber = GameManager.Instance.playerNumber;
 
-            Valve.VR.OpenVR.System.GetDeviceToAbsoluteTrackingPose(Valve.VR.ETrackingUniverseOrigin.TrackingUniverseStanding, 0, stationsPose);
+            Valve.VR.OpenVR.System.GetDeviceToAbsoluteTrackingPose(Valve.VR.ETrackingUniverseOrigin.TrackingUniverseStanding, 0, stationsPose); //Updating the poses
             float yMax = float.MinValue;
             uint chosenStation = 0;
-            for (uint i = 0; i < Valve.VR.OpenVR.k_unMaxTrackedDeviceCount; i++)
+            for (uint i = 0; i < Valve.VR.OpenVR.k_unMaxTrackedDeviceCount; i++) //For every tracked device
             {
-                if (Valve.VR.OpenVR.System.GetTrackedDeviceClass(i) == Valve.VR.ETrackedDeviceClass.TrackingReference)
+                if (Valve.VR.OpenVR.System.GetTrackedDeviceClass(i) == Valve.VR.ETrackedDeviceClass.TrackingReference) //If it's a base station
                 {
                     Vector3 baseStation = stationsPose[i].mDeviceToAbsoluteTracking.GetPosition();
-                    if (yMax == float.MinValue)
+                    if (yMax == float.MinValue) //If it's the first one, we store it
                     {
                         yMax = baseStation.y;
                         chosenStation = i;
                     }
-                    else
+                    else // Otherwise, we keep the higher one
                     {
                         if (baseStation.y > yMax)
                         {
@@ -91,6 +93,7 @@ public class SyncHeads : NetworkBehaviour
                     }
                 }
             }
+            //Get position and rotation of the station
             Vector3 baseStationPos = stationsPose[chosenStation].mDeviceToAbsoluteTracking.GetPosition();
             Quaternion baseStationRot = stationsPose[chosenStation].mDeviceToAbsoluteTracking.GetRotation();
 
