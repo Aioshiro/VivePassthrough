@@ -64,6 +64,7 @@ public class InstructionUpdater : MonoBehaviour
     void UpdateInstructions(List<string> input)
     {
         TMPro.TMP_Text shownText = GetComponent<TMPro.TMP_Text>();
+        shownText.text = "";
         int start = 0;
         if (GameManager.Instance.playerNumber == 1) { start = instructions.Count/2; }
         for (int i = 0; i < instructions.Count / 2; i++)
