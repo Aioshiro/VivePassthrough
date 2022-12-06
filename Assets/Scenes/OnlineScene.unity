@@ -420,6 +420,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316506162}
   m_CullTransparentMesh: 0
+--- !u!1 &360389579 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4339937004052221834, guid: 2ebb58b785236934cb464b9aba3b3652,
+    type: 3}
+  m_PrefabInstance: {fileID: 7470998583456702110}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &360389580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360389579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac035d8819402341a1ac2c0edc952b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instructions:
+  - '- La mairie doit se trouver au centre de la ville'
+  - "- Pour le bien des patients, l'h\xF4pital est proche d'un parc."
+  - "- La station de pompiers doit pouvoir atteindre les autres b\xE2timents rapidement."
+  - "- Les r\xE9sidences doivent \xEAtre proches de la mer."
+  - "- La gare doit \xEAtre le plus excentr\xE9e possible."
+  - "- Le gratte-ciel et son quartier des affaires doivent \xEAtre au centre de la
+    ville."
+  - "- Le stade doit \xEAtre \xE9loign\xE9 des r\xE9sidences \xE0 cause du bruit."
+  - "- Les r\xE9sidences doivent \xEAtre proches d'infrastructures importantes."
+  englishInstructions:
+  - '- The town hall must be in the center of the city.'
+  - '- For the benefit of patients, the hospital is close to a park.'
+  - '- The fire station must be able to reach the other buildings quickly.'
+  - '- The residences must be close to the sea.'
+  - '- The station should be as off-center as possible.'
+  - '- The skyscraper and its business district should be at the center of the city.'
+  - '- The stadium must be located away from residences because of the noise.'
+  - '- Residences must be close to important infrastructures.'
 --- !u!1 &366353474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,6 +1056,128 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633017922}
   m_CullTransparentMesh: 0
+--- !u!1001 &690386923
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1998164380}
+    m_Modifications:
+    - target: {fileID: 6599141344893441716, guid: fdbbc8979552d804e9bf748cffcce87b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599141344893441716, guid: fdbbc8979552d804e9bf748cffcce87b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599141344893441716, guid: fdbbc8979552d804e9bf748cffcce87b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599141344893441716, guid: fdbbc8979552d804e9bf748cffcce87b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599141344893441716, guid: fdbbc8979552d804e9bf748cffcce87b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599141344893441716, guid: fdbbc8979552d804e9bf748cffcce87b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599141344893441716, guid: fdbbc8979552d804e9bf748cffcce87b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599141344893441716, guid: fdbbc8979552d804e9bf748cffcce87b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599141344893441716, guid: fdbbc8979552d804e9bf748cffcce87b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599141344893441716, guid: fdbbc8979552d804e9bf748cffcce87b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599141344893441716, guid: fdbbc8979552d804e9bf748cffcce87b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599141344893441717, guid: fdbbc8979552d804e9bf748cffcce87b,
+        type: 3}
+      propertyPath: m_Name
+      value: Single canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599141344893441717, guid: fdbbc8979552d804e9bf748cffcce87b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599141344935608815, guid: fdbbc8979552d804e9bf748cffcce87b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fdbbc8979552d804e9bf748cffcce87b, type: 3}
+--- !u!4 &690386924 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6599141344893441716, guid: fdbbc8979552d804e9bf748cffcce87b,
+    type: 3}
+  m_PrefabInstance: {fileID: 690386923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &690386925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6599141344935608803, guid: fdbbc8979552d804e9bf748cffcce87b,
+    type: 3}
+  m_PrefabInstance: {fileID: 690386923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &690386926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690386925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac035d8819402341a1ac2c0edc952b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instructions:
+  - '- La mairie doit se trouver au centre de la ville'
+  - "- Pour le bien des patients, l'h\xF4pital est proche d'un parc."
+  - "- La station de pompiers doit pouvoir atteindre les autres b\xE2timents rapidement."
+  - "- Les r\xE9sidences doivent \xEAtre proches de la mer."
+  - "- La gare doit \xEAtre le plus excentr\xE9e possible."
+  - "- Le gratte-ciel et son quartier des affaires doivent \xEAtre au centre de la
+    ville."
+  - "- Le stade doit \xEAtre \xE9loign\xE9 des r\xE9sidences \xE0 cause du bruit."
+  - "- Les r\xE9sidences doivent \xEAtre proches d'infrastructures importantes."
+  englishInstructions:
+  - '- The town hall must be in the center of the city.'
+  - '- For the benefit of patients, the hospital is close to a park.'
+  - '- The fire station must be able to reach the other buildings quickly.'
+  - '- The residences must be close to the sea.'
+  - '- The station should be as off-center as possible.'
+  - '- The skyscraper and its business district should be at the center of the city.'
+  - '- The stadium must be located away from residences because of the noise.'
+  - '- Residences must be close to important infrastructures.'
 --- !u!1 &691784969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,6 +1926,43 @@ Transform:
   m_Father: {fileID: 2095971281}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &968150537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4339937004885143435, guid: 2ebb58b785236934cb464b9aba3b3652,
+    type: 3}
+  m_PrefabInstance: {fileID: 7470998583456702110}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &968150538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968150537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac035d8819402341a1ac2c0edc952b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instructions:
+  - '- La mairie doit se trouver au centre de la ville'
+  - "- Pour le bien des patients, l'h\xF4pital est proche d'un parc."
+  - "- La station de pompiers doit pouvoir atteindre les autres b\xE2timents rapidement."
+  - "- Les r\xE9sidences doivent \xEAtre proches de la mer."
+  - "- La gare doit \xEAtre le plus excentr\xE9e possible."
+  - "- Le gratte-ciel et son quartier des affaires doivent \xEAtre au centre de la
+    ville."
+  - "- Le stade doit \xEAtre \xE9loign\xE9 des r\xE9sidences \xE0 cause du bruit."
+  - "- Les r\xE9sidences doivent \xEAtre proches d'infrastructures importantes."
+  englishInstructions:
+  - '- The town hall must be in the center of the city.'
+  - '- For the benefit of patients, the hospital is close to a park.'
+  - '- The fire station must be able to reach the other buildings quickly.'
+  - '- The residences must be close to the sea.'
+  - '- The station should be as off-center as possible.'
+  - '- The skyscraper and its business district should be at the center of the city.'
+  - '- The stadium must be located away from residences because of the noise.'
+  - '- Residences must be close to important infrastructures.'
 --- !u!1 &1038136950
 GameObject:
   m_ObjectHideFlags: 0
@@ -3481,6 +3677,7 @@ Transform:
   m_Children:
   - {fileID: 769725973}
   - {fileID: 2059575570}
+  - {fileID: 690386924}
   m_Father: {fileID: 4703040164457372522}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5816,9 +6013,19 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4339937004827244765, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7470998582017965964, guid: 2ebb58b785236934cb464b9aba3b3652,
