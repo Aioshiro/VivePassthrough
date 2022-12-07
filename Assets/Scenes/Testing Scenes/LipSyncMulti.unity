@@ -975,8 +975,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1606552516}
   - component: {fileID: 1606552515}
-  - component: {fileID: 1606552514}
   - component: {fileID: 1606552517}
+  - component: {fileID: 1606552514}
   m_Layer: 0
   m_Name: OVRLipSync
   m_TagString: Untagged
@@ -993,17 +993,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1606552513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d5ed157083b494e85013bad8fd5e12, type: 3}
+  m_Script: {fileID: 11500000, guid: 926ea01955e6a2e439aa80db879ed3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
   enableMicSelectionGUI: 0
   micSelectionGUIKey: 109
-  micInputVolume: 40
+  micInputVolume: 100
   micFrequency: 48000
   micControl: 2
   micActivationKey: 32
   selectedDevice: 
+  micSelected: 0
+  initialized: 0
+  _isRecordingSpeech: 0
+  startRecordOnStart: 0
+  recordLength: 600
 --- !u!82 &1606552515
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1173,7 +1178,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.001
   smoothAmount: 70
-  ownVisemes:
+  ownViseme:
   - 0
   - 0
   - 0
