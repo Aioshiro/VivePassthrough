@@ -873,6 +873,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3173343622674647922, guid: 10e0484ba2605684eb888f868b7859e4,
+        type: 3}
+      propertyPath: overrides.Array.data[3]
+      value: 0.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10e0484ba2605684eb888f868b7859e4, type: 3}
 --- !u!4 &103413015978878755 stripped
@@ -957,7 +962,7 @@ PrefabInstance:
     - target: {fileID: 3084202377634982595, guid: 96e7486844a65ca4cb2e4ad341159741,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96e7486844a65ca4cb2e4ad341159741, type: 3}
@@ -1044,6 +1049,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300742859036096672, guid: d1f49a98bd8bc5640b09494283ecd47f,
+        type: 3}
+      propertyPath: overrides.Array.data[3]
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1f49a98bd8bc5640b09494283ecd47f, type: 3}
@@ -1216,6 +1226,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622946633042409465, guid: 5ac0e9267c7da1f48acb4873a775da7c,
+        type: 3}
+      propertyPath: overrides.Array.data[3]
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ac0e9267c7da1f48acb4873a775da7c, type: 3}
@@ -1561,6 +1576,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5922861228627144796, guid: c26f8abbf1e48f14ebb726750c0741a0,
+        type: 3}
+      propertyPath: overrides.Array.data[3]
+      value: 0.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c26f8abbf1e48f14ebb726750c0741a0, type: 3}
 --- !u!4 &7959854499375409374 stripped
@@ -1647,6 +1667,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 801938839262533142, guid: 62ea8806923c81b499c3a51e563d6a64,
+        type: 3}
+      propertyPath: overrides.Array.data[3]
+      value: 0.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62ea8806923c81b499c3a51e563d6a64, type: 3}
 --- !u!4 &7627666774450991192 stripped
@@ -1732,6 +1757,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951147274679608217, guid: 1484a1e18a163ea4bb2c87dbc21914b8,
+        type: 3}
+      propertyPath: overrides.Array.data[3]
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1484a1e18a163ea4bb2c87dbc21914b8, type: 3}
@@ -1848,7 +1878,7 @@ PrefabInstance:
     - target: {fileID: 4942091948392433656, guid: d1fd7b7b5a361754088f01ce5fc2b46b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5755044923532352834, guid: d1fd7b7b5a361754088f01ce5fc2b46b,
         type: 3}
@@ -1905,6 +1935,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7300389500208627765, guid: d1fd7b7b5a361754088f01ce5fc2b46b,
+        type: 3}
+      propertyPath: overrides.Array.data[3]
+      value: 0.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1fd7b7b5a361754088f01ce5fc2b46b, type: 3}
 --- !u!4 &3610517040551099808 stripped
@@ -1926,6 +1961,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5414525143130115678}
     m_Modifications:
+    - target: {fileID: 5481358825673117998, guid: bac80d2eca226eb42a2c9f96db2d2624,
+        type: 3}
+      propertyPath: overrides.Array.data[3]
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 8590014025343668306, guid: bac80d2eca226eb42a2c9f96db2d2624,
         type: 3}
       propertyPath: m_Name
