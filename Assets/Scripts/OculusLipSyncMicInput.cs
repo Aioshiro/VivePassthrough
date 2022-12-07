@@ -79,7 +79,6 @@ public class OculusLipSyncMicInput : MonoBehaviour
     // PRIVATE MEMBERS
     private bool micSelected = false;
     private int minFreq, maxFreq;
-    private bool focused = true;
     private bool initialized = false;
 
     private int _micNdx = 0;
@@ -162,12 +161,6 @@ public class OculusLipSyncMicInput : MonoBehaviour
     void Update()
     {
 
-        if (!Application.isPlaying)
-        {
-            StopMicrophone();
-            return;
-        }
-
         // Lazy Microphone initialization (needed on Android)
         if (!initialized)
         {
@@ -229,19 +222,6 @@ public class OculusLipSyncMicInput : MonoBehaviour
                 micSelected = false;
             }
         }
-    }
-
-
-    /// <summary>
-    /// Raises the application pause event.
-    /// </summary>
-    /// <param name="pauseStatus">If set to <c>true</c>: paused.</param>
-    void OnApplicationPause(bool pauseStatus)
-    {
-        focused = !pauseStatus;
-
-        if (!focused)
-            StopMicrophone();
     }
 
     void OnDisable()
