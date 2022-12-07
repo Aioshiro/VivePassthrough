@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/OnlineScene.unity
     guid: 8997eaa28e696f24fa734966c2d6a6b5
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SettingsScene.unity
     guid: 21107fd67df4bb047b162b4064a2f369
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Testing Scenes/LipSyncMulti.unity
     guid: 4a401f165c5d467479c77e84f3775356
   m_configObjects:

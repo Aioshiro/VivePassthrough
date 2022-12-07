@@ -77,14 +77,14 @@ public class OculusLipSyncMicInput : MonoBehaviour
     public string selectedDevice;
 
     // PRIVATE MEMBERS
-    private bool micSelected = false;
+    public bool micSelected = false;
     private int minFreq, maxFreq;
-    private bool initialized = false;
+    public bool initialized = false;
 
     private int _micNdx = 0;
     private AudioClip _recordedClip;
     private AudioClip _croppedClip;
-    private bool _isRecordingSpeech = false;
+    public bool _isRecordingSpeech = false;
     public bool startRecordOnStart = false;
     public int recordLength = 600;
 
@@ -331,6 +331,7 @@ public class OculusLipSyncMicInput : MonoBehaviour
     /// </summary>
     public void StopMicrophone()
     {
+        Debug.Log("stopping microphone");
         if (micSelected == false) return;
 
         // Overriden with a clip to play? Don't stop the audio source
@@ -358,6 +359,7 @@ public class OculusLipSyncMicInput : MonoBehaviour
 
     public void EndMicrophoneRecord()
     {
+        Debug.Log("ending microphone record");
         int recordedSamples = Microphone.GetPosition(null);
         _recordedClip = (audioSource == null) ? null : audioSource.clip;
         StopMicrophone();
