@@ -121,8 +121,8 @@ public class ExperimentStarter : NetworkBehaviour
         {
             obje.SetActive(false);
         }
-        var micRecord = FindObjectOfType<OculusLipSyncMicInput>();
-        micRecord.StartMicrophoneRecord(micRecord.recordLength);
+        //var micRecord = FindObjectOfType<OculusLipSyncMicInput>();
+       // micRecord.StartMicrophoneRecord(micRecord.recordLength);
         FindObjectOfType<RegisterResults>().chronometer.StartChronometer();
     }
 
