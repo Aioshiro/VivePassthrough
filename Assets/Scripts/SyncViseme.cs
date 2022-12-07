@@ -30,6 +30,8 @@ public class SyncViseme : NetworkBehaviour
     /// </summary>
     public readonly SyncList<float> playerTwoViseme = new SyncList<float>();
 
+    public float[] ownViseme = new float[15];
+
     /// <summary>
     /// On server start, initialize syncLists of visemes
     /// </summary>
@@ -48,8 +50,8 @@ public class SyncViseme : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        playerOneViseme.Callback += OnPlayerOneUpdated;
-        playerTwoViseme.Callback += OnPlayerTwoUpdated;
+        //playerOneViseme.Callback += OnPlayerOneUpdated;
+        //playerTwoViseme.Callback += OnPlayerTwoUpdated;
         lipsyncContext = FindObjectOfType<OVRLipSyncContextBase>();
         if (lipsyncContext == null)
         {
@@ -89,6 +91,7 @@ public class SyncViseme : NetworkBehaviour
                 }
                 int playerNumber = GameManager.Instance.playerNumber;
                 OVRLipSync.Frame frame = lipsyncContext.GetCurrentPhonemeFrame();
+                ownViseme = frame.Visemes;
                 //upload own viseme
                 UpdateVisemes(playerNumber, frame.Visemes);
             }
