@@ -161,14 +161,6 @@ public class OculusLipSyncMicInput : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (!focused)
-        {
-            if (Microphone.IsRecording(selectedDevice))
-            {
-                StopMicrophone();
-            }
-            return;
-        }
 
         if (!Application.isPlaying)
         {
@@ -239,18 +231,6 @@ public class OculusLipSyncMicInput : MonoBehaviour
         }
     }
 
-
-    /// <summary>
-    /// Raises the application focus event.
-    /// </summary>
-    /// <param name="focus">If set to <c>true</c>: focused.</param>
-    void OnApplicationFocus(bool focus)
-    {
-        focused = focus;
-
-        if (!focused)
-            StopMicrophone();
-    }
 
     /// <summary>
     /// Raises the application pause event.
