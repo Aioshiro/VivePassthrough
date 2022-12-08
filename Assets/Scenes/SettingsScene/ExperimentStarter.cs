@@ -77,6 +77,7 @@ public class ExperimentStarter : NetworkBehaviour
         }
         if (startedExperiment && chrono.StopChronometer()>timeOfExperiment)
         {
+            Debug.Log("finishing experiment");
             FindObjectOfType<ExperimentEnder>().TogglePlayerAsFinished();
             this.enabled = false;
         }
