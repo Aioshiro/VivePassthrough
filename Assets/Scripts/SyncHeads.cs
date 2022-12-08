@@ -82,7 +82,7 @@ public class SyncHeads : NetworkBehaviour
                     {
                         System.Text.StringBuilder stringB = new System.Text.StringBuilder();
                         Valve.VR.ETrackedPropertyError perror = new Valve.VR.ETrackedPropertyError();
-                        Valve.VR.OpenVR.System.GetStringTrackedDeviceProperty(i, Valve.VR.ETrackedDeviceProperty.Prop_TrackingSystemName_String, stringB, 100, ref perror);
+                        Valve.VR.OpenVR.System.GetStringTrackedDeviceProperty(i, Valve.VR.ETrackedDeviceProperty.Prop_SerialNumber_String, stringB, 100, ref perror);
                         SendSerialNumberTracking(stringB.ToString());
                         trackingReferenceSerialNumber = stringB.ToString();
                         return;
