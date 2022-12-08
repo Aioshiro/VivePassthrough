@@ -60,7 +60,7 @@ public class AvatarEyeControl : MonoBehaviour
     /// <summary>
     /// Max time during which we ignore frames
     /// </summary>
-    const float timeToIgnoreFrames = 0.35f;
+    const float timeToIgnoreFrames = 0.6f;
     /// <summary>
     /// Clock to see how much time has passed since we started to ignore frames
     /// </summary>
