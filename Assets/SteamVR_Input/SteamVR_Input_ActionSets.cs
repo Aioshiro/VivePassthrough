@@ -17,9 +17,21 @@ namespace Valve.VR
     public partial class SteamVR_Actions
     {
         
+        private static SteamVR_Input_ActionSet_NewSet p_NewSet;
+        
+        public static SteamVR_Input_ActionSet_NewSet NewSet
+        {
+            get
+            {
+                return SteamVR_Actions.p_NewSet.GetCopy<SteamVR_Input_ActionSet_NewSet>();
+            }
+        }
+        
         private static void StartPreInitActionSets()
         {
-            Valve.VR.SteamVR_Input.actionSets = new Valve.VR.SteamVR_ActionSet[0];
+            SteamVR_Actions.p_NewSet = ((SteamVR_Input_ActionSet_NewSet)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_NewSet>("/actions/NewSet")));
+            Valve.VR.SteamVR_Input.actionSets = new Valve.VR.SteamVR_ActionSet[] {
+                    SteamVR_Actions.NewSet};
         }
     }
 }

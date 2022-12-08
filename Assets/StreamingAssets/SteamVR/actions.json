@@ -1,6 +1,11 @@
 {
   "actions": [],
-  "action_sets": [],
+  "action_sets": [
+    {
+      "name": "/actions/NewSet",
+      "usage": "single"
+    }
+  ],
   "default_bindings": [
     {
       "controller_type": "vive_controller",
