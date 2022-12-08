@@ -38,15 +38,15 @@ public class AvatarEyeControlMulti : MonoBehaviour
     /// <summary>
     /// Max time during which we ignore frames
     /// </summary>
-    const float timeToIgnoreFrames = 0.35f;
+    public const float timeToIgnoreFrames = 0.35f;
     /// <summary>
     /// Clock to see how much time has passed since we started to ignore frames
     /// </summary>
-    float currentIgnoredTime = 0;
+    public  float currentIgnoredTime = 0;
     /// <summary>
     /// Is true when some of the gaze frames have been missing, mainly during blinks
     /// </summary>
-    bool missingFramesInternal =false;
+    public bool missingFramesInternal =false;
 
     /// <summary>
     /// Should the weight for the blendshapes be between [0,1] or [0,100] ?
