@@ -1726,7 +1726,7 @@ MonoBehaviour:
   objectsToDisable:
   - {fileID: 2024776612}
   endAfterTimeHasPassed: 1
-  timeOfExperiment: 60
+  timeOfExperiment: 300
 --- !u!114 &855634858
 MonoBehaviour:
   m_ObjectHideFlags: 0
