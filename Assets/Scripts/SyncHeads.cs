@@ -30,13 +30,6 @@ public class SyncHeads : NetworkBehaviour
     [Tooltip("Local rig tracked camera")]
     [SerializeField] Transform localRigTrackedCamera;
 
-    Vector3 playerOneMarkerPos =Vector3.zero;
-    Vector3 playerTwoMarkerPos = Vector3.zero;
-
-    Quaternion playerOneMarkerRot = Quaternion.identity;
-
-    bool hasSentMarkerTransform;
-
     string trackingReferenceSerialNumber=null;
     System.Text.StringBuilder stringB = new System.Text.StringBuilder();
     Valve.VR.ETrackedPropertyError perror = new Valve.VR.ETrackedPropertyError();
@@ -156,43 +149,9 @@ public class SyncHeads : NetworkBehaviour
     }
 
     [Command(requiresAuthority =false)]
-    void SendMarkerPosToServer(int index,Vector3 pos)
-    {
-        if (index == 0)
-        {
-            playerOneMarkerPos = pos;
-        }
-        else
-        {
-            playerTwoMarkerPos = pos;
-        }
-        if (playerOneMarkerPos != Vector3.zero && playerOneMarkerPos != Vector3.zero && Vector3.Distance(playerTwoMarkerPos, playerOneMarkerPos) < 0.01f)
-        {
-            var networkConnection = FindObjectOfType<NetworkConnection>();
-            GetMarker10Rot(networkConnection.clientConn[0]);
-            SetMarker10Transform(networkConnection.clientConn[1], playerOneMarkerPos,playerOneMarkerRot);
-            Debug.Log("Synchronising markers pos on cients");
-        }
-    }
-
-    [Command(requiresAuthority =false)]
     void SetRotation(Quaternion rot)
     {
         playerOneMarkerRot = rot;
-    }
-
-    [TargetRpc]
-    void GetMarker10Rot(Mirror.NetworkConnection target)
-    {
-        Debug.Log("Uploading marker rot");
-        SetRotation(baseStationOrigin.transform.rotation);
-    }
-
-    [TargetRpc]
-    void SetMarker10Transform(Mirror.NetworkConnection target, Vector3 newPos,Quaternion newRot)
-    {
-        Debug.Log("recieving marker transform");
-        baseStationOrigin.transform.SetPositionAndRotation(newPos, newRot);
     }
 
 
