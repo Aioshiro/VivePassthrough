@@ -122,7 +122,7 @@ public class SyncHeads : NetworkBehaviour
     void SendSerialNumberTracking(string name)
     {
         trackingReferenceSerialNumber = name;
-        Debug.Log(@"Setting {name} as tracking station");
+        Debug.Log($"Setting {name} as tracking station");
         SetSerialNumberTracking(name);
     }
 
@@ -130,7 +130,7 @@ public class SyncHeads : NetworkBehaviour
     void SetSerialNumberTracking(string name)
     {
         trackingReferenceSerialNumber = name;
-        Debug.Log(@"Recieved {name} as tracking station");
+        Debug.Log($"Recieved {name} as tracking station");
     }
 
     /// <summary>
