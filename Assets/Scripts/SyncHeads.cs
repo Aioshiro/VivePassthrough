@@ -96,7 +96,7 @@ public class SyncHeads : NetworkBehaviour
             {
                 if (Valve.VR.OpenVR.System.GetTrackedDeviceClass(i) == Valve.VR.ETrackedDeviceClass.TrackingReference) //If it's a base station
                 {
-                    Valve.VR.OpenVR.System.GetStringTrackedDeviceProperty(i, Valve.VR.ETrackedDeviceProperty.Prop_TrackingSystemName_String, stringB, 100, ref perror);
+                    Valve.VR.OpenVR.System.GetStringTrackedDeviceProperty(i, Valve.VR.ETrackedDeviceProperty.Prop_SerialNumber_String, stringB, 100, ref perror);
                     if (stringB.ToString() == trackingReferenceSerialNumber)
                     {
                         chosenStation = i;
