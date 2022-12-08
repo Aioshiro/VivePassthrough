@@ -37,6 +37,10 @@ public class SyncHeads : NetworkBehaviour
 
     bool hasSentMarkerTransform;
 
+    string trackingReferenceSerialNumber=null;
+    System.Text.StringBuilder stringB = new System.Text.StringBuilder();
+    Valve.VR.ETrackedPropertyError perror = new Valve.VR.ETrackedPropertyError();
+
     /// <summary>
     /// On server start, initialize SyncLists
     /// </summary>
@@ -70,26 +74,33 @@ public class SyncHeads : NetworkBehaviour
         if (isClientOnly)
         {
             int playerNumber = GameManager.Instance.playerNumber;
+            if (trackingReferenceSerialNumber==null)
+            {
+                for (uint i = 0; i < Valve.VR.OpenVR.k_unMaxTrackedDeviceCount; i++) //For every tracked device
+                {
+                    if (Valve.VR.OpenVR.System.GetTrackedDeviceClass(i) == Valve.VR.ETrackedDeviceClass.TrackingReference) //If it's a base station
+                    {
+                        System.Text.StringBuilder stringB = new System.Text.StringBuilder();
+                        Valve.VR.ETrackedPropertyError perror = new Valve.VR.ETrackedPropertyError();
+                        Valve.VR.OpenVR.System.GetStringTrackedDeviceProperty(i, Valve.VR.ETrackedDeviceProperty.Prop_TrackingSystemName_String, stringB, 100, ref perror);
+                        SendSerialNumberTracking(stringB.ToString());
+                        trackingReferenceSerialNumber = stringB.ToString();
+                        return;
+                    }
+                }
+            }
 
             Valve.VR.OpenVR.System.GetDeviceToAbsoluteTrackingPose(Valve.VR.ETrackingUniverseOrigin.TrackingUniverseStanding, 0, stationsPose); //Updating the poses
-            float yMax = float.MinValue;
             uint chosenStation = 0;
             for (uint i = 0; i < Valve.VR.OpenVR.k_unMaxTrackedDeviceCount; i++) //For every tracked device
             {
                 if (Valve.VR.OpenVR.System.GetTrackedDeviceClass(i) == Valve.VR.ETrackedDeviceClass.TrackingReference) //If it's a base station
                 {
-                    Vector3 baseStation = stationsPose[i].mDeviceToAbsoluteTracking.GetPosition();
-                    if (yMax == float.MinValue) //If it's the first one, we store it
+                    Valve.VR.OpenVR.System.GetStringTrackedDeviceProperty(i, Valve.VR.ETrackedDeviceProperty.Prop_TrackingSystemName_String, stringB, 100, ref perror);
+                    if (stringB.ToString() == trackingReferenceSerialNumber)
                     {
-                        yMax = baseStation.y;
                         chosenStation = i;
-                    }
-                    else // Otherwise, we keep the higher one
-                    {
-                        if (baseStation.y > yMax)
-                        {
-                            chosenStation = i;
-                        }
+                        break;
                     }
                 }
             }
@@ -106,6 +117,22 @@ public class SyncHeads : NetworkBehaviour
             otherPlayerHead.transform.SetPositionAndRotation(baseStationOrigin.transform.TransformPoint(playersHeadsLocalPositions[(playerNumber + 1) % 2]), baseStationOrigin.transform.rotation * playersHeadsLocalRotations[(playerNumber + 1) % 2]);
         }
 }
+
+    [Command(requiresAuthority =false)]
+    void SendSerialNumberTracking(string name)
+    {
+        trackingReferenceSerialNumber = name;
+        Debug.Log(@"Setting {name} as tracking station");
+        SetSerialNumberTracking(name);
+    }
+
+    [ClientRpc]
+    void SetSerialNumberTracking(string name)
+    {
+        trackingReferenceSerialNumber = name;
+        Debug.Log(@"Recieved {name} as tracking station");
+    }
+
     /// <summary>
     /// Upload local position on server
     /// </summary>
