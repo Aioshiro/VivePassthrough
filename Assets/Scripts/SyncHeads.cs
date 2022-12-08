@@ -148,12 +148,6 @@ public class SyncHeads : NetworkBehaviour
         playersHeadsLocalRotations[index] = newValue;
     }
 
-    [Command(requiresAuthority =false)]
-    void SetRotation(Quaternion rot)
-    {
-        playerOneMarkerRot = rot;
-    }
-
 
     /// <summary>
     /// Callback when position is updated
