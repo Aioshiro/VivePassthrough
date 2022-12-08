@@ -68,18 +68,23 @@ public class ExperimentStarter : NetworkBehaviour
 
     private void Update()
     {
-        if (!this.isServer) { return; }
-        if (playerOneReady && playerTwoReady && !startedExperiment)
+        if (this.isServer)
         {
-            startedExperiment = true;
-            Debug.Log("Starting exp on clients");
-            RpcStartExperimentCountDown();
+            if (playerOneReady && playerTwoReady && !startedExperiment)
+            {
+                startedExperiment = true;
+                Debug.Log("Starting exp on clients");
+                RpcStartExperimentCountDown();
+            }
         }
-        if (startedExperiment && chrono.StopChronometer()>timeOfExperiment)
+        else
         {
-            Debug.Log("finishing experiment");
-            FindObjectOfType<ExperimentEnder>().TogglePlayerAsFinished();
-            this.enabled = false;
+            if (startedExperiment && chrono.StopChronometer() > timeOfExperiment)
+            {
+                Debug.Log("finishing experiment");
+                FindObjectOfType<ExperimentEnder>().TogglePlayerAsFinished();
+                this.enabled = false;
+            }
         }
     }
 
