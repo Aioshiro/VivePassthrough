@@ -24,7 +24,7 @@ public class SyncHeads : NetworkBehaviour
     private GameObject baseStationOrigin;
 
 
-    Valve.VR.TrackedDevicePose_t[] stationsPose = new Valve.VR.TrackedDevicePose_t[3]; //Storing the poses
+    Valve.VR.TrackedDevicePose_t[] stationsPose = new Valve.VR.TrackedDevicePose_t[5]; //Storing the poses
 
 
     [Tooltip("Local rig tracked camera")]
