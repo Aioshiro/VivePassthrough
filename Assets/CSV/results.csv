@@ -1,2 +1,3 @@
-ID;Heads active;Cartoon;Male;Ethnic;Time of experiment (s);Time spent looking at head (s);Time spent looking at eyes (s);Time spent looking at mouth (s);Time spent looking at forehead (s);Number of fixations on head;Average fixation duration (s)
--1;Not active;;;Caucasian;4,066284;;;;;;
+ID;Heads active;Cartoon;Male;Ethnic;Lip animation;Time of experiment (s);Time spent looking at head (s);Time spent looking at eyes (s);Time spent looking at mouth (s);Time spent looking at forehead (s);Number of fixations on head;Average fixation duration (s)
+-1;Not active;;;Caucasian;Lip sync;4,066284;;;;;;
+42;Active;Realistic;Female;Caucasian;Facial tracker;301,2679;29,36825;14,21366;11,39418;3,76041;50;0,5812194

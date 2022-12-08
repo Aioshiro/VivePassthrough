@@ -39,6 +39,7 @@ public class RegisterResults : NetworkBehaviour
         string avatarOn;
         string cartoon;
         string male;
+        string lipAnimation;
         if (GameManager.Instance.HeadsActive)
         {
             avatarOn = "Active";
@@ -65,6 +66,14 @@ public class RegisterResults : NetworkBehaviour
            cartoon = "";
            male = "";
         }
+        if (GameManager.Instance.facialTracker)
+        {
+            lipAnimation = "Facial tracker";
+        }
+        else
+        {
+            lipAnimation = "Lip sync";
+        }
         string ethnic = GameManager.Instance.chosedEthnie.ToString();
         string time = totalTime.ToString();
         string timeLookingAtHead = gazeRay.totalTimeLookingAtHead.ToString();
@@ -73,7 +82,7 @@ public class RegisterResults : NetworkBehaviour
         string timeLookingAtForehead = gazeRay.timeLookingAtForehead.ToString();
         string numberOfFixations = gazeRay.numberOfFixations.ToString();
         string averageFixationTime = (gazeRay.totalFixationTime / gazeRay.numberOfFixations).ToString();
-        var newLine = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11}", id,avatarOn,cartoon,male,ethnic, time,timeLookingAtHead, timeLookingAtEyes, timeLookingAtMouth, timeLookingAtForehead,numberOfFixations,averageFixationTime);
+        var newLine = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12}", id,avatarOn,cartoon,male,ethnic, lipAnimation,time,timeLookingAtHead, timeLookingAtEyes, timeLookingAtMouth, timeLookingAtForehead,numberOfFixations,averageFixationTime);
         csv.AppendLine(newLine);
 
         SaveLocally(csv.ToString());
