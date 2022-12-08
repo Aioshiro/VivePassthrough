@@ -45,6 +45,10 @@ public class ExperimentStarter : NetworkBehaviour
     /// </summary>
     int timeUntilExperimentStart = 15;
 
+    public bool endAfterTimeHasPassed = true;
+    private Chronometer chrono;
+    public float timeOfExperiment = 60 * 5;//5 min
+
     private void Awake()
     {
         if (ExperimentStarter.instance == null)
@@ -57,6 +61,11 @@ public class ExperimentStarter : NetworkBehaviour
         }
     }
 
+    private void Start()
+    {
+        chrono = new Chronometer();
+    }
+
     private void Update()
     {
         if (!this.isServer) { return; }
@@ -65,7 +74,10 @@ public class ExperimentStarter : NetworkBehaviour
             startedExperiment = true;
             Debug.Log("Starting exp on clients");
             RpcStartExperimentCountDown();
-            this.enabled = false;
+        }
+        if (startedExperiment && chrono.StopChronometer()>timeOfExperiment)
+        {
+            FindObjectOfType<ExperimentEnder>().TogglePlayerAsFinished();
         }
     }
 
@@ -124,6 +136,7 @@ public class ExperimentStarter : NetworkBehaviour
         //var micRecord = FindObjectOfType<OculusLipSyncMicInput>();
        // micRecord.StartMicrophoneRecord(micRecord.recordLength);
         FindObjectOfType<RegisterResults>().chronometer.StartChronometer();
+        chrono.StartChronometer();
     }
 
 
