@@ -3553,7 +3553,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OnPushEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1838508417}
     - target: {fileID: 4984136718058802950, guid: 58f382678e23e5148b9370e00ba12e20,
         type: 3}
       propertyPath: OnPushEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
