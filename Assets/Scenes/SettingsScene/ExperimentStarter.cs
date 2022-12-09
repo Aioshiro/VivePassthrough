@@ -24,11 +24,6 @@ public class ExperimentStarter : NetworkBehaviour
     public bool playerTwoReady = false;
 
     /// <summary>
-    /// Has the experiment started ?
-    /// </summary>
-    bool startedExperiment = false;
-
-    /// <summary>
     /// The instruction canvas text
     /// </summary>
     [SerializeField]

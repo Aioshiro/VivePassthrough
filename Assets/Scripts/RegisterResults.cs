@@ -29,7 +29,7 @@ public class RegisterResults : NetworkBehaviour
     /// <summary>
     /// Formats the data to save it in csv on client and on server
     /// </summary>
-    public void Save()
+    public void Save(int taskNumber)
     {
         float totalTime = chronometer.GetChronometerTime();
 
@@ -85,8 +85,8 @@ public class RegisterResults : NetworkBehaviour
         var newLine = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12}", id,avatarOn,cartoon,male,ethnic, lipAnimation,time,timeLookingAtHead, timeLookingAtEyes, timeLookingAtMouth, timeLookingAtForehead,numberOfFixations,averageFixationTime);
         csv.AppendLine(newLine);
 
-        SaveLocally(csv.ToString());
-        SaveOnServer(csv.ToString());
+        SaveLocally(csv.ToString(),taskNumber);
+        SaveOnServer(csv.ToString(),taskNumber);
         ResetData();
     }
 
@@ -99,10 +99,10 @@ public class RegisterResults : NetworkBehaviour
     /// Saves data locally
     /// </summary>
     /// <param name="newLine">String of data to save</param>
-    void SaveLocally(string newLine)
+    void SaveLocally(string newLine,int taskNumber)
     {
         Debug.Log("Saving data locally");
-        string filePath = GetPath();
+        string filePath = GetPath(taskNumber);
         File.AppendAllText(filePath, newLine);
     }
 
@@ -111,10 +111,10 @@ public class RegisterResults : NetworkBehaviour
     /// </summary>
     /// <param name="newLine"> String of data to save </param>
     [Command(requiresAuthority =false)]
-    void SaveOnServer(string newLine)
+    void SaveOnServer(string newLine,int taskNumber)
     {
         Debug.Log("Saving data on server");
-        string filePath = GetPath();
+        string filePath = GetPath(taskNumber);
         File.AppendAllText(filePath, newLine);
     }
 
@@ -123,10 +123,10 @@ public class RegisterResults : NetworkBehaviour
     /// Following method is used to retrive the relative path as device platform
     /// </summary>
     /// <returns></returns>
-    private string GetPath()
+    private string GetPath(int taskNumber)
     {
 
-        string fileName = $"resultsTask{GameManager.Instance.currentTask}.csv";
+        string fileName = $"resultsTask{taskNumber}.csv";
 #if UNITY_EDITOR
         return Application.dataPath + "/CSV/" + fileName;
 #else
