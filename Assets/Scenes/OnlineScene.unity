@@ -2431,7 +2431,7 @@ PrefabInstance:
     - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
       propertyPath: instructions.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
@@ -2442,8 +2442,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
+      propertyPath: instructions.Array.data[1]
+      value: ' '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
       propertyPath: englishInstructions.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
@@ -2451,6 +2456,11 @@ PrefabInstance:
       value: Play the 20 questions game, one thinks of an object and the other asks
         up to 20 closed questions (yes/no) to find it, then do it again by reversing
         roles.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
+      propertyPath: englishInstructions.Array.data[1]
+      value: ' '
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004827244765, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
@@ -2482,7 +2492,7 @@ PrefabInstance:
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
       propertyPath: instructions.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
@@ -2493,8 +2503,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
+      propertyPath: instructions.Array.data[1]
+      value: ' '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
       propertyPath: englishInstructions.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
@@ -2502,6 +2517,11 @@ PrefabInstance:
       value: Play the 20 questions game, one thinks of an object and the other asks
         up to 20 closed questions (yes/no) to find it, then do it again by reversing
         roles.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
+      propertyPath: englishInstructions.Array.data[1]
+      value: ' '
       objectReference: {fileID: 0}
     - target: {fileID: 7470998582017965964, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
