@@ -86,8 +86,8 @@ public class ExperimentStarter : NetworkBehaviour
                 GameManager.Instance.currentTask += 1;
                 startedExperiment = true;
                 Debug.Log($"Starting exp {GameManager.Instance.currentTask} on clients");
-                SetPlayerReady(0, false);
-                SetPlayerReady(1, false);
+                playerOneReady = false;
+                playerTwoReady = false;
                 RpcStartExperimentCountDown();
             }
         }

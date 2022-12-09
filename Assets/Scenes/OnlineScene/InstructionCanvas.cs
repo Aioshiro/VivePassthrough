@@ -56,6 +56,7 @@ public class InstructionCanvas : MonoBehaviour
                 text.text = "En attente du second participant...";
             }
             ExperimentStarter.instance.SetPlayerReady(GameManager.Instance.playerNumber,true);
+            Debug.Log("setting player as ready");
             this.enabled = false;
         }
     }
