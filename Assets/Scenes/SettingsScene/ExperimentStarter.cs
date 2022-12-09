@@ -109,6 +109,7 @@ public class ExperimentStarter : NetworkBehaviour
     [ClientRpc]
     private void RpcStartExperimentCountDown()
     {
+        GameManager.Instance.currentTask += 1;
         Debug.Log("Starting exp coroutine");
         if (!startedExperiment)
         {
@@ -133,7 +134,7 @@ public class ExperimentStarter : NetworkBehaviour
             }
             else
             {
-                instructionsCanvasText.text = $"La tâche  {GameManager.Instance.currentTask} débutera dans " + timeUntilExperimentStart.ToString() + " secondes.";
+                instructionsCanvasText.text = $"La tâche {GameManager.Instance.currentTask} débutera dans " + timeUntilExperimentStart.ToString() + " secondes.";
             }
             timeUntilExperimentStart -= 1;
             yield return new WaitForSeconds(1);
