@@ -1687,7 +1687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1023475361
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3411,10 +3411,10 @@ MonoBehaviour:
   - {fileID: 214995845}
   - {fileID: 1998164378}
   - {fileID: 1348083833}
+  - {fileID: 1023475360}
   objectsToDisableTask1:
   - {fileID: 2024776612}
   - {fileID: 1348083833}
-  - {fileID: 1023475360}
   objectsToEnableTask2:
   - {fileID: 4703040165134494880}
   - {fileID: 4703040165470651555}
@@ -3428,7 +3428,8 @@ MonoBehaviour:
   - {fileID: 4703040164017597618}
   - {fileID: 1998164378}
   - {fileID: 7470998583456702111}
-  objectsToDisableTask2: []
+  objectsToDisableTask2:
+  - {fileID: 1023475360}
   endAfterTimeHasPassed: 0
   timeOfExperiment: 300
 --- !u!114 &1838508419

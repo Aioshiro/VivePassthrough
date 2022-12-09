@@ -33,11 +33,11 @@ public class ExperimentEnder : NetworkBehaviour
     {
         if (index == 0)
         {
-            playerOneFinished = !playerOneFinished;
+            playerOneFinished = true;
         }
         else
         {
-            playerTwoFinished = !playerTwoFinished;
+            playerTwoFinished = true;
         }
         if (playerOneFinished && playerTwoFinished)
         {
