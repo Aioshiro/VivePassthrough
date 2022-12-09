@@ -45,6 +45,27 @@ public class ExperimentEnder : NetworkBehaviour
         }
     }
 
+    public void TogglePlayerAsUnfinished()
+    {
+        Cmd_TogglePlayerAsUnfinished(GameManager.Instance.playerNumber);
+    }
+
+    /// <summary>
+    /// Updates the booleans of player unfinished on server
+    /// </summary>
+    /// <param name="index"> Player number</param>
+    [Command(requiresAuthority = false)]
+    public void Cmd_TogglePlayerAsUnfinished(int index)
+    {
+        if (index == 0)
+        {
+            playerOneFinished = false;
+        }
+        else
+        {
+            playerTwoFinished = false;
+        }
+    }
 
     /// <summary>
     /// Ends experiment by saving eye gaze data and microphone conversation, then quits
@@ -52,7 +73,7 @@ public class ExperimentEnder : NetworkBehaviour
     [ClientRpc]
     void Rpc_EndExperiment()
     {
-        TogglePlayerAsFinished(); //player is now not ready, in case for second task
+        TogglePlayerAsUnfinished(); //player is now not ready, in case for second task
         FindObjectOfType<RegisterResults>().Save();
         //FindObjectOfType<OculusLipSyncMicInput>().EndMicrophoneRecord();
         if (GameManager.Instance.currentTask == 2)
