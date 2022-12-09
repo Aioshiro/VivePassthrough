@@ -13,6 +13,8 @@ public class ExperimentStarter : NetworkBehaviour
     /// </summary>
     public static ExperimentStarter instance;
 
+    const int NUMBER_OF_TASKS = 2;
+
     [Tooltip("Is player one ready ?")]
     [SyncVar]
     public bool playerOneReady = false;
@@ -32,13 +34,22 @@ public class ExperimentStarter : NetworkBehaviour
     [SerializeField]
     TMPro.TMP_Text instructionsCanvasText;
 
-    [Tooltip("Objects to enable when experiment is starting")]
+    [Tooltip("Objects to enable when experiment 1 is starting")]
     [SerializeField]
-    List<GameObject> objectsToEnable;
+    List<GameObject> objectsToEnableTask1;
 
-    [Tooltip("Objects to disable when experiment is starting")]
+    [Tooltip("Objects to disable when experiment 1 is starting")]
     [SerializeField]
-    List<GameObject> objectsToDisable;
+    List<GameObject> objectsToDisableTask1;
+
+
+    [Tooltip("Objects to enable when experiment 2 is starting")]
+    [SerializeField]
+    List<GameObject> objectsToEnableTask2;
+
+    [Tooltip("Objects to disable when experiment 2 is starting")]
+    [SerializeField]
+    List<GameObject> objectsToDisableTask2;
 
     /// <summary>
     /// The countdown time until experiment start
@@ -70,20 +81,22 @@ public class ExperimentStarter : NetworkBehaviour
     {
         if (this.isServer)
         {
-            if (playerOneReady && playerTwoReady && !startedExperiment)
+            if (playerOneReady && playerTwoReady)
             {
                 startedExperiment = true;
                 Debug.Log("Starting exp on clients");
                 RpcStartExperimentCountDown();
+                SetPlayerReady(0, false);
+                SetPlayerReady(1, false);
             }
         }
         else
         {
-            if (startedExperiment && chrono.StopChronometer() > timeOfExperiment)
+            if (startedExperiment && endAfterTimeHasPassed && chrono.GetChronometerTime() > timeOfExperiment)
             {
                 Debug.Log("finishing experiment");
                 FindObjectOfType<ExperimentEnder>().TogglePlayerAsFinished();
-                this.enabled = false;
+                //this.enabled = false;
             }
         }
     }
@@ -115,11 +128,11 @@ public class ExperimentStarter : NetworkBehaviour
         {
             if (GameManager.Instance.languageSetToEnglish)
             {
-                instructionsCanvasText.text = "The experiment will start in " + timeUntilExperimentStart.ToString() + " seconds.";
+                instructionsCanvasText.text = $"The task {GameManager.Instance.currentTask} will start in " + timeUntilExperimentStart.ToString() + " seconds.";
             }
             else
             {
-                instructionsCanvasText.text = "L'expérience débutera dans " + timeUntilExperimentStart.ToString() + " secondes.";
+                instructionsCanvasText.text = $"La tâche  {GameManager.Instance.currentTask} débutera dans " + timeUntilExperimentStart.ToString() + " secondes.";
             }
             timeUntilExperimentStart -= 1;
             yield return new WaitForSeconds(1);
@@ -132,13 +145,28 @@ public class ExperimentStarter : NetworkBehaviour
     /// </summary>
     private void StartExperiment()
     {
-        foreach(var obje in objectsToEnable)
+        GameManager.Instance.currentTask += 1;
+        if (GameManager.Instance.currentTask == 1)
         {
-            obje.SetActive(true);
+            foreach (var obje in objectsToEnableTask1)
+            {
+                obje.SetActive(true);
+            }
+            foreach (var obje in objectsToDisableTask1)
+            {
+                obje.SetActive(false);
+            }
         }
-        foreach(var obje in objectsToDisable)
+        else
         {
-            obje.SetActive(false);
+            foreach (var obje in objectsToEnableTask2)
+            {
+                obje.SetActive(true);
+            }
+            foreach (var obje in objectsToDisableTask2)
+            {
+                obje.SetActive(false);
+            }
         }
         //var micRecord = FindObjectOfType<OculusLipSyncMicInput>();
        // micRecord.StartMicrophoneRecord(micRecord.recordLength);
@@ -152,15 +180,15 @@ public class ExperimentStarter : NetworkBehaviour
     /// </summary>
     /// <param name="index"> Player number</param>
     [Command(requiresAuthority =false)]
-    public void SetPlayerReady(int index)
+    public void SetPlayerReady(int index,bool value)
     {
         if (index == 0)
         {
-            playerOneReady = true;
+            playerOneReady = value;
         }
         else
         {
-            playerTwoReady = true;
+            playerTwoReady = value;
         }
     }
 }

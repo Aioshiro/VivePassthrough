@@ -52,8 +52,13 @@ public class ExperimentEnder : NetworkBehaviour
     [ClientRpc]
     void Rpc_EndExperiment()
     {
+        TogglePlayerAsFinished(); //player is now not ready, in case for second task
         FindObjectOfType<RegisterResults>().Save();
         //FindObjectOfType<OculusLipSyncMicInput>().EndMicrophoneRecord();
-        Application.Quit();
+        if (GameManager.Instance.currentTask == 2)
+        {
+            Debug.Log("Quitting app");
+            Application.Quit();
+        }
     }
 }

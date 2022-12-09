@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
     [Tooltip("The server's ip")]
     public string serverIp = "localhost";
 
+    public int currentTask = 0; //0 for no task, 1 for first task, 2 for second task
+
 
     private void Awake()
     {

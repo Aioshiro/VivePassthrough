@@ -140,4 +140,14 @@ public class GazeRay : MonoBehaviour
             currentFixationTime = 0;
         }
     }
+
+    public void ResetData()
+    {
+        timeLookingAtEyes = 0;
+        timeLookingAtForehead = 0;
+        timeLookingAtMouth = 0;
+        numberOfFixations = 0;
+        totalFixationTime = 0;
+        totalTimeLookingAtHead = 0;
+    }
 }

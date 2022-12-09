@@ -21,7 +21,7 @@ public class Chronometer
     /// Returning chronometer current time
     /// </summary>
     /// <returns></returns>
-    public float StopChronometer()
+    public float GetChronometerTime()
     {
         return Time.time - initialTime;
     }

@@ -31,7 +31,7 @@ public class RegisterResults : NetworkBehaviour
     /// </summary>
     public void Save()
     {
-        float totalTime = chronometer.StopChronometer();
+        float totalTime = chronometer.GetChronometerTime();
 
         StringBuilder csv = new StringBuilder();
 
@@ -87,7 +87,14 @@ public class RegisterResults : NetworkBehaviour
 
         SaveLocally(csv.ToString());
         SaveOnServer(csv.ToString());
+        ResetData();
     }
+
+    private void ResetData()
+    {
+        gazeRay.ResetData();
+    }
+
     /// <summary>
     /// Saves data locally
     /// </summary>
@@ -119,7 +126,7 @@ public class RegisterResults : NetworkBehaviour
     private string GetPath()
     {
 
-        string fileName = "results.csv";
+        string fileName = $"resultsTask{GameManager.Instance.currentTask}.csv";
 #if UNITY_EDITOR
         return Application.dataPath + "/CSV/" + fileName;
 #else
