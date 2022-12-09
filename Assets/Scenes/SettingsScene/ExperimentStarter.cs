@@ -76,7 +76,6 @@ public class ExperimentStarter : NetworkBehaviour
             if (playerOneReady && playerTwoReady)
             {
                 GameManager.Instance.currentTask += 1;
-                startedExperiment = true;
                 Debug.Log($"Starting exp {GameManager.Instance.currentTask} on clients");
                 playerOneReady = false;
                 playerTwoReady = false;
@@ -94,11 +93,7 @@ public class ExperimentStarter : NetworkBehaviour
     {
         GameManager.Instance.currentTask += 1;
         Debug.Log("Starting exp coroutine");
-        if (!startedExperiment)
-        {
-            startedExperiment = true;
-            StartCoroutine(nameof(ExperimentCountdown));
-        }
+        StartCoroutine(nameof(ExperimentCountdown));
     }
 
     /// <summary>
@@ -130,6 +125,7 @@ public class ExperimentStarter : NetworkBehaviour
     /// </summary>
     private void StartExperiment()
     {
+        Debug.Log($"Starting task {GameManager.Instance.currentTask}");
         if (GameManager.Instance.currentTask == 1)
         {
             foreach (var obje in objectsToEnableTask1)
