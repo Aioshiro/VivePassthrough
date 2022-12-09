@@ -158,6 +158,11 @@ public class ExperimentStarter : NetworkBehaviour
     }
 
 
+    public void SetPlayerReady()
+    {
+        SetPlayerReady(GameManager.Instance.playerNumber, true);
+    }
+
     /// <summary>
     /// Upload player ready boolean on server
     /// </summary>

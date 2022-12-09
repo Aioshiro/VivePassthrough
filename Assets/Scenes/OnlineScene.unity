@@ -1762,6 +1762,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1838508418}
+        m_MethodName: SetPlayerReady
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1023475363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3430,8 +3441,6 @@ MonoBehaviour:
   - {fileID: 7470998583456702111}
   objectsToDisableTask2:
   - {fileID: 1023475360}
-  endAfterTimeHasPassed: 0
-  timeOfExperiment: 300
 --- !u!114 &1838508419
 MonoBehaviour:
   m_ObjectHideFlags: 0
