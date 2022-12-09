@@ -433,7 +433,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360389579}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ac035d8819402341a1ac2c0edc952b6, type: 3}
   m_Name: 
@@ -1725,7 +1725,7 @@ MonoBehaviour:
   - {fileID: 4703040165134494880}
   objectsToDisable:
   - {fileID: 2024776612}
-  endAfterTimeHasPassed: 1
+  endAfterTimeHasPassed: 0
   timeOfExperiment: 300
 --- !u!114 &855634858
 MonoBehaviour:
@@ -1968,7 +1968,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968150537}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ac035d8819402341a1ac2c0edc952b6, type: 3}
   m_Name: 
@@ -6070,7 +6070,7 @@ PrefabInstance:
     - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004827244765, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
@@ -6090,7 +6090,7 @@ PrefabInstance:
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7470998582017965964, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
