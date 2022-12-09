@@ -2430,8 +2430,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
+      propertyPath: splitAcrossPlayers
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
       propertyPath: instructions.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
@@ -2448,7 +2453,7 @@ PrefabInstance:
     - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
       propertyPath: englishInstructions.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
@@ -2491,8 +2496,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
+      propertyPath: splitAcrossPlayers
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
       propertyPath: instructions.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
@@ -2509,7 +2519,7 @@ PrefabInstance:
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
       propertyPath: englishInstructions.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}

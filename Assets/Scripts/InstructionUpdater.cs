@@ -15,6 +15,10 @@ public class InstructionUpdater : MonoBehaviour
     [SerializeField] List<string> instructions;
     [Tooltip("List of instructions in English")]
     [SerializeField] List<string> englishInstructions;
+
+    [SerializeField]
+    private bool splitAcrossPlayers = true;
+
     /// <summary>
     /// Has instruction been initialized ?
     /// </summary>
@@ -65,11 +69,21 @@ public class InstructionUpdater : MonoBehaviour
     {
         TMPro.TMP_Text shownText = GetComponent<TMPro.TMP_Text>();
         shownText.text = "";
-        int start = 0;
-        if (GameManager.Instance.playerNumber == 1) { start = instructions.Count/2; }
-        for (int i = 0; i < instructions.Count / 2; i++)
+        if (splitAcrossPlayers)
         {
-            shownText.text += input[start + i] + "\n";
+            int start = 0;
+            if (GameManager.Instance.playerNumber == 1) { start = instructions.Count / 2; }
+            for (int i = 0; i < instructions.Count / 2; i++)
+            {
+                shownText.text += input[start + i] + "\n";
+            }
+        }
+        else
+        {
+            for (int i = 0; i < instructions.Count; i++)
+            {
+                shownText.text += input[i] + "\n";
+            }
         }
     }
 #endif
