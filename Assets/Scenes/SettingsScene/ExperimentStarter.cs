@@ -83,11 +83,12 @@ public class ExperimentStarter : NetworkBehaviour
         {
             if (playerOneReady && playerTwoReady)
             {
+                GameManager.Instance.currentTask += 1;
                 startedExperiment = true;
-                Debug.Log("Starting exp on clients");
-                RpcStartExperimentCountDown();
+                Debug.Log($"Starting exp {GameManager.Instance.currentTask} on clients");
                 SetPlayerReady(0, false);
                 SetPlayerReady(1, false);
+                RpcStartExperimentCountDown();
             }
         }
         else
@@ -145,7 +146,6 @@ public class ExperimentStarter : NetworkBehaviour
     /// </summary>
     private void StartExperiment()
     {
-        GameManager.Instance.currentTask += 1;
         if (GameManager.Instance.currentTask == 1)
         {
             foreach (var obje in objectsToEnableTask1)
