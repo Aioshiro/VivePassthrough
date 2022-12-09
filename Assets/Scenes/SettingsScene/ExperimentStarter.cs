@@ -56,9 +56,6 @@ public class ExperimentStarter : NetworkBehaviour
     /// </summary>
     int timeUntilExperimentStart = 15;
 
-    public bool endAfterTimeHasPassed = true;
-    private Chronometer chrono;
-    public float timeOfExperiment = 60 * 5;//5 min
 
     private void Awake()
     {
@@ -70,11 +67,6 @@ public class ExperimentStarter : NetworkBehaviour
         {
             Destroy(this);
         }
-    }
-
-    private void Start()
-    {
-        chrono = new Chronometer();
     }
 
     private void Update()
@@ -89,15 +81,6 @@ public class ExperimentStarter : NetworkBehaviour
                 playerOneReady = false;
                 playerTwoReady = false;
                 RpcStartExperimentCountDown();
-            }
-        }
-        else
-        {
-            if (startedExperiment && endAfterTimeHasPassed && chrono.GetChronometerTime() > timeOfExperiment)
-            {
-                Debug.Log("finishing experiment");
-                FindObjectOfType<ExperimentEnder>().TogglePlayerAsFinished();
-                //this.enabled = false;
             }
         }
     }
@@ -172,7 +155,6 @@ public class ExperimentStarter : NetworkBehaviour
         //var micRecord = FindObjectOfType<OculusLipSyncMicInput>();
        // micRecord.StartMicrophoneRecord(micRecord.recordLength);
         FindObjectOfType<RegisterResults>().chronometer.StartChronometer();
-        chrono.StartChronometer();
     }
 
 
