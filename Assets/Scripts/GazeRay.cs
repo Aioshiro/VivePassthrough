@@ -42,7 +42,7 @@ public class GazeRay : MonoBehaviour
     /// <summary>
     /// 50ms, we minimum time that we consider there is a fixation
     /// </summary>
-    const float minimumFixationTime = 0.05f;
+    const float minimumFixationTime = 0.1f;
     [Tooltip("Count the total time of fixations on the partner's eyes")]
     public float timeLookingAtEyes = 0f;
     [Tooltip("Count the total time of fixations on the partner's forehead")]
