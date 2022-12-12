@@ -96,6 +96,21 @@ public class RegisterResults : NetworkBehaviour
     }
 
     /// <summary>
+    /// Show the current measures on screen
+    /// </summary>
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(700, 0, 400, 100), "Current measures values :");
+        GUI.Label(new Rect(700, 20, 400, 100), $"Current time of experiment : {chronometer.GetChronometerTime()} s");
+        GUI.Label(new Rect(700, 40, 400, 100), $"Current time looking at head : {gazeRay.totalTimeLookingAtHead} s");
+        GUI.Label(new Rect(700, 60, 400, 100), $"Current time looking at eyes : {gazeRay.timeLookingAtEyes} s");
+        GUI.Label(new Rect(700, 80, 400, 100), $"Current time looking at mouth : {gazeRay.timeLookingAtMouth} s");
+        GUI.Label(new Rect(700, 100, 400, 100), $"Current time looking at forehead : {gazeRay.timeLookingAtForehead} s");
+        GUI.Label(new Rect(700, 120, 400, 100), $"Current number of fixations: {gazeRay.numberOfFixations}");
+        GUI.Label(new Rect(700, 140, 400, 100), $"Current average fixations time : {gazeRay.totalFixationTime / gazeRay.numberOfFixations}s");
+    }
+
+    /// <summary>
     /// Saves data locally
     /// </summary>
     /// <param name="newLine">String of data to save</param>
