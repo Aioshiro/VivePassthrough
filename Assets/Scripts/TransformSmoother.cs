@@ -65,6 +65,8 @@ public class TransformSmoother : MonoBehaviour
     [Tooltip("Initial rotation values")]
     public Vector3 freezeRotValues;
 
+    bool initialized;
+
     public void Update()
     {
         if (leftCamera == null)
@@ -81,6 +83,14 @@ public class TransformSmoother : MonoBehaviour
     public void SetNewTransform(Vector3 pos, Quaternion rot)
     {
         if (!allowMovement || Vector3.SqrMagnitude(leftCamera.transform.position)<0.001f) { return; } // if the camera is at the origin, that means the head position is not tracked yet, and so it gives a false position which gives a false mean
+        if (!initialized)
+        {
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+            initialized = true;
+        }
         count++;
         if (count> movingAverageLengthPos) //If we have enough samples, we update the position
         {
