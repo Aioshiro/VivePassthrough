@@ -50,6 +50,8 @@ public class GazeRay : MonoBehaviour
     [Tooltip("Count the total time of fixations on the partner's mouth")]
     public float timeLookingAtMouth = 0f;
 
+    public int NumberOfBlinks = 0;
+
     [Tooltip("The partner's head")]
     [SerializeField] Transform headTransform;
 
@@ -77,6 +79,7 @@ public class GazeRay : MonoBehaviour
         else
         {
             missingFrames = true;
+            NumberOfBlinks += 1;
             return;
         }
 

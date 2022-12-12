@@ -82,7 +82,8 @@ public class RegisterResults : NetworkBehaviour
         string timeLookingAtForehead = gazeRay.timeLookingAtForehead.ToString();
         string numberOfFixations = gazeRay.numberOfFixations.ToString();
         string averageFixationTime = (gazeRay.totalFixationTime / gazeRay.numberOfFixations).ToString();
-        var newLine = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12}", id,avatarOn,cartoon,male,ethnic, lipAnimation,time,timeLookingAtHead, timeLookingAtEyes, timeLookingAtMouth, timeLookingAtForehead,numberOfFixations,averageFixationTime);
+        string numberOfBlinks = gazeRay.NumberOfBlinks.ToString();
+        var newLine = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13}", id,avatarOn,cartoon,male,ethnic, lipAnimation,time,timeLookingAtHead, timeLookingAtEyes, timeLookingAtMouth, timeLookingAtForehead,numberOfFixations,averageFixationTime,numberOfBlinks);
         csv.AppendLine(newLine);
 
         SaveLocally(csv.ToString(),taskNumber);
@@ -108,6 +109,8 @@ public class RegisterResults : NetworkBehaviour
         GUI.Label(new Rect(700, 100, 400, 100), $"Current time looking at forehead : {gazeRay.timeLookingAtForehead} s");
         GUI.Label(new Rect(700, 120, 400, 100), $"Current number of fixations: {gazeRay.numberOfFixations}");
         GUI.Label(new Rect(700, 140, 400, 100), $"Current average fixations time : {gazeRay.totalFixationTime / gazeRay.numberOfFixations}s");
+        GUI.Label(new Rect(700, 160, 400, 100), $"Current number of blinks : {gazeRay.NumberOfBlinks}");
+
     }
 
     /// <summary>
