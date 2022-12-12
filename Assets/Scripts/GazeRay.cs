@@ -51,6 +51,7 @@ public class GazeRay : MonoBehaviour
     public float timeLookingAtMouth = 0f;
 
     public int NumberOfBlinks = 0;
+    private bool hasBlinked = false;
 
     [Tooltip("The partner's head")]
     [SerializeField] Transform headTransform;
@@ -78,10 +79,15 @@ public class GazeRay : MonoBehaviour
         else if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.RIGHT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal, EyeDataGetter.ownEyeData)) { }
         else
         {
+            if (!hasBlinked)
+            {
+                NumberOfBlinks += 1;
+                hasBlinked = true;
+            }
             missingFrames = true;
-            NumberOfBlinks += 1;
             return;
         }
+        hasBlinked = false;
 
         Vector3 GazeDirectionCombined;
         if (missingFrames)
@@ -152,5 +158,6 @@ public class GazeRay : MonoBehaviour
         numberOfFixations = 0;
         totalFixationTime = 0;
         totalTimeLookingAtHead = 0;
+        NumberOfBlinks = 0;
     }
 }
