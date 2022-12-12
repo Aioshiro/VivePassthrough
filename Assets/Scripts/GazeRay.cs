@@ -53,6 +53,10 @@ public class GazeRay : MonoBehaviour
     public int NumberOfBlinks = 0;
     private bool hasBlinked = false;
 
+    public float totalSizeOfPupilLeft = 0;
+    public float totalSizeOfPupilRight = 0;
+    public int countOfEyePupilsize = 0;
+
     [Tooltip("The partner's head")]
     [SerializeField] Transform headTransform;
 
@@ -104,6 +108,13 @@ public class GazeRay : MonoBehaviour
             }
         }
         GazeDirectionCombined = headTransform.TransformDirection(GazeDirectionCombinedLocal).normalized;
+
+        if (EyeDataGetter.ownEyeData.verbose_data.left.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_PUPIL_DIAMETER_VALIDITY) && EyeDataGetter.ownEyeData.verbose_data.right.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_PUPIL_DIAMETER_VALIDITY))
+        {
+            countOfEyePupilsize += 1;
+            totalSizeOfPupilLeft += EyeDataGetter.ownEyeData.verbose_data.left.pupil_diameter_mm;
+            totalSizeOfPupilRight += EyeDataGetter.ownEyeData.verbose_data.right.pupil_diameter_mm;
+        }
 
         if (showGazeRay)
         {
@@ -159,5 +170,8 @@ public class GazeRay : MonoBehaviour
         totalFixationTime = 0;
         totalTimeLookingAtHead = 0;
         NumberOfBlinks = 0;
+        totalSizeOfPupilLeft = 0;
+        totalSizeOfPupilRight = 0;
+        countOfEyePupilsize = 0;
     }
 }

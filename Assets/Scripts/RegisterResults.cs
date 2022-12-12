@@ -83,7 +83,11 @@ public class RegisterResults : NetworkBehaviour
         string numberOfFixations = gazeRay.numberOfFixations.ToString();
         string averageFixationTime = (gazeRay.totalFixationTime / gazeRay.numberOfFixations).ToString();
         string numberOfBlinks = gazeRay.NumberOfBlinks.ToString();
-        var newLine = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13}", id,avatarOn,cartoon,male,ethnic, lipAnimation,time,timeLookingAtHead, timeLookingAtEyes, timeLookingAtMouth, timeLookingAtForehead,numberOfFixations,averageFixationTime,numberOfBlinks);
+        string avgLeftPupilDiameter = (gazeRay.totalSizeOfPupilLeft / gazeRay.countOfEyePupilsize).ToString();
+        string avgRightPupilDiameter = (gazeRay.totalSizeOfPupilRight / gazeRay.countOfEyePupilsize).ToString();
+        var newLine = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15}", id,avatarOn,cartoon,male,ethnic, lipAnimation,
+            time,timeLookingAtHead, timeLookingAtEyes, timeLookingAtMouth, timeLookingAtForehead,numberOfFixations,averageFixationTime,numberOfBlinks
+            avgLeftPupilDiameter, avgRightPupilDiameter);
         csv.AppendLine(newLine);
 
         SaveLocally(csv.ToString(),taskNumber);
@@ -110,6 +114,8 @@ public class RegisterResults : NetworkBehaviour
         GUI.Label(new Rect(700, 120, 400, 100), $"Current number of fixations: {gazeRay.numberOfFixations}");
         GUI.Label(new Rect(700, 140, 400, 100), $"Current average fixations time : {gazeRay.totalFixationTime / gazeRay.numberOfFixations}s");
         GUI.Label(new Rect(700, 160, 400, 100), $"Current number of blinks : {gazeRay.NumberOfBlinks}");
+        GUI.Label(new Rect(700, 180, 400, 100), $"Current average size of left pupil : {gazeRay.totalSizeOfPupilLeft/gazeRay.countOfEyePupilsize} mm");
+        GUI.Label(new Rect(700, 200, 400, 100), $"Current average size of right pupil : {gazeRay.totalSizeOfPupilRight/ gazeRay.countOfEyePupilsize} mm");
 
     }
 
