@@ -2561,6 +2561,7 @@ MonoBehaviour:
   - {fileID: 1023475360}
   objectsToDisableTask1:
   - {fileID: 2024776612}
+  - {fileID: 7470998583456702111}
   objectsToEnableTask2:
   - {fileID: 4703040165134494880}
   - {fileID: 4703040165470651555}
@@ -2576,6 +2577,7 @@ MonoBehaviour:
   - {fileID: 7470998583456702111}
   objectsToDisableTask2:
   - {fileID: 1248355423}
+  - {fileID: 1348083833}
 --- !u!114 &1838508419
 MonoBehaviour:
   m_ObjectHideFlags: 0
