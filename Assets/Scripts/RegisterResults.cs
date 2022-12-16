@@ -85,7 +85,7 @@ public class RegisterResults : NetworkBehaviour
         string numberOfBlinks = gazeRay.NumberOfBlinks.ToString();
         string avgLeftPupilDiameter = (gazeRay.totalSizeOfPupilLeft / gazeRay.countOfEyePupilsize).ToString();
         string avgRightPupilDiameter = (gazeRay.totalSizeOfPupilRight / gazeRay.countOfEyePupilsize).ToString();
-        var newLine = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15}", id,avatarOn,cartoon,male,ethnic, lipAnimation,
+        var newLine = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{16}", DateTime.Now.ToString(),id,avatarOn,cartoon,male,ethnic, lipAnimation,
             time,timeLookingAtHead, timeLookingAtEyes, timeLookingAtMouth, timeLookingAtForehead,numberOfFixations,averageFixationTime,numberOfBlinks,
             avgLeftPupilDiameter, avgRightPupilDiameter);
         csv.AppendLine(newLine);
