@@ -105,6 +105,7 @@ public class RegisterResults : NetworkBehaviour
     /// </summary>
     private void OnGUI()
     {
+        GUI.backgroundColor = Color.red;
         GUI.Label(new Rect(700, 0, 400, 100), "Current measures values :");
         GUI.Label(new Rect(700, 20, 400, 100), $"Current time of experiment : {chronometer.GetChronometerTime()} s");
         GUI.Label(new Rect(700, 40, 400, 100), $"Current time looking at head : {gazeRay.totalTimeLookingAtHead} s");
