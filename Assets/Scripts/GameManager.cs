@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     public string serverIp = "localhost";
 
     public int currentTask = 0; //0 for no task, 1 for first task, 2 for second task
+    public string TwentyQuestionsWord="";
 
 
     private void Awake()
@@ -217,4 +218,8 @@ public class GameManager : MonoBehaviour
         serverIp = ip;
     }
 
+    public void SetWord(string word)
+    {
+        TwentyQuestionsWord = word;
+    }
 }
