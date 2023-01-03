@@ -1543,6 +1543,7 @@ MonoBehaviour:
   languageSetToEnglish: 0
   serverIp: localhost
   currentTask: 0
+  TwentyQuestionsWord: 
 --- !u!4 &1181722220
 Transform:
   m_ObjectHideFlags: 0
@@ -1956,7 +1957,9 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652, type: 3}
+    - {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2ebb58b785236934cb464b9aba3b3652, type: 3}
 --- !u!4 &1348083832 stripped
 Transform:
@@ -1970,6 +1973,42 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1348083831}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1348083834 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4339937004885143435, guid: 2ebb58b785236934cb464b9aba3b3652,
+    type: 3}
+  m_PrefabInstance: {fileID: 1348083831}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1348083835 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4339937004052221834, guid: 2ebb58b785236934cb464b9aba3b3652,
+    type: 3}
+  m_PrefabInstance: {fileID: 1348083831}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1348083836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348083834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 009e9eb4e55da284185dac6c65bdcd09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1348083837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348083835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 009e9eb4e55da284185dac6c65bdcd09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1362148720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2267793909724166458, guid: a1850860fad15634ba1a3169cfe1763e,
@@ -2983,6 +3022,10 @@ MonoBehaviour:
   timeLookingAtEyes: 0
   timeLookingAtForehead: 0
   timeLookingAtMouth: 0
+  NumberOfBlinks: 0
+  totalSizeOfPupilLeft: 0
+  totalSizeOfPupilRight: 0
+  countOfEyePupilsize: 0
   headTransform: {fileID: 302144843}
 --- !u!120 &1993913569
 LineRenderer:
