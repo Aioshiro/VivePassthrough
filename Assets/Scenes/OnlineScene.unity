@@ -374,8 +374,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Veuillez fixer le symbole ci dessous qui se trouve sur la table pour effectuer
-    la callibration.
+  m_text: "Veuillez fixer le symbole ci dessous qui se trouve \xE0 c\xF4t\xE9 de
+    vous pour effectuer la callibration."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
