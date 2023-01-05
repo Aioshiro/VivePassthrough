@@ -181,6 +181,7 @@ public class RegisterResults : NetworkBehaviour
         string filePath = GetPath(taskNumber);
         StreamWriter file = File.CreateText(filePath);
         file.WriteLine(newLine);
+        file.Close();
     }
 
     /// <summary>
@@ -194,6 +195,7 @@ public class RegisterResults : NetworkBehaviour
         string filePath = GetPath(taskNumber);
         StreamWriter file = File.CreateText(filePath);
         file.WriteLine(newLine);
+        file.Close();
     }
 
 
