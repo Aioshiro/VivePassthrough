@@ -22,27 +22,34 @@ public class RegisterResults : NetworkBehaviour
 
     [SyncVar]
     public bool playerOneIsMale;
+    [SyncVar]
+    public GameManager.Ethnie playerOneEthnie;
 
     [SyncVar]
     public bool playerTwoIsMale;
+    [SyncVar]
+    public GameManager.Ethnie playerTwoEthnie;
+
 
     void Start()
     {
         chronometer = new Chronometer();
         //gazeRay = GetComponentInChildren<GazeRay>();
-        SetGenderOfPlayer(GameManager.Instance.isMale, GameManager.Instance.playerNumber);
+        SetGenderAndEthnicOfPlayer(GameManager.Instance.isMale, GameManager.Instance.chosedEthnie,GameManager.Instance.playerNumber);
     }
 
     [Command(requiresAuthority =false)]
-    public void SetGenderOfPlayer(bool isMale,int index)
+    public void SetGenderAndEthnicOfPlayer(bool isMale,GameManager.Ethnie ethnie,int index)
     {
         if (index == 0)
         {
-            playerOneIsMale = isMale;
+            playerTwoIsMale = isMale;
+            playerTwoEthnie = ethnie;
         }
         else
         {
-            playerTwoIsMale = isMale;
+            playerOneIsMale = isMale;
+            playerOneEthnie = ethnie;
         }
     }
 
@@ -110,7 +117,15 @@ public class RegisterResults : NetworkBehaviour
         {
             lipAnimation = "Lip sync";
         }
-        string ethnic = GameManager.Instance.chosedEthnie.ToString();
+        string ethnic;
+        if (GameManager.Instance.playerNumber == 0)
+        {
+            ethnic = playerOneEthnie.ToString();
+        }
+        else
+        {
+            ethnic = playerTwoEthnie.ToString();
+        }
         string time = totalTime.ToString();
         string timeLookingAtHead = gazeRay.totalTimeLookingAtHead.ToString();
         string timeLookingAtEyes = gazeRay.timeLookingAtEyes.ToString();
