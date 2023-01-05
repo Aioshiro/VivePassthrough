@@ -20,10 +20,29 @@ public class RegisterResults : NetworkBehaviour
     /// </summary>
     public GazeRay gazeRay;
 
+    [SyncVar]
+    public bool playerOneIsMale;
+
+    [SyncVar]
+    public bool playerTwoIsMale;
+
     void Start()
     {
         chronometer = new Chronometer();
         //gazeRay = GetComponentInChildren<GazeRay>();
+    }
+
+    [Command]
+    public void SetGenderOfPlayer(bool isMale,int index)
+    {
+        if (index == 0)
+        {
+            playerOneIsMale = isMale;
+        }
+        else
+        {
+            playerTwoIsMale = isMale;
+        }
     }
 
     /// <summary>
@@ -31,6 +50,8 @@ public class RegisterResults : NetworkBehaviour
     /// </summary>
     public void Save(int taskNumber)
     {
+        SetGenderOfPlayer(GameManager.Instance.isMale, GameManager.Instance.playerNumber);
+
         float totalTime = chronometer.GetChronometerTime();
 
         StringBuilder csv = new StringBuilder();
@@ -51,14 +72,29 @@ public class RegisterResults : NetworkBehaviour
             {
                 cartoon = "Realistic";
             }
-            if (GameManager.Instance.isMale)
+            if (GameManager.Instance.playerNumber == 0)
             {
-                male = "Male";
+                if (playerOneIsMale)
+                {
+                    male = "Male";
+                }
+                else
+                {
+                    male = "Female";
+                }
             }
             else
             {
-                male = "Female";
+                if (playerTwoIsMale)
+                {
+                    male = "Male";
+                }
+                else
+                {
+                    male = "Female";
+                }
             }
+
         }
         else
         {
