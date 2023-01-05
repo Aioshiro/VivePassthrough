@@ -48,6 +48,17 @@ public class TwentyQuestionsTextUpdater : MonoBehaviour
             shownText.text = "Jouez au jeu des 20 questions, l'un a un mot secret et l'autre lui pose jusqu'à 20 questions fermées (oui/non) pour le trouver, puis refaites le en inversant les rôles.";
             shownText.text += $" Votre mot est : {GameManager.Instance.TwentyQuestionsWord}.";
         }
+        if (GameManager.Instance.playerNumber == 0)
+        {
+            if (languageIsEnglish)
+            {
+                shownText.text += " You start !";
+            }
+            else
+            {
+                shownText.text += " Vous commencez !";
+            }
+        }
     }
 
 
