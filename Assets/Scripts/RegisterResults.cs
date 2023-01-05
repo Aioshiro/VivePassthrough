@@ -142,7 +142,7 @@ public class RegisterResults : NetworkBehaviour
         csv.AppendLine(newLine);
 
         SaveLocally(csv.ToString(),taskNumber);
-        SaveOnServer(csv.ToString(),taskNumber);
+        SaveOnServer(csv.ToString(),taskNumber,GameManager.Instance.participantID);
         ResetData();
     }
 
@@ -189,10 +189,10 @@ public class RegisterResults : NetworkBehaviour
     /// </summary>
     /// <param name="newLine"> String of data to save </param>
     [Command(requiresAuthority =false)]
-    void SaveOnServer(string newLine,int taskNumber)
+    void SaveOnServer(string newLine,int taskNumber,int participantsID)
     {
         Debug.Log("Saving data on server");
-        string filePath = GetPath(taskNumber);
+        string filePath = GetPath(taskNumber,participantsID);
         StreamWriter file = File.CreateText(filePath);
         file.WriteLine(newLine);
         file.Close();
@@ -207,6 +207,21 @@ public class RegisterResults : NetworkBehaviour
     {
 
         string fileName = $"resultsTask{taskNumber}N{GameManager.Instance.participantID}.csv";
+#if UNITY_EDITOR
+        return Application.dataPath + "/CSV/" + fileName;
+#else
+        return Application.dataPath + "/"+ fileName;
+#endif
+    }
+
+    /// <summary>
+    /// Following method is used to retrive the relative path as device platform
+    /// </summary>
+    /// <returns></returns>
+    private string GetPath(int taskNumber,int participantsID)
+    {
+
+        string fileName = $"resultsTask{taskNumber}N{participantsID}.csv";
 #if UNITY_EDITOR
         return Application.dataPath + "/CSV/" + fileName;
 #else
