@@ -30,6 +30,7 @@ public class RegisterResults : NetworkBehaviour
     {
         chronometer = new Chronometer();
         //gazeRay = GetComponentInChildren<GazeRay>();
+        SetGenderOfPlayer(GameManager.Instance.isMale, GameManager.Instance.playerNumber);
     }
 
     [Command(requiresAuthority =false)]
@@ -50,7 +51,6 @@ public class RegisterResults : NetworkBehaviour
     /// </summary>
     public void Save(int taskNumber)
     {
-        SetGenderOfPlayer(GameManager.Instance.isMale, GameManager.Instance.playerNumber);
 
         float totalTime = chronometer.GetChronometerTime();
 
