@@ -179,6 +179,7 @@ public class RegisterResults : NetworkBehaviour
     {
         Debug.Log("Saving data locally");
         string filePath = GetPath(taskNumber);
+        File.Create(filePath);
         File.AppendAllText(filePath, newLine);
     }
 
@@ -191,6 +192,7 @@ public class RegisterResults : NetworkBehaviour
     {
         Debug.Log("Saving data on server");
         string filePath = GetPath(taskNumber);
+        File.Create(filePath);
         File.AppendAllText(filePath, newLine);
     }
 
@@ -202,7 +204,7 @@ public class RegisterResults : NetworkBehaviour
     private string GetPath(int taskNumber)
     {
 
-        string fileName = $"resultsTask{taskNumber}.csv";
+        string fileName = $"resultsTask{taskNumber}N{GameManager.Instance.participantID}.csv";
 #if UNITY_EDITOR
         return Application.dataPath + "/CSV/" + fileName;
 #else
