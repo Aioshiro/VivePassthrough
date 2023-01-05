@@ -179,8 +179,8 @@ public class RegisterResults : NetworkBehaviour
     {
         Debug.Log("Saving data locally");
         string filePath = GetPath(taskNumber);
-        File.Create(filePath);
-        File.AppendAllText(filePath, newLine);
+        StreamWriter file = File.CreateText(filePath);
+        file.WriteLine(newLine);
     }
 
     /// <summary>
@@ -192,8 +192,8 @@ public class RegisterResults : NetworkBehaviour
     {
         Debug.Log("Saving data on server");
         string filePath = GetPath(taskNumber);
-        File.Create(filePath);
-        File.AppendAllText(filePath, newLine);
+        StreamWriter file = File.CreateText(filePath);
+        file.WriteLine(newLine);
     }
 
 
