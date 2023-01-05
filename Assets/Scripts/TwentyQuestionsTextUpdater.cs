@@ -59,6 +59,17 @@ public class TwentyQuestionsTextUpdater : MonoBehaviour
                 shownText.text += " Vous commencez !";
             }
         }
+        else
+        {
+            if (languageIsEnglish)
+            {
+                shownText.text += " Your partner starts.";
+            }
+            else
+            {
+                shownText.text += " Votre partenaire commence.";
+            }
+        }
     }
 
 
