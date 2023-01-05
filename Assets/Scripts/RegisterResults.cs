@@ -32,7 +32,7 @@ public class RegisterResults : NetworkBehaviour
         //gazeRay = GetComponentInChildren<GazeRay>();
     }
 
-    [Command]
+    [Command(requiresAuthority =false)]
     public void SetGenderOfPlayer(bool isMale,int index)
     {
         if (index == 0)
