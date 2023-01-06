@@ -7935,8 +7935,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
+      propertyPath: instructions.Array.data[0]
+      value: "- Les r\xE9sidences se trouvent dans un quartier avec un parc."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
       propertyPath: instructions.Array.data[6]
-      value: "- Le gratte-ciel est proche de la rive ouest de la rivi\xE8re."
+      value: "- Le gratte-ciel est sur la rive ouest de la rivi\xE8re."
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
@@ -7945,8 +7950,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
+      propertyPath: englishInstructions.Array.data[0]
+      value: '- The residences are located in a neighborhood with a park.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
       propertyPath: englishInstructions.Array.data[6]
-      value: '- The skyscraper is close to the west bank of the river'
+      value: '- The skyscraper is on the west bank of the river'
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
@@ -7981,7 +7991,7 @@ PrefabInstance:
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
       propertyPath: instructions.Array.data[6]
-      value: "- Le gratte-ciel est proche de la rive ouest de la rivi\xE8re."
+      value: "- Le gratte-ciel est sur la rive ouest de la rivi\xE8re."
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
@@ -7996,7 +8006,7 @@ PrefabInstance:
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
       propertyPath: englishInstructions.Array.data[6]
-      value: '- The skyscraper is close to the west bank of the river'
+      value: '- The skyscraper is on the west bank of the river'
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
