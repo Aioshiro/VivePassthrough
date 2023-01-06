@@ -7975,6 +7975,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
+      propertyPath: instructions.Array.data[0]
+      value: "- Les r\xE9sidences se trouvent dans un quartier avec un parc."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
       propertyPath: instructions.Array.data[6]
       value: "- Le gratte-ciel est proche de la rive ouest de la rivi\xE8re."
       objectReference: {fileID: 0}
@@ -7982,6 +7987,11 @@ PrefabInstance:
         type: 3}
       propertyPath: instructions.Array.data[9]
       value: "- L'h\xF4pital se trouve sur la rive est de la rivi\xE8re."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
+      propertyPath: englishInstructions.Array.data[0]
+      value: '- The residences are located in a neighborhood with a park.'
       objectReference: {fileID: 0}
     - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
