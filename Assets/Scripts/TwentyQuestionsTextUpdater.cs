@@ -52,22 +52,22 @@ public class TwentyQuestionsTextUpdater : MonoBehaviour
         {
             if (languageIsEnglish)
             {
-                shownText.text += " You start !";
+                shownText.text += " You start asking questions !";
             }
             else
             {
-                shownText.text += " Vous commencez !";
+                shownText.text += " Vous commencez à poser des questions !";
             }
         }
         else
         {
             if (languageIsEnglish)
             {
-                shownText.text += " Your partner starts.";
+                shownText.text += " Your partner starts asking questions.";
             }
             else
             {
-                shownText.text += " Votre partenaire commence.";
+                shownText.text += " Votre partenaire commence à poser des questions.";
             }
         }
     }

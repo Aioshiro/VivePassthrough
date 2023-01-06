@@ -7933,6 +7933,26 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
+      propertyPath: instructions.Array.data[6]
+      value: "- Le gratte-ciel est proche de la rive ouest de la rivi\xE8re."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
+      propertyPath: instructions.Array.data[9]
+      value: "- L'h\xF4pital se trouve sur la rive est de la rivi\xE8re."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
+      propertyPath: englishInstructions.Array.data[6]
+      value: '- The skyscraper is close to the west bank of the river'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004052221830, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
+      propertyPath: englishInstructions.Array.data[9]
+      value: '- The hospital is located on the east bank of the river.'
+      objectReference: {fileID: 0}
     - target: {fileID: 4339937004827244765, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
       propertyPath: m_IsActive
@@ -7952,6 +7972,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
+      propertyPath: instructions.Array.data[6]
+      value: "- Le gratte-ciel est proche de la rive ouest de la rivi\xE8re."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
+      propertyPath: instructions.Array.data[9]
+      value: "- L'h\xF4pital se trouve sur la rive est de la rivi\xE8re."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
+      propertyPath: englishInstructions.Array.data[6]
+      value: '- The skyscraper is close to the west bank of the river'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339937004885143431, guid: 2ebb58b785236934cb464b9aba3b3652,
+        type: 3}
+      propertyPath: englishInstructions.Array.data[9]
+      value: '- The hospital is located on the east bank of the river.'
       objectReference: {fileID: 0}
     - target: {fileID: 7470998582017965964, guid: 2ebb58b785236934cb464b9aba3b3652,
         type: 3}
