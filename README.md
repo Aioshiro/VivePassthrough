@@ -40,7 +40,18 @@ Building will appear on Aruco markers 4*4 number 1 to 9. Instructions will be up
 ![map(7)_parks_contours](https://user-images.githubusercontent.com/73835238/214267544-5c0ba839-264b-4ae3-a717-5236e1483db7.png)
 
 They're allowed to share information to solve this puzzle.
-Once done, they can press a button which appears on ArUco marker 0 with their hands (with hand tracking). When press by a player, it turns green for him. Once green for both player,
-the app exits and results are saved.
+Once done, they can press a button which appears on ArUco marker 0 with their hands (with hand tracking). When press by a player, it turns green for him. Once green for both players, the app exits and results are saved.
 
 ## Saved results
+
+The following data is shown on the computer screen for the experimenter to see and are saved at the end of each task :
+
+- The total time of the task
+- The time passed looking at the other user's head 
+- The time passed looking at the other user's forehead 
+- The time passed looking at the other user's eyes 
+- The time passed looking at the other user's mouth
+- The number of fixations on the other user's head
+- The average fixation time
+- The number of blinks
+- The average left/right pupil size
