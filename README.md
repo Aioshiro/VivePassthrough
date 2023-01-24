@@ -8,7 +8,8 @@ In here, you'll find an app we used to experiment with avatar heads in mixed rea
 To use this app, first launch the server on a machine, then launch the client on both computers. This app will only work with HTC Vive Pro Eye.
 You'll get this setting screen :
 
-// insérer image
+![settings](https://user-images.githubusercontent.com/73835238/214270633-e393690d-82a6-4298-87bb-ea11f74209e7.PNG)
+
 
 1. The part to activate the other's player avatar, toggle the realistic/cartoon one and the male/female. Having desactivated avatar makes the R/C and M/F option useless.
 2. Toggle the ethnicity of the avatar, again no effect if avatars desactivated.
@@ -33,10 +34,10 @@ questions to guess the other player secret word. Once its done, the experiment a
 
 ### Task 2 : Urban planning
 
-Building will appear on Aruco markers 4*4 number 1 to 9. Instructions will be updated to show both player different, yet complementary information to place the buildings on
-a physical maps in front of them. The buildings have name on top of them to reduce confusion. Here's the map and the buildings :
+Building will appear on Aruco markers 4*4 number 1 to 9. Instructions will be updated to show both player different, yet complementary information to place the buildings on a physical maps in front of them. The buildings have name on top of them to reduce confusion. The buildings are : a train station, a church, a skyscrapper, an hospital, a fire station, a town hall, a stadium, a residential home and a school. Here's the map and the buildings :
 
-///Insérer images
+![Buildings](https://user-images.githubusercontent.com/73835238/214265275-c8f1d630-d7a0-41fd-a244-23a88bb6b865.PNG)
+![map(7)_parks_contours](https://user-images.githubusercontent.com/73835238/214267544-5c0ba839-264b-4ae3-a717-5236e1483db7.png)
 
 They're allowed to share information to solve this puzzle.
 Once done, they can press a button which appears on ArUco marker 0 with their hands (with hand tracking). When press by a player, it turns green for him. Once green for both player,
