@@ -24,7 +24,7 @@ You'll get this setting screen :
 
 Once the app is launched, eye callibration is done with the user (if not disabled). After a short loading time, the user sees the real world through the HMD camera.
 
-Both participants are then ask to look at ArUco marker 4*4 n°10, sitting on a wall nearby. Its used to setup instruction next to the users.
+Both participants are then ask to look at ArUco marker 4x4 n°10, sitting on a wall nearby. Its used to setup instruction next to the users.
 When both participants have looked at the marker, task one starts in 15 seconds.
 
 ### Task 1 : 20 questions game
@@ -34,7 +34,7 @@ questions to guess the other player secret word. Once its done, the experiment a
 
 ### Task 2 : Urban planning
 
-Building will appear on Aruco markers 4*4 number 1 to 9. Instructions will be updated to show both player different, yet complementary information to place the buildings on a physical maps in front of them. The buildings have name on top of them to reduce confusion. The buildings are : a train station, a church, a skyscrapper, an hospital, a fire station, a town hall, a stadium, a residential home and a school. Here's the map and the buildings :
+Building will appear on Aruco markers 4x4 number 1 to 9. Instructions will be updated to show both player different, yet complementary information to place the buildings on a physical maps in front of them. The buildings have name on top of them to reduce confusion. The buildings are : a train station, a church, a skyscrapper, an hospital, a fire station, a town hall, a stadium, a residential home and a school. Here's the map and the buildings :
 
 ![Buildings](https://user-images.githubusercontent.com/73835238/214265275-c8f1d630-d7a0-41fd-a244-23a88bb6b865.PNG)
 ![map(7)_parks_contours](https://user-images.githubusercontent.com/73835238/214267544-5c0ba839-264b-4ae3-a717-5236e1483db7.png)
@@ -55,3 +55,15 @@ The following data is shown on the computer screen for the experimenter to see a
 - The average fixation time
 - The number of blinks
 - The average left/right pupil size
+
+
+## The avatars
+
+There is currently 16 avatars : 8 cartoonish and 8 realistic, for 4 ethnicities (Caucasian, Latino, Asian, African) and male/female. They can be seen here : 
+![Avatars](https://user-images.githubusercontent.com/73835238/214315371-bd4487c9-9b23-49d4-8885-588e1ffc7441.PNG)
+
+## Questionnaires
+
+Before the experiment, the participants fill a demographic questionnaire for their age and previous experience with VR/Video games.
+
+After the experiment, participants fill the TLX, the UEQ (attractivness, simulation, novelty parts), the User Engagement Scale (UES) in short form and the Network Mind measure of social presence. The survey can be seen here : https://forms.gle/mPsWEEuWrVkPWjLe7. It does not contain the TLX which made filled separately, as Google Form does not allow for slider answers to questions.
