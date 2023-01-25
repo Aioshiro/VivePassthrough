@@ -75,4 +75,4 @@ Build the server by checking server build and putting "OnlineScene" in index 0.
 
 ## Troubleshooting
 
-When launching the app, after the eye callibration, the screen is white (real world does not appear). Relaunch the app, it's usually due to SDK not having time to initialize properly, reloading the app should work.
+When launching the app, after the eye callibration, the screen is white (real world does not appear). Relaunch the app, it's usually due to Vive's SRworks SDK not having time to initialize properly, reloading the app should work.
