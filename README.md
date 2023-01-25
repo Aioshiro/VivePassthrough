@@ -68,6 +68,11 @@ Before the experiment, the participants fill a demographic questionnaire for the
 
 After the experiment, participants fill the TLX, the UEQ (attractivness, simulation, novelty parts), the User Engagement Scale (UES) in short form and the Network Mind measure of social presence. The survey can be seen here : https://forms.gle/mPsWEEuWrVkPWjLe7. It does not contain the TLX which made filled separately, as Google Form does not allow for slider answers to questions.
 
+## Building this app
+
+Build the client with the scene "SettingsScene" in index 0 and "OnlineScene" in index 1
+Build the server by checking server build and putting "OnlineScene" in index 0.
+
 ## Troubleshooting
 
 When launching the app, after the eye callibration, the screen is white (real world does not appear). Relaunch the app, it's usually due to SDK not having time to initialize properly, reloading the app should work.
