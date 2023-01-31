@@ -5,13 +5,25 @@ using UnityEngine;
 public class BaseStationsTest : MonoBehaviour
 {
 
-    Valve.VR.TrackedDevicePose_t[] stationsPose = new Valve.VR.TrackedDevicePose_t[10]; //Storing the poses
+    /// <summary>
+    /// List of stored positions of tracked devices
+    /// </summary>
+    Valve.VR.TrackedDevicePose_t[] stationsPose = new Valve.VR.TrackedDevicePose_t[10];
+
+    /// <summary>
+    /// GameObject (cube) representing the first station
+    /// </summary>
     GameObject station1;
+
+    /// <summary>
+    /// GameObject (cube) representing the second station
+    /// </summary>
     GameObject station2;
 
-    // Start is called before the first frame update
-    void Start()
+    //setting up variables
+     void Start()
     {
+        //creating cube of 10cm side to represent stations
         station1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
         station2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
         station1.transform.localScale /= 10;
@@ -23,25 +35,29 @@ public class BaseStationsTest : MonoBehaviour
     void Update()
     {
         bool firstStationChanged = false;
-        Valve.VR.OpenVR.System.GetDeviceToAbsoluteTrackingPose(Valve.VR.ETrackingUniverseOrigin.TrackingUniverseStanding, 0, stationsPose); //Updating the poses
-        for (uint i = 0; i < Valve.VR.OpenVR.k_unMaxTrackedDeviceCount; i++) //For every tracked device
+        // Updating the poses of all tracked devices
+        Valve.VR.OpenVR.System.GetDeviceToAbsoluteTrackingPose(Valve.VR.ETrackingUniverseOrigin.TrackingUniverseStanding, 0, stationsPose);
+        //For every tracked device
+        for (uint i = 0; i < Valve.VR.OpenVR.k_unMaxTrackedDeviceCount; i++)
         {
-            if (Valve.VR.OpenVR.System.GetTrackedDeviceClass(i) == Valve.VR.ETrackedDeviceClass.TrackingReference) //If it's a base station
+            // If it's a base station
+            if (Valve.VR.OpenVR.System.GetTrackedDeviceClass(i) == Valve.VR.ETrackedDeviceClass.TrackingReference) 
             {
+                //we get its position and rotation
                 Vector3 baseStationPos = stationsPose[i].mDeviceToAbsoluteTracking.GetPosition();
                 Quaternion baseStationRot = stationsPose[i].mDeviceToAbsoluteTracking.GetRotation();
-                if (firstStationChanged)
+                //we update the first station transform if it has not been done, otherwise we update the second one
+                if (!firstStationChanged)
                 {
-                    station2.transform.SetPositionAndRotation(baseStationPos, baseStationRot);
+                    station1.transform.SetPositionAndRotation(baseStationPos, baseStationRot);
+                    firstStationChanged = true;
+
                 }
                 else
                 {
-                    firstStationChanged = true;
-                    station1.transform.SetPositionAndRotation(baseStationPos, baseStationRot);
+                    station2.transform.SetPositionAndRotation(baseStationPos, baseStationRot);
                 }
             }
-            //Get position and rotation of the station
-
         }
     }
 }

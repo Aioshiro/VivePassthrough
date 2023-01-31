@@ -44,7 +44,9 @@ public class Button : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //making sure the button doesn't fall too low
         buttonTop.transform.localPosition = new Vector3(0, 0, Mathf.Min(buttonTop.transform.localPosition.z,0));
+        //if the button has been pushed
         if (buttonTop.transform.localPosition.z < maxDist/2)
         {
             if (!hasCalledEvent)
@@ -54,6 +56,7 @@ public class Button : MonoBehaviour
                 //Debug.Log("calling event");
             }
 
+            //setting up a limit to how much the button can be pushed
             if (buttonTop.transform.localPosition.z < maxDist)
             {
                 buttonTop.transform.localPosition = new Vector3(0, 0, maxDist);

@@ -77,11 +77,14 @@ public class AvatarEyeControl : MonoBehaviour
     Vector3 GazeDirectionCombinedLocal;
     private void Start()
     {
+        //disabling script if eye tracking is disabled
         if (!SRanipal_Eye_Framework.Instance.EnableEye)
         {
             enabled = false;
             return;
         }
+
+        //setting up variables
 
         SetEyesModels(EyesModels[0], EyesModels[1]);
         SetEyeShapeTables(EyeShapeTables);
@@ -113,6 +116,8 @@ public class AvatarEyeControl : MonoBehaviour
 
         if (NeededToGetData)
         {
+            //making sure we get the data, either via callback or manually
+
             if (SRanipal_Eye_Framework.Instance.EnableEyeDataCallback == true && eye_callback_registered == false)
             {
                 SRanipal_Eye_v2.WrapperRegisterEyeDataCallback(Marshal.GetFunctionPointerForDelegate((SRanipal_Eye_v2.CallbackBasic)EyeCallback));
@@ -126,6 +131,7 @@ public class AvatarEyeControl : MonoBehaviour
             else if (SRanipal_Eye_Framework.Instance.EnableEyeDataCallback == false)
                 SRanipal_Eye_API.GetEyeData_v2(ref eyeData);
 
+            //checking which eyes are active
             bool isLeftEyeActive = false;
             bool isRightEyeAcitve = false;
             if (SRanipal_Eye_Framework.Status == SRanipal_Eye_Framework.FrameworkStatus.WORKING)
@@ -139,6 +145,7 @@ public class AvatarEyeControl : MonoBehaviour
                 isRightEyeAcitve = true;
             }
 
+            //calculting gaze
             Vector3 GazeOriginCombinedLocal = Vector3.zero;
             if (eye_callback_registered == true)
             {
@@ -161,9 +168,10 @@ public class AvatarEyeControl : MonoBehaviour
                     return;
                 }
             }
-
+            //if the frame is empty, that means the person was blinking at that frame
             if (missingFrames)
             {
+                //so, we start to ignore the next frames, during which the data is not reliable
                 currentIgnoredTime += Time.deltaTime;
                 if (currentIgnoredTime > timeToIgnoreFrames)
                 {
@@ -177,6 +185,7 @@ public class AvatarEyeControl : MonoBehaviour
                     else
                         SRanipal_Eye_v2.GetEyeWeightings(out eyeWeightings);
                     float closedValue;
+                    // when ignoring frames, we force a manual blink animation during this time to hide the unreliable gaze
                     if (currentIgnoredTime < timeToIgnoreFrames / 2)
                     {
                         closedValue = 1;
@@ -192,8 +201,10 @@ public class AvatarEyeControl : MonoBehaviour
                 }
             }
 
+            
             UpdateGazeRay(GazeDirectionCombinedLocal);
 
+            //if we have data for at least one eye we update it, if we have none, we just close the eye
             if (isLeftEyeActive || isRightEyeAcitve)
             {
                 if (eye_callback_registered == true)
