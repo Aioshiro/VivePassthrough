@@ -7,6 +7,10 @@ TagManager:
   - Map
   - RealCamera
   - MixCamera
+  - FacialTracker
+  - FacialTrackerBis
+  - LipSync
+  - LipSyncBis
   layers:
   - Default
   - TransparentFX
