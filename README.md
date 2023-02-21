@@ -64,7 +64,7 @@ There is currently 16 avatars : 8 cartoonish and 8 realistic, for 4 ethnicities 
 
 ## Questionnaires
 
-Before the experiment, the participants fill a demographic questionnaire for their age and previous experience with VR/Video games.
+Before the experiment, the participants fill a demographic questionnaire for their age and previous experience with VR/Video games : https://forms.gle/aa3LVUckuz3ZzoUb8.
 
 After the experiment, participants fill the TLX, the UEQ (attractivness, simulation, novelty parts), the User Engagement Scale (UES) in short form and the Network Mind measure of social presence. The survey can be seen here : https://forms.gle/mPsWEEuWrVkPWjLe7. It does not contain the TLX which made filled separately, as Google Form does not allow for slider answers to questions.
 
